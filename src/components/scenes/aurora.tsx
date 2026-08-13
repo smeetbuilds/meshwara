@@ -1,4 +1,5 @@
-import { Instance, Instances, Line, MeshTransmissionMaterial, RoundedBox } from '@react-three/drei'
+import { Instance, Instances, Line, MeshTransmissionMaterial } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'

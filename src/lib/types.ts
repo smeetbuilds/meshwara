@@ -551,5 +551,6 @@ export interface AssetRecord {
   accent: string
   download: string
   featured?: boolean
+  geometryV2?: boolean
   new?: boolean
 }

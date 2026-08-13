@@ -1,4 +1,5 @@
-import { RoundedBox, MeshTransmissionMaterial } from '@react-three/drei'
+import { MeshTransmissionMaterial } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useMemo } from 'react'
 import * as THREE from 'three'
 function ChargingDock(){const curve=useMemo(()=>new THREE.CatmullRomCurve3([new THREE.Vector3(.55,-.1,.15),new THREE.Vector3(1.1,-.25,.1),new THREE.Vector3(1.45,-.55,-.25),new THREE.Vector3(1.8,-.72,-.55)]),[]);return <group position={[0,-.6,0]} rotation={[0,-.3,0]}>

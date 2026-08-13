@@ -149,7 +149,7 @@ export const assets: AssetRecord[] = [
     slug: 'precision-chrono', index: '025', name: 'Precision Chrono', category: 'Fashion', scene: 'chrono',
     blurb: 'A machined chronograph study with layered dial depth, optical crystal and measured mechanical motion.',
     description: 'A product-focused watch composition built from a dense case, transmission crystal, instanced index marks, subdials and calibrated hand motion. Intended for premium fashion and industrial-design hero layouts.',
-    tags: ['Chronograph', 'Machined', 'Product'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], accent: '#d9c49b', download: '/downloads/precision-chrono.zip', featured: true, new: true,
+    tags: ['Chronograph', 'Machined', 'Product'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], accent: '#d9c49b', download: '/downloads/precision-chrono.zip', featured: true, geometryV2: true, new: true,
   },
   {
     slug: 'quiet-pavilion', index: '026', name: 'Quiet Pavilion', category: 'Architecture', scene: 'pavilion',
@@ -167,7 +167,7 @@ export const assets: AssetRecord[] = [
     slug: 'monocoque-chair', index: '028', name: 'Monocoque Chair', category: 'Furniture', scene: 'monocoque',
     blurb: 'A soft monocoque lounge chair with a quiet shell, dark metal stance and warm structural detail.',
     description: 'A furniture study focused on silhouette, bevel quality and proportion rather than ornamental complexity. Its material hierarchy is designed for product-showcase and interior-editorial compositions.',
-    tags: ['Furniture', 'Monocoque', 'Product'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], accent: '#d6b58c', download: '/downloads/monocoque-chair.zip', featured: true,
+    tags: ['Furniture', 'Monocoque', 'Product'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], accent: '#d6b58c', download: '/downloads/monocoque-chair.zip', featured: true, geometryV2: true,
   },
   {
     slug: 'performance-rotor', index: '029', name: 'Performance Rotor', category: 'Vehicles', scene: 'rotor',
@@ -716,7 +716,7 @@ export const assets: AssetRecord[] = [
     slug: 'orchid-stem', index: '119', name: 'Orchid Stem', category: 'Nature', scene: 'orchidstem',
     blurb: 'A curve-authored orchid with three layered blossoms, asymmetrical leaves and compact ceramic planter.',
     description: 'A botanical object built around stem direction, petal layering and deliberate floral spacing. It extends the nature collection with a more delicate close-up plant language than the existing bonsai and tree studies.',
-    tags: ['Orchid', 'Flower', 'Botanical'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#e9d7df', download: '/downloads/orchid-stem.zip', featured: true, new: true,
+    tags: ['Orchid', 'Flower', 'Botanical'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#e9d7df', download: '/downloads/orchid-stem.zip', featured: true, geometryV2: true, new: true,
   },
   {
     slug: 'desert-cactus', index: '120', name: 'Desert Cactus', category: 'Nature', scene: 'desertcactus',
@@ -728,7 +728,7 @@ export const assets: AssetRecord[] = [
     slug: 'fern-study', index: '121', name: 'Fern Study', category: 'Nature', scene: 'fernstudy',
     blurb: 'Seven curve-authored fronds radiate from a compact planter with layered paired leaflets.',
     description: 'A foliage asset built from explicit frond curves and deterministic leaf placement rather than random instancing. It is designed to remain coherent when viewed close or compressed into a catalog card.',
-    tags: ['Fern', 'Foliage', 'Curves'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#547b60', download: '/downloads/fern-study.zip', featured: true, new: true,
+    tags: ['Fern', 'Foliage', 'Curves'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#547b60', download: '/downloads/fern-study.zip', featured: true, geometryV2: true, new: true,
   },
   {
     slug: 'mushroom-cluster', index: '122', name: 'Mushroom Cluster', category: 'Nature', scene: 'mushroomcluster',
@@ -740,7 +740,7 @@ export const assets: AssetRecord[] = [
     slug: 'cocktail-coupe', index: '123', name: 'Cocktail Coupe', category: 'Food', scene: 'cocktailcoupe',
     blurb: 'A custom-profile coupe with transparent bowl, warm cocktail layer and minimal citrus garnish.',
     description: 'A hospitality asset using lathed glass geometry so the stem, bowl and rim read as one designed profile. The liquid and garnish are deliberately restrained for premium bar and restaurant interfaces.',
-    tags: ['Cocktail', 'Glassware', 'Hospitality'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#d9a879', download: '/downloads/cocktail-coupe.zip', featured: true, new: true,
+    tags: ['Cocktail', 'Glassware', 'Hospitality'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#d9a879', download: '/downloads/cocktail-coupe.zip', featured: true, geometryV2: true, new: true,
   },
   {
     slug: 'olive-oil-bottle', index: '124', name: 'Olive Oil Bottle', category: 'Food', scene: 'oliveoil',
@@ -752,7 +752,7 @@ export const assets: AssetRecord[] = [
     slug: 'bento-service', index: '125', name: 'Bento Service', category: 'Food', scene: 'bentoservice',
     blurb: 'A four-compartment bento composition with rice, salmon, greens and warm side elements.',
     description: 'A complete food-service scene built for clear compartment hierarchy and balanced color. The content is stylized enough for performance while still reading immediately as a considered meal presentation.',
-    tags: ['Bento', 'Food', 'Service'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#d66f4e', download: '/downloads/bento-service.zip', featured: true, new: true,
+    tags: ['Bento', 'Food', 'Service'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#d66f4e', download: '/downloads/bento-service.zip', featured: true, geometryV2: true, new: true,
   },
   {
     slug: 'sourdough-loaf', index: '126', name: 'Sourdough Loaf', category: 'Food', scene: 'sourdough',
@@ -764,13 +764,13 @@ export const assets: AssetRecord[] = [
     slug: 'prosthetic-hand', index: '127', name: 'Prosthetic Hand', category: 'Medical', scene: 'prosthetichand',
     blurb: 'A technical prosthetic hand study with articulated finger chains, palm shell, thumb linkage and wrist collar.',
     description: 'A medical-device asset rather than a biological hand claim. The mechanical digit hierarchy is explicit and readable, making it suitable for prosthetics, rehabilitation and healthcare technology interfaces.',
-    tags: ['Prosthetic', 'Medical', 'Biomechanics'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], accent: '#8fbcb6', download: '/downloads/prosthetic-hand.zip', featured: true, new: true,
+    tags: ['Prosthetic', 'Medical', 'Biomechanics'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], accent: '#8fbcb6', download: '/downloads/prosthetic-hand.zip', featured: true, geometryV2: true, new: true,
   },
   {
     slug: 'weather-station', index: '128', name: 'Weather Station', category: 'Scientific', scene: 'weatherstation',
     blurb: 'A compact field station with rotating cup anemometer, wind vane, shielded sensor stack and weighted mast.',
     description: 'A scientific-instrument asset that communicates function through visible sensor hierarchy. The slow anemometer motion is mechanically meaningful rather than decorative.',
-    tags: ['Weather', 'Sensor', 'Scientific'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#8aa7a8', download: '/downloads/weather-station.zip', featured: true, new: true,
+    tags: ['Weather', 'Sensor', 'Scientific'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#8aa7a8', download: '/downloads/weather-station.zip', featured: true, geometryV2: true, new: true,
   },
   {
     slug: 'modular-smartphone', index: '129', name: 'Modular Smartphone', category: 'Technology', scene: 'modularphone',
@@ -1076,7 +1076,7 @@ export const assets: AssetRecord[] = [
     slug: 'electric-coupe', index: '179', name: 'Electric Coupe', category: 'Vehicles', subcategory: 'Road', scene: 'electriccoupe',
     blurb: 'A low electric coupe silhouette with aero wheels, continuous glasshouse and disciplined lighting signatures.',
     description: 'A stylized-but-product-authored road vehicle that preserves realistic wheelbase, cabin proportion and grounded stance without claiming OEM-specific geometry.',
-    tags: ['EV', 'Coupe', 'Automotive'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#66757d', download: '/downloads/electric-coupe.zip', new: true,
+    tags: ['EV', 'Coupe', 'Automotive'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#66757d', download: '/downloads/electric-coupe.zip', geometryV2: true, new: true,
   },
   {
     slug: 'commuter-motorcycle', index: '180', name: 'Commuter Motorcycle', category: 'Vehicles', subcategory: 'Road', scene: 'commutermotorcycle',

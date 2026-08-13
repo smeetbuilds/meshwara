@@ -1,4 +1,5 @@
-import { Instance, Instances, RoundedBox } from '@react-three/drei'
+import { Instance, Instances } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useMemo } from 'react'
 
 function MechanicalKeyboard() {
@@ -17,9 +18,9 @@ function MechanicalKeyboard() {
   }, [])
   return (
     <group rotation={[0.08, -0.36, -0.02]} position={[0, -0.15, 0]} scale={0.95}>
-      <RoundedBox args={[3.65, 0.34, 1.55]} radius={0.13} smoothness={7}>
+      <CurvedBox args={[3.65, 0.34, 1.55]} radius={0.13} smoothness={7}>
         <meshPhysicalMaterial color="#202326" metalness={0.64} roughness={0.3} clearcoat={0.38} />
-      </RoundedBox>
+      </CurvedBox>
       <Instances limit={80}>
         <boxGeometry args={[1, 1, 1]} />
         <meshPhysicalMaterial color="#d8d4cc" roughness={0.42} />

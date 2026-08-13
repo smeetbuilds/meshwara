@@ -1,6 +1,6 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 function ReferenceTurntable(){return <group position={[0,-.6,0]} rotation={[0,-.32,0]}>
-  <RoundedBox args={[3,.26,2.15]} radius={.12} smoothness={5}><meshPhysicalMaterial color="#543e2f" roughness={.34} clearcoat={.28}/></RoundedBox>
+  <CurvedBox args={[3,.26,2.15]} radius={.12} smoothness={5}><meshPhysicalMaterial color="#543e2f" roughness={.34} clearcoat={.28}/></CurvedBox>
   <mesh position={[-.38,.24,0]}><cylinderGeometry args={[.86,.86,.13,80]}/><meshPhysicalMaterial color="#35383a" metalness={.8} roughness={.19}/></mesh>
   <mesh position={[-.38,.32,0]}><cylinderGeometry args={[.77,.77,.035,80]}/><meshStandardMaterial color="#111315" roughness={.34}/></mesh>
   <mesh position={[-.38,.36,0]}><cylinderGeometry args={[.055,.055,.05,28]}/><meshPhysicalMaterial color="#b4b5b5" metalness={1} roughness={.14}/></mesh>

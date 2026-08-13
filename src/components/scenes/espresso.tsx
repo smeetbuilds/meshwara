@@ -1,4 +1,4 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useMemo } from 'react'
 import * as THREE from 'three'
 
@@ -34,9 +34,9 @@ function EspressoSet() {
         </mesh>
       ))}
       <group position={[1.05, -0.55, 0.18]} rotation={[0, 0, -0.32]}>
-        <RoundedBox args={[1.2, 0.07, 0.08]} radius={0.025} smoothness={3}>
+        <CurvedBox args={[1.2, 0.07, 0.08]} radius={0.025} smoothness={3}>
           <meshPhysicalMaterial color="#8f795d" metalness={0.9} roughness={0.23} />
-        </RoundedBox>
+        </CurvedBox>
         <mesh position={[0.62, 0, 0]} scale={[1.45, 0.52, 0.36]}>
           <sphereGeometry args={[0.16, 28, 18]} />
           <meshPhysicalMaterial color="#8f795d" metalness={0.9} roughness={0.23} />

@@ -1,4 +1,5 @@
-import { Instance, Instances, Line, MeshTransmissionMaterial, RoundedBox } from '@react-three/drei'
+import { Instance, Instances, Line, MeshTransmissionMaterial } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
@@ -17,9 +18,9 @@ function KineticArchive() {
         const y = (i - 3) * 0.37
         const offset = Math.sin(i * 1.4) * 0.22
         return (
-          <RoundedBox key={i} args={[1.72 - i * 0.055, 0.26, 0.92]} radius={0.09} smoothness={5} position={[offset, y, Math.cos(i * .8) * .12]} rotation={[0, i * .14 - .4, i * .025]}>
+          <CurvedBox key={i} args={[1.72 - i * 0.055, 0.26, 0.92]} radius={0.09} smoothness={5} position={[offset, y, Math.cos(i * .8) * .12]} rotation={[0, i * .14 - .4, i * .025]}>
             <meshPhysicalMaterial color={i === 3 ? '#d8d4cb' : '#1a1b1c'} metalness={i === 3 ? .18 : .78} roughness={i === 3 ? .32 : .2} clearcoat={.65} />
-          </RoundedBox>
+          </CurvedBox>
         )
       })}
       <mesh position={[0.74, 0.02, 0.56]}>

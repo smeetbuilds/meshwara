@@ -15,7 +15,7 @@
     "models:check": "bun scripts/validate-modeled-assets.mjs",
     "sources:check": "bun scripts/materialize-model-source.mjs --check-only staging/sources/kaykit-adventurers-1.0.json",
     "versions:check": "bun scripts/validate-version-pins.mjs",
-    "quality:check": "bun scripts/validate-scene-quality.mjs && bun scripts/audit-asset-quality.mjs",
+    "quality:check": "bun scripts/validate-scene-quality.mjs && bun scripts/audit-geometry-v2.mjs && bun scripts/audit-asset-quality.mjs",
     "quality:audit": "bun scripts/audit-asset-quality.mjs"
   },
   "dependencies": {

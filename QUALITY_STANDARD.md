@@ -73,3 +73,9 @@ The asset detail viewer uses the same source scene at higher fidelity. Download 
 `bun run quality:check` must validate all published scene sources and write `public/quality/asset-audit.json`. Critical automated checks cover deterministic construction, placeholder-free source, authored-source floor, renderability, explicit material definition, premium materials for cinematic assets, semantic geometry density for product/animal/spatial categories, and the stricter scaled-production density gate for assets 301+.
 
 Automated quality metrics are evidence and regression protection; they do not replace visual art-direction review. A passing score must never be used to justify visibly weak proportions, wrong physical archetypes, broken animation, clipping, or poor composition.
+
+## Geometry V2 — curved primary silhouettes
+
+Realistic product, furniture, vehicle, botanical, food, medical and scientific assets must not rely on box/cylinder assemblies for their primary silhouette. Geometry V2 assets use authored profiles, spline sweeps, lofted/custom BufferGeometry, lathed surfaces, extrusions or production GLB meshes. Primitive geometry remains acceptable for secondary hardware and physically appropriate components.
+
+The public homepage may feature only assets marked `geometryV2: true`. The automated Geometry V2 audit rejects featured assets that regress to primitive-dominated construction.

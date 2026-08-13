@@ -1,4 +1,4 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useMemo } from 'react'
 import * as THREE from 'three'
 
@@ -30,9 +30,9 @@ function AeroRunner() {
       <mesh geometry={new THREE.ExtrudeGeometry(upper, { depth: 0.6, bevelEnabled: true, bevelSegments: 6, steps: 1, bevelSize: 0.06, bevelThickness: 0.05 })} position={[0, -0.06, -0.3]}>
         <meshPhysicalMaterial color="#25282b" roughness={0.52} sheen={0.35} sheenColor="#657079" />
       </mesh>
-      <RoundedBox args={[0.46, 0.86, 0.62]} radius={0.14} smoothness={6} position={[-0.83, 0.35, 0]} rotation={[0, 0, -0.18]}>
+      <CurvedBox args={[0.46, 0.86, 0.62]} radius={0.14} smoothness={6} position={[-0.83, 0.35, 0]} rotation={[0, 0, -0.18]}>
         <meshPhysicalMaterial color="#171a1d" roughness={0.44} />
-      </RoundedBox>
+      </CurvedBox>
       {Array.from({ length: 6 }, (_, i) => (
         <mesh key={i} position={[-0.34 + i * 0.2, 0.38 - Math.abs(i - 2.5) * 0.025, 0.34]} rotation={[0, 0, -0.08 + i * 0.025]}>
           <boxGeometry args={[0.29, 0.025, 0.018]} />

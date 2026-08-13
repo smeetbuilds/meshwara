@@ -75,7 +75,10 @@ function proceduralWrapper(asset, component) {
 
 async function buildProceduralPack(asset) {
   const component = componentName(asset.name)
-  const scene = await readFile(resolve(ROOT, 'src/components/scenes', `${asset.scene}.tsx`), 'utf8')
+  const rawScene = await readFile(resolve(ROOT, 'src/components/scenes', `${asset.scene}.tsx`), 'utf8')
+  const usesCurvedBox = rawScene.includes("../geometry/CurvedBox")
+  const scene = usesCurvedBox ? rawScene.replaceAll("../geometry/CurvedBox", "./geometry/CurvedBox") : rawScene
+  const curvedBoxSource = usesCurvedBox ? await readFile(resolve(ROOT, 'src/components/geometry/CurvedBox.tsx'), 'utf8') : null
   const prefix = `${asset.slug}/`
   const interactionCopy = asset.interaction === 'Pointer' ? 'pointer inertia, ' : ''
   const readme = `# MESHVARA / ${asset.name}\n\n> Free production-grade Three.js asset by Aahav Labs.\n> https://aahavlabs.in · hi@aahavlabs.in\n\n**Category:** ${asset.category}${asset.subcategory ? ` / ${asset.subcategory}` : ''}\n\n${asset.blurb}\n\n${asset.description}\n\n## Install\n\n\`\`\`bash\nbun add three@${versions.three} @react-three/fiber@${versions['@react-three/fiber']} @react-three/drei@${versions['@react-three/drei']} react@${versions.react}\n\`\`\`\n\n## Use\n\nCopy \`src/Scene.tsx\` and \`src/${component}.tsx\` into your project, then render \`<${component} />\`. The wrapper includes automatic bounds/framing, ACES filmic tone mapping, responsive DPR, ${interactionCopy}a studio environment, and \`prefers-reduced-motion\` handling.\n\n## License\n\nMIT. Free for personal and commercial projects. Keep the included license notice with substantial redistributed source.\n`
@@ -86,6 +89,7 @@ async function buildProceduralPack(asset) {
     { name: `${prefix}LICENSE`, data: codeLicense },
     { name: `${prefix}QUALITY.md`, data: `# MESHVARA quality contract\n\n- Live catalog WebGL preview\n- Automatic bounds/framing\n- ACES filmic tone mapping\n- Responsive DPR\n- Reduced-motion support\n- Deterministic source construction\n- SHA-256-manifested download ZIP\n- Scene source bytes: ${Buffer.byteLength(scene)}\n\nThis automated contract complements visual art-direction review.\n` },
     { name: `${prefix}src/Scene.tsx`, data: scene },
+    ...(curvedBoxSource ? [{ name: `${prefix}src/geometry/CurvedBox.tsx`, data: curvedBoxSource }] : []),
     { name: `${prefix}src/${component}.tsx`, data: proceduralWrapper(asset, component) },
     { name: `${prefix}src/index.ts`, data: `export { default, ${component} } from './${component}'\n` },
   ])

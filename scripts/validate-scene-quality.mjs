@@ -40,7 +40,7 @@ for (const asset of assets) {
   const scene = await readFile(path, 'utf8')
   const size = (await stat(path)).size
   const materialCount = (scene.match(/<(?:mesh(?:Physical|Standard|Basic)|shader)Material\b|<MeshTransmissionMaterial\b/g) ?? []).length
-  const geometryCount = (scene.match(/<(?:RoundedBox|mesh)\b/g) ?? []).length
+  const geometryCount = (scene.match(/<(?:RoundedBox|CurvedBox|mesh)\b/g) ?? []).length
   const distinctColors = new Set([...scene.matchAll(/color=\"(#[0-9a-fA-F]{6})\"/g)].map((match) => match[1].toLowerCase())).size
   if (size < 500) failures.push(`${asset.slug}: scene source is suspiciously small (${size} bytes)`)
   if (materialCount < 1) failures.push(`${asset.slug}: scene has no explicit web material`)

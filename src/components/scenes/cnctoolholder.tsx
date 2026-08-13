@@ -1,3 +1,3 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 function CncToolHolder(){return <group position={[0, 0.15, 0]} rotation={[0, -0.3, 0]}><mesh position={[0, 0.45, 0]} rotation={[0, 0, 0]}><cylinderGeometry args={[0.4, 0.4, 0.4, 40]}/><meshPhysicalMaterial color="#777e80" metalness={0.95} roughness={0.25}/></mesh><mesh position={[0, 0.0, 0]} rotation={[0, 0, 0]}><cylinderGeometry args={[0.24, 0.24, 0.7, 40]}/><meshPhysicalMaterial color="#8a9091" metalness={0.95} roughness={0.25}/></mesh><mesh position={[0, -0.68, 0]} rotation={[0, 0, 0]}><cylinderGeometry args={[0.16, 0.16, 0.85, 40]}/><meshPhysicalMaterial color="#979c9d" metalness={0.95} roughness={0.25}/></mesh><mesh position={[0, 0.25, 0]} rotation={[1.5708, 0, 0]}><torusGeometry args={[0.32, 0.06, 20, 64]}/><meshPhysicalMaterial color="#5c6466" metalness={0.95} roughness={0.25}/></mesh></group>}
 export default CncToolHolder

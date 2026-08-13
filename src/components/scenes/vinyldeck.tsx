@@ -1,4 +1,4 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
@@ -16,9 +16,9 @@ function VinylDeck() {
   })
   return (
     <group rotation={[0.16, -0.5, 0]} position={[0, -0.42, 0]}>
-      <RoundedBox args={[3.05, 0.34, 2.2]} radius={0.13} smoothness={7}>
+      <CurvedBox args={[3.05, 0.34, 2.2]} radius={0.13} smoothness={7}>
         <meshPhysicalMaterial color="#262a2d" metalness={0.62} roughness={0.3} clearcoat={0.35} />
-      </RoundedBox>
+      </CurvedBox>
       <group ref={record} position={[-0.42, 0.24, 0]}>
         <mesh><cylinderGeometry args={[0.94, 0.94, 0.07, 96]} /><meshPhysicalMaterial color="#0e1011" roughness={0.48} /></mesh>
         <mesh position={[0, 0.045, 0]}><cylinderGeometry args={[0.21, 0.21, 0.018, 48]} /><meshBasicMaterial color="#b76658" /></mesh>
@@ -26,9 +26,9 @@ function VinylDeck() {
       </group>
       <mesh position={[1.04, 0.3, -0.72]}><cylinderGeometry args={[0.18, 0.22, 0.24, 32]} /><meshPhysicalMaterial color="#a58a68" metalness={0.88} roughness={0.2} /></mesh>
       <mesh><tubeGeometry args={[armCurve, 72, 0.035, 12, false]} /><meshPhysicalMaterial color="#bfc3c4" metalness={0.96} roughness={0.16} /></mesh>
-      <RoundedBox args={[0.32, 0.12, 0.16]} radius={0.035} smoothness={4} position={[0.04, 0.25, 0.18]} rotation={[0, -0.28, 0]}>
+      <CurvedBox args={[0.32, 0.12, 0.16]} radius={0.035} smoothness={4} position={[0.04, 0.25, 0.18]} rotation={[0, -0.28, 0]}>
         <meshPhysicalMaterial color="#8a6a4f" metalness={0.8} roughness={0.24} />
-      </RoundedBox>
+      </CurvedBox>
       <mesh position={[1.1, 0.27, 0.65]}><cylinderGeometry args={[0.12, 0.12, 0.12, 32]} /><meshPhysicalMaterial color="#c5c9ca" metalness={0.95} roughness={0.18} /></mesh>
     </group>
   )

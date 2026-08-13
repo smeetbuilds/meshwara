@@ -4,7 +4,7 @@
   "assetCount": 500,
   "criticalPassed": true,
   "minimumAutomatedScore": 63,
-  "averageAutomatedScore": 88.69,
+  "averageAutomatedScore": 88.82,
   "note": "Automated checks verify source depth, deterministic construction, rendering/material contracts, semantic density and packaging readiness. They complement — not replace — visual art-direction review.",
   "assets": [
     {
@@ -21,7 +21,7 @@
       "criticalPassed": true,
       "score": 66,
       "metrics": {
-        "bytes": 1062,
+        "bytes": 1100,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -57,7 +57,7 @@
       "criticalPassed": true,
       "score": 67,
       "metrics": {
-        "bytes": 1296,
+        "bytes": 1334,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -93,7 +93,7 @@
       "criticalPassed": true,
       "score": 79,
       "metrics": {
-        "bytes": 1444,
+        "bytes": 1482,
         "meshLike": 3,
         "geometries": 3,
         "repeatedGeometryEstimate": 3,
@@ -129,7 +129,7 @@
       "criticalPassed": true,
       "score": 84,
       "metrics": {
-        "bytes": 1234,
+        "bytes": 1272,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 11,
@@ -165,7 +165,7 @@
       "criticalPassed": true,
       "score": 65,
       "metrics": {
-        "bytes": 1092,
+        "bytes": 1130,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -201,7 +201,7 @@
       "criticalPassed": true,
       "score": 70,
       "metrics": {
-        "bytes": 960,
+        "bytes": 996,
         "meshLike": 1,
         "geometries": 0,
         "repeatedGeometryEstimate": 9,
@@ -237,7 +237,7 @@
       "criticalPassed": true,
       "score": 82,
       "metrics": {
-        "bytes": 1358,
+        "bytes": 1396,
         "meshLike": 2,
         "geometries": 1,
         "repeatedGeometryEstimate": 44,
@@ -273,7 +273,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1510,
+        "bytes": 1548,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 36,
@@ -309,7 +309,7 @@
       "criticalPassed": true,
       "score": 84,
       "metrics": {
-        "bytes": 1233,
+        "bytes": 1271,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 24,
@@ -345,7 +345,7 @@
       "criticalPassed": true,
       "score": 81,
       "metrics": {
-        "bytes": 1291,
+        "bytes": 1329,
         "meshLike": 1,
         "geometries": 1,
         "repeatedGeometryEstimate": 36,
@@ -381,7 +381,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 1485,
+        "bytes": 1480,
         "meshLike": 6,
         "geometries": 2,
         "repeatedGeometryEstimate": 7,
@@ -415,9 +415,9 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 66,
+      "score": 67,
       "metrics": {
-        "bytes": 1084,
+        "bytes": 1122,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -451,9 +451,9 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 70,
+      "score": 71,
       "metrics": {
-        "bytes": 1201,
+        "bytes": 1239,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 3,
@@ -489,7 +489,7 @@
       "criticalPassed": true,
       "score": 65,
       "metrics": {
-        "bytes": 1787,
+        "bytes": 1825,
         "meshLike": 1,
         "geometries": 1,
         "repeatedGeometryEstimate": 0,
@@ -525,7 +525,7 @@
       "criticalPassed": true,
       "score": 74,
       "metrics": {
-        "bytes": 2249,
+        "bytes": 2287,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -559,9 +559,9 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 75,
+      "score": 76,
       "metrics": {
-        "bytes": 1262,
+        "bytes": 1298,
         "meshLike": 2,
         "geometries": 1,
         "repeatedGeometryEstimate": 7,
@@ -597,7 +597,7 @@
       "criticalPassed": true,
       "score": 80,
       "metrics": {
-        "bytes": 1340,
+        "bytes": 1378,
         "meshLike": 1,
         "geometries": 1,
         "repeatedGeometryEstimate": 22,
@@ -633,7 +633,7 @@
       "criticalPassed": true,
       "score": 66,
       "metrics": {
-        "bytes": 1182,
+        "bytes": 1220,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -669,7 +669,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1465,
+        "bytes": 1503,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 36,
@@ -705,7 +705,7 @@
       "criticalPassed": true,
       "score": 77,
       "metrics": {
-        "bytes": 2460,
+        "bytes": 2498,
         "meshLike": 0,
         "geometries": 0,
         "repeatedGeometryEstimate": 8,
@@ -741,7 +741,7 @@
       "criticalPassed": true,
       "score": 70,
       "metrics": {
-        "bytes": 1108,
+        "bytes": 1146,
         "meshLike": 2,
         "geometries": 2,
         "repeatedGeometryEstimate": 3,
@@ -775,9 +775,9 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 81,
+      "score": 82,
       "metrics": {
-        "bytes": 1493,
+        "bytes": 1531,
         "meshLike": 1,
         "geometries": 1,
         "repeatedGeometryEstimate": 17,
@@ -813,7 +813,7 @@
       "criticalPassed": true,
       "score": 80,
       "metrics": {
-        "bytes": 1296,
+        "bytes": 1334,
         "meshLike": 1,
         "geometries": 1,
         "repeatedGeometryEstimate": 18,
@@ -849,7 +849,7 @@
       "criticalPassed": true,
       "score": 84,
       "metrics": {
-        "bytes": 1386,
+        "bytes": 1420,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 4,
@@ -885,14 +885,14 @@
       "criticalPassed": true,
       "score": 100,
       "metrics": {
-        "bytes": 3874,
-        "meshLike": 12,
-        "geometries": 12,
-        "repeatedGeometryEstimate": 46,
-        "effectiveGeometry": 70,
-        "materials": 12,
-        "premiumMaterials": 9,
-        "distinctColors": 10,
+        "bytes": 6937,
+        "meshLike": 16,
+        "geometries": 11,
+        "repeatedGeometryEstimate": 47,
+        "effectiveGeometry": 74,
+        "materials": 16,
+        "premiumMaterials": 13,
+        "distinctColors": 13,
         "animated": true,
         "shaderDriven": false
       },
@@ -921,7 +921,7 @@
       "criticalPassed": true,
       "score": 98,
       "metrics": {
-        "bytes": 2314,
+        "bytes": 2340,
         "meshLike": 9,
         "geometries": 3,
         "repeatedGeometryEstimate": 2,
@@ -991,16 +991,16 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 86,
+      "score": 94,
       "metrics": {
-        "bytes": 1713,
+        "bytes": 5006,
         "meshLike": 5,
-        "geometries": 2,
+        "geometries": 4,
         "repeatedGeometryEstimate": 2,
-        "effectiveGeometry": 9,
+        "effectiveGeometry": 11,
         "materials": 5,
         "premiumMaterials": 5,
-        "distinctColors": 3,
+        "distinctColors": 4,
         "animated": true,
         "shaderDriven": false
       },
@@ -1099,9 +1099,9 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 94,
+      "score": 95,
       "metrics": {
-        "bytes": 1877,
+        "bytes": 1878,
         "meshLike": 7,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -1135,9 +1135,9 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 85,
+      "score": 86,
       "metrics": {
-        "bytes": 1655,
+        "bytes": 1685,
         "meshLike": 6,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -1243,9 +1243,9 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 99,
+      "score": 100,
       "metrics": {
-        "bytes": 2074,
+        "bytes": 2106,
         "meshLike": 5,
         "geometries": 2,
         "repeatedGeometryEstimate": 14,
@@ -1281,7 +1281,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 1934,
+        "bytes": 1970,
         "meshLike": 7,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -1317,7 +1317,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 2554,
+        "bytes": 2555,
         "meshLike": 6,
         "geometries": 3,
         "repeatedGeometryEstimate": 6,
@@ -1353,7 +1353,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 2269,
+        "bytes": 2268,
         "meshLike": 6,
         "geometries": 4,
         "repeatedGeometryEstimate": 2,
@@ -1425,7 +1425,7 @@
       "criticalPassed": true,
       "score": 78,
       "metrics": {
-        "bytes": 1234,
+        "bytes": 1231,
         "meshLike": 5,
         "geometries": 2,
         "repeatedGeometryEstimate": 2,
@@ -1461,7 +1461,7 @@
       "criticalPassed": true,
       "score": 91,
       "metrics": {
-        "bytes": 1809,
+        "bytes": 1845,
         "meshLike": 5,
         "geometries": 4,
         "repeatedGeometryEstimate": 2,
@@ -1533,7 +1533,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 2244,
+        "bytes": 2245,
         "meshLike": 7,
         "geometries": 6,
         "repeatedGeometryEstimate": 2,
@@ -1569,7 +1569,7 @@
       "criticalPassed": true,
       "score": 100,
       "metrics": {
-        "bytes": 2335,
+        "bytes": 2336,
         "meshLike": 8,
         "geometries": 7,
         "repeatedGeometryEstimate": 0,
@@ -1605,7 +1605,7 @@
       "criticalPassed": true,
       "score": 85,
       "metrics": {
-        "bytes": 1570,
+        "bytes": 1565,
         "meshLike": 6,
         "geometries": 2,
         "repeatedGeometryEstimate": 4,
@@ -1641,7 +1641,7 @@
       "criticalPassed": true,
       "score": 100,
       "metrics": {
-        "bytes": 2289,
+        "bytes": 2325,
         "meshLike": 9,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -1749,7 +1749,7 @@
       "criticalPassed": true,
       "score": 100,
       "metrics": {
-        "bytes": 2173,
+        "bytes": 2172,
         "meshLike": 8,
         "geometries": 6,
         "repeatedGeometryEstimate": 5,
@@ -1857,7 +1857,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1642,
+        "bytes": 1678,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 12,
@@ -1965,7 +1965,7 @@
       "criticalPassed": true,
       "score": 90,
       "metrics": {
-        "bytes": 1506,
+        "bytes": 1503,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 6,
@@ -2001,7 +2001,7 @@
       "criticalPassed": true,
       "score": 99,
       "metrics": {
-        "bytes": 2031,
+        "bytes": 2063,
         "meshLike": 8,
         "geometries": 5,
         "repeatedGeometryEstimate": 3,
@@ -2037,7 +2037,7 @@
       "criticalPassed": true,
       "score": 91,
       "metrics": {
-        "bytes": 1701,
+        "bytes": 1737,
         "meshLike": 8,
         "geometries": 7,
         "repeatedGeometryEstimate": 5,
@@ -2109,7 +2109,7 @@
       "criticalPassed": true,
       "score": 90,
       "metrics": {
-        "bytes": 1539,
+        "bytes": 1536,
         "meshLike": 8,
         "geometries": 5,
         "repeatedGeometryEstimate": 2,
@@ -2145,7 +2145,7 @@
       "criticalPassed": true,
       "score": 92,
       "metrics": {
-        "bytes": 1829,
+        "bytes": 1824,
         "meshLike": 8,
         "geometries": 4,
         "repeatedGeometryEstimate": 4,
@@ -2217,7 +2217,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 2866,
+        "bytes": 2865,
         "meshLike": 10,
         "geometries": 8,
         "repeatedGeometryEstimate": 3,
@@ -2251,9 +2251,9 @@
       "interaction": "Pointer",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 99,
+      "score": 100,
       "metrics": {
-        "bytes": 2073,
+        "bytes": 2107,
         "meshLike": 8,
         "geometries": 6,
         "repeatedGeometryEstimate": 12,
@@ -2431,9 +2431,9 @@
       "interaction": "Idle",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 87,
+      "score": 88,
       "metrics": {
-        "bytes": 1430,
+        "bytes": 1464,
         "meshLike": 8,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -2505,7 +2505,7 @@
       "criticalPassed": true,
       "score": 92,
       "metrics": {
-        "bytes": 1859,
+        "bytes": 1860,
         "meshLike": 7,
         "geometries": 6,
         "repeatedGeometryEstimate": 2,
@@ -2541,7 +2541,7 @@
       "criticalPassed": true,
       "score": 69,
       "metrics": {
-        "bytes": 837,
+        "bytes": 836,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -2613,7 +2613,7 @@
       "criticalPassed": true,
       "score": 77,
       "metrics": {
-        "bytes": 1218,
+        "bytes": 1217,
         "meshLike": 5,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -2685,7 +2685,7 @@
       "criticalPassed": true,
       "score": 90,
       "metrics": {
-        "bytes": 1615,
+        "bytes": 1616,
         "meshLike": 9,
         "geometries": 8,
         "repeatedGeometryEstimate": 2,
@@ -2721,7 +2721,7 @@
       "criticalPassed": true,
       "score": 83,
       "metrics": {
-        "bytes": 1400,
+        "bytes": 1401,
         "meshLike": 6,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -2865,7 +2865,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1601,
+        "bytes": 1635,
         "meshLike": 8,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -3009,7 +3009,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 2047,
+        "bytes": 2081,
         "meshLike": 11,
         "geometries": 9,
         "repeatedGeometryEstimate": 2,
@@ -3117,7 +3117,7 @@
       "criticalPassed": true,
       "score": 87,
       "metrics": {
-        "bytes": 1454,
+        "bytes": 1449,
         "meshLike": 8,
         "geometries": 4,
         "repeatedGeometryEstimate": 2,
@@ -3189,7 +3189,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 2004,
+        "bytes": 2001,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 5,
@@ -3225,7 +3225,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1461,
+        "bytes": 1497,
         "meshLike": 8,
         "geometries": 7,
         "repeatedGeometryEstimate": 3,
@@ -3261,7 +3261,7 @@
       "criticalPassed": true,
       "score": 66,
       "metrics": {
-        "bytes": 709,
+        "bytes": 710,
         "meshLike": 3,
         "geometries": 2,
         "repeatedGeometryEstimate": 2,
@@ -3333,7 +3333,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1315,
+        "bytes": 1314,
         "meshLike": 6,
         "geometries": 4,
         "repeatedGeometryEstimate": 4,
@@ -3369,7 +3369,7 @@
       "criticalPassed": true,
       "score": 70,
       "metrics": {
-        "bytes": 1338,
+        "bytes": 1337,
         "meshLike": 3,
         "geometries": 1,
         "repeatedGeometryEstimate": 2,
@@ -3405,7 +3405,7 @@
       "criticalPassed": true,
       "score": 92,
       "metrics": {
-        "bytes": 1848,
+        "bytes": 1847,
         "meshLike": 10,
         "geometries": 8,
         "repeatedGeometryEstimate": 4,
@@ -3837,7 +3837,7 @@
       "criticalPassed": true,
       "score": 91,
       "metrics": {
-        "bytes": 1683,
+        "bytes": 1715,
         "meshLike": 9,
         "geometries": 6,
         "repeatedGeometryEstimate": 2,
@@ -3873,7 +3873,7 @@
       "criticalPassed": true,
       "score": 90,
       "metrics": {
-        "bytes": 1544,
+        "bytes": 1543,
         "meshLike": 8,
         "geometries": 6,
         "repeatedGeometryEstimate": 8,
@@ -4053,7 +4053,7 @@
       "criticalPassed": true,
       "score": 72,
       "metrics": {
-        "bytes": 849,
+        "bytes": 848,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 2,
@@ -4267,16 +4267,16 @@
       "interaction": "Pointer",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 89,
+      "score": 88,
       "metrics": {
-        "bytes": 1478,
-        "meshLike": 5,
-        "geometries": 5,
-        "repeatedGeometryEstimate": 5,
-        "effectiveGeometry": 15,
-        "materials": 5,
-        "premiumMaterials": 5,
-        "distinctColors": 5,
+        "bytes": 5433,
+        "meshLike": 7,
+        "geometries": 3,
+        "repeatedGeometryEstimate": 0,
+        "effectiveGeometry": 10,
+        "materials": 7,
+        "premiumMaterials": 7,
+        "distinctColors": 6,
         "animated": false,
         "shaderDriven": false
       },
@@ -4339,13 +4339,13 @@
       "interaction": "Pointer",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 81,
+      "score": 89,
       "metrics": {
-        "bytes": 1210,
+        "bytes": 3348,
         "meshLike": 3,
-        "geometries": 3,
-        "repeatedGeometryEstimate": 17,
-        "effectiveGeometry": 23,
+        "geometries": 2,
+        "repeatedGeometryEstimate": 22,
+        "effectiveGeometry": 27,
         "materials": 3,
         "premiumMaterials": 3,
         "distinctColors": 2,
@@ -4411,16 +4411,16 @@
       "interaction": "Pointer",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 72,
+      "score": 90,
       "metrics": {
-        "bytes": 1067,
-        "meshLike": 4,
-        "geometries": 4,
+        "bytes": 2638,
+        "meshLike": 6,
+        "geometries": 6,
         "repeatedGeometryEstimate": 0,
-        "effectiveGeometry": 8,
-        "materials": 4,
-        "premiumMaterials": 4,
-        "distinctColors": 3,
+        "effectiveGeometry": 12,
+        "materials": 6,
+        "premiumMaterials": 6,
+        "distinctColors": 6,
         "animated": false,
         "shaderDriven": false
       },
@@ -4483,14 +4483,14 @@
       "interaction": "Idle",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 89,
+      "score": 95,
       "metrics": {
-        "bytes": 1405,
-        "meshLike": 7,
-        "geometries": 5,
-        "repeatedGeometryEstimate": 9,
-        "effectiveGeometry": 21,
-        "materials": 7,
+        "bytes": 5263,
+        "meshLike": 8,
+        "geometries": 2,
+        "repeatedGeometryEstimate": 20,
+        "effectiveGeometry": 30,
+        "materials": 8,
         "premiumMaterials": 7,
         "distinctColors": 7,
         "animated": false,
@@ -4555,16 +4555,16 @@
       "interaction": "Pointer",
       "presentation": "Floating",
       "criticalPassed": true,
-      "score": 83,
+      "score": 88,
       "metrics": {
-        "bytes": 1643,
-        "meshLike": 5,
-        "geometries": 5,
+        "bytes": 5984,
+        "meshLike": 7,
+        "geometries": 3,
         "repeatedGeometryEstimate": 0,
         "effectiveGeometry": 10,
-        "materials": 5,
-        "premiumMaterials": 5,
-        "distinctColors": 5,
+        "materials": 7,
+        "premiumMaterials": 7,
+        "distinctColors": 6,
         "animated": false,
         "shaderDriven": false
       },
@@ -4593,10 +4593,10 @@
       "criticalPassed": true,
       "score": 100,
       "metrics": {
-        "bytes": 2193,
+        "bytes": 4313,
         "meshLike": 8,
-        "geometries": 8,
-        "repeatedGeometryEstimate": 9,
+        "geometries": 7,
+        "repeatedGeometryEstimate": 10,
         "effectiveGeometry": 25,
         "materials": 8,
         "premiumMaterials": 8,
@@ -4629,7 +4629,7 @@
       "criticalPassed": true,
       "score": 79,
       "metrics": {
-        "bytes": 1174,
+        "bytes": 1173,
         "meshLike": 6,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -4665,7 +4665,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1466,
+        "bytes": 1463,
         "meshLike": 8,
         "geometries": 5,
         "repeatedGeometryEstimate": 14,
@@ -4701,7 +4701,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1169,
+        "bytes": 1168,
         "meshLike": 6,
         "geometries": 4,
         "repeatedGeometryEstimate": 5,
@@ -4737,7 +4737,7 @@
       "criticalPassed": true,
       "score": 85,
       "metrics": {
-        "bytes": 1004,
+        "bytes": 1005,
         "meshLike": 5,
         "geometries": 4,
         "repeatedGeometryEstimate": 11,
@@ -4773,7 +4773,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1496,
+        "bytes": 1495,
         "meshLike": 7,
         "geometries": 5,
         "repeatedGeometryEstimate": 8,
@@ -4917,7 +4917,7 @@
       "criticalPassed": true,
       "score": 78,
       "metrics": {
-        "bytes": 1175,
+        "bytes": 1172,
         "meshLike": 6,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -4987,9 +4987,9 @@
       "interaction": "Pointer",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 74,
+      "score": 75,
       "metrics": {
-        "bytes": 814,
+        "bytes": 850,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 3,
@@ -5061,7 +5061,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1073,
+        "bytes": 1074,
         "meshLike": 5,
         "geometries": 4,
         "repeatedGeometryEstimate": 8,
@@ -5277,7 +5277,7 @@
       "criticalPassed": true,
       "score": 80,
       "metrics": {
-        "bytes": 810,
+        "bytes": 811,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 7,
@@ -5313,7 +5313,7 @@
       "criticalPassed": true,
       "score": 71,
       "metrics": {
-        "bytes": 821,
+        "bytes": 820,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 2,
@@ -5637,7 +5637,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1077,
+        "bytes": 1078,
         "meshLike": 6,
         "geometries": 5,
         "repeatedGeometryEstimate": 4,
@@ -5781,7 +5781,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1284,
+        "bytes": 1283,
         "meshLike": 6,
         "geometries": 4,
         "repeatedGeometryEstimate": 4,
@@ -5817,7 +5817,7 @@
       "criticalPassed": true,
       "score": 87,
       "metrics": {
-        "bytes": 1207,
+        "bytes": 1202,
         "meshLike": 6,
         "geometries": 2,
         "repeatedGeometryEstimate": 20,
@@ -5853,7 +5853,7 @@
       "criticalPassed": true,
       "score": 85,
       "metrics": {
-        "bytes": 1307,
+        "bytes": 1308,
         "meshLike": 7,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -5889,7 +5889,7 @@
       "criticalPassed": true,
       "score": 78,
       "metrics": {
-        "bytes": 967,
+        "bytes": 966,
         "meshLike": 5,
         "geometries": 3,
         "repeatedGeometryEstimate": 2,
@@ -5925,7 +5925,7 @@
       "criticalPassed": true,
       "score": 69,
       "metrics": {
-        "bytes": 851,
+        "bytes": 850,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -5961,7 +5961,7 @@
       "criticalPassed": true,
       "score": 74,
       "metrics": {
-        "bytes": 867,
+        "bytes": 866,
         "meshLike": 5,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -5997,7 +5997,7 @@
       "criticalPassed": true,
       "score": 78,
       "metrics": {
-        "bytes": 1033,
+        "bytes": 1030,
         "meshLike": 5,
         "geometries": 2,
         "repeatedGeometryEstimate": 3,
@@ -6031,9 +6031,9 @@
       "interaction": "Pointer",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 72,
+      "score": 73,
       "metrics": {
-        "bytes": 1068,
+        "bytes": 1106,
         "meshLike": 4,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -6069,7 +6069,7 @@
       "criticalPassed": true,
       "score": 68,
       "metrics": {
-        "bytes": 966,
+        "bytes": 967,
         "meshLike": 3,
         "geometries": 2,
         "repeatedGeometryEstimate": 2,
@@ -6105,7 +6105,7 @@
       "criticalPassed": true,
       "score": 74,
       "metrics": {
-        "bytes": 1019,
+        "bytes": 1016,
         "meshLike": 5,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -6141,7 +6141,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1291,
+        "bytes": 1290,
         "meshLike": 6,
         "geometries": 4,
         "repeatedGeometryEstimate": 4,
@@ -6177,7 +6177,7 @@
       "criticalPassed": true,
       "score": 71,
       "metrics": {
-        "bytes": 936,
+        "bytes": 933,
         "meshLike": 4,
         "geometries": 1,
         "repeatedGeometryEstimate": 2,
@@ -6249,7 +6249,7 @@
       "criticalPassed": true,
       "score": 64,
       "metrics": {
-        "bytes": 656,
+        "bytes": 657,
         "meshLike": 3,
         "geometries": 2,
         "repeatedGeometryEstimate": 2,
@@ -6427,16 +6427,16 @@
       "interaction": "Pointer",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 85,
+      "score": 95,
       "metrics": {
-        "bytes": 1526,
-        "meshLike": 6,
-        "geometries": 4,
-        "repeatedGeometryEstimate": 2,
-        "effectiveGeometry": 12,
-        "materials": 6,
-        "premiumMaterials": 3,
-        "distinctColors": 6,
+        "bytes": 5602,
+        "meshLike": 10,
+        "geometries": 8,
+        "repeatedGeometryEstimate": 9,
+        "effectiveGeometry": 27,
+        "materials": 10,
+        "premiumMaterials": 7,
+        "distinctColors": 9,
         "animated": false,
         "shaderDriven": false
       },
@@ -6789,7 +6789,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1027,
+        "bytes": 1028,
         "meshLike": 5,
         "geometries": 4,
         "repeatedGeometryEstimate": 13,
@@ -6825,7 +6825,7 @@
       "criticalPassed": true,
       "score": 71,
       "metrics": {
-        "bytes": 895,
+        "bytes": 931,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -6969,7 +6969,7 @@
       "criticalPassed": true,
       "score": 76,
       "metrics": {
-        "bytes": 1144,
+        "bytes": 1145,
         "meshLike": 5,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -7005,7 +7005,7 @@
       "criticalPassed": true,
       "score": 72,
       "metrics": {
-        "bytes": 1062,
+        "bytes": 1063,
         "meshLike": 5,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -7149,7 +7149,7 @@
       "criticalPassed": true,
       "score": 69,
       "metrics": {
-        "bytes": 973,
+        "bytes": 974,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 3,
@@ -7185,7 +7185,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1490,
+        "bytes": 1491,
         "meshLike": 6,
         "geometries": 5,
         "repeatedGeometryEstimate": 5,
@@ -7221,7 +7221,7 @@
       "criticalPassed": true,
       "score": 92,
       "metrics": {
-        "bytes": 1825,
+        "bytes": 1826,
         "meshLike": 8,
         "geometries": 7,
         "repeatedGeometryEstimate": 0,
@@ -7257,7 +7257,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 4291,
+        "bytes": 4260,
         "meshLike": 21,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -7293,7 +7293,7 @@
       "criticalPassed": true,
       "score": 75,
       "metrics": {
-        "bytes": 1334,
+        "bytes": 1327,
         "meshLike": 6,
         "geometries": 1,
         "repeatedGeometryEstimate": 0,
@@ -7329,7 +7329,7 @@
       "criticalPassed": true,
       "score": 92,
       "metrics": {
-        "bytes": 2992,
+        "bytes": 2967,
         "meshLike": 14,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -7365,7 +7365,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1406,
+        "bytes": 1403,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 7,
@@ -7401,7 +7401,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 3398,
+        "bytes": 3369,
         "meshLike": 17,
         "geometries": 1,
         "repeatedGeometryEstimate": 0,
@@ -7437,7 +7437,7 @@
       "criticalPassed": true,
       "score": 88,
       "metrics": {
-        "bytes": 1319,
+        "bytes": 1316,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 4,
@@ -7473,7 +7473,7 @@
       "criticalPassed": true,
       "score": 79,
       "metrics": {
-        "bytes": 1534,
+        "bytes": 1525,
         "meshLike": 7,
         "geometries": 1,
         "repeatedGeometryEstimate": 0,
@@ -7509,7 +7509,7 @@
       "criticalPassed": true,
       "score": 88,
       "metrics": {
-        "bytes": 1362,
+        "bytes": 1359,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 8,
@@ -7545,7 +7545,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 3121,
+        "bytes": 3124,
         "meshLike": 14,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -7581,7 +7581,7 @@
       "criticalPassed": true,
       "score": 76,
       "metrics": {
-        "bytes": 1110,
+        "bytes": 1109,
         "meshLike": 5,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -7617,7 +7617,7 @@
       "criticalPassed": true,
       "score": 83,
       "metrics": {
-        "bytes": 1656,
+        "bytes": 1647,
         "meshLike": 8,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -7653,7 +7653,7 @@
       "criticalPassed": true,
       "score": 75,
       "metrics": {
-        "bytes": 1060,
+        "bytes": 1059,
         "meshLike": 5,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -7689,7 +7689,7 @@
       "criticalPassed": true,
       "score": 71,
       "metrics": {
-        "bytes": 888,
+        "bytes": 889,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -7725,7 +7725,7 @@
       "criticalPassed": true,
       "score": 88,
       "metrics": {
-        "bytes": 1375,
+        "bytes": 1372,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 9,
@@ -7759,9 +7759,9 @@
       "interaction": "Pointer",
       "presentation": "Grounded",
       "criticalPassed": true,
-      "score": 76,
+      "score": 75,
       "metrics": {
-        "bytes": 1547,
+        "bytes": 1536,
         "meshLike": 7,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -7797,7 +7797,7 @@
       "criticalPassed": true,
       "score": 84,
       "metrics": {
-        "bytes": 1206,
+        "bytes": 1203,
         "meshLike": 6,
         "geometries": 3,
         "repeatedGeometryEstimate": 4,
@@ -7833,7 +7833,7 @@
       "criticalPassed": true,
       "score": 71,
       "metrics": {
-        "bytes": 934,
+        "bytes": 935,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -7869,7 +7869,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1282,
+        "bytes": 1275,
         "meshLike": 6,
         "geometries": 1,
         "repeatedGeometryEstimate": 7,
@@ -7905,7 +7905,7 @@
       "criticalPassed": true,
       "score": 87,
       "metrics": {
-        "bytes": 1233,
+        "bytes": 1228,
         "meshLike": 7,
         "geometries": 3,
         "repeatedGeometryEstimate": 7,
@@ -7941,7 +7941,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1057,
+        "bytes": 1054,
         "meshLike": 5,
         "geometries": 2,
         "repeatedGeometryEstimate": 10,
@@ -7977,7 +7977,7 @@
       "criticalPassed": true,
       "score": 77,
       "metrics": {
-        "bytes": 1479,
+        "bytes": 1468,
         "meshLike": 7,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8013,7 +8013,7 @@
       "criticalPassed": true,
       "score": 87,
       "metrics": {
-        "bytes": 1923,
+        "bytes": 1908,
         "meshLike": 10,
         "geometries": 1,
         "repeatedGeometryEstimate": 0,
@@ -8049,7 +8049,7 @@
       "criticalPassed": true,
       "score": 84,
       "metrics": {
-        "bytes": 1895,
+        "bytes": 1884,
         "meshLike": 8,
         "geometries": 1,
         "repeatedGeometryEstimate": 0,
@@ -8085,7 +8085,7 @@
       "criticalPassed": true,
       "score": 88,
       "metrics": {
-        "bytes": 1368,
+        "bytes": 1365,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 6,
@@ -8121,7 +8121,7 @@
       "criticalPassed": true,
       "score": 80,
       "metrics": {
-        "bytes": 1277,
+        "bytes": 1278,
         "meshLike": 6,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -8157,7 +8157,7 @@
       "criticalPassed": true,
       "score": 80,
       "metrics": {
-        "bytes": 1135,
+        "bytes": 1132,
         "meshLike": 5,
         "geometries": 2,
         "repeatedGeometryEstimate": 4,
@@ -8193,7 +8193,7 @@
       "criticalPassed": true,
       "score": 84,
       "metrics": {
-        "bytes": 1213,
+        "bytes": 1214,
         "meshLike": 6,
         "geometries": 5,
         "repeatedGeometryEstimate": 2,
@@ -8265,7 +8265,7 @@
       "criticalPassed": true,
       "score": 88,
       "metrics": {
-        "bytes": 2598,
+        "bytes": 2577,
         "meshLike": 12,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8301,7 +8301,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 2232,
+        "bytes": 2215,
         "meshLike": 10,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8337,7 +8337,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 2338,
+        "bytes": 2319,
         "meshLike": 11,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8373,7 +8373,7 @@
       "criticalPassed": true,
       "score": 83,
       "metrics": {
-        "bytes": 1779,
+        "bytes": 1764,
         "meshLike": 9,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8409,7 +8409,7 @@
       "criticalPassed": true,
       "score": 93,
       "metrics": {
-        "bytes": 5445,
+        "bytes": 5394,
         "meshLike": 27,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8445,7 +8445,7 @@
       "criticalPassed": true,
       "score": 88,
       "metrics": {
-        "bytes": 1624,
+        "bytes": 1623,
         "meshLike": 8,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -8481,7 +8481,7 @@
       "criticalPassed": true,
       "score": 73,
       "metrics": {
-        "bytes": 1248,
+        "bytes": 1239,
         "meshLike": 6,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8517,7 +8517,7 @@
       "criticalPassed": true,
       "score": 76,
       "metrics": {
-        "bytes": 1479,
+        "bytes": 1468,
         "meshLike": 7,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8553,7 +8553,7 @@
       "criticalPassed": true,
       "score": 90,
       "metrics": {
-        "bytes": 1537,
+        "bytes": 1526,
         "meshLike": 8,
         "geometries": 1,
         "repeatedGeometryEstimate": 7,
@@ -8589,7 +8589,7 @@
       "criticalPassed": true,
       "score": 77,
       "metrics": {
-        "bytes": 1447,
+        "bytes": 1436,
         "meshLike": 7,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -8625,7 +8625,7 @@
       "criticalPassed": true,
       "score": 85,
       "metrics": {
-        "bytes": 1304,
+        "bytes": 1295,
         "meshLike": 7,
         "geometries": 1,
         "repeatedGeometryEstimate": 5,
@@ -8661,7 +8661,7 @@
       "criticalPassed": true,
       "score": 92,
       "metrics": {
-        "bytes": 2968,
+        "bytes": 2951,
         "meshLike": 12,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -8697,7 +8697,7 @@
       "criticalPassed": true,
       "score": 82,
       "metrics": {
-        "bytes": 1276,
+        "bytes": 1277,
         "meshLike": 6,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -8733,7 +8733,7 @@
       "criticalPassed": true,
       "score": 76,
       "metrics": {
-        "bytes": 1117,
+        "bytes": 1116,
         "meshLike": 5,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -8769,7 +8769,7 @@
       "criticalPassed": true,
       "score": 69,
       "metrics": {
-        "bytes": 883,
+        "bytes": 882,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -8805,7 +8805,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1422,
+        "bytes": 1419,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 4,
@@ -8841,7 +8841,7 @@
       "criticalPassed": true,
       "score": 78,
       "metrics": {
-        "bytes": 1317,
+        "bytes": 1312,
         "meshLike": 6,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -8877,7 +8877,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5137,
+        "bytes": 5104,
         "meshLike": 21,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -8949,7 +8949,7 @@
       "criticalPassed": true,
       "score": 81,
       "metrics": {
-        "bytes": 1575,
+        "bytes": 1568,
         "meshLike": 7,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -8985,7 +8985,7 @@
       "criticalPassed": true,
       "score": 75,
       "metrics": {
-        "bytes": 1121,
+        "bytes": 1120,
         "meshLike": 5,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -9021,7 +9021,7 @@
       "criticalPassed": true,
       "score": 75,
       "metrics": {
-        "bytes": 1112,
+        "bytes": 1111,
         "meshLike": 5,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -9057,7 +9057,7 @@
       "criticalPassed": true,
       "score": 87,
       "metrics": {
-        "bytes": 1416,
+        "bytes": 1411,
         "meshLike": 7,
         "geometries": 3,
         "repeatedGeometryEstimate": 4,
@@ -9093,7 +9093,7 @@
       "criticalPassed": true,
       "score": 93,
       "metrics": {
-        "bytes": 2574,
+        "bytes": 2561,
         "meshLike": 11,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -9129,7 +9129,7 @@
       "criticalPassed": true,
       "score": 68,
       "metrics": {
-        "bytes": 898,
+        "bytes": 897,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -9165,7 +9165,7 @@
       "criticalPassed": true,
       "score": 91,
       "metrics": {
-        "bytes": 1893,
+        "bytes": 1890,
         "meshLike": 9,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -9201,7 +9201,7 @@
       "criticalPassed": true,
       "score": 79,
       "metrics": {
-        "bytes": 1091,
+        "bytes": 1094,
         "meshLike": 5,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -9237,7 +9237,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 2501,
+        "bytes": 2504,
         "meshLike": 11,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -9273,7 +9273,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1447,
+        "bytes": 1450,
         "meshLike": 7,
         "geometries": 7,
         "repeatedGeometryEstimate": 0,
@@ -9309,7 +9309,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 4709,
+        "bytes": 4672,
         "meshLike": 24,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -9345,7 +9345,7 @@
       "criticalPassed": true,
       "score": 82,
       "metrics": {
-        "bytes": 1245,
+        "bytes": 1248,
         "meshLike": 6,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -9381,7 +9381,7 @@
       "criticalPassed": true,
       "score": 71,
       "metrics": {
-        "bytes": 914,
+        "bytes": 915,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -9417,7 +9417,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 3738,
+        "bytes": 3729,
         "meshLike": 19,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -9453,7 +9453,7 @@
       "criticalPassed": true,
       "score": 72,
       "metrics": {
-        "bytes": 889,
+        "bytes": 892,
         "meshLike": 4,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -9489,7 +9489,7 @@
       "criticalPassed": true,
       "score": 93,
       "metrics": {
-        "bytes": 2598,
+        "bytes": 2585,
         "meshLike": 11,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -9525,7 +9525,7 @@
       "criticalPassed": true,
       "score": 69,
       "metrics": {
-        "bytes": 902,
+        "bytes": 901,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -9561,7 +9561,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 2352,
+        "bytes": 2351,
         "meshLike": 12,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -9597,7 +9597,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1482,
+        "bytes": 1477,
         "meshLike": 7,
         "geometries": 3,
         "repeatedGeometryEstimate": 7,
@@ -9633,7 +9633,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 2016,
+        "bytes": 2015,
         "meshLike": 10,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -9669,7 +9669,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1474,
+        "bytes": 1469,
         "meshLike": 7,
         "geometries": 3,
         "repeatedGeometryEstimate": 8,
@@ -9705,7 +9705,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1681,
+        "bytes": 1684,
         "meshLike": 8,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -9741,7 +9741,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1477,
+        "bytes": 1472,
         "meshLike": 7,
         "geometries": 3,
         "repeatedGeometryEstimate": 13,
@@ -9777,7 +9777,7 @@
       "criticalPassed": true,
       "score": 80,
       "metrics": {
-        "bytes": 1591,
+        "bytes": 1582,
         "meshLike": 7,
         "geometries": 1,
         "repeatedGeometryEstimate": 0,
@@ -9813,7 +9813,7 @@
       "criticalPassed": true,
       "score": 83,
       "metrics": {
-        "bytes": 1375,
+        "bytes": 1378,
         "meshLike": 6,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -9849,7 +9849,7 @@
       "criticalPassed": true,
       "score": 69,
       "metrics": {
-        "bytes": 897,
+        "bytes": 896,
         "meshLike": 4,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -9885,7 +9885,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1410,
+        "bytes": 1405,
         "meshLike": 7,
         "geometries": 3,
         "repeatedGeometryEstimate": 7,
@@ -9921,7 +9921,7 @@
       "criticalPassed": true,
       "score": 90,
       "metrics": {
-        "bytes": 1577,
+        "bytes": 1572,
         "meshLike": 8,
         "geometries": 4,
         "repeatedGeometryEstimate": 5,
@@ -9957,7 +9957,7 @@
       "criticalPassed": true,
       "score": 89,
       "metrics": {
-        "bytes": 1447,
+        "bytes": 1444,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 4,
@@ -9993,7 +9993,7 @@
       "criticalPassed": true,
       "score": 91,
       "metrics": {
-        "bytes": 1709,
+        "bytes": 1706,
         "meshLike": 8,
         "geometries": 5,
         "repeatedGeometryEstimate": 6,
@@ -10029,7 +10029,7 @@
       "criticalPassed": true,
       "score": 90,
       "metrics": {
-        "bytes": 1539,
+        "bytes": 1536,
         "meshLike": 7,
         "geometries": 4,
         "repeatedGeometryEstimate": 7,
@@ -10065,7 +10065,7 @@
       "criticalPassed": true,
       "score": 71,
       "metrics": {
-        "bytes": 936,
+        "bytes": 937,
         "meshLike": 4,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -10101,7 +10101,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1460,
+        "bytes": 1461,
         "meshLike": 7,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -10137,7 +10137,7 @@
       "criticalPassed": true,
       "score": 72,
       "metrics": {
-        "bytes": 912,
+        "bytes": 915,
         "meshLike": 4,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -10173,7 +10173,7 @@
       "criticalPassed": true,
       "score": 92,
       "metrics": {
-        "bytes": 2608,
+        "bytes": 2593,
         "meshLike": 11,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -10209,7 +10209,7 @@
       "criticalPassed": true,
       "score": 92,
       "metrics": {
-        "bytes": 2010,
+        "bytes": 2001,
         "meshLike": 10,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -10245,7 +10245,7 @@
       "criticalPassed": true,
       "score": 93,
       "metrics": {
-        "bytes": 1896,
+        "bytes": 1899,
         "meshLike": 10,
         "geometries": 10,
         "repeatedGeometryEstimate": 4,
@@ -10281,7 +10281,7 @@
       "criticalPassed": true,
       "score": 91,
       "metrics": {
-        "bytes": 1673,
+        "bytes": 1674,
         "meshLike": 9,
         "geometries": 8,
         "repeatedGeometryEstimate": 9,
@@ -10317,7 +10317,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1413,
+        "bytes": 1416,
         "meshLike": 7,
         "geometries": 7,
         "repeatedGeometryEstimate": 0,
@@ -10389,7 +10389,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 2213,
+        "bytes": 2216,
         "meshLike": 11,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -10497,7 +10497,7 @@
       "criticalPassed": true,
       "score": 81,
       "metrics": {
-        "bytes": 1261,
+        "bytes": 1262,
         "meshLike": 6,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -10533,7 +10533,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 3857,
+        "bytes": 3860,
         "meshLike": 17,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -10569,7 +10569,7 @@
       "criticalPassed": true,
       "score": 93,
       "metrics": {
-        "bytes": 3310,
+        "bytes": 3313,
         "meshLike": 15,
         "geometries": 15,
         "repeatedGeometryEstimate": 0,
@@ -10605,7 +10605,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 3581,
+        "bytes": 3584,
         "meshLike": 19,
         "geometries": 19,
         "repeatedGeometryEstimate": 0,
@@ -10677,7 +10677,7 @@
       "criticalPassed": true,
       "score": 90,
       "metrics": {
-        "bytes": 2038,
+        "bytes": 2041,
         "meshLike": 9,
         "geometries": 9,
         "repeatedGeometryEstimate": 0,
@@ -10713,7 +10713,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3298,
+        "bytes": 3283,
         "meshLike": 17,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -10749,7 +10749,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 2190,
+        "bytes": 2185,
         "meshLike": 10,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -10785,7 +10785,7 @@
       "criticalPassed": true,
       "score": 86,
       "metrics": {
-        "bytes": 1830,
+        "bytes": 1819,
         "meshLike": 9,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -10821,7 +10821,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5813,
+        "bytes": 5802,
         "meshLike": 25,
         "geometries": 18,
         "repeatedGeometryEstimate": 0,
@@ -10857,7 +10857,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5182,
+        "bytes": 5171,
         "meshLike": 23,
         "geometries": 16,
         "repeatedGeometryEstimate": 0,
@@ -10893,7 +10893,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6661,
+        "bytes": 6640,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -10929,7 +10929,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6591,
+        "bytes": 6570,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -10965,7 +10965,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6603,
+        "bytes": 6582,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11001,7 +11001,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6638,
+        "bytes": 6617,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11037,7 +11037,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5744,
+        "bytes": 5733,
         "meshLike": 25,
         "geometries": 18,
         "repeatedGeometryEstimate": 0,
@@ -11073,7 +11073,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6622,
+        "bytes": 6601,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11109,7 +11109,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6674,
+        "bytes": 6653,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11145,7 +11145,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6640,
+        "bytes": 6619,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11181,7 +11181,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5672,
+        "bytes": 5665,
         "meshLike": 25,
         "geometries": 20,
         "repeatedGeometryEstimate": 0,
@@ -11217,7 +11217,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7460,
+        "bytes": 7435,
         "meshLike": 30,
         "geometries": 16,
         "repeatedGeometryEstimate": 0,
@@ -11253,7 +11253,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7393,
+        "bytes": 7368,
         "meshLike": 30,
         "geometries": 16,
         "repeatedGeometryEstimate": 0,
@@ -11289,7 +11289,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5657,
+        "bytes": 5650,
         "meshLike": 25,
         "geometries": 20,
         "repeatedGeometryEstimate": 0,
@@ -11325,7 +11325,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5645,
+        "bytes": 5638,
         "meshLike": 25,
         "geometries": 20,
         "repeatedGeometryEstimate": 0,
@@ -11361,7 +11361,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5621,
+        "bytes": 5614,
         "meshLike": 25,
         "geometries": 20,
         "repeatedGeometryEstimate": 0,
@@ -11397,7 +11397,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5658,
+        "bytes": 5651,
         "meshLike": 25,
         "geometries": 20,
         "repeatedGeometryEstimate": 0,
@@ -11433,7 +11433,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7434,
+        "bytes": 7409,
         "meshLike": 30,
         "geometries": 16,
         "repeatedGeometryEstimate": 0,
@@ -11469,7 +11469,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5657,
+        "bytes": 5650,
         "meshLike": 25,
         "geometries": 20,
         "repeatedGeometryEstimate": 0,
@@ -11505,7 +11505,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5607,
+        "bytes": 5600,
         "meshLike": 25,
         "geometries": 20,
         "repeatedGeometryEstimate": 0,
@@ -11541,7 +11541,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6614,
+        "bytes": 6593,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11577,7 +11577,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6609,
+        "bytes": 6588,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11613,7 +11613,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 10325,
+        "bytes": 10264,
         "meshLike": 44,
         "geometries": 12,
         "repeatedGeometryEstimate": 0,
@@ -11649,7 +11649,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 10264,
+        "bytes": 10203,
         "meshLike": 44,
         "geometries": 12,
         "repeatedGeometryEstimate": 0,
@@ -11685,7 +11685,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6619,
+        "bytes": 6598,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11721,7 +11721,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5450,
+        "bytes": 5449,
         "meshLike": 24,
         "geometries": 22,
         "repeatedGeometryEstimate": 0,
@@ -11757,7 +11757,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6631,
+        "bytes": 6610,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11793,7 +11793,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6607,
+        "bytes": 6586,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11829,7 +11829,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6610,
+        "bytes": 6589,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11865,7 +11865,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6618,
+        "bytes": 6597,
         "meshLike": 29,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -11901,7 +11901,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3609,
+        "bytes": 3602,
         "meshLike": 16,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -11937,7 +11937,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3885,
+        "bytes": 3876,
         "meshLike": 17,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -11973,7 +11973,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3661,
+        "bytes": 3654,
         "meshLike": 16,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -12009,7 +12009,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3683,
+        "bytes": 3676,
         "meshLike": 16,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -12045,7 +12045,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3669,
+        "bytes": 3662,
         "meshLike": 16,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -12081,7 +12081,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3410,
+        "bytes": 3405,
         "meshLike": 15,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -12117,7 +12117,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4091,
+        "bytes": 4084,
         "meshLike": 18,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -12153,7 +12153,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3887,
+        "bytes": 3878,
         "meshLike": 17,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -12189,7 +12189,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3601,
+        "bytes": 3594,
         "meshLike": 16,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -12225,7 +12225,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3629,
+        "bytes": 3622,
         "meshLike": 16,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -12261,7 +12261,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3392,
+        "bytes": 3377,
         "meshLike": 15,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -12297,7 +12297,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3404,
+        "bytes": 3385,
         "meshLike": 15,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -12333,7 +12333,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3471,
+        "bytes": 3452,
         "meshLike": 15,
         "geometries": 4,
         "repeatedGeometryEstimate": 0,
@@ -12369,7 +12369,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3706,
+        "bytes": 3695,
         "meshLike": 16,
         "geometries": 9,
         "repeatedGeometryEstimate": 0,
@@ -12405,7 +12405,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3599,
+        "bytes": 3588,
         "meshLike": 16,
         "geometries": 9,
         "repeatedGeometryEstimate": 0,
@@ -12441,7 +12441,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3635,
+        "bytes": 3618,
         "meshLike": 16,
         "geometries": 6,
         "repeatedGeometryEstimate": 0,
@@ -12477,7 +12477,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3630,
+        "bytes": 3623,
         "meshLike": 16,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -12513,7 +12513,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3846,
+        "bytes": 3843,
         "meshLike": 17,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -12549,7 +12549,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3846,
+        "bytes": 3843,
         "meshLike": 17,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -12585,7 +12585,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3688,
+        "bytes": 3685,
         "meshLike": 16,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -12621,7 +12621,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4663,
+        "bytes": 4626,
         "meshLike": 20,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12657,7 +12657,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4655,
+        "bytes": 4618,
         "meshLike": 20,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12693,7 +12693,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 4655,
+        "bytes": 4618,
         "meshLike": 20,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12729,7 +12729,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4651,
+        "bytes": 4614,
         "meshLike": 20,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12765,7 +12765,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4655,
+        "bytes": 4618,
         "meshLike": 20,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12801,7 +12801,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4659,
+        "bytes": 4622,
         "meshLike": 20,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12837,7 +12837,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3914,
+        "bytes": 3883,
         "meshLike": 17,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12873,7 +12873,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3910,
+        "bytes": 3879,
         "meshLike": 17,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12909,7 +12909,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6584,
+        "bytes": 6531,
         "meshLike": 28,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12945,7 +12945,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3928,
+        "bytes": 3897,
         "meshLike": 17,
         "geometries": 0,
         "repeatedGeometryEstimate": 0,
@@ -12981,7 +12981,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 11129,
+        "bytes": 11066,
         "meshLike": 43,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -13017,7 +13017,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 11223,
+        "bytes": 11160,
         "meshLike": 43,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -13053,7 +13053,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4941,
+        "bytes": 4912,
         "meshLike": 21,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -13089,7 +13089,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5003,
+        "bytes": 4974,
         "meshLike": 21,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -13125,7 +13125,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5055,
+        "bytes": 5026,
         "meshLike": 21,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -13161,7 +13161,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 11183,
+        "bytes": 11120,
         "meshLike": 43,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -13197,7 +13197,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4424,
+        "bytes": 4405,
         "meshLike": 20,
         "geometries": 9,
         "repeatedGeometryEstimate": 0,
@@ -13233,7 +13233,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6148,
+        "bytes": 6101,
         "meshLike": 27,
         "geometries": 2,
         "repeatedGeometryEstimate": 0,
@@ -13269,7 +13269,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4458,
+        "bytes": 4439,
         "meshLike": 20,
         "geometries": 9,
         "repeatedGeometryEstimate": 0,
@@ -13305,7 +13305,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4434,
+        "bytes": 4415,
         "meshLike": 20,
         "geometries": 9,
         "repeatedGeometryEstimate": 0,
@@ -13341,7 +13341,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 11431,
+        "bytes": 11364,
         "meshLike": 45,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -13377,7 +13377,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4474,
+        "bytes": 4455,
         "meshLike": 20,
         "geometries": 9,
         "repeatedGeometryEstimate": 0,
@@ -13413,7 +13413,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5001,
+        "bytes": 4972,
         "meshLike": 21,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -13449,7 +13449,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4366,
+        "bytes": 4347,
         "meshLike": 20,
         "geometries": 9,
         "repeatedGeometryEstimate": 0,
@@ -13485,7 +13485,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4937,
+        "bytes": 4908,
         "meshLike": 21,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -13521,7 +13521,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5803,
+        "bytes": 5778,
         "meshLike": 24,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -13557,7 +13557,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5761,
+        "bytes": 5736,
         "meshLike": 24,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -13593,7 +13593,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5687,
+        "bytes": 5662,
         "meshLike": 24,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -13629,7 +13629,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5178,
+        "bytes": 5157,
         "meshLike": 22,
         "geometries": 10,
         "repeatedGeometryEstimate": 0,
@@ -13665,7 +13665,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4065,
+        "bytes": 4048,
         "meshLike": 18,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -13701,7 +13701,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5509,
+        "bytes": 5498,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -13737,7 +13737,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5569,
+        "bytes": 5558,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -13773,7 +13773,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6066,
+        "bytes": 6047,
         "meshLike": 25,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -13809,7 +13809,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6171,
+        "bytes": 6156,
         "meshLike": 27,
         "geometries": 18,
         "repeatedGeometryEstimate": 0,
@@ -13845,7 +13845,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6145,
+        "bytes": 6130,
         "meshLike": 27,
         "geometries": 18,
         "repeatedGeometryEstimate": 0,
@@ -13881,7 +13881,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5413,
+        "bytes": 5406,
         "meshLike": 24,
         "geometries": 19,
         "repeatedGeometryEstimate": 0,
@@ -13917,7 +13917,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5593,
+        "bytes": 5582,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -13953,7 +13953,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6276,
+        "bytes": 6255,
         "meshLike": 26,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -13989,7 +13989,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6205,
+        "bytes": 6190,
         "meshLike": 27,
         "geometries": 18,
         "repeatedGeometryEstimate": 0,
@@ -14025,7 +14025,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4924,
+        "bytes": 4907,
         "meshLike": 22,
         "geometries": 12,
         "repeatedGeometryEstimate": 0,
@@ -14061,7 +14061,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6336,
+        "bytes": 6315,
         "meshLike": 26,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -14097,7 +14097,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6332,
+        "bytes": 6311,
         "meshLike": 26,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -14133,7 +14133,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6276,
+        "bytes": 6255,
         "meshLike": 26,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -14169,7 +14169,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5386,
+        "bytes": 5385,
         "meshLike": 24,
         "geometries": 22,
         "repeatedGeometryEstimate": 0,
@@ -14205,7 +14205,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5454,
+        "bytes": 5453,
         "meshLike": 24,
         "geometries": 22,
         "repeatedGeometryEstimate": 0,
@@ -14241,7 +14241,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5784,
+        "bytes": 5783,
         "meshLike": 25,
         "geometries": 23,
         "repeatedGeometryEstimate": 0,
@@ -14277,7 +14277,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5786,
+        "bytes": 5785,
         "meshLike": 25,
         "geometries": 23,
         "repeatedGeometryEstimate": 0,
@@ -14313,7 +14313,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5431,
+        "bytes": 5430,
         "meshLike": 24,
         "geometries": 22,
         "repeatedGeometryEstimate": 0,
@@ -14349,7 +14349,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5440,
+        "bytes": 5439,
         "meshLike": 24,
         "geometries": 22,
         "repeatedGeometryEstimate": 0,
@@ -14385,7 +14385,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5475,
+        "bytes": 5474,
         "meshLike": 24,
         "geometries": 22,
         "repeatedGeometryEstimate": 0,
@@ -14421,7 +14421,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5543,
+        "bytes": 5538,
         "meshLike": 25,
         "geometries": 21,
         "repeatedGeometryEstimate": 0,
@@ -14457,7 +14457,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5550,
+        "bytes": 5545,
         "meshLike": 25,
         "geometries": 21,
         "repeatedGeometryEstimate": 0,
@@ -14493,7 +14493,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6197,
+        "bytes": 6184,
         "meshLike": 27,
         "geometries": 19,
         "repeatedGeometryEstimate": 0,
@@ -14529,7 +14529,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7113,
+        "bytes": 7108,
         "meshLike": 33,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -14565,7 +14565,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7159,
+        "bytes": 7154,
         "meshLike": 33,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -14601,7 +14601,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7093,
+        "bytes": 7088,
         "meshLike": 33,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -14637,7 +14637,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7080,
+        "bytes": 7075,
         "meshLike": 33,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -14673,7 +14673,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5549,
+        "bytes": 5544,
         "meshLike": 25,
         "geometries": 21,
         "repeatedGeometryEstimate": 0,
@@ -14709,7 +14709,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7121,
+        "bytes": 7116,
         "meshLike": 33,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -14745,7 +14745,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5543,
+        "bytes": 5538,
         "meshLike": 25,
         "geometries": 21,
         "repeatedGeometryEstimate": 0,
@@ -14781,7 +14781,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6126,
+        "bytes": 6113,
         "meshLike": 27,
         "geometries": 19,
         "repeatedGeometryEstimate": 0,
@@ -14817,7 +14817,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6248,
+        "bytes": 6243,
         "meshLike": 28,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -14853,7 +14853,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6225,
+        "bytes": 6220,
         "meshLike": 28,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -14889,7 +14889,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6248,
+        "bytes": 6243,
         "meshLike": 28,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -14925,7 +14925,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6299,
+        "bytes": 6294,
         "meshLike": 28,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -14961,7 +14961,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6159,
+        "bytes": 6146,
         "meshLike": 27,
         "geometries": 19,
         "repeatedGeometryEstimate": 0,
@@ -14997,7 +14997,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5529,
+        "bytes": 5528,
         "meshLike": 25,
         "geometries": 23,
         "repeatedGeometryEstimate": 0,
@@ -15033,7 +15033,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7141,
+        "bytes": 7136,
         "meshLike": 33,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -15069,7 +15069,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6240,
+        "bytes": 6235,
         "meshLike": 28,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -15105,7 +15105,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6276,
+        "bytes": 6271,
         "meshLike": 28,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -15141,7 +15141,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5426,
+        "bytes": 5415,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15177,7 +15177,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5438,
+        "bytes": 5427,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15213,7 +15213,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4975,
+        "bytes": 4968,
         "meshLike": 22,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15249,7 +15249,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4234,
+        "bytes": 4221,
         "meshLike": 19,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -15285,7 +15285,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4273,
+        "bytes": 4260,
         "meshLike": 19,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -15321,7 +15321,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5484,
+        "bytes": 5473,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15357,7 +15357,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4358,
+        "bytes": 4345,
         "meshLike": 19,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -15393,7 +15393,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5444,
+        "bytes": 5433,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15429,7 +15429,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5439,
+        "bytes": 5428,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15465,7 +15465,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4239,
+        "bytes": 4226,
         "meshLike": 19,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -15501,7 +15501,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4973,
+        "bytes": 4966,
         "meshLike": 22,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15537,7 +15537,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4970,
+        "bytes": 4963,
         "meshLike": 22,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15573,7 +15573,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4933,
+        "bytes": 4926,
         "meshLike": 22,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15609,7 +15609,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4937,
+        "bytes": 4930,
         "meshLike": 22,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15645,7 +15645,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5443,
+        "bytes": 5432,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15681,7 +15681,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4905,
+        "bytes": 4898,
         "meshLike": 22,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15717,7 +15717,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5415,
+        "bytes": 5404,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15753,7 +15753,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5410,
+        "bytes": 5399,
         "meshLike": 24,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15789,7 +15789,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4962,
+        "bytes": 4955,
         "meshLike": 22,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15825,7 +15825,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4975,
+        "bytes": 4968,
         "meshLike": 22,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -15861,7 +15861,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5243,
+        "bytes": 5242,
         "meshLike": 26,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -15897,7 +15897,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5428,
+        "bytes": 5427,
         "meshLike": 27,
         "geometries": 25,
         "repeatedGeometryEstimate": 0,
@@ -15933,7 +15933,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6229,
+        "bytes": 6220,
         "meshLike": 30,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -15969,7 +15969,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4731,
+        "bytes": 4730,
         "meshLike": 23,
         "geometries": 21,
         "repeatedGeometryEstimate": 0,
@@ -16005,7 +16005,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4772,
+        "bytes": 4771,
         "meshLike": 23,
         "geometries": 21,
         "repeatedGeometryEstimate": 0,
@@ -16041,7 +16041,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6229,
+        "bytes": 6220,
         "meshLike": 30,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -16077,7 +16077,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3868,
+        "bytes": 3867,
         "meshLike": 19,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -16113,7 +16113,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3896,
+        "bytes": 3895,
         "meshLike": 19,
         "geometries": 17,
         "repeatedGeometryEstimate": 0,
@@ -16149,7 +16149,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4621,
+        "bytes": 4620,
         "meshLike": 21,
         "geometries": 19,
         "repeatedGeometryEstimate": 0,
@@ -16185,7 +16185,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3267,
+        "bytes": 3266,
         "meshLike": 16,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -16221,7 +16221,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7841,
+        "bytes": 7834,
         "meshLike": 34,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -16257,7 +16257,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7840,
+        "bytes": 7833,
         "meshLike": 34,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -16293,7 +16293,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 9465,
+        "bytes": 9434,
         "meshLike": 41,
         "geometries": 24,
         "repeatedGeometryEstimate": 0,
@@ -16329,7 +16329,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7152,
+        "bytes": 7113,
         "meshLike": 26,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -16365,7 +16365,7 @@
       "criticalPassed": true,
       "score": 94,
       "metrics": {
-        "bytes": 7229,
+        "bytes": 7190,
         "meshLike": 26,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -16401,7 +16401,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 9024,
+        "bytes": 8985,
         "meshLike": 34,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -16437,7 +16437,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4230,
+        "bytes": 4223,
         "meshLike": 19,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -16473,7 +16473,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4159,
+        "bytes": 4152,
         "meshLike": 19,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -16509,7 +16509,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 7835,
+        "bytes": 7828,
         "meshLike": 34,
         "geometries": 29,
         "repeatedGeometryEstimate": 0,
@@ -16545,7 +16545,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6256,
+        "bytes": 6249,
         "meshLike": 27,
         "geometries": 22,
         "repeatedGeometryEstimate": 0,
@@ -16581,7 +16581,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4413,
+        "bytes": 4404,
         "meshLike": 19,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -16617,7 +16617,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4387,
+        "bytes": 4378,
         "meshLike": 19,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -16653,7 +16653,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3871,
+        "bytes": 3868,
         "meshLike": 17,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -16689,7 +16689,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3899,
+        "bytes": 3896,
         "meshLike": 17,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -16725,7 +16725,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3784,
+        "bytes": 3781,
         "meshLike": 17,
         "geometries": 14,
         "repeatedGeometryEstimate": 0,
@@ -16761,7 +16761,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3924,
+        "bytes": 3919,
         "meshLike": 17,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -16797,7 +16797,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4415,
+        "bytes": 4410,
         "meshLike": 19,
         "geometries": 15,
         "repeatedGeometryEstimate": 0,
@@ -16833,7 +16833,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3943,
+        "bytes": 3938,
         "meshLike": 17,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -16869,7 +16869,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4654,
+        "bytes": 4645,
         "meshLike": 21,
         "geometries": 15,
         "repeatedGeometryEstimate": 0,
@@ -16905,7 +16905,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3965,
+        "bytes": 3960,
         "meshLike": 17,
         "geometries": 13,
         "repeatedGeometryEstimate": 0,
@@ -16941,7 +16941,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4324,
+        "bytes": 4313,
         "meshLike": 19,
         "geometries": 12,
         "repeatedGeometryEstimate": 0,
@@ -16977,7 +16977,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4401,
+        "bytes": 4390,
         "meshLike": 19,
         "geometries": 12,
         "repeatedGeometryEstimate": 0,
@@ -17013,7 +17013,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4314,
+        "bytes": 4303,
         "meshLike": 19,
         "geometries": 12,
         "repeatedGeometryEstimate": 0,
@@ -17049,7 +17049,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3971,
+        "bytes": 3962,
         "meshLike": 17,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -17085,7 +17085,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3958,
+        "bytes": 3949,
         "meshLike": 17,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -17121,7 +17121,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5925,
+        "bytes": 5898,
         "meshLike": 23,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17157,7 +17157,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6003,
+        "bytes": 5976,
         "meshLike": 23,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17193,7 +17193,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5928,
+        "bytes": 5901,
         "meshLike": 23,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17229,7 +17229,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6024,
+        "bytes": 5997,
         "meshLike": 23,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17265,7 +17265,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5928,
+        "bytes": 5901,
         "meshLike": 23,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17301,7 +17301,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4634,
+        "bytes": 4607,
         "meshLike": 18,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -17337,7 +17337,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3349,
+        "bytes": 3334,
         "meshLike": 14,
         "geometries": 5,
         "repeatedGeometryEstimate": 0,
@@ -17373,7 +17373,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4257,
+        "bytes": 4232,
         "meshLike": 17,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -17409,7 +17409,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5068,
+        "bytes": 5043,
         "meshLike": 21,
         "geometries": 7,
         "repeatedGeometryEstimate": 0,
@@ -17445,7 +17445,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 6207,
+        "bytes": 6166,
         "meshLike": 25,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -17481,7 +17481,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3557,
+        "bytes": 3546,
         "meshLike": 15,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17517,7 +17517,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 3661,
+        "bytes": 3650,
         "meshLike": 15,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17553,7 +17553,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4701,
+        "bytes": 4672,
         "meshLike": 19,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -17589,7 +17589,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4699,
+        "bytes": 4670,
         "meshLike": 19,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -17625,7 +17625,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4615,
+        "bytes": 4586,
         "meshLike": 19,
         "geometries": 3,
         "repeatedGeometryEstimate": 0,
@@ -17661,7 +17661,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4922,
+        "bytes": 4899,
         "meshLike": 21,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17697,7 +17697,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4846,
+        "bytes": 4823,
         "meshLike": 21,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17733,7 +17733,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4387,
+        "bytes": 4368,
         "meshLike": 19,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17769,7 +17769,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5055,
+        "bytes": 5038,
         "meshLike": 22,
         "geometries": 12,
         "repeatedGeometryEstimate": 0,
@@ -17805,7 +17805,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5895,
+        "bytes": 5870,
         "meshLike": 25,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -17841,7 +17841,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4842,
+        "bytes": 4819,
         "meshLike": 21,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17877,7 +17877,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4993,
+        "bytes": 4974,
         "meshLike": 22,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,
@@ -17913,7 +17913,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4926,
+        "bytes": 4903,
         "meshLike": 21,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17949,7 +17949,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 4836,
+        "bytes": 4813,
         "meshLike": 21,
         "geometries": 8,
         "repeatedGeometryEstimate": 0,
@@ -17985,7 +17985,7 @@
       "criticalPassed": true,
       "score": 95,
       "metrics": {
-        "bytes": 5889,
+        "bytes": 5864,
         "meshLike": 25,
         "geometries": 11,
         "repeatedGeometryEstimate": 0,

@@ -1,4 +1,4 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
@@ -13,9 +13,9 @@ function SignalDrone() {
   const points: [number, number, number][] = [[-1.18, 0, -0.82], [1.18, 0, -0.82], [-1.18, 0, 0.82], [1.18, 0, 0.82]]
   return (
     <group rotation={[0.12, -0.48, -0.05]}>
-      <RoundedBox args={[1.25, 0.38, 0.8]} radius={0.19} smoothness={8}>
+      <CurvedBox args={[1.25, 0.38, 0.8]} radius={0.19} smoothness={8}>
         <meshPhysicalMaterial color="#202428" metalness={0.78} roughness={0.24} clearcoat={0.55} />
-      </RoundedBox>
+      </CurvedBox>
       {points.map(([x, y, z], i) => (
         <group key={i}>
           <mesh position={[x * 0.52, y, z * 0.52]} rotation={[0, Math.atan2(x, z), Math.PI / 2]}>

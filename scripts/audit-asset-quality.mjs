@@ -48,7 +48,7 @@ for (const block of blocks) {
 
   const scene = await readFile(resolve(root, 'src/components/scenes', `${asset.scene}.tsx`), 'utf8')
   const bytes = Buffer.byteLength(scene)
-  const meshLike = (scene.match(/<(?:mesh|RoundedBox|Instance|Line)\b/g) ?? []).length
+  const meshLike = (scene.match(/<(?:mesh|RoundedBox|CurvedBox|Instance|Line)\b/g) ?? []).length
   const geometries = (scene.match(/<[A-Za-z][A-Za-z0-9]*Geometry\b/g) ?? []).length
   const repeated = estimateRepeatedGeometry(scene)
   const effectiveGeometry = meshLike + geometries + repeated

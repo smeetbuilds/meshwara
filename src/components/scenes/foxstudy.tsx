@@ -1,4 +1,4 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 function FoxStudy(){return <group position={[0,.12,0]} rotation={[0,-.45,0]}>
   <mesh position={[-.1,.05,0]} scale={[1.5,.72,.68]}><sphereGeometry args={[.68,48,32]}/><meshPhysicalMaterial color="#a85d3f" roughness={.62}/></mesh>
   <mesh position={[.95,.32,0]} scale={[1.05,.86,.78]}><sphereGeometry args={[.42,44,30]}/><meshPhysicalMaterial color="#b66c4b" roughness={.6}/></mesh>

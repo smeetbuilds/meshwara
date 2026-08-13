@@ -1,11 +1,11 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 
 function AnesthesiaMonitor() {
   return (
     <group position={[0, -0.45, 0]} rotation={[0, -0.34, 0]}>
-      <RoundedBox args={[2.25, 1.45, 0.72]} radius={0.14} smoothness={5}>
+      <CurvedBox args={[2.25, 1.45, 0.72]} radius={0.14} smoothness={5}>
         <meshStandardMaterial color="#d8dad7" roughness={0.4} />
-      </RoundedBox>
+      </CurvedBox>
       <mesh position={[-0.28, 0.12, 0.37]}>
         <planeGeometry args={[1.35, 0.72]} />
         <meshBasicMaterial color="#182b2b" />

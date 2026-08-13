@@ -1,4 +1,4 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
@@ -29,9 +29,9 @@ function StudioHeadphones() {
       </mesh>
       {[-1.08, 1.08].map((x) => (
         <group key={x} position={[x, -0.25, 0]} rotation={[0, x > 0 ? -0.08 : 0.08, 0]}>
-          <RoundedBox args={[0.42, 1.18, 0.74]} radius={0.2} smoothness={8}>
+          <CurvedBox args={[0.42, 1.18, 0.74]} radius={0.2} smoothness={8}>
             <meshPhysicalMaterial color="#151719" metalness={0.68} roughness={0.27} clearcoat={0.38} />
-          </RoundedBox>
+          </CurvedBox>
           <mesh position={[0, 0, 0.39]} rotation={[Math.PI / 2, 0, 0]}>
             <cylinderGeometry args={[0.42, 0.42, 0.1, 48]} />
             <meshPhysicalMaterial color="#23272a" roughness={0.68} sheen={0.6} sheenColor="#6c7379" />
@@ -40,9 +40,9 @@ function StudioHeadphones() {
             <cylinderGeometry args={[0.29, 0.29, 0.035, 48]} />
             <meshPhysicalMaterial color="#a88d68" metalness={0.9} roughness={0.18} />
           </mesh>
-          <RoundedBox args={[0.16, 0.7, 0.18]} radius={0.055} smoothness={5} position={[0, 0.78, -0.08]}>
+          <CurvedBox args={[0.16, 0.7, 0.18]} radius={0.055} smoothness={5} position={[0, 0.78, -0.08]}>
             <meshPhysicalMaterial color="#6c7073" metalness={0.85} roughness={0.24} />
-          </RoundedBox>
+          </CurvedBox>
         </group>
       ))}
     </group>

@@ -1,4 +1,5 @@
-import { MeshTransmissionMaterial, RoundedBox } from '@react-three/drei'
+import { MeshTransmissionMaterial } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
@@ -8,8 +9,8 @@ function LabCentrifuge() {
   useFrame((_,delta)=>{ if(rotor.current) rotor.current.rotation.y += delta * 1.1 })
   const slots=useMemo(()=>Array.from({length:12},(_,i)=>{const a=i/12*Math.PI*2; return {a,x:Math.cos(a)*0.58,z:Math.sin(a)*0.58}}),[])
   return <group position={[0,-0.62,0]} rotation={[0.04,-0.42,0]}>
-    <RoundedBox args={[2.2,1.35,1.75]} radius={0.25} smoothness={8} position={[0,-0.38,0]}><meshPhysicalMaterial color="#d9dddc" roughness={0.34} clearcoat={0.35} /></RoundedBox>
-    <RoundedBox args={[1.55,0.18,0.64]} radius={0.08} smoothness={5} position={[0,-0.22,0.91]}><meshPhysicalMaterial color="#252b2d" metalness={0.42} roughness={0.3} /></RoundedBox>
+    <CurvedBox args={[2.2,1.35,1.75]} radius={0.25} smoothness={8} position={[0,-0.38,0]}><meshPhysicalMaterial color="#d9dddc" roughness={0.34} clearcoat={0.35} /></CurvedBox>
+    <CurvedBox args={[1.55,0.18,0.64]} radius={0.08} smoothness={5} position={[0,-0.22,0.91]}><meshPhysicalMaterial color="#252b2d" metalness={0.42} roughness={0.3} /></CurvedBox>
     <mesh position={[0.52,-0.21,1.03]}><planeGeometry args={[0.52,0.19]} /><meshBasicMaterial color="#7ce6d8" toneMapped={false} /></mesh>
     <group position={[0,0.3,0]} ref={rotor}>
       <mesh><cylinderGeometry args={[0.72,0.68,0.18,64]} /><meshPhysicalMaterial color="#363c3f" metalness={0.82} roughness={0.22} /></mesh>

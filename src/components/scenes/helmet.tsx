@@ -1,4 +1,5 @@
-import { MeshTransmissionMaterial, RoundedBox } from '@react-three/drei'
+import { MeshTransmissionMaterial } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
@@ -18,9 +19,9 @@ function CarbonHelmet() {
         <sphereGeometry args={[1, 64, 32]} />
         <MeshTransmissionMaterial transmission={0.82} thickness={0.18} roughness={0.06} ior={1.5} chromaticAberration={0.012} color="#6f8491" />
       </mesh>
-      <RoundedBox args={[1.48, 0.42, 0.5]} radius={0.16} smoothness={7} position={[0, -0.66, 0.55]} rotation={[0.08, 0, 0]}>
+      <CurvedBox args={[1.48, 0.42, 0.5]} radius={0.16} smoothness={7} position={[0, -0.66, 0.55]} rotation={[0.08, 0, 0]}>
         <meshPhysicalMaterial color="#151719" metalness={0.65} roughness={0.28} clearcoat={0.72} />
-      </RoundedBox>
+      </CurvedBox>
       {[-0.62, 0.62].map((x) => (
         <mesh key={x} position={[x, -0.05, 0.92]} rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.13, 0.13, 0.07, 28]} />

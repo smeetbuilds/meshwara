@@ -1,4 +1,4 @@
-import { RoundedBox } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
@@ -12,9 +12,9 @@ function SignalSpeaker() {
   })
   return (
     <group ref={ref} rotation={[0.06, -0.32, 0]}>
-      <RoundedBox args={[1.75, 2.7, 1.08]} radius={0.24} smoothness={8}>
+      <CurvedBox args={[1.75, 2.7, 1.08]} radius={0.24} smoothness={8}>
         <meshPhysicalMaterial color="#202326" metalness={0.72} roughness={0.28} clearcoat={0.45} />
-      </RoundedBox>
+      </CurvedBox>
       <mesh position={[0, 0.42, 0.58]} rotation={[Math.PI / 2, 0, 0]} ref={woofer}>
         <cylinderGeometry args={[0.65, 0.56, 0.18, 64]} />
         <meshPhysicalMaterial color="#0a0c0d" roughness={0.54} sheen={0.35} />

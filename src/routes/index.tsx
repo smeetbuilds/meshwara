@@ -10,7 +10,7 @@ export const Route = createFileRoute('/')({
 })
 
 function HomePage() {
-  const featured = assets.filter((asset) => asset.featured).slice(-6).reverse()
+  const featured = assets.filter((asset) => asset.featured && asset.geometryV2).slice(-6).reverse()
   const [featuredPreview, setFeaturedPreview] = useState<string | null>(featured[0]?.slug ?? null)
   const heroAsset = assets.find((asset) => asset.slug === 'precision-chrono') ?? featured[0]
   return (

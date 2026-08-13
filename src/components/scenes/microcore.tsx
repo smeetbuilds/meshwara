@@ -1,4 +1,5 @@
-import { Instance, Instances, RoundedBox } from '@react-three/drei'
+import { Instance, Instances } from '@react-three/drei'
+import { CurvedBox } from '../geometry/CurvedBox'
 import { useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
@@ -22,15 +23,15 @@ function MicroCore() {
   })
   return (
     <group ref={ref} rotation={[0.34, -0.42, 0.12]}>
-      <RoundedBox args={[2.2, 2.2, 0.22]} radius={0.16} smoothness={6}>
+      <CurvedBox args={[2.2, 2.2, 0.22]} radius={0.16} smoothness={6}>
         <meshPhysicalMaterial color="#111517" metalness={0.7} roughness={0.32} />
-      </RoundedBox>
-      <RoundedBox args={[1.2, 1.2, 0.28]} radius={0.12} smoothness={6} position={[0, 0, 0.18]}>
+      </CurvedBox>
+      <CurvedBox args={[1.2, 1.2, 0.28]} radius={0.12} smoothness={6} position={[0, 0, 0.18]}>
         <meshPhysicalMaterial color="#263b36" metalness={0.5} roughness={0.26} clearcoat={0.5} />
-      </RoundedBox>
-      <RoundedBox args={[0.68, 0.68, 0.12]} radius={0.08} smoothness={5} position={[0, 0, 0.4]}>
+      </CurvedBox>
+      <CurvedBox args={[0.68, 0.68, 0.12]} radius={0.08} smoothness={5} position={[0, 0, 0.4]}>
         <meshBasicMaterial color="#72f3c0" toneMapped={false} />
-      </RoundedBox>
+      </CurvedBox>
       <Instances limit={60}>
         <boxGeometry args={[0.1, 0.28, 0.055]} />
         <meshPhysicalMaterial color="#b99966" metalness={1} roughness={0.22} />
