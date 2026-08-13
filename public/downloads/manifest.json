@@ -3158,8 +3158,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/courtyard-villa-study.zip",
-      "bytes": 5834,
-      "sha256": "de7aa0c4bf1f49e15d75d2fa4734c442660c23af67748a1a1c5597f03f7cb033"
+      "bytes": 8423,
+      "sha256": "6dcf8a522c7aee80ac05acfe84fcc56dcd5480fb58363ef06e0e686b4c3d44f5"
     },
     {
       "slug": "glass-house-study",
@@ -3167,8 +3167,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/glass-house-study.zip",
-      "bytes": 5736,
-      "sha256": "f17044f3e4c6d4d1fdf3cb437c46378747d1bcbcbd68b3c7cd29a675d5d0d690"
+      "bytes": 8312,
+      "sha256": "2ecef4ba947b750d5a8f4fa0c48d0c9cd21e42e9acd451c5e210b90c79e00e37"
     },
     {
       "slug": "cliff-cabin-study",
@@ -3176,8 +3176,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/cliff-cabin-study.zip",
-      "bytes": 5731,
-      "sha256": "86fc9cb342831b1a6fa07591096d1f243566ef06f2a71a0ca947ad6c35129811"
+      "bytes": 8312,
+      "sha256": "b95902f685bee8e5b87623a8957f676df381a2ae9e192fe9c52e0c6547aaccad"
     },
     {
       "slug": "urban-row-house",
@@ -3185,8 +3185,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/urban-row-house.zip",
-      "bytes": 5692,
-      "sha256": "a1dad6ff18a23cb0a339f8c1bbf8621645b35601050699447050f4c54b2607f8"
+      "bytes": 8247,
+      "sha256": "881843b3c69e87a0e80d5306d68280ba990c7ac9ee9bde49000f29e9e4f22574"
     },
     {
       "slug": "museum-wing-study",
@@ -3194,8 +3194,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/museum-wing-study.zip",
-      "bytes": 5743,
-      "sha256": "62eec4df1377f6fc6cf7105a2877300f71c50b17edcd0a12f8c51f577d3c9d0b"
+      "bytes": 8317,
+      "sha256": "28375d16d8381ffcaa4c962b6efcac98765afe6861531959a9fff83506099e30"
     },
     {
       "slug": "timber-library-hall",
@@ -3203,8 +3203,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/timber-library-hall.zip",
-      "bytes": 5788,
-      "sha256": "f5cec4156734d98763badcc002ac7f28c0e538ae6fc19c0853dbf89eedf23c4e"
+      "bytes": 8350,
+      "sha256": "fddd4de4c575c70bd49ed107b348e5697efecf8d1a9a1ec4b49c9452578c1b8a"
     },
     {
       "slug": "rail-platform-canopy",
@@ -3212,8 +3212,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/rail-platform-canopy.zip",
-      "bytes": 5721,
-      "sha256": "7b0f92a91fdd352f466d7b0b8211866802950df68fcf062367781547a45a6bdd"
+      "bytes": 8375,
+      "sha256": "b40317180b71d43c2ef574c682bff0db533c7d631f05307f31a8a2bf965aed7f"
     },
     {
       "slug": "urban-bus-pavilion",
@@ -3221,8 +3221,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/urban-bus-pavilion.zip",
-      "bytes": 5681,
-      "sha256": "9a5d922f0ee0c9ffac1f19e44bfc4b3d51e9454ef9567a3c7652c4a5a4fee029"
+      "bytes": 8327,
+      "sha256": "8da79484a3a2f23328a6d9a928d0e00461646c4c3558866e9675d670b32be54c"
     },
     {
       "slug": "footbridge-lookout-tower",
@@ -3230,8 +3230,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/footbridge-lookout-tower.zip",
-      "bytes": 5873,
-      "sha256": "97ac2f1a7d9b411ed8c8e1925280248ec572f1200802feaaf62c408c2d9db36c"
+      "bytes": 8507,
+      "sha256": "5026bb20976f072a90e35c83a74b927c6a2a31226c41317cd183b2fd748ec567"
     },
     {
       "slug": "coastal-observation-shelter",
@@ -3239,8 +3239,8 @@
       "category": "Architecture",
       "subcategory": "Residential",
       "file": "/downloads/coastal-observation-shelter.zip",
-      "bytes": 5891,
-      "sha256": "20f2c0be917e34078e58b10cc3c912d8ed484d00cf1c63cb07825bbf404770e1"
+      "bytes": 8594,
+      "sha256": "d323ab8586012fa8ca207be708af572b7711c9c6041cc37aa04be5e53801530f"
     },
     {
       "slug": "grand-touring-coupe",
@@ -3428,8 +3428,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/six-axis-robot-cell.zip",
-      "bytes": 6005,
-      "sha256": "54a3d33c6e6700d2010438430bc991f5d9c669ca36f179114389d029c3da33b2"
+      "bytes": 8393,
+      "sha256": "7545a64096f2d48b605a51f136b8e1ae2a10acf25da6a8ceaee406579bfdab75"
     },
     {
       "slug": "scara-assembly-robot",
@@ -3437,8 +3437,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/scara-assembly-robot.zip",
-      "bytes": 6042,
-      "sha256": "060908c7ce38289637d6968f2a0a3dbbc9db6f4e781fc5d0b2aeb9a9a5e8476b"
+      "bytes": 8416,
+      "sha256": "ade23f91fef5b8ae92be423512cff1b88713176e3f2893497f7e92a4f246ff04"
     },
     {
       "slug": "delta-pick-robot",
@@ -3446,8 +3446,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/delta-pick-robot.zip",
-      "bytes": 5914,
-      "sha256": "b4e13e34d51bbf9f57d9930c9d52ed37cd73d75dc1fc27cce3e25bfeebbf315b"
+      "bytes": 8306,
+      "sha256": "4c66ccca6244ee62731a841a0830629fe52ff7896780c6b792faadf2502f0d83"
     },
     {
       "slug": "servo-drive-module",
@@ -3455,8 +3455,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/servo-drive-module.zip",
-      "bytes": 5887,
-      "sha256": "98ff977d499e738617a5f4af2a3307192ee445f474318bc4f6b9631deb69e62d"
+      "bytes": 8330,
+      "sha256": "27f6d5582687df53c065d7a46dcc469eddbb33938f147c7f3eaf0255c2e19bd7"
     },
     {
       "slug": "plc-control-rack",
@@ -3464,8 +3464,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/plc-control-rack.zip",
-      "bytes": 5845,
-      "sha256": "25c7e7e70cbbef1a1fd08d2685173d6e8546bb0136a9674f0c04a7fa9d955925"
+      "bytes": 8284,
+      "sha256": "67255e4a79d64efcefb0934acf7fe9c144032044d486c8e22c0dd35b43834066"
     },
     {
       "slug": "conveyor-diverter-junction",
@@ -3473,8 +3473,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/conveyor-diverter-junction.zip",
-      "bytes": 6024,
-      "sha256": "9b46b290182f99c66f97093c689b91d086bbb7a47485d41b023287323b67247c"
+      "bytes": 8569,
+      "sha256": "8fc52b9cbc86567df2800c529ad997f54327ea556ac5b1b400915737437d1f86"
     },
     {
       "slug": "compact-palletizer",
@@ -3482,8 +3482,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/compact-palletizer.zip",
-      "bytes": 5988,
-      "sha256": "c6cb384f2df05e90ba72fc26ba47ffdf51ba382f0cfb35b86e2f8ac7a8d5527d"
+      "bytes": 8358,
+      "sha256": "a79ca3918ea8f95addd65bdb3f231fe3661b9c36dcbf204f668cf85bc475114d"
     },
     {
       "slug": "vacuum-gripper-array",
@@ -3491,8 +3491,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/vacuum-gripper-array.zip",
-      "bytes": 6098,
-      "sha256": "8ff0a4fea15ec1ac0f463924b6e5a874dd2a24afc8c2dacb8b723bcbdf413123"
+      "bytes": 8390,
+      "sha256": "c028ec3a6564523443183264462c770cb23b5389594924e3696c4e4fc36c5b95"
     },
     {
       "slug": "machine-vision-camera",
@@ -3500,8 +3500,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/machine-vision-camera.zip",
-      "bytes": 5972,
-      "sha256": "a551f544e26d9e67075afb213b68d96724da53508f9f88a21c0a799122c30b2e"
+      "bytes": 8435,
+      "sha256": "a9ea7b705cd8a8db6412b320471e1d679a972f7376986e8b3a0cca5327a8632d"
     },
     {
       "slug": "safety-light-curtain",
@@ -3509,8 +3509,8 @@
       "category": "Industrial",
       "subcategory": "Automation",
       "file": "/downloads/safety-light-curtain.zip",
-      "bytes": 5869,
-      "sha256": "115a48e5cfe0bbcd6c5734b683d29addcc8cdfd552910040bb0c9f1d7c5d9708"
+      "bytes": 8378,
+      "sha256": "f2e319d2053fc72ead620d9299933e818c60ad0571c1b179fc9ca37003a06760"
     },
     {
       "slug": "cnc-rotary-table",
@@ -3518,8 +3518,8 @@
       "category": "Industrial",
       "subcategory": "Machining",
       "file": "/downloads/cnc-rotary-table.zip",
-      "bytes": 6018,
-      "sha256": "80cedb07ed5b8d619ae2853df66c1a21f20594568404d425c847c63c314f211c"
+      "bytes": 8306,
+      "sha256": "fa219c07ebad3e5151a8b22c7b7e9f3ca2ae23b44a3f45f45fd0cea8fd90c393"
     },
     {
       "slug": "precision-milling-vice",
@@ -3527,8 +3527,8 @@
       "category": "Industrial",
       "subcategory": "Machining",
       "file": "/downloads/precision-milling-vice.zip",
-      "bytes": 6154,
-      "sha256": "8a42e0fab21bab63c2caab858ee5882e579c7740caf5e2475ff121076539fe18"
+      "bytes": 8456,
+      "sha256": "29d239f6739be29d19669bed95b4024e3d14d9ff285fae1a293329b20f7b05c9"
     },
     {
       "slug": "twelve-station-tool-turret",
@@ -3536,8 +3536,8 @@
       "category": "Industrial",
       "subcategory": "Machining",
       "file": "/downloads/twelve-station-tool-turret.zip",
-      "bytes": 6235,
-      "sha256": "3cb50148856fc5aa23c0c68b9d385ce1170d376c2d739004143cf2485b274187"
+      "bytes": 8556,
+      "sha256": "467a25b476350184d2a85103e5bc589e4bcd99015f1ac98e01c4dc57eebdd5c0"
     },
     {
       "slug": "hydraulic-tie-rod-cylinder",
@@ -3545,8 +3545,8 @@
       "category": "Industrial",
       "subcategory": "Machining",
       "file": "/downloads/hydraulic-tie-rod-cylinder.zip",
-      "bytes": 6031,
-      "sha256": "87539693b46718a76c0170a2af971004c66cbe85cf637c54c96e5f4deca74957"
+      "bytes": 8552,
+      "sha256": "17c265054a79344ee081292815a55572c389393c4d7c1ae7c21e7d1137968d19"
     },
     {
       "slug": "hydraulic-power-unit",
@@ -4139,8 +4139,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/sea-fan-coral-study.zip",
-      "bytes": 6023,
-      "sha256": "988b3f669941697869a337705e55cc85ae9e19da89c258402243e8c4e5ca1075"
+      "bytes": 7248,
+      "sha256": "5931215e848d310d6e90158ad277283d63633502cb5f5b091fb8c1877d64be22"
     },
     {
       "slug": "dual-group-espresso-machine",
@@ -4229,8 +4229,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/patisserie-display-stand.zip",
-      "bytes": 6062,
-      "sha256": "80ac0ec52925fb3aa9aae526c2d2a20622010d13d164cf988f1a7be5c0c60098"
+      "bytes": 8516,
+      "sha256": "0193899e3b9f2a296c64e795cfc470d0a7c54e09ff9e0941113d7e1c24d2ba77"
     },
     {
       "slug": "structured-leather-tote",
@@ -4310,8 +4310,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/sculptural-pendant-necklace.zip",
-      "bytes": 6262,
-      "sha256": "aa55d77b0a50390444e3fc6b7f5216d8cf23fd5b597eef59afb9a256307a5796"
+      "bytes": 8607,
+      "sha256": "9188f679762c0bc1d294953408ce83b62343bd71ec6f7ee03899cc5762bdfb4f"
     },
     {
       "slug": "brushed-signet-ring",
@@ -4319,8 +4319,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/brushed-signet-ring.zip",
-      "bytes": 6076,
-      "sha256": "7cff925b4289ab107342d99232d6c0cd8d6ebbfe873e04a83a5a8cd29db51801"
+      "bytes": 8383,
+      "sha256": "3cbecc63dd7dbb62528b8ca7d7f9991d27978bcc33c551c42990b77241ba165d"
     },
     {
       "slug": "aero-cycling-helmet",
@@ -4328,8 +4328,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/aero-cycling-helmet.zip",
-      "bytes": 5859,
-      "sha256": "0706ea7ed028b331f7386c9b4c2b7e773a3c7389334c5a59e75ef0dc15583b68"
+      "bytes": 8418,
+      "sha256": "796625fe87e797eba9e2161af90e763751971de17b1eee3f9597896ed26f9616"
     },
     {
       "slug": "alpine-ski-goggles",
@@ -4337,8 +4337,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/alpine-ski-goggles.zip",
-      "bytes": 5816,
-      "sha256": "3fec0cca45879c101b12fb533c8ea4431b335b2008969a53a780859e666b7c5e"
+      "bytes": 8387,
+      "sha256": "dfcdf9f1e10ff1a97b9ab2b3b1ba0178cc81195b5da737dcc90213427d34cfd7"
     },
     {
       "slug": "carbon-running-shoe",
@@ -4346,8 +4346,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/carbon-running-shoe.zip",
-      "bytes": 5849,
-      "sha256": "320bf716b02fd33be12cc56a047f062bec8189d2eb5ecbd64f51579d2316ce68"
+      "bytes": 8426,
+      "sha256": "5f76b698d3e0ad3daa842dfc55ef1ec9cfdd2b9918b9deeb7b8419cef017e76d"
     },
     {
       "slug": "pro-football-cleat",
@@ -4355,8 +4355,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/pro-football-cleat.zip",
-      "bytes": 5871,
-      "sha256": "26ea0462ecd4bc7a8e877cc0ad9736a39c28fafffaa10a7215f2058d64a3e018"
+      "bytes": 8409,
+      "sha256": "9f8d115083fdb37e01b728587379570ce9dc01a6fe21d690d9298bfb179a5f72"
     },
     {
       "slug": "tour-tennis-racket",
@@ -4364,8 +4364,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/tour-tennis-racket.zip",
-      "bytes": 5871,
-      "sha256": "13e84685ac6706ce14aeda94b523d3aa129ac8766a65ff27f93cb211e2558fa1"
+      "bytes": 7208,
+      "sha256": "24e28649f4a1a3551dd2348263356289439759e26e41346305b9b2b125936ded"
     },
     {
       "slug": "studio-dumbbell-pair",
@@ -4373,8 +4373,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/studio-dumbbell-pair.zip",
-      "bytes": 5819,
-      "sha256": "c6dc82f7ae312b6b49d1720e200fa89530a2a4d03064632f60ee7b8616f166a8"
+      "bytes": 7151,
+      "sha256": "79f9d984dd994a6af66f811e057a70d757f449d8f3bc7e9ae062c5a65c252a1b"
     },
     {
       "slug": "competition-kettlebell",
@@ -4382,8 +4382,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/competition-kettlebell.zip",
-      "bytes": 5874,
-      "sha256": "d31eac5a4adf1a7a6dd623bcebabd8b9afdfda2f855059c43003ab23879b7c76"
+      "bytes": 7164,
+      "sha256": "52b0877145a8d07cb147d4fc6b21f84bed82d616856c8a33bddcd345617e0825"
     },
     {
       "slug": "climbing-carabiner-set",
@@ -4391,8 +4391,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/climbing-carabiner-set.zip",
-      "bytes": 5943,
-      "sha256": "45d33a583114871f3ae8ba12e18fa39797bafb81cceb1d724b146ab141e0f43b"
+      "bytes": 7216,
+      "sha256": "213123448855fc531ad3234d5d5978b2985911b5da61d209cdff5a7dcc3a897c"
     },
     {
       "slug": "digital-torque-wrench",
@@ -4400,8 +4400,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/digital-torque-wrench.zip",
-      "bytes": 5937,
-      "sha256": "222f801d70d0ca766be31204fdf2718bbadf6696fdbe5628c78672f766c0fd51"
+      "bytes": 7210,
+      "sha256": "a2db3ec7706bf8fa1cbba35ea8abcca662c3d474bdb1d02b459aa80d3c71528e"
     },
     {
       "slug": "professional-vernier-caliper",
@@ -4409,8 +4409,8 @@
       "category": "Sports",
       "subcategory": "Performance Gear",
       "file": "/downloads/professional-vernier-caliper.zip",
-      "bytes": 6088,
-      "sha256": "da457e5ca94f1806476b0907aea64149eacab7695cc1311ee8f76d1b4ef2732e"
+      "bytes": 7326,
+      "sha256": "e9d78bf038c7c7d57f44e25ca8e0b9e3d46a6376645e5aec6b1706b518814430"
     },
     {
       "slug": "audio-mastering-desk-scene",
@@ -4418,8 +4418,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/audio-mastering-desk-scene.zip",
-      "bytes": 6072,
-      "sha256": "f91370c8d1fac03482fa66b0a033d0345db01bd8091a035409a24c5e5fa9975d"
+      "bytes": 8512,
+      "sha256": "0334dea0a88a6b428e193cfdbd20b7cf2d6c55423eb941aa34ce91b7d715b1ce"
     },
     {
       "slug": "product-photography-studio",
@@ -4427,8 +4427,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/product-photography-studio.zip",
-      "bytes": 6068,
-      "sha256": "f9ef344b022d2ca5de92c0068a6376d43e395de5201a875de90f8331cfa69c94"
+      "bytes": 8510,
+      "sha256": "4e2bbfd0287d504d3e16cc81599c043412cff57efcd812351389a5acaaf6533a"
     },
     {
       "slug": "contemporary-surgical-suite",
@@ -4436,8 +4436,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/contemporary-surgical-suite.zip",
-      "bytes": 6038,
-      "sha256": "ead4cb00e6a5232196738e5e8259559f27dcca934f5e570c23b7258cfddd90b4"
+      "bytes": 8543,
+      "sha256": "a49635c802ffc56c33d03d6b2340ad83870ca1874b3093d7ab94e73a8a0d0121"
     },
     {
       "slug": "advanced-research-laboratory",
@@ -4445,8 +4445,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/advanced-research-laboratory.zip",
-      "bytes": 6055,
-      "sha256": "6bfe2aa59d1279b46ebbb221ce5481c5285c502f33387b6a1850b8255de2a1f6"
+      "bytes": 8590,
+      "sha256": "f3f48e7c9ddecc9792d2cf02b91bf2980be0db1c98b93cf357af36cfb604ce28"
     },
     {
       "slug": "electric-vehicle-workshop",
@@ -4454,8 +4454,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/electric-vehicle-workshop.zip",
-      "bytes": 6160,
-      "sha256": "c72fdff045bca573bb0bd238f2822cc09392c20cd9ca725cfceadda5363a4004"
+      "bytes": 8526,
+      "sha256": "7456da07c52d6006c0eaa93dc7345ac2a47256258c5996a4a5f9e3ba310c2dda"
     },
     {
       "slug": "minimal-living-room-scene",
@@ -4463,8 +4463,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/minimal-living-room-scene.zip",
-      "bytes": 6038,
-      "sha256": "64f3560f5dc21656b58b1b6d65803a2a7510311692e3fcffe18b6fb1c027b958"
+      "bytes": 8485,
+      "sha256": "7ba31b5510833e85d85506d677fd7522d5f8b71863a1ce854bd3dab686a9301e"
     },
     {
       "slug": "luxury-boutique-display",
@@ -4472,8 +4472,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/luxury-boutique-display.zip",
-      "bytes": 5931,
-      "sha256": "3bcce037eb27cbd2bcf4fdb328dd981a4175a6821394f1a096c287ead3f4bfab"
+      "bytes": 8431,
+      "sha256": "17d5f3b383f81a35e6cc8848819f6cec834efceb2d2ee0dca8407c3f3f666390"
     },
     {
       "slug": "sculpture-gallery-courtyard",
@@ -4481,8 +4481,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/sculpture-gallery-courtyard.zip",
-      "bytes": 6098,
-      "sha256": "e1239922caa2403f3a7fd2de3b6d6cf3f1def1b6d62b7c597972a77e1dd51806"
+      "bytes": 8547,
+      "sha256": "9f53e36a260cb99dfec8031d5f8c88778df2a4431af7ca3558cc6c8f5ce747f1"
     },
     {
       "slug": "observatory-roof-deck",
@@ -4490,8 +4490,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/observatory-roof-deck.zip",
-      "bytes": 5958,
-      "sha256": "7fad82802debcdcf43c287b1ec4d46fde580ac9967f50dcdcd516760dbcea3a7"
+      "bytes": 8413,
+      "sha256": "d193e2de409a06216411d3c4e44d1841ae22eafecada78308227679d8320a710"
     },
     {
       "slug": "robotics-assembly-cell",
@@ -4499,8 +4499,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/robotics-assembly-cell.zip",
-      "bytes": 6079,
-      "sha256": "02e0c1584fc38b8a3c8fb0738684b755dd920ee5c743d1b7c2ed9b1c979e1b28"
+      "bytes": 8417,
+      "sha256": "7255920b8d263cc6eddb3dd25ee4feaa6c454e469975cb65cf2dd78448a0486d"
     }
   ]
 }

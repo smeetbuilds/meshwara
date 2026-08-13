@@ -42,7 +42,6 @@ The catalog can grow without a quantity ceiling. The quality threshold does not 
 
 The enforced humanoid rig/motion/facial/evidence contract is defined in `CHARACTER_ASSET_STANDARD.md` and validated by `scripts/validate-modeled-assets.mjs`.
 
-
 A human, animal or other articulated character does not ship merely because a GLB loads.
 
 Required review includes:
@@ -80,8 +79,18 @@ Realistic product, furniture, vehicle, botanical, food, medical and scientific a
 
 The public homepage may feature only assets marked `geometryV2: true`. The automated Geometry V2 audit rejects featured assets that regress to primitive-dominated construction.
 
-## Geometry V2 phase 2
+## Geometry V2 phases 2–3
 
-Product, furniture, vehicle, medical and scientific assets promoted in phase 2 define their main silhouette with authored loft stations, revolved profiles, spline paths, custom buffer geometry or extruded profiles. `CurvedBox` remains acceptable for secondary construction where physically appropriate, but it is not sufficient as the primary modeling method.
+Phase 2 product, furniture, vehicle, medical and scientific assets define their main silhouette with authored loft stations, revolved profiles, spline paths, custom buffer geometry or extruded profiles. `CurvedBox` remains acceptable for secondary construction where physically appropriate, but it is not sufficient as the primary modeling method.
 
-Phase 2 assets also require multiple primary curved/profile surfaces, explicit silhouette/profile data in the scene source, and the standard deterministic download rebuild before publication.
+Phase 3 extends the same gate to botanical, food and fashion assets. Organic leaves and coral require curved surface/spline construction; vessels and cookware require designed revolved/profiled surfaces; bags, eyewear, watches and jewelry require soft or precision-authored silhouette data rather than primitive assemblies.
+
+## Geometry V2 long-tranche phases 4–5
+
+Phase 4 covers performance equipment, precision tools and full spatial environments. Phase 5 covers architectural studies and industrial automation/machining systems. These assets may share `ProductionForms.tsx` as geometry infrastructure, but the shared component is not the asset definition.
+
+Every shared-form asset must provide substantial per-asset loft stations, spline paths, profiles, footprints and controlled material data. A thin wrapper, recolor, or duplicated shape configuration is a release blocker. `scripts/validate-production-forms.mjs` enforces per-asset source/configuration floors, helper-family contracts and unique normalized shape fingerprints.
+
+Production-form geometry and materials are scored transitively by the full-catalog audits because the actual loft/spline/extrusion implementation lives in shared source. This transitive credit is granted only when the raw per-asset configuration floor also passes.
+
+All generated V2 downloads must remain self-contained. Packs using `ProductionForms` include both the production-form source and its `GeometryV2` dependency, and deterministic ZIP hashes must remain identical across consecutive rebuilds.
