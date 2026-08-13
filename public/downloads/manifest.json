@@ -404,8 +404,8 @@
       "category": "Furniture",
       "subcategory": null,
       "file": "/downloads/cantilever-sofa.zip",
-      "bytes": 6270,
-      "sha256": "31e96874b508b4d3c4856c2ac9bdaf3af5729b844fa3f5ebe8d230abbe999882"
+      "bytes": 6710,
+      "sha256": "042af635a085e68a8c16b01a27379be5245d7bae857edf2c6c8778f906f08f60"
     },
     {
       "slug": "solar-observatory",
@@ -467,8 +467,8 @@
       "category": "Technology",
       "subcategory": null,
       "file": "/downloads/mechanical-keyboard.zip",
-      "bytes": 7631,
-      "sha256": "1a4ec0902f1ce0f67e7771c8d34f9f59596fee17121972a74804535d3acc35ed"
+      "bytes": 8071,
+      "sha256": "69c0021916a4be884e6c00565fe060513468db40941c1d88fcfc630a6a80006f"
     },
     {
       "slug": "carbon-bicycle",
@@ -557,8 +557,8 @@
       "category": "Scientific",
       "subcategory": null,
       "file": "/downloads/precision-microscope.zip",
-      "bytes": 6494,
-      "sha256": "f37b2f58a2f30801c1dde69b9b1414a8532e7e8c6a5535e737bf78374b1d1104"
+      "bytes": 6934,
+      "sha256": "47a74682d7d26d5b8f433e0ff6304025253415515d0c578ad903f21c315eb92f"
     },
     {
       "slug": "lab-centrifuge",
@@ -1160,8 +1160,8 @@
       "category": "Technology",
       "subcategory": null,
       "file": "/downloads/modular-smartphone.zip",
-      "bytes": 6381,
-      "sha256": "31e9b331cc20b6bae1a59f07b8d1c312e7ca729b2ba181ced3e642b28735ba47"
+      "bytes": 6821,
+      "sha256": "fc20a3825c49dd8973721924ea1846b40bd43863caf60933fe96ae9056d8242d"
     },
     {
       "slug": "studio-smartwatch",
@@ -1448,8 +1448,8 @@
       "category": "Technology",
       "subcategory": "Imaging",
       "file": "/downloads/mirrorless-camera.zip",
-      "bytes": 6583,
-      "sha256": "06469f950b669b7939aa02e6ffc51a191d8bc7f4a253de13fe37c11d7f37df6e"
+      "bytes": 7023,
+      "sha256": "4f5ac70cc212622882af5c4132bcd1263d3d7535ec3849d46b3d9cc89967d67f"
     },
     {
       "slug": "studio-laptop",
@@ -1709,8 +1709,8 @@
       "category": "Scientific",
       "subcategory": "Lab Instruments",
       "file": "/downloads/analytical-balance.zip",
-      "bytes": 6382,
-      "sha256": "2dd1b85c9f8ee5dd492698fef3a5438315c7aff4650608096e668402eef75b01"
+      "bytes": 6822,
+      "sha256": "c70169eaf0e2b451d9612afdc1c4b66ad5469527e2228ea676bf3b11d7b9080d"
     },
     {
       "slug": "chromatography-column",
@@ -1907,8 +1907,8 @@
       "category": "Technology",
       "subcategory": "Imaging",
       "file": "/downloads/cinema-camera.zip",
-      "bytes": 6406,
-      "sha256": "1ed6cd0bd4dd085f2805176a026f47edd717bea1fea77d49cd858880ef2b9199"
+      "bytes": 6846,
+      "sha256": "7b763f439e43334eaf6b5be064b26d23833ac86a489809c63124e47347b27406"
     },
     {
       "slug": "three-axis-gimbal",
@@ -2744,8 +2744,8 @@
       "category": "Technology",
       "subcategory": "Audio",
       "file": "/downloads/field-audio-recorder.zip",
-      "bytes": 6798,
-      "sha256": "8daf39ebc6c30602c333e84edf8dd62523b79eb095f365aec0bc85fd0181ed19"
+      "bytes": 7238,
+      "sha256": "e7370e6096ffecdbbad3c131a94ee14e73469d066a2d7aae18b4025f01ffa2ff"
     },
     {
       "slug": "wireless-lavalier-system",
@@ -2798,8 +2798,8 @@
       "category": "Technology",
       "subcategory": "Imaging",
       "file": "/downloads/medium-format-camera.zip",
-      "bytes": 6710,
-      "sha256": "c89a3e88d94c0d423d24274f065fbdbdc13cc37fd93a91e2d7f46a3f3a3666ea"
+      "bytes": 7150,
+      "sha256": "32038d065a3a471f3b8d6396b0aaa8e94e3b9aefd2ec25555c4cbd3250b2875a"
     },
     {
       "slug": "cinema-prime-lens",
@@ -2978,8 +2978,8 @@
       "category": "Furniture",
       "subcategory": "Seating",
       "file": "/downloads/oak-dining-armchair.zip",
-      "bytes": 6652,
-      "sha256": "18f239b4ad1353c8fe27c117d1f79144711501b74ea492b2841be5dff28ccdc2"
+      "bytes": 7092,
+      "sha256": "72a71cdc8207841ef41bcef635ff59369338e47f6a6637e6a4eac507cb065007"
     },
     {
       "slug": "leather-sling-chair",
@@ -2987,8 +2987,8 @@
       "category": "Furniture",
       "subcategory": "Seating",
       "file": "/downloads/leather-sling-chair.zip",
-      "bytes": 6582,
-      "sha256": "e5db16e58c13cc72f1723f7ed3253ad0c36d81279a40a539b0435adcca3e61a0"
+      "bytes": 7022,
+      "sha256": "672171712afa94083096403b2f7ce66dfcef316c8b9b79cbc9c5bad219feb2e1"
     },
     {
       "slug": "boucle-barrel-chair",
@@ -2996,8 +2996,8 @@
       "category": "Furniture",
       "subcategory": "Seating",
       "file": "/downloads/boucle-barrel-chair.zip",
-      "bytes": 6602,
-      "sha256": "ccaa70ca1edd65e4b531a94cae03670724c6f65ce06fb36170e07e39db703e69"
+      "bytes": 7042,
+      "sha256": "40b60ca6899ee7e24f6592369fd7f0fd48b4f8a5bafeedbae8dd8533a8771182"
     },
     {
       "slug": "ergonomic-task-chair-pro",
@@ -3005,8 +3005,8 @@
       "category": "Furniture",
       "subcategory": "Seating",
       "file": "/downloads/ergonomic-task-chair-pro.zip",
-      "bytes": 6862,
-      "sha256": "18a1fdfb77e4721fd80d8fe9d302a0a274aeada21602a8f471faa1f4542c919b"
+      "bytes": 7302,
+      "sha256": "cad894808e6b250252b52f24535c847d10b4c80e5a322567d0253311ff98ce85"
     },
     {
       "slug": "upholstered-entry-bench",
@@ -3032,8 +3032,8 @@
       "category": "Furniture",
       "subcategory": "Seating",
       "file": "/downloads/bentwood-rocking-chair.zip",
-      "bytes": 6710,
-      "sha256": "cd87947640182f2ccf913726c8d831ed0ddd2b5f4c45707c7e407b1f75c47303"
+      "bytes": 7150,
+      "sha256": "0f7ed6d02f3cb84c1ba2fb0ceae93b104044acf20cc4cafa5785f8cd90d23a07"
     },
     {
       "slug": "executive-mesh-chair",
@@ -3248,8 +3248,8 @@
       "category": "Vehicles",
       "subcategory": "Road",
       "file": "/downloads/grand-touring-coupe.zip",
-      "bytes": 6689,
-      "sha256": "ad97f755407e98f2a32c339ea181b9386923b5f5a5da96c4d143729d9bf326cc"
+      "bytes": 7129,
+      "sha256": "4298b72b158cded766fa174d9ee59c7633cedf112877e7fe747fc874edd5dd7b"
     },
     {
       "slug": "compact-electric-hatchback",
@@ -3257,8 +3257,8 @@
       "category": "Vehicles",
       "subcategory": "Road",
       "file": "/downloads/compact-electric-hatchback.zip",
-      "bytes": 6943,
-      "sha256": "3f5bb9b2d0b6b26843c60c45f2b2fdc199678cfb2e08d0a1ac07bd4b6133a397"
+      "bytes": 7383,
+      "sha256": "1404f2961796190d02e70ee79fd6ef3d48708ea93b2452fe6309dd2f02fd20c7"
     },
     {
       "slug": "touring-motorcycle-gt",
@@ -3275,8 +3275,8 @@
       "category": "Vehicles",
       "subcategory": "Road",
       "file": "/downloads/adventure-motorcycle-adv.zip",
-      "bytes": 6830,
-      "sha256": "bbf662a249d63729a350f855b0ca6739cb505c71547e6fd164a8eca0be22e01c"
+      "bytes": 7270,
+      "sha256": "9b28b8c5992dde19be42301b0dd4b59bf1cdbc00dfdd6b93e7a31c4023711c59"
     },
     {
       "slug": "urban-electric-scooter",
@@ -3293,8 +3293,8 @@
       "category": "Vehicles",
       "subcategory": "Road",
       "file": "/downloads/electric-cargo-van.zip",
-      "bytes": 6826,
-      "sha256": "2a21cccdc1809e1ef8db242943ebe5c4aa3e404f907c5610895586f94494766f"
+      "bytes": 7266,
+      "sha256": "a0e5b3170a0ed368ed3babf59df034861ce793a88d3f3b5ffb6d963f0be4bd60"
     },
     {
       "slug": "roadster-chassis-study",
@@ -3338,8 +3338,8 @@
       "category": "Vehicles",
       "subcategory": "Mobility Systems",
       "file": "/downloads/high-speed-train-nose.zip",
-      "bytes": 6866,
-      "sha256": "e701f0e9fdca1c3d75e8e14ddcbacaa8513fafb4c653ca53310f791206468d33"
+      "bytes": 7306,
+      "sha256": "afab26be70c32751903a32dc42380d5502b127a984c94714e4fbc0b084c55bb6"
     },
     {
       "slug": "low-floor-tram-bogie",
@@ -3356,8 +3356,8 @@
       "category": "Vehicles",
       "subcategory": "Mobility Systems",
       "file": "/downloads/carbon-bicycle-frameset.zip",
-      "bytes": 6787,
-      "sha256": "88b0c13838079ca529ae8b3e937512af2aab15aec1fb79a6a69ae820af9eda9b"
+      "bytes": 7227,
+      "sha256": "fe133633b74a08559d4ed3759f5c99acb0bad93daebde8a315dc687620a0834a"
     },
     {
       "slug": "deep-section-wheelset",
@@ -3617,8 +3617,8 @@
       "category": "Scientific",
       "subcategory": "Optics",
       "file": "/downloads/raman-spectrometer-bench.zip",
-      "bytes": 6840,
-      "sha256": "47b4a62ef6a089ec61302e7d6781e0d48e6c2202e5a4324718adbb8531de3dd8"
+      "bytes": 7280,
+      "sha256": "59f0426c4e243267ed456381e1df1068663540036edb47796a6d24c277f4bc2b"
     },
     {
       "slug": "optical-breadboard-rig",
@@ -3806,8 +3806,8 @@
       "category": "Medical",
       "subcategory": "Diagnostic",
       "file": "/downloads/portable-ultrasound-unit.zip",
-      "bytes": 6881,
-      "sha256": "24ec83f29004b7846916fb650eafb363ce9efda4450c14d964a8a46d4b4153b0"
+      "bytes": 7321,
+      "sha256": "4e0bda4e7dfe8477b46e8282e5e809d2ad1832f5baa72a34e16adcde3e333aba"
     },
     {
       "slug": "otoscope-charging-dock",
@@ -3824,8 +3824,8 @@
       "category": "Medical",
       "subcategory": "Diagnostic",
       "file": "/downloads/digital-ophthalmoscope.zip",
-      "bytes": 6751,
-      "sha256": "dc5975082da9b87679516f3e8c38201e9e4da3df5276f068c700430450b36b23"
+      "bytes": 7191,
+      "sha256": "e92431e51f59edebe9c43be86d8e5bb12d109edb60c64260daacbc32b2595b56"
     },
     {
       "slug": "desktop-spirometer",
@@ -3842,8 +3842,8 @@
       "category": "Medical",
       "subcategory": "Diagnostic",
       "file": "/downloads/electronic-stethoscope.zip",
-      "bytes": 6757,
-      "sha256": "137f183ad9df99b8739657ff3434d882530298bdf7f590cf6a6291f81f065d84"
+      "bytes": 7197,
+      "sha256": "409d396e5aaf5771e79e0e72854db03993f9d3daf5cbd3fb330bca8d04ea712d"
     },
     {
       "slug": "continuous-glucose-reader",
@@ -4058,8 +4058,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/japanese-maple-study.zip",
-      "bytes": 6423,
-      "sha256": "1f2925b7228412e8c6fc32cadd29185ad0cd2d46ccebd157547bbe7200a7872f"
+      "bytes": 7365,
+      "sha256": "00503b166407d2d9368f94dd8cc3022dec0f7fa700be2922357c43d3767daa23"
     },
     {
       "slug": "mediterranean-palm-cluster",
@@ -4067,8 +4067,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/mediterranean-palm-cluster.zip",
-      "bytes": 6564,
-      "sha256": "fe47517a0d11b8539b328e2ef484e9752b2644e68d156fd8acbd7151a0b58c5c"
+      "bytes": 7497,
+      "sha256": "9fe894305a253380d1feb26f228378c4066962ce8b08b8b01436dac3e9d9b40d"
     },
     {
       "slug": "bamboo-grove-study",
@@ -4076,8 +4076,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/bamboo-grove-study.zip",
-      "bytes": 5950,
-      "sha256": "ae8dfb16e91ca554bb4147c9e8d0b521deb3e4db400c429c80100500340392e8"
+      "bytes": 7300,
+      "sha256": "e2174b3093703ef448932b1738bdbb0e7989ac6af83484401fa46cf3022aed48"
     },
     {
       "slug": "agave-rosette",
@@ -4085,8 +4085,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/agave-rosette.zip",
-      "bytes": 6069,
-      "sha256": "3b1cfcc1fec87c5af70f57f9e5f51b50f1f1fc16dd56c6d4b689f2c9c5daa37f"
+      "bytes": 7152,
+      "sha256": "769805341eaeda0e86a17d570bfd8b357ce42de9d5ee2a29139f8fe9c2a9c95d"
     },
     {
       "slug": "succulent-arrangement",
@@ -4094,8 +4094,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/succulent-arrangement.zip",
-      "bytes": 6264,
-      "sha256": "9dea17d14a27afd7545a9cae024bf6150726aba788f520097772bfd0f7c6ed62"
+      "bytes": 7340,
+      "sha256": "32b25ff89d8237e5cb5d77857387ea1bbd91607fda380aa0733403a827f50793"
     },
     {
       "slug": "wildflower-meadow-study",
@@ -4103,8 +4103,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/wildflower-meadow-study.zip",
-      "bytes": 6550,
-      "sha256": "146e25f229cf5e62c0c0efe1a6609f6f721a35f5a735c3ff933b93512c0dd516"
+      "bytes": 7410,
+      "sha256": "8dfb6e72fe2a2e86340171be16f801330e31379da6b6cef8bde91444e8fdfbd4"
     },
     {
       "slug": "moss-stone-study",
@@ -4112,8 +4112,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/moss-stone-study.zip",
-      "bytes": 5768,
-      "sha256": "9be06d22dddb4095327881ca638ac5356699584e64a42eaddbe845a5150296d1"
+      "bytes": 7071,
+      "sha256": "b43a1c9d1b0f399f96ced06650703d18bb226ce4686a0a8184cdd029a426868c"
     },
     {
       "slug": "desert-boulder-study",
@@ -4121,8 +4121,8 @@
       "category": "Nature",
       "subcategory": "Botanical",
       "file": "/downloads/desert-boulder-study.zip",
-      "bytes": 5860,
-      "sha256": "3d74c7c9602a40d3e0aa133b66ca388045ada76d8fcb73ee7d6741424aec078c"
+      "bytes": 7164,
+      "sha256": "5db081239c5e055ad07636ad269e15c140108ea2951b55945e151a994c081112"
     },
     {
       "slug": "alpine-pine-study",
@@ -4148,8 +4148,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/dual-group-espresso-machine.zip",
-      "bytes": 6091,
-      "sha256": "9e0c28acb5f8822d3b4bdb11859957d8d86e722be707257a7c671039c6ce2560"
+      "bytes": 7344,
+      "sha256": "42471d064abb71ea3a92d87ace639215f61be0d2fbcc0c67b20d36e148536e4c"
     },
     {
       "slug": "precision-coffee-grinder",
@@ -4157,8 +4157,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/precision-coffee-grinder.zip",
-      "bytes": 6013,
-      "sha256": "f4be8b051fd62acde3953be01e17c238eda938445ee272177bde2de659bb0318"
+      "bytes": 7234,
+      "sha256": "59f60d4db39c376fe9e5c7999ef1720560e8ca6af22d1fa6d0d1991b053c31de"
     },
     {
       "slug": "pour-over-coffee-set",
@@ -4166,8 +4166,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/pour-over-coffee-set.zip",
-      "bytes": 5854,
-      "sha256": "1007fd7580653e0648114d33fde9836ecabb560df05b27a58f2e04cc057c1770"
+      "bytes": 7128,
+      "sha256": "056017a92f771efc32de56108201c68443bf41c08b5db747fbb127ba86d44a5a"
     },
     {
       "slug": "cocktail-shaker-set",
@@ -4175,8 +4175,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/cocktail-shaker-set.zip",
-      "bytes": 5834,
-      "sha256": "29b725ec66f5e03431fd0ffb25ddb338a4faf76d8148cd45d793d447240080d3"
+      "bytes": 7102,
+      "sha256": "1e3cb713a2f87457c5fb8e5299126ebf628d24ec9cea2d7ecac5dacb9e46b795"
     },
     {
       "slug": "crystal-wine-decanter",
@@ -4184,8 +4184,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/crystal-wine-decanter.zip",
-      "bytes": 5875,
-      "sha256": "164275cf3ad2247d5dd4bb7aacff048b8afe4f2b0ab98662bd21b067b4f3c27d"
+      "bytes": 7184,
+      "sha256": "b1e5ab2de197f19bb0645fc17c7a7eca0d8f8d9bab0c9ed5f7572377a16f081e"
     },
     {
       "slug": "professional-saute-pan",
@@ -4193,8 +4193,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/professional-saute-pan.zip",
-      "bytes": 5954,
-      "sha256": "073e9e914f5cd5feac0e561fccdbdb245242dcf009f54cbbd853bff72048de0b"
+      "bytes": 7229,
+      "sha256": "bed42bb3128c96b24d81922c1b77cbd64669c473bcd7a897b4c90766cca68ed4"
     },
     {
       "slug": "enamel-dutch-oven",
@@ -4202,8 +4202,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/enamel-dutch-oven.zip",
-      "bytes": 5889,
-      "sha256": "9544a3fe3772dd141338bc262ed97d73629847d88b717c9e8d9faec4ed848cb4"
+      "bytes": 7084,
+      "sha256": "3c2e09a62a4e6b5c1f2e49f4f7348d404ba970120ed6255e88dcd2e493ca138a"
     },
     {
       "slug": "artisan-bread-basket",
@@ -4211,8 +4211,8 @@
       "category": "Food",
       "subcategory": "Hospitality",
       "file": "/downloads/artisan-bread-basket.zip",
-      "bytes": 5961,
-      "sha256": "c651481f8255aa4db28a749432a90be82b13e0310d031f522067c922c713aecf"
+      "bytes": 7192,
+      "sha256": "29d68272aa7f9360e576d58559d474d9a0a3fc1d354b2da133510ed782ad29bf"
     },
     {
       "slug": "omakase-sushi-platter",
@@ -4238,8 +4238,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/structured-leather-tote.zip",
-      "bytes": 5959,
-      "sha256": "a39c7ef07bace14c9a662b8000ba8bfd7ca36744bb12ad34ca451d4a3dbf2f30"
+      "bytes": 7181,
+      "sha256": "d62f2369bb2df94dae0396764d4c7c923784d3b79c800b23aaaaf72e3e3d10f9"
     },
     {
       "slug": "technical-weekender-bag",
@@ -4247,8 +4247,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/technical-weekender-bag.zip",
-      "bytes": 5960,
-      "sha256": "ae7aaaf769ab41fbc9dd2d28514e249c73a4bfa4db18bc19a478d45a7478416f"
+      "bytes": 7194,
+      "sha256": "67d68fa95733fe0f24502109464bf7d8f95591aa90c08fb1fb878c4b79f5b69b"
     },
     {
       "slug": "compact-crossbody-bag",
@@ -4256,8 +4256,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/compact-crossbody-bag.zip",
-      "bytes": 5912,
-      "sha256": "ea4f85bd53fec5bd5f2b86cf6c796c17f852a06c954cf3b7242f0408952dbd7e"
+      "bytes": 7135,
+      "sha256": "a2aa3aa6378d4a7b33ce8de2badb76121a90610e7649230728e6d4a6fcd6f33a"
     },
     {
       "slug": "titanium-aviator-frames",
@@ -4265,8 +4265,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/titanium-aviator-frames.zip",
-      "bytes": 5933,
-      "sha256": "36ce147cfe6b7a7d4fd541109b83367389aa6d6ddebb1d8cf40eafbd92e9d592"
+      "bytes": 7151,
+      "sha256": "593eeefd5a6a72840f3dc7b022306f3ab606c8740b0a457a2ea1ea24816024e5"
     },
     {
       "slug": "acetate-optical-frames",
@@ -4274,8 +4274,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/acetate-optical-frames.zip",
-      "bytes": 5907,
-      "sha256": "68c996042bd23152d97fcc2b9ff3fc2af9bb86bfc150d0d6661ec596a3e70706"
+      "bytes": 7142,
+      "sha256": "87456591536b22a928c2ea230885b797afdb110f25430fda40401a0c0eb61e47"
     },
     {
       "slug": "mechanical-chronograph-watch",
@@ -4283,8 +4283,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/mechanical-chronograph-watch.zip",
-      "bytes": 6282,
-      "sha256": "1f104d31ff0296ec026f7742d954952960ab256366a0ebf398fa082a895dca8a"
+      "bytes": 7446,
+      "sha256": "f7addf336b7e8268d699604d907a9f2fff574c09349656b26cfa3a534b341c6b"
     },
     {
       "slug": "minimal-dress-watch",
@@ -4292,8 +4292,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/minimal-dress-watch.zip",
-      "bytes": 6073,
-      "sha256": "698f5fee34f1b861dcf9c6d7a1017e4a23eef71214f5c1519f15b766e90e6a0a"
+      "bytes": 7059,
+      "sha256": "752a21bc0142826ddae13d5db696a4d24f2bde8129d67602e3b24b92dc75a801"
     },
     {
       "slug": "curb-chain-bracelet",
@@ -4301,8 +4301,8 @@
       "category": "Fashion",
       "subcategory": "Accessories",
       "file": "/downloads/curb-chain-bracelet.zip",
-      "bytes": 6071,
-      "sha256": "1348c812fd2294c629c571532cf35c7e662bb19867f6d5b5f5c1b15163e7cb92"
+      "bytes": 7169,
+      "sha256": "a077a598a01c3aa09cbda78f2042a11606a0f495ae2dc42aed5cc22c84260a84"
     },
     {
       "slug": "sculptural-pendant-necklace",

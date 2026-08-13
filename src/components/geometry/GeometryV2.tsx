@@ -19,7 +19,6 @@ function signedPow(value: number, power: number) {
 }
 
 function useDisposableGeometry(factory: () => THREE.BufferGeometry, deps: readonly unknown[]) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const geometry = useMemo(factory, deps)
   useEffect(() => () => geometry.dispose(), [geometry])
   return geometry
@@ -127,5 +126,69 @@ export function ExtrudedProfile({ points, depth = 0.12, bevelSize = 0.025, bevel
     g.center()
     return g
   }, [points, depth, bevelSize, bevelThickness, bevelSegments])
+  return <mesh {...props} geometry={geometry}>{children}</mesh>
+}
+
+export function LeafSurface({
+  length = 0.8,
+  width = 0.32,
+  camber = 0.06,
+  curl = 0,
+  twist = 0,
+  serration = 0,
+  lengthSegments = 24,
+  widthSegments = 8,
+  children,
+  ...props
+}: MeshProps & {
+  length?: number
+  width?: number
+  camber?: number
+  curl?: number
+  twist?: number
+  serration?: number
+  lengthSegments?: number
+  widthSegments?: number
+}) {
+  const geometry = useDisposableGeometry(() => {
+    const vertices: number[] = []
+    const uvs: number[] = []
+    const indices: number[] = []
+    for (let ix = 0; ix <= lengthSegments; ix += 1) {
+      const t = ix / lengthSegments
+      const x = (t - 0.5) * length
+      const envelope = Math.pow(Math.sin(Math.PI * t), 0.72)
+      const serrated = serration > 0 ? 1 + Math.sin(t * Math.PI * serration * 2) * 0.045 : 1
+      const localTwist = twist * (t - 0.5)
+      const cs = Math.cos(localTwist)
+      const sn = Math.sin(localTwist)
+      for (let iy = 0; iy <= widthSegments; iy += 1) {
+        const v = iy / widthSegments
+        const lateral = (v - 0.5) * 2
+        const baseY = lateral * width * 0.5 * envelope * serrated
+        const baseZ = camber * (1 - lateral * lateral) * Math.sin(Math.PI * t) + curl * t * t
+        const y = baseY * cs - baseZ * sn
+        const z = baseY * sn + baseZ * cs
+        vertices.push(x, y, z)
+        uvs.push(t, v)
+      }
+    }
+    const row = widthSegments + 1
+    for (let ix = 0; ix < lengthSegments; ix += 1) {
+      for (let iy = 0; iy < widthSegments; iy += 1) {
+        const a = ix * row + iy
+        const b = a + row
+        indices.push(a, b, a + 1, a + 1, b, b + 1)
+      }
+    }
+    const g = new THREE.BufferGeometry()
+    g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
+    g.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2))
+    g.setIndex(indices)
+    g.computeVertexNormals()
+    g.computeBoundingBox()
+    g.computeBoundingSphere()
+    return g
+  }, [length, width, camber, curl, twist, serration, lengthSegments, widthSegments])
   return <mesh {...props} geometry={geometry}>{children}</mesh>
 }

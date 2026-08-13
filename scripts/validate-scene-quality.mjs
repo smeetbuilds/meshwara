@@ -20,7 +20,7 @@ const assets = blocks.map((block) => ({
 
 function authoredGeometryScore(scene) {
   const legacyNodes = (scene.match(/<(?:RoundedBox|CurvedBox|mesh)\b/g) ?? []).length
-  const primaryProfiledSurfaces = (scene.match(/<(?:LoftSurface|RevolvedSurface|ExtrudedProfile)\b/g) ?? []).length
+  const primaryProfiledSurfaces = (scene.match(/<(?:LoftSurface|RevolvedSurface|ExtrudedProfile|LeafSurface)\b/g) ?? []).length
   const splineSurfaces = (scene.match(/<SplineTube\b/g) ?? []).length
   return legacyNodes + primaryProfiledSurfaces * 3 + splineSurfaces * 2
 }

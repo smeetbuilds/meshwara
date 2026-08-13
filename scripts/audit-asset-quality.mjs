@@ -39,13 +39,13 @@ for (const block of blocks) {
   const bytes = Buffer.byteLength(scene)
   const meshLike = (scene.match(/<(?:mesh|RoundedBox|CurvedBox|Instance|Line)\b/g) ?? []).length
   const geometries = (scene.match(/<[A-Za-z][A-Za-z0-9]*Geometry\b/g) ?? []).length
-  const profiledSurfaces = (scene.match(/<(?:LoftSurface|RevolvedSurface|ExtrudedProfile)\b/g) ?? []).length
+  const profiledSurfaces = (scene.match(/<(?:LoftSurface|RevolvedSurface|ExtrudedProfile|LeafSurface)\b/g) ?? []).length
   const splineSurfaces = (scene.match(/<SplineTube\b/g) ?? []).length
   const repeated = estimateRepeatedGeometry(scene)
   const effectiveGeometry = meshLike + geometries + repeated + profiledSurfaces * 3 + splineSurfaces * 2
   const materials = (scene.match(/<(?:mesh(?:Physical|Standard|Basic|Lambert|Phong)|shader)Material\b|<MeshTransmissionMaterial\b/g) ?? []).length
   const premiumMaterials = (scene.match(/<meshPhysicalMaterial\b|<MeshTransmissionMaterial\b|<shaderMaterial\b/g) ?? []).length
-  const distinctColors = new Set([...scene.matchAll(/color="(#[0-9a-fA-F]{6})"/g)].map((match) => match[1].toLowerCase())).size
+  const distinctColors = new Set([...scene.matchAll(/color=\"(#[0-9a-fA-F]{6})\"/g)].map((match) => match[1].toLowerCase())).size
   const animated = /useFrame\s*\(/.test(scene)
   const shaderDriven = /shaderMaterial|glsl|vertexShader|fragmentShader/.test(scene)
   const deterministic = !/Math\.random\s*\(/.test(scene)
