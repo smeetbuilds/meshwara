@@ -1,0 +1,6 @@
+import { useFrame } from '@react-three/fiber'
+import { useRef } from 'react'
+import * as THREE from 'three'
+function Gear({r=.4,teeth=12}:{r?:number;teeth?:number}){return <group><mesh rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[r,r,.16,teeth]} /><meshPhysicalMaterial color="#7b8284" metalness={.95} roughness={.2}/></mesh>{Array.from({length:teeth},(_,i)=>{const a=i/teeth*Math.PI*2;return <mesh key={i} position={[Math.sin(a)*(r+.07),Math.cos(a)*(r+.07),0]} rotation={[0,0,-a]}><boxGeometry args={[.12,.18,.16]} /><meshPhysicalMaterial color="#7b8284" metalness={.95} roughness={.2}/></mesh>})}</group>}
+function PlanetaryGearbox(){const ref=useRef<THREE.Group>(null);useFrame((s)=>{if(ref.current)ref.current.rotation.z=s.clock.elapsedTime*.08});return <group rotation={[.22,-.35,0]}><mesh rotation={[Math.PI/2,0,0]}><torusGeometry args={[1.25,.14,20,72]} /><meshPhysicalMaterial color="#353b3d" metalness={.88} roughness={.22}/></mesh><group ref={ref}><Gear r={.35} teeth={14}/>{[0,1,2].map(i=>{const a=i/3*Math.PI*2;return <group key={i} position={[Math.sin(a)*.72,Math.cos(a)*.72,.03]}><Gear r={.28} teeth={12}/></group>})}</group><mesh position={[0,0,.18]}><cylinderGeometry args={[.12,.12,.56,28]} /><meshPhysicalMaterial color="#b3b7b8" metalness={1} roughness={.16}/></mesh></group>}
+export default PlanetaryGearbox

@@ -1,0 +1,12 @@
+node_modules
+.output
+.dist
+dist
+.vite
+.env
+.DS_Store
+tests/model-pipeline/.generated-validation.glb
+tests/model-pipeline/.generated-validation.gltf
+
+# Materialized third-party source bytes (verified locally, never committed)
+staging/materialized/

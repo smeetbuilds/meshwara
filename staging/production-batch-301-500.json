@@ -1,0 +1,2806 @@
+{
+  "brand": "MESHVARA",
+  "count": 200,
+  "assets": [
+    {
+      "index": 301,
+      "slug": "ribbon-reference-microphone",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Ribbon Reference Microphone",
+      "tags": [
+        "Ribbon",
+        "Microphone",
+        "Studio",
+        "Audio"
+      ]
+    },
+    {
+      "index": 302,
+      "slug": "compact-nearfield-monitor",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Compact Nearfield Monitor",
+      "tags": [
+        "Speaker",
+        "Nearfield",
+        "Studio",
+        "Audio"
+      ]
+    },
+    {
+      "index": 303,
+      "slug": "balanced-headphone-amplifier",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Balanced Headphone Amplifier",
+      "tags": [
+        "Headphone Amp",
+        "Balanced",
+        "Audio",
+        "Hardware"
+      ]
+    },
+    {
+      "index": 304,
+      "slug": "reference-dac-stack",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Reference DAC Stack",
+      "tags": [
+        "DAC",
+        "Converter",
+        "Audio",
+        "Desktop"
+      ]
+    },
+    {
+      "index": 305,
+      "slug": "field-audio-recorder",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Field Audio Recorder",
+      "tags": [
+        "Recorder",
+        "Portable",
+        "Audio",
+        "Production"
+      ]
+    },
+    {
+      "index": 306,
+      "slug": "wireless-lavalier-system",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Wireless Lavalier System",
+      "tags": [
+        "Lavalier",
+        "Wireless",
+        "Audio",
+        "Production"
+      ]
+    },
+    {
+      "index": 307,
+      "slug": "broadcast-boom-microphone",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Broadcast Boom Microphone",
+      "tags": [
+        "Broadcast",
+        "Boom",
+        "Microphone",
+        "Audio"
+      ]
+    },
+    {
+      "index": 308,
+      "slug": "desktop-audio-interface",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Desktop Audio Interface",
+      "tags": [
+        "Interface",
+        "Studio",
+        "Audio",
+        "Desktop"
+      ]
+    },
+    {
+      "index": 309,
+      "slug": "discrete-phono-preamplifier",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Discrete Phono Preamplifier",
+      "tags": [
+        "Phono",
+        "Vinyl",
+        "Preamplifier",
+        "Audio"
+      ]
+    },
+    {
+      "index": 310,
+      "slug": "portable-headphone-amplifier",
+      "category": "Technology",
+      "subcategory": "Audio",
+      "archetype": "device",
+      "name": "Portable Headphone Amplifier",
+      "tags": [
+        "Portable",
+        "Headphone",
+        "Amplifier",
+        "Audio"
+      ]
+    },
+    {
+      "index": 311,
+      "slug": "medium-format-camera",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Medium Format Camera",
+      "tags": [
+        "Camera",
+        "Medium Format",
+        "Imaging",
+        "Optical"
+      ]
+    },
+    {
+      "index": 312,
+      "slug": "cinema-prime-lens",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Cinema Prime Lens",
+      "tags": [
+        "Cinema",
+        "Lens",
+        "Imaging",
+        "Optical"
+      ]
+    },
+    {
+      "index": 313,
+      "slug": "macro-prime-lens",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Macro Prime Lens",
+      "tags": [
+        "Macro",
+        "Lens",
+        "Imaging",
+        "Optical"
+      ]
+    },
+    {
+      "index": 314,
+      "slug": "rangefinder-camera",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Rangefinder Camera",
+      "tags": [
+        "Rangefinder",
+        "Camera",
+        "Imaging",
+        "Mechanical"
+      ]
+    },
+    {
+      "index": 315,
+      "slug": "professional-camera-gimbal",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Professional Camera Gimbal",
+      "tags": [
+        "Gimbal",
+        "Camera",
+        "Imaging",
+        "Stabilization"
+      ]
+    },
+    {
+      "index": 316,
+      "slug": "desktop-film-scanner",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Desktop Film Scanner",
+      "tags": [
+        "Film",
+        "Scanner",
+        "Imaging",
+        "Archive"
+      ]
+    },
+    {
+      "index": 317,
+      "slug": "cinema-camera-cage",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Cinema Camera Cage",
+      "tags": [
+        "Camera Cage",
+        "Rig",
+        "Imaging",
+        "Production"
+      ]
+    },
+    {
+      "index": 318,
+      "slug": "precision-lens-adapter",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Precision Lens Adapter",
+      "tags": [
+        "Lens Adapter",
+        "Mount",
+        "Imaging",
+        "Mechanical"
+      ]
+    },
+    {
+      "index": 319,
+      "slug": "electronic-viewfinder-module",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Electronic Viewfinder Module",
+      "tags": [
+        "Viewfinder",
+        "EVF",
+        "Imaging",
+        "Display"
+      ]
+    },
+    {
+      "index": 320,
+      "slug": "handheld-color-meter",
+      "category": "Technology",
+      "subcategory": "Imaging",
+      "archetype": "optical",
+      "name": "Handheld Color Meter",
+      "tags": [
+        "Color Meter",
+        "Imaging",
+        "Measurement",
+        "Production"
+      ]
+    },
+    {
+      "index": 321,
+      "slug": "compact-rack-server",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Compact Rack Server",
+      "tags": [
+        "Server",
+        "Rack",
+        "Computing",
+        "Enterprise"
+      ]
+    },
+    {
+      "index": 322,
+      "slug": "aluminium-mini-computer",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Aluminium Mini Computer",
+      "tags": [
+        "Mini PC",
+        "Computer",
+        "Computing",
+        "Desktop"
+      ]
+    },
+    {
+      "index": 323,
+      "slug": "seventy-five-mechanical-keyboard",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Seventy Five Mechanical Keyboard",
+      "tags": [
+        "Keyboard",
+        "Mechanical",
+        "Computing",
+        "Input"
+      ]
+    },
+    {
+      "index": 324,
+      "slug": "precision-glass-trackpad",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Precision Glass Trackpad",
+      "tags": [
+        "Trackpad",
+        "Input",
+        "Computing",
+        "Desktop"
+      ]
+    },
+    {
+      "index": 325,
+      "slug": "usb-c-studio-hub",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "USB C Studio Hub",
+      "tags": [
+        "USB-C",
+        "Hub",
+        "Computing",
+        "Connectivity"
+      ]
+    },
+    {
+      "index": 326,
+      "slug": "ceiling-wifi-access-point",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Ceiling WiFi Access Point",
+      "tags": [
+        "WiFi",
+        "Access Point",
+        "Networking",
+        "Computing"
+      ]
+    },
+    {
+      "index": 327,
+      "slug": "managed-fiber-switch",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Managed Fiber Switch",
+      "tags": [
+        "Fiber",
+        "Switch",
+        "Networking",
+        "Enterprise"
+      ]
+    },
+    {
+      "index": 328,
+      "slug": "eight-bay-nas-enclosure",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Eight Bay NAS Enclosure",
+      "tags": [
+        "NAS",
+        "Storage",
+        "Networking",
+        "Computing"
+      ]
+    },
+    {
+      "index": 329,
+      "slug": "rack-kvm-console",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Rack KVM Console",
+      "tags": [
+        "KVM",
+        "Rack",
+        "Computing",
+        "Enterprise"
+      ]
+    },
+    {
+      "index": 330,
+      "slug": "desktop-smart-display",
+      "category": "Technology",
+      "subcategory": "Computing",
+      "archetype": "device",
+      "name": "Desktop Smart Display",
+      "tags": [
+        "Display",
+        "Desktop",
+        "Computing",
+        "Interface"
+      ]
+    },
+    {
+      "index": 331,
+      "slug": "oak-dining-armchair",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Oak Dining Armchair",
+      "tags": [
+        "Chair",
+        "Oak",
+        "Seating",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 332,
+      "slug": "leather-sling-chair",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Leather Sling Chair",
+      "tags": [
+        "Sling",
+        "Leather",
+        "Chair",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 333,
+      "slug": "boucle-barrel-chair",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Boucle Barrel Chair",
+      "tags": [
+        "Boucle",
+        "Chair",
+        "Seating",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 334,
+      "slug": "ergonomic-task-chair-pro",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Ergonomic Task Chair Pro",
+      "tags": [
+        "Task Chair",
+        "Ergonomic",
+        "Office",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 335,
+      "slug": "upholstered-entry-bench",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Upholstered Entry Bench",
+      "tags": [
+        "Bench",
+        "Upholstery",
+        "Seating",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 336,
+      "slug": "counter-height-stool",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Counter Height Stool",
+      "tags": [
+        "Stool",
+        "Counter",
+        "Seating",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 337,
+      "slug": "bentwood-rocking-chair",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Bentwood Rocking Chair",
+      "tags": [
+        "Rocking Chair",
+        "Bentwood",
+        "Seating",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 338,
+      "slug": "executive-mesh-chair",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Executive Mesh Chair",
+      "tags": [
+        "Executive",
+        "Mesh",
+        "Chair",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 339,
+      "slug": "cafe-side-chair",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Cafe Side Chair",
+      "tags": [
+        "Cafe",
+        "Chair",
+        "Seating",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 340,
+      "slug": "low-lounge-bench",
+      "category": "Furniture",
+      "subcategory": "Seating",
+      "archetype": "furniture",
+      "name": "Low Lounge Bench",
+      "tags": [
+        "Lounge",
+        "Bench",
+        "Seating",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 341,
+      "slug": "stone-pedestal-table",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Stone Pedestal Table",
+      "tags": [
+        "Pedestal",
+        "Table",
+        "Stone",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 342,
+      "slug": "oak-trestle-table",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Oak Trestle Table",
+      "tags": [
+        "Trestle",
+        "Table",
+        "Oak",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 343,
+      "slug": "nested-side-table-pair",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Nested Side Table Pair",
+      "tags": [
+        "Side Table",
+        "Nested",
+        "Furniture",
+        "Interior"
+      ]
+    },
+    {
+      "index": 344,
+      "slug": "fluted-console-cabinet",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Fluted Console Cabinet",
+      "tags": [
+        "Console",
+        "Cabinet",
+        "Storage",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 345,
+      "slug": "three-drawer-chest",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Three Drawer Chest",
+      "tags": [
+        "Drawers",
+        "Chest",
+        "Storage",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 346,
+      "slug": "open-frame-shelving",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Open Frame Shelving",
+      "tags": [
+        "Shelving",
+        "Storage",
+        "Furniture",
+        "Interior"
+      ]
+    },
+    {
+      "index": 347,
+      "slug": "brass-wall-sconce",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Brass Wall Sconce",
+      "tags": [
+        "Sconce",
+        "Lighting",
+        "Brass",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 348,
+      "slug": "architect-desk-lamp",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Architect Desk Lamp",
+      "tags": [
+        "Desk Lamp",
+        "Lighting",
+        "Furniture",
+        "Task"
+      ]
+    },
+    {
+      "index": 349,
+      "slug": "paper-floor-lantern",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Paper Floor Lantern",
+      "tags": [
+        "Lantern",
+        "Lighting",
+        "Furniture",
+        "Ambient"
+      ]
+    },
+    {
+      "index": 350,
+      "slug": "opal-pendant-globe",
+      "category": "Furniture",
+      "subcategory": "Tables",
+      "archetype": "furniture",
+      "name": "Opal Pendant Globe",
+      "tags": [
+        "Pendant",
+        "Lighting",
+        "Glass",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 351,
+      "slug": "courtyard-villa-study",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Courtyard Villa Study",
+      "tags": [
+        "Villa",
+        "Residential",
+        "Architecture",
+        "Courtyard"
+      ]
+    },
+    {
+      "index": 352,
+      "slug": "glass-house-study",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Glass House Study",
+      "tags": [
+        "Glass House",
+        "Residential",
+        "Architecture",
+        "Modern"
+      ]
+    },
+    {
+      "index": 353,
+      "slug": "cliff-cabin-study",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Cliff Cabin Study",
+      "tags": [
+        "Cabin",
+        "Residential",
+        "Architecture",
+        "Cliff"
+      ]
+    },
+    {
+      "index": 354,
+      "slug": "urban-row-house",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Urban Row House",
+      "tags": [
+        "Row House",
+        "Residential",
+        "Architecture",
+        "Urban"
+      ]
+    },
+    {
+      "index": 355,
+      "slug": "museum-wing-study",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Museum Wing Study",
+      "tags": [
+        "Museum",
+        "Cultural",
+        "Architecture",
+        "Gallery"
+      ]
+    },
+    {
+      "index": 356,
+      "slug": "timber-library-hall",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Timber Library Hall",
+      "tags": [
+        "Library",
+        "Timber",
+        "Architecture",
+        "Cultural"
+      ]
+    },
+    {
+      "index": 357,
+      "slug": "rail-platform-canopy",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Rail Platform Canopy",
+      "tags": [
+        "Rail",
+        "Canopy",
+        "Architecture",
+        "Infrastructure"
+      ]
+    },
+    {
+      "index": 358,
+      "slug": "urban-bus-pavilion",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Urban Bus Pavilion",
+      "tags": [
+        "Bus",
+        "Pavilion",
+        "Architecture",
+        "Infrastructure"
+      ]
+    },
+    {
+      "index": 359,
+      "slug": "footbridge-lookout-tower",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Footbridge Lookout Tower",
+      "tags": [
+        "Footbridge",
+        "Tower",
+        "Architecture",
+        "Civic"
+      ]
+    },
+    {
+      "index": 360,
+      "slug": "coastal-observation-shelter",
+      "category": "Architecture",
+      "subcategory": "Residential",
+      "archetype": "architecture",
+      "name": "Coastal Observation Shelter",
+      "tags": [
+        "Shelter",
+        "Coastal",
+        "Architecture",
+        "Landscape"
+      ]
+    },
+    {
+      "index": 361,
+      "slug": "grand-touring-coupe",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Grand Touring Coupe",
+      "tags": [
+        "Coupe",
+        "Road",
+        "Vehicle",
+        "Automotive"
+      ]
+    },
+    {
+      "index": 362,
+      "slug": "compact-electric-hatchback",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Compact Electric Hatchback",
+      "tags": [
+        "EV",
+        "Hatchback",
+        "Road",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 363,
+      "slug": "touring-motorcycle-gt",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Touring Motorcycle GT",
+      "tags": [
+        "Motorcycle",
+        "Touring",
+        "Road",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 364,
+      "slug": "adventure-motorcycle-adv",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Adventure Motorcycle ADV",
+      "tags": [
+        "Motorcycle",
+        "Adventure",
+        "Road",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 365,
+      "slug": "urban-electric-scooter",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Urban Electric Scooter",
+      "tags": [
+        "Scooter",
+        "Electric",
+        "Mobility",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 366,
+      "slug": "electric-cargo-van",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Electric Cargo Van",
+      "tags": [
+        "Van",
+        "Electric",
+        "Road",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 367,
+      "slug": "roadster-chassis-study",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Roadster Chassis Study",
+      "tags": [
+        "Chassis",
+        "Roadster",
+        "Automotive",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 368,
+      "slug": "ev-battery-skateboard",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "EV Battery Skateboard",
+      "tags": [
+        "Battery",
+        "EV",
+        "Platform",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 369,
+      "slug": "performance-corner-assembly",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Performance Corner Assembly",
+      "tags": [
+        "Suspension",
+        "Brake",
+        "Automotive",
+        "Component"
+      ]
+    },
+    {
+      "index": 370,
+      "slug": "variable-ratio-steering-rack",
+      "category": "Vehicles",
+      "subcategory": "Road",
+      "archetype": "vehicle",
+      "name": "Variable Ratio Steering Rack",
+      "tags": [
+        "Steering",
+        "Rack",
+        "Automotive",
+        "Component"
+      ]
+    },
+    {
+      "index": 371,
+      "slug": "high-speed-train-nose",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "High Speed Train Nose",
+      "tags": [
+        "Train",
+        "Rail",
+        "Transport",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 372,
+      "slug": "low-floor-tram-bogie",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Low Floor Tram Bogie",
+      "tags": [
+        "Tram",
+        "Rail",
+        "Bogie",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 373,
+      "slug": "carbon-bicycle-frameset",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Carbon Bicycle Frameset",
+      "tags": [
+        "Bicycle",
+        "Carbon",
+        "Cycling",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 374,
+      "slug": "deep-section-wheelset",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Deep Section Wheelset",
+      "tags": [
+        "Wheelset",
+        "Cycling",
+        "Carbon",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 375,
+      "slug": "mid-drive-e-bike-unit",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Mid Drive E Bike Unit",
+      "tags": [
+        "E-Bike",
+        "Motor",
+        "Cycling",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 376,
+      "slug": "helicopter-rotor-head",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Helicopter Rotor Head",
+      "tags": [
+        "Helicopter",
+        "Rotor",
+        "Aerospace",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 377,
+      "slug": "jet-fan-module",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Jet Fan Module",
+      "tags": [
+        "Jet",
+        "Fan",
+        "Aerospace",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 378,
+      "slug": "sailboat-deck-winch",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Sailboat Deck Winch",
+      "tags": [
+        "Sailboat",
+        "Winch",
+        "Marine",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 379,
+      "slug": "marine-propeller-assembly",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Marine Propeller Assembly",
+      "tags": [
+        "Propeller",
+        "Marine",
+        "Mechanical",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 380,
+      "slug": "yacht-helm-console",
+      "category": "Vehicles",
+      "subcategory": "Mobility Systems",
+      "archetype": "vehicle",
+      "name": "Yacht Helm Console",
+      "tags": [
+        "Yacht",
+        "Helm",
+        "Marine",
+        "Vehicle"
+      ]
+    },
+    {
+      "index": 381,
+      "slug": "six-axis-robot-cell",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "Six Axis Robot Cell",
+      "tags": [
+        "Robot",
+        "Automation",
+        "Industrial",
+        "Cell"
+      ]
+    },
+    {
+      "index": 382,
+      "slug": "scara-assembly-robot",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "SCARA Assembly Robot",
+      "tags": [
+        "SCARA",
+        "Robot",
+        "Automation",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 383,
+      "slug": "delta-pick-robot",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "Delta Pick Robot",
+      "tags": [
+        "Delta Robot",
+        "Automation",
+        "Industrial",
+        "Picker"
+      ]
+    },
+    {
+      "index": 384,
+      "slug": "servo-drive-module",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "Servo Drive Module",
+      "tags": [
+        "Servo",
+        "Drive",
+        "Automation",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 385,
+      "slug": "plc-control-rack",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "PLC Control Rack",
+      "tags": [
+        "PLC",
+        "Control",
+        "Automation",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 386,
+      "slug": "conveyor-diverter-junction",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "Conveyor Diverter Junction",
+      "tags": [
+        "Conveyor",
+        "Automation",
+        "Industrial",
+        "Logistics"
+      ]
+    },
+    {
+      "index": 387,
+      "slug": "compact-palletizer",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "Compact Palletizer",
+      "tags": [
+        "Palletizer",
+        "Automation",
+        "Industrial",
+        "Robot"
+      ]
+    },
+    {
+      "index": 388,
+      "slug": "vacuum-gripper-array",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "Vacuum Gripper Array",
+      "tags": [
+        "Vacuum",
+        "Gripper",
+        "Automation",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 389,
+      "slug": "machine-vision-camera",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "Machine Vision Camera",
+      "tags": [
+        "Vision",
+        "Camera",
+        "Automation",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 390,
+      "slug": "safety-light-curtain",
+      "category": "Industrial",
+      "subcategory": "Automation",
+      "archetype": "industrial",
+      "name": "Safety Light Curtain",
+      "tags": [
+        "Safety",
+        "Sensor",
+        "Automation",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 391,
+      "slug": "cnc-rotary-table",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "CNC Rotary Table",
+      "tags": [
+        "CNC",
+        "Rotary",
+        "Machining",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 392,
+      "slug": "precision-milling-vice",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "Precision Milling Vice",
+      "tags": [
+        "Vice",
+        "Milling",
+        "Machining",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 393,
+      "slug": "twelve-station-tool-turret",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "Twelve Station Tool Turret",
+      "tags": [
+        "Turret",
+        "CNC",
+        "Machining",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 394,
+      "slug": "hydraulic-tie-rod-cylinder",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "Hydraulic Tie Rod Cylinder",
+      "tags": [
+        "Hydraulic",
+        "Cylinder",
+        "Industrial",
+        "Fluid"
+      ]
+    },
+    {
+      "index": 395,
+      "slug": "hydraulic-power-unit",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "Hydraulic Power Unit",
+      "tags": [
+        "Hydraulic",
+        "Power",
+        "Industrial",
+        "Fluid"
+      ]
+    },
+    {
+      "index": 396,
+      "slug": "external-gear-pump",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "External Gear Pump",
+      "tags": [
+        "Gear Pump",
+        "Fluid",
+        "Industrial",
+        "Mechanical"
+      ]
+    },
+    {
+      "index": 397,
+      "slug": "sanitary-diaphragm-pump",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "Sanitary Diaphragm Pump",
+      "tags": [
+        "Diaphragm",
+        "Pump",
+        "Industrial",
+        "Fluid"
+      ]
+    },
+    {
+      "index": 398,
+      "slug": "trunnion-ball-valve",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "Trunnion Ball Valve",
+      "tags": [
+        "Ball Valve",
+        "Fluid",
+        "Industrial",
+        "Mechanical"
+      ]
+    },
+    {
+      "index": 399,
+      "slug": "wafer-butterfly-valve",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "Wafer Butterfly Valve",
+      "tags": [
+        "Butterfly Valve",
+        "Fluid",
+        "Industrial",
+        "Mechanical"
+      ]
+    },
+    {
+      "index": 400,
+      "slug": "precision-pressure-regulator",
+      "category": "Industrial",
+      "subcategory": "Machining",
+      "archetype": "industrial",
+      "name": "Precision Pressure Regulator",
+      "tags": [
+        "Regulator",
+        "Pressure",
+        "Industrial",
+        "Fluid"
+      ]
+    },
+    {
+      "index": 401,
+      "slug": "research-microscope-pro",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Research Microscope Pro",
+      "tags": [
+        "Microscope",
+        "Optics",
+        "Scientific",
+        "Research"
+      ]
+    },
+    {
+      "index": 402,
+      "slug": "raman-spectrometer-bench",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Raman Spectrometer Bench",
+      "tags": [
+        "Raman",
+        "Spectrometer",
+        "Scientific",
+        "Optics"
+      ]
+    },
+    {
+      "index": 403,
+      "slug": "optical-breadboard-rig",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Optical Breadboard Rig",
+      "tags": [
+        "Optics",
+        "Breadboard",
+        "Scientific",
+        "Laser"
+      ]
+    },
+    {
+      "index": 404,
+      "slug": "laser-diode-mount",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Laser Diode Mount",
+      "tags": [
+        "Laser",
+        "Mount",
+        "Scientific",
+        "Optics"
+      ]
+    },
+    {
+      "index": 405,
+      "slug": "beam-splitter-mount",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Beam Splitter Mount",
+      "tags": [
+        "Beam Splitter",
+        "Optics",
+        "Scientific",
+        "Mount"
+      ]
+    },
+    {
+      "index": 406,
+      "slug": "photodiode-detector",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Photodiode Detector",
+      "tags": [
+        "Photodiode",
+        "Detector",
+        "Scientific",
+        "Optics"
+      ]
+    },
+    {
+      "index": 407,
+      "slug": "fiber-coupler-stage",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Fiber Coupler Stage",
+      "tags": [
+        "Fiber",
+        "Coupler",
+        "Scientific",
+        "Optics"
+      ]
+    },
+    {
+      "index": 408,
+      "slug": "equatorial-telescope-mount",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Equatorial Telescope Mount",
+      "tags": [
+        "Telescope",
+        "Mount",
+        "Scientific",
+        "Astronomy"
+      ]
+    },
+    {
+      "index": 409,
+      "slug": "diffraction-grating-stage",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Diffraction Grating Stage",
+      "tags": [
+        "Diffraction",
+        "Grating",
+        "Scientific",
+        "Optics"
+      ]
+    },
+    {
+      "index": 410,
+      "slug": "spectral-imaging-camera",
+      "category": "Scientific",
+      "subcategory": "Optics",
+      "archetype": "scientific",
+      "name": "Spectral Imaging Camera",
+      "tags": [
+        "Spectral",
+        "Camera",
+        "Scientific",
+        "Imaging"
+      ]
+    },
+    {
+      "index": 411,
+      "slug": "centrifuge-rotor-set",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Centrifuge Rotor Set",
+      "tags": [
+        "Centrifuge",
+        "Rotor",
+        "Scientific",
+        "Laboratory"
+      ]
+    },
+    {
+      "index": 412,
+      "slug": "precision-pipette-set",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Precision Pipette Set",
+      "tags": [
+        "Pipette",
+        "Lab",
+        "Scientific",
+        "Measurement"
+      ]
+    },
+    {
+      "index": 413,
+      "slug": "burette-titration-stand",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Burette Titration Stand",
+      "tags": [
+        "Burette",
+        "Chemistry",
+        "Scientific",
+        "Lab"
+      ]
+    },
+    {
+      "index": 414,
+      "slug": "separatory-funnel-rig",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Separatory Funnel Rig",
+      "tags": [
+        "Funnel",
+        "Chemistry",
+        "Scientific",
+        "Lab"
+      ]
+    },
+    {
+      "index": 415,
+      "slug": "vacuum-filtration-set",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Vacuum Filtration Set",
+      "tags": [
+        "Filtration",
+        "Vacuum",
+        "Scientific",
+        "Lab"
+      ]
+    },
+    {
+      "index": 416,
+      "slug": "ceramic-hotplate-stirrer",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Ceramic Hotplate Stirrer",
+      "tags": [
+        "Hotplate",
+        "Stirrer",
+        "Scientific",
+        "Lab"
+      ]
+    },
+    {
+      "index": 417,
+      "slug": "jacketed-reactor-vessel",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Jacketed Reactor Vessel",
+      "tags": [
+        "Reactor",
+        "Chemistry",
+        "Scientific",
+        "Lab"
+      ]
+    },
+    {
+      "index": 418,
+      "slug": "microfluidic-chip-stage",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Microfluidic Chip Stage",
+      "tags": [
+        "Microfluidic",
+        "Scientific",
+        "Lab",
+        "Research"
+      ]
+    },
+    {
+      "index": 419,
+      "slug": "petri-culture-stack",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Petri Culture Stack",
+      "tags": [
+        "Petri",
+        "Culture",
+        "Scientific",
+        "Lab"
+      ]
+    },
+    {
+      "index": 420,
+      "slug": "autosampler-vial-rack",
+      "category": "Scientific",
+      "subcategory": "Lab Instruments",
+      "archetype": "scientific",
+      "name": "Autosampler Vial Rack",
+      "tags": [
+        "Vial",
+        "Autosampler",
+        "Scientific",
+        "Lab"
+      ]
+    },
+    {
+      "index": 421,
+      "slug": "twelve-lead-ecg-monitor",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Twelve Lead ECG Monitor",
+      "tags": [
+        "ECG",
+        "Diagnostic",
+        "Medical",
+        "Monitoring"
+      ]
+    },
+    {
+      "index": 422,
+      "slug": "ultrasound-console-pro",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Ultrasound Console Pro",
+      "tags": [
+        "Ultrasound",
+        "Diagnostic",
+        "Medical",
+        "Imaging"
+      ]
+    },
+    {
+      "index": 423,
+      "slug": "portable-ultrasound-unit",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Portable Ultrasound Unit",
+      "tags": [
+        "Ultrasound",
+        "Portable",
+        "Medical",
+        "Diagnostic"
+      ]
+    },
+    {
+      "index": 424,
+      "slug": "otoscope-charging-dock",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Otoscope Charging Dock",
+      "tags": [
+        "Otoscope",
+        "Diagnostic",
+        "Medical",
+        "Dock"
+      ]
+    },
+    {
+      "index": 425,
+      "slug": "digital-ophthalmoscope",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Digital Ophthalmoscope",
+      "tags": [
+        "Ophthalmoscope",
+        "Diagnostic",
+        "Medical",
+        "Optical"
+      ]
+    },
+    {
+      "index": 426,
+      "slug": "desktop-spirometer",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Desktop Spirometer",
+      "tags": [
+        "Spirometer",
+        "Diagnostic",
+        "Medical",
+        "Respiratory"
+      ]
+    },
+    {
+      "index": 427,
+      "slug": "electronic-stethoscope",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Electronic Stethoscope",
+      "tags": [
+        "Stethoscope",
+        "Diagnostic",
+        "Medical",
+        "Digital"
+      ]
+    },
+    {
+      "index": 428,
+      "slug": "continuous-glucose-reader",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Continuous Glucose Reader",
+      "tags": [
+        "Glucose",
+        "Diagnostic",
+        "Medical",
+        "Monitoring"
+      ]
+    },
+    {
+      "index": 429,
+      "slug": "clinical-tympanometer",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Clinical Tympanometer",
+      "tags": [
+        "Tympanometer",
+        "Diagnostic",
+        "Medical",
+        "ENT"
+      ]
+    },
+    {
+      "index": 430,
+      "slug": "dermatoscope-pro",
+      "category": "Medical",
+      "subcategory": "Diagnostic",
+      "archetype": "medical",
+      "name": "Dermatoscope Pro",
+      "tags": [
+        "Dermatoscope",
+        "Diagnostic",
+        "Medical",
+        "Imaging"
+      ]
+    },
+    {
+      "index": 431,
+      "slug": "surgical-light-array-pro",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Surgical Light Array Pro",
+      "tags": [
+        "Surgical",
+        "Lighting",
+        "Medical",
+        "Operating Room"
+      ]
+    },
+    {
+      "index": 432,
+      "slug": "stainless-instrument-trolley",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Stainless Instrument Trolley",
+      "tags": [
+        "Trolley",
+        "Clinical",
+        "Medical",
+        "Surgical"
+      ]
+    },
+    {
+      "index": 433,
+      "slug": "anaesthesia-workstation-cart",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Anaesthesia Workstation Cart",
+      "tags": [
+        "Anaesthesia",
+        "Medical",
+        "Clinical",
+        "Cart"
+      ]
+    },
+    {
+      "index": 434,
+      "slug": "infusion-station-tower",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Infusion Station Tower",
+      "tags": [
+        "Infusion",
+        "Medical",
+        "Clinical",
+        "Monitoring"
+      ]
+    },
+    {
+      "index": 435,
+      "slug": "precision-syringe-driver",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Precision Syringe Driver",
+      "tags": [
+        "Syringe",
+        "Medical",
+        "Clinical",
+        "Infusion"
+      ]
+    },
+    {
+      "index": 436,
+      "slug": "clinical-recliner-chair",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Clinical Recliner Chair",
+      "tags": [
+        "Recliner",
+        "Medical",
+        "Clinical",
+        "Furniture"
+      ]
+    },
+    {
+      "index": 437,
+      "slug": "dialysis-console-module",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Dialysis Console Module",
+      "tags": [
+        "Dialysis",
+        "Medical",
+        "Clinical",
+        "Therapy"
+      ]
+    },
+    {
+      "index": 438,
+      "slug": "icu-ventilator-module",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "ICU Ventilator Module",
+      "tags": [
+        "Ventilator",
+        "Medical",
+        "Clinical",
+        "Respiratory"
+      ]
+    },
+    {
+      "index": 439,
+      "slug": "defibrillator-crash-cart",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Defibrillator Crash Cart",
+      "tags": [
+        "Defibrillator",
+        "Medical",
+        "Clinical",
+        "Emergency"
+      ]
+    },
+    {
+      "index": 440,
+      "slug": "operating-table-pro",
+      "category": "Medical",
+      "subcategory": "Clinical",
+      "archetype": "medical",
+      "name": "Operating Table Pro",
+      "tags": [
+        "Operating Table",
+        "Medical",
+        "Surgical",
+        "Clinical"
+      ]
+    },
+    {
+      "index": 441,
+      "slug": "wolf-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Wolf Form Study",
+      "tags": [
+        "Wolf",
+        "Mammal",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 442,
+      "slug": "lion-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Lion Form Study",
+      "tags": [
+        "Lion",
+        "Mammal",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 443,
+      "slug": "tiger-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Tiger Form Study",
+      "tags": [
+        "Tiger",
+        "Mammal",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 444,
+      "slug": "elephant-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Elephant Form Study",
+      "tags": [
+        "Elephant",
+        "Mammal",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 445,
+      "slug": "giraffe-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Giraffe Form Study",
+      "tags": [
+        "Giraffe",
+        "Mammal",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 446,
+      "slug": "zebra-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Zebra Form Study",
+      "tags": [
+        "Zebra",
+        "Mammal",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 447,
+      "slug": "eagle-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Eagle Form Study",
+      "tags": [
+        "Eagle",
+        "Bird",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 448,
+      "slug": "swan-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Swan Form Study",
+      "tags": [
+        "Swan",
+        "Bird",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 449,
+      "slug": "octopus-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Octopus Form Study",
+      "tags": [
+        "Octopus",
+        "Marine",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 450,
+      "slug": "shark-form-study",
+      "category": "Animals",
+      "subcategory": "Mammals",
+      "archetype": "animal",
+      "name": "Shark Form Study",
+      "tags": [
+        "Shark",
+        "Marine",
+        "Animal",
+        "Stylized"
+      ]
+    },
+    {
+      "index": 451,
+      "slug": "japanese-maple-study",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Japanese Maple Study",
+      "tags": [
+        "Maple",
+        "Tree",
+        "Nature",
+        "Botanical"
+      ]
+    },
+    {
+      "index": 452,
+      "slug": "mediterranean-palm-cluster",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Mediterranean Palm Cluster",
+      "tags": [
+        "Palm",
+        "Tree",
+        "Nature",
+        "Botanical"
+      ]
+    },
+    {
+      "index": 453,
+      "slug": "bamboo-grove-study",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Bamboo Grove Study",
+      "tags": [
+        "Bamboo",
+        "Plant",
+        "Nature",
+        "Botanical"
+      ]
+    },
+    {
+      "index": 454,
+      "slug": "agave-rosette",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Agave Rosette",
+      "tags": [
+        "Agave",
+        "Plant",
+        "Nature",
+        "Botanical"
+      ]
+    },
+    {
+      "index": 455,
+      "slug": "succulent-arrangement",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Succulent Arrangement",
+      "tags": [
+        "Succulent",
+        "Plant",
+        "Nature",
+        "Botanical"
+      ]
+    },
+    {
+      "index": 456,
+      "slug": "wildflower-meadow-study",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Wildflower Meadow Study",
+      "tags": [
+        "Wildflower",
+        "Plant",
+        "Nature",
+        "Botanical"
+      ]
+    },
+    {
+      "index": 457,
+      "slug": "moss-stone-study",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Moss Stone Study",
+      "tags": [
+        "Moss",
+        "Stone",
+        "Nature",
+        "Terrain"
+      ]
+    },
+    {
+      "index": 458,
+      "slug": "desert-boulder-study",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Desert Boulder Study",
+      "tags": [
+        "Boulder",
+        "Desert",
+        "Nature",
+        "Terrain"
+      ]
+    },
+    {
+      "index": 459,
+      "slug": "alpine-pine-study",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Alpine Pine Study",
+      "tags": [
+        "Pine",
+        "Tree",
+        "Nature",
+        "Botanical"
+      ]
+    },
+    {
+      "index": 460,
+      "slug": "sea-fan-coral-study",
+      "category": "Nature",
+      "subcategory": "Botanical",
+      "archetype": "nature",
+      "name": "Sea Fan Coral Study",
+      "tags": [
+        "Coral",
+        "Marine",
+        "Nature",
+        "Aquatic"
+      ]
+    },
+    {
+      "index": 461,
+      "slug": "dual-group-espresso-machine",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Dual Group Espresso Machine",
+      "tags": [
+        "Espresso",
+        "Machine",
+        "Food",
+        "Hospitality"
+      ]
+    },
+    {
+      "index": 462,
+      "slug": "precision-coffee-grinder",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Precision Coffee Grinder",
+      "tags": [
+        "Coffee",
+        "Grinder",
+        "Food",
+        "Hospitality"
+      ]
+    },
+    {
+      "index": 463,
+      "slug": "pour-over-coffee-set",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Pour Over Coffee Set",
+      "tags": [
+        "Coffee",
+        "Pour Over",
+        "Food",
+        "Tableware"
+      ]
+    },
+    {
+      "index": 464,
+      "slug": "cocktail-shaker-set",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Cocktail Shaker Set",
+      "tags": [
+        "Cocktail",
+        "Barware",
+        "Food",
+        "Hospitality"
+      ]
+    },
+    {
+      "index": 465,
+      "slug": "crystal-wine-decanter",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Crystal Wine Decanter",
+      "tags": [
+        "Wine",
+        "Decanter",
+        "Food",
+        "Glass"
+      ]
+    },
+    {
+      "index": 466,
+      "slug": "professional-saute-pan",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Professional Saute Pan",
+      "tags": [
+        "Pan",
+        "Cookware",
+        "Food",
+        "Kitchen"
+      ]
+    },
+    {
+      "index": 467,
+      "slug": "enamel-dutch-oven",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Enamel Dutch Oven",
+      "tags": [
+        "Dutch Oven",
+        "Cookware",
+        "Food",
+        "Kitchen"
+      ]
+    },
+    {
+      "index": 468,
+      "slug": "artisan-bread-basket",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Artisan Bread Basket",
+      "tags": [
+        "Bread",
+        "Basket",
+        "Food",
+        "Hospitality"
+      ]
+    },
+    {
+      "index": 469,
+      "slug": "omakase-sushi-platter",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Omakase Sushi Platter",
+      "tags": [
+        "Sushi",
+        "Platter",
+        "Food",
+        "Hospitality"
+      ]
+    },
+    {
+      "index": 470,
+      "slug": "patisserie-display-stand",
+      "category": "Food",
+      "subcategory": "Hospitality",
+      "archetype": "food",
+      "name": "Patisserie Display Stand",
+      "tags": [
+        "Pastry",
+        "Display",
+        "Food",
+        "Hospitality"
+      ]
+    },
+    {
+      "index": 471,
+      "slug": "structured-leather-tote",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Structured Leather Tote",
+      "tags": [
+        "Tote",
+        "Leather",
+        "Fashion",
+        "Bag"
+      ]
+    },
+    {
+      "index": 472,
+      "slug": "technical-weekender-bag",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Technical Weekender Bag",
+      "tags": [
+        "Weekender",
+        "Bag",
+        "Fashion",
+        "Travel"
+      ]
+    },
+    {
+      "index": 473,
+      "slug": "compact-crossbody-bag",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Compact Crossbody Bag",
+      "tags": [
+        "Crossbody",
+        "Bag",
+        "Fashion",
+        "Accessory"
+      ]
+    },
+    {
+      "index": 474,
+      "slug": "titanium-aviator-frames",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Titanium Aviator Frames",
+      "tags": [
+        "Aviator",
+        "Eyewear",
+        "Fashion",
+        "Titanium"
+      ]
+    },
+    {
+      "index": 475,
+      "slug": "acetate-optical-frames",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Acetate Optical Frames",
+      "tags": [
+        "Acetate",
+        "Eyewear",
+        "Fashion",
+        "Optical"
+      ]
+    },
+    {
+      "index": 476,
+      "slug": "mechanical-chronograph-watch",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Mechanical Chronograph Watch",
+      "tags": [
+        "Chronograph",
+        "Watch",
+        "Fashion",
+        "Mechanical"
+      ]
+    },
+    {
+      "index": 477,
+      "slug": "minimal-dress-watch",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Minimal Dress Watch",
+      "tags": [
+        "Watch",
+        "Minimal",
+        "Fashion",
+        "Mechanical"
+      ]
+    },
+    {
+      "index": 478,
+      "slug": "curb-chain-bracelet",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Curb Chain Bracelet",
+      "tags": [
+        "Bracelet",
+        "Chain",
+        "Fashion",
+        "Jewelry"
+      ]
+    },
+    {
+      "index": 479,
+      "slug": "sculptural-pendant-necklace",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Sculptural Pendant Necklace",
+      "tags": [
+        "Necklace",
+        "Pendant",
+        "Fashion",
+        "Jewelry"
+      ]
+    },
+    {
+      "index": 480,
+      "slug": "brushed-signet-ring",
+      "category": "Fashion",
+      "subcategory": "Accessories",
+      "archetype": "fashion",
+      "name": "Brushed Signet Ring",
+      "tags": [
+        "Ring",
+        "Signet",
+        "Fashion",
+        "Jewelry"
+      ]
+    },
+    {
+      "index": 481,
+      "slug": "aero-cycling-helmet",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Aero Cycling Helmet",
+      "tags": [
+        "Cycling",
+        "Helmet",
+        "Sports",
+        "Performance"
+      ]
+    },
+    {
+      "index": 482,
+      "slug": "alpine-ski-goggles",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Alpine Ski Goggles",
+      "tags": [
+        "Ski",
+        "Goggles",
+        "Sports",
+        "Performance"
+      ]
+    },
+    {
+      "index": 483,
+      "slug": "carbon-running-shoe",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Carbon Running Shoe",
+      "tags": [
+        "Running",
+        "Shoe",
+        "Sports",
+        "Performance"
+      ]
+    },
+    {
+      "index": 484,
+      "slug": "pro-football-cleat",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Pro Football Cleat",
+      "tags": [
+        "Football",
+        "Cleat",
+        "Sports",
+        "Performance"
+      ]
+    },
+    {
+      "index": 485,
+      "slug": "tour-tennis-racket",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Tour Tennis Racket",
+      "tags": [
+        "Tennis",
+        "Racket",
+        "Sports",
+        "Performance"
+      ]
+    },
+    {
+      "index": 486,
+      "slug": "studio-dumbbell-pair",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Studio Dumbbell Pair",
+      "tags": [
+        "Dumbbell",
+        "Fitness",
+        "Sports",
+        "Training"
+      ]
+    },
+    {
+      "index": 487,
+      "slug": "competition-kettlebell",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Competition Kettlebell",
+      "tags": [
+        "Kettlebell",
+        "Fitness",
+        "Sports",
+        "Training"
+      ]
+    },
+    {
+      "index": 488,
+      "slug": "climbing-carabiner-set",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Climbing Carabiner Set",
+      "tags": [
+        "Climbing",
+        "Carabiner",
+        "Sports",
+        "Safety"
+      ]
+    },
+    {
+      "index": 489,
+      "slug": "digital-torque-wrench",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Digital Torque Wrench",
+      "tags": [
+        "Torque",
+        "Wrench",
+        "Tools",
+        "Precision"
+      ]
+    },
+    {
+      "index": 490,
+      "slug": "professional-vernier-caliper",
+      "category": "Sports",
+      "subcategory": "Performance Gear",
+      "archetype": "sporttool",
+      "name": "Professional Vernier Caliper",
+      "tags": [
+        "Caliper",
+        "Measuring",
+        "Tools",
+        "Precision"
+      ]
+    },
+    {
+      "index": 491,
+      "slug": "audio-mastering-desk-scene",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Audio Mastering Desk Scene",
+      "tags": [
+        "Audio",
+        "Studio",
+        "Scene",
+        "Interior"
+      ]
+    },
+    {
+      "index": 492,
+      "slug": "product-photography-studio",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Product Photography Studio",
+      "tags": [
+        "Photography",
+        "Studio",
+        "Scene",
+        "Interior"
+      ]
+    },
+    {
+      "index": 493,
+      "slug": "contemporary-surgical-suite",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Contemporary Surgical Suite",
+      "tags": [
+        "Surgical",
+        "Medical",
+        "Scene",
+        "Interior"
+      ]
+    },
+    {
+      "index": 494,
+      "slug": "advanced-research-laboratory",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Advanced Research Laboratory",
+      "tags": [
+        "Laboratory",
+        "Scientific",
+        "Scene",
+        "Interior"
+      ]
+    },
+    {
+      "index": 495,
+      "slug": "electric-vehicle-workshop",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Electric Vehicle Workshop",
+      "tags": [
+        "EV",
+        "Workshop",
+        "Scene",
+        "Industrial"
+      ]
+    },
+    {
+      "index": 496,
+      "slug": "minimal-living-room-scene",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Minimal Living Room Scene",
+      "tags": [
+        "Living Room",
+        "Furniture",
+        "Scene",
+        "Interior"
+      ]
+    },
+    {
+      "index": 497,
+      "slug": "luxury-boutique-display",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Luxury Boutique Display",
+      "tags": [
+        "Boutique",
+        "Fashion",
+        "Scene",
+        "Interior"
+      ]
+    },
+    {
+      "index": 498,
+      "slug": "sculpture-gallery-courtyard",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Sculpture Gallery Courtyard",
+      "tags": [
+        "Gallery",
+        "Courtyard",
+        "Scene",
+        "Architecture"
+      ]
+    },
+    {
+      "index": 499,
+      "slug": "observatory-roof-deck",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Observatory Roof Deck",
+      "tags": [
+        "Observatory",
+        "Science",
+        "Scene",
+        "Architecture"
+      ]
+    },
+    {
+      "index": 500,
+      "slug": "robotics-assembly-cell",
+      "category": "Scenes",
+      "subcategory": "Interior Scenes",
+      "archetype": "scene",
+      "name": "Robotics Assembly Cell",
+      "tags": [
+        "Robotics",
+        "Industrial",
+        "Scene",
+        "Automation"
+      ]
+    }
+  ]
+}

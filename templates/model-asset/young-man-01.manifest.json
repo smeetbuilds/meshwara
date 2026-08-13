@@ -1,0 +1,889 @@
+{
+  "schemaVersion": 1,
+  "slug": "young-man-01",
+  "title": "Young Man 01",
+  "kind": "Character",
+  "publish": false,
+  "presentation": "Grounded",
+  "display": {
+    "scale": 1,
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "cameraPosition": [
+      0,
+      1.25,
+      4.2
+    ],
+    "cameraTarget": [
+      0,
+      1,
+      0
+    ],
+    "defaultClip": "Idle",
+    "tiers": {
+      "tablet": {
+        "scale": 0.98,
+        "cameraPosition": [
+          0,
+          1.22,
+          4.55
+        ],
+        "cameraTarget": [
+          0,
+          0.98,
+          0
+        ]
+      },
+      "mobile": {
+        "scale": 0.94,
+        "position": [
+          0,
+          0.01,
+          0
+        ],
+        "cameraPosition": [
+          0,
+          1.15,
+          5.1
+        ],
+        "cameraTarget": [
+          0,
+          0.94,
+          0
+        ]
+      }
+    }
+  },
+  "license": {
+    "id": "REPLACE-WITH-REDISTRIBUTABLE-LICENSE",
+    "author": "REPLACE",
+    "source": "REPLACE",
+    "redistribution": false,
+    "commercialUse": false
+  },
+  "tiers": {
+    "desktop": {
+      "file": "young-man-01-high.glb",
+      "maxBytes": 12582912,
+      "maxTriangles": 140000,
+      "maxTextures": 12,
+      "sha256": "REPLACE-AFTER-FINAL-EXPORT"
+    },
+    "tablet": {
+      "file": "young-man-01-medium.glb",
+      "maxBytes": 8388608,
+      "maxTriangles": 80000,
+      "maxTextures": 10,
+      "sha256": "REPLACE-AFTER-FINAL-EXPORT"
+    },
+    "mobile": {
+      "file": "young-man-01-mobile.glb",
+      "maxBytes": 5242880,
+      "maxTriangles": 45000,
+      "maxTextures": 8,
+      "sha256": "REPLACE-AFTER-FINAL-EXPORT"
+    }
+  },
+  "rig": {
+    "required": true,
+    "minBones": 85,
+    "minSkins": 1,
+    "minMorphTargets": 52,
+    "facialCloseup": true
+  },
+  "character": {
+    "realism": "Realistic",
+    "ageBand": "YoungAdult",
+    "fullBody": true,
+    "closeupReady": true,
+    "handCloseupReady": true,
+    "rootMotion": "InPlace",
+    "semanticJoints": {
+      "hips": [
+        "Hips",
+        "mixamorig:Hips",
+        "pelvis"
+      ],
+      "spine": [
+        "Spine",
+        "mixamorig:Spine",
+        "spine_01"
+      ],
+      "chest": [
+        "Chest",
+        "mixamorig:Spine2",
+        "spine_03"
+      ],
+      "neck": [
+        "Neck",
+        "mixamorig:Neck"
+      ],
+      "head": [
+        "Head",
+        "mixamorig:Head"
+      ],
+      "leftShoulder": [
+        "LeftShoulder",
+        "mixamorig:LeftShoulder",
+        "clavicle_l"
+      ],
+      "leftUpperArm": [
+        "LeftArm",
+        "mixamorig:LeftArm",
+        "upperarm_l"
+      ],
+      "leftLowerArm": [
+        "LeftForeArm",
+        "mixamorig:LeftForeArm",
+        "lowerarm_l"
+      ],
+      "leftHand": [
+        "LeftHand",
+        "mixamorig:LeftHand",
+        "hand_l"
+      ],
+      "rightShoulder": [
+        "RightShoulder",
+        "mixamorig:RightShoulder",
+        "clavicle_r"
+      ],
+      "rightUpperArm": [
+        "RightArm",
+        "mixamorig:RightArm",
+        "upperarm_r"
+      ],
+      "rightLowerArm": [
+        "RightForeArm",
+        "mixamorig:RightForeArm",
+        "lowerarm_r"
+      ],
+      "rightHand": [
+        "RightHand",
+        "mixamorig:RightHand",
+        "hand_r"
+      ],
+      "leftUpperLeg": [
+        "LeftUpLeg",
+        "mixamorig:LeftUpLeg",
+        "thigh_l"
+      ],
+      "leftLowerLeg": [
+        "LeftLeg",
+        "mixamorig:LeftLeg",
+        "calf_l"
+      ],
+      "leftFoot": [
+        "LeftFoot",
+        "mixamorig:LeftFoot",
+        "foot_l"
+      ],
+      "rightUpperLeg": [
+        "RightUpLeg",
+        "mixamorig:RightUpLeg",
+        "thigh_r"
+      ],
+      "rightLowerLeg": [
+        "RightLeg",
+        "mixamorig:RightLeg",
+        "calf_r"
+      ],
+      "rightFoot": [
+        "RightFoot",
+        "mixamorig:RightFoot",
+        "foot_r"
+      ]
+    },
+    "facial": {
+      "required": true,
+      "minMorphTargets": 52,
+      "requiredMorphTargets": {
+        "blinkLeft": [
+          "eyeBlinkLeft",
+          "blink_L",
+          "Blink_Left"
+        ],
+        "blinkRight": [
+          "eyeBlinkRight",
+          "blink_R",
+          "Blink_Right"
+        ],
+        "jawOpen": [
+          "jawOpen",
+          "Jaw_Open"
+        ],
+        "smileLeft": [
+          "mouthSmileLeft",
+          "smile_L"
+        ],
+        "smileRight": [
+          "mouthSmileRight",
+          "smile_R"
+        ],
+        "browRaiseLeft": [
+          "browInnerUpLeft",
+          "browRaise_L"
+        ],
+        "browRaiseRight": [
+          "browInnerUpRight",
+          "browRaise_R"
+        ],
+        "mouthPucker": [
+          "mouthPucker",
+          "pucker"
+        ],
+        "browDownLeft": [
+          "browDownLeft",
+          "browDown_L"
+        ],
+        "browDownRight": [
+          "browDownRight",
+          "browDown_R"
+        ],
+        "mouthFunnel": [
+          "mouthFunnel",
+          "funnel"
+        ],
+        "cheekRaiseLeft": [
+          "cheekSquintLeft",
+          "cheekRaise_L"
+        ],
+        "cheekRaiseRight": [
+          "cheekSquintRight",
+          "cheekRaise_R"
+        ]
+      },
+      "qaEvidence": "qa/facial.md",
+      "metricsFile": "qa/metrics/facial.json",
+      "thresholds": {
+        "maxLipPenetrationMeters": 0.002,
+        "maxEyelidGapMeters": 0.0015,
+        "maxExpressionAsymmetryRatio": 0.06
+      }
+    },
+    "transitions": [
+      {
+        "from": "Idle",
+        "to": "Walk",
+        "maxBlendSeconds": 0.24,
+        "qaEvidence": "qa/transitions/idle-to-walk.md",
+        "metricsFile": "qa/metrics/idle-to-walk.json",
+        "thresholds": {
+          "maxFootSlideMeters": 0.018,
+          "maxRootSnapMeters": 0.015,
+          "maxAngularSnapDegrees": 4.0
+        }
+      },
+      {
+        "from": "Walk",
+        "to": "Idle",
+        "maxBlendSeconds": 0.24,
+        "qaEvidence": "qa/transitions/walk-to-idle.md",
+        "metricsFile": "qa/metrics/walk-to-idle.json",
+        "thresholds": {
+          "maxFootSlideMeters": 0.018,
+          "maxRootSnapMeters": 0.015,
+          "maxAngularSnapDegrees": 4.0
+        }
+      },
+      {
+        "from": "Walk",
+        "to": "Run",
+        "maxBlendSeconds": 0.2,
+        "qaEvidence": "qa/transitions/walk-to-run.md",
+        "metricsFile": "qa/metrics/walk-to-run.json",
+        "thresholds": {
+          "maxFootSlideMeters": 0.018,
+          "maxRootSnapMeters": 0.015,
+          "maxAngularSnapDegrees": 4.0
+        }
+      },
+      {
+        "from": "Run",
+        "to": "Walk",
+        "maxBlendSeconds": 0.2,
+        "qaEvidence": "qa/transitions/run-to-walk.md",
+        "metricsFile": "qa/metrics/run-to-walk.json",
+        "thresholds": {
+          "maxFootSlideMeters": 0.018,
+          "maxRootSnapMeters": 0.015,
+          "maxAngularSnapDegrees": 4.0
+        }
+      }
+    ],
+    "deformationQa": [
+      {
+        "name": "ShoulderOverhead",
+        "semantics": [
+          "leftShoulder",
+          "leftUpperArm",
+          "leftLowerArm"
+        ],
+        "qaEvidence": "qa/deformation/shoulder-overhead.md",
+        "metricsFile": "qa/metrics/deformation-shoulder-overhead.json",
+        "thresholds": {
+          "maxSurfacePenetrationMeters": 0.0035,
+          "maxVolumeLossRatio": 0.1,
+          "maxNormalDeviationDegrees": 12.0
+        }
+      },
+      {
+        "name": "ArmsForward",
+        "semantics": [
+          "leftShoulder",
+          "rightShoulder",
+          "leftUpperArm",
+          "rightUpperArm"
+        ],
+        "qaEvidence": "qa/deformation/arms-forward.md",
+        "metricsFile": "qa/metrics/deformation-arms-forward.json",
+        "thresholds": {
+          "maxSurfacePenetrationMeters": 0.0035,
+          "maxVolumeLossRatio": 0.1,
+          "maxNormalDeviationDegrees": 12.0
+        }
+      },
+      {
+        "name": "ElbowDeepFlexion",
+        "semantics": [
+          "leftUpperArm",
+          "leftLowerArm",
+          "rightUpperArm",
+          "rightLowerArm"
+        ],
+        "qaEvidence": "qa/deformation/elbow-flexion.md",
+        "metricsFile": "qa/metrics/deformation-elbow-deep-flexion.json",
+        "thresholds": {
+          "maxSurfacePenetrationMeters": 0.0035,
+          "maxVolumeLossRatio": 0.1,
+          "maxNormalDeviationDegrees": 12.0
+        }
+      },
+      {
+        "name": "WristRange",
+        "semantics": [
+          "leftLowerArm",
+          "leftHand",
+          "rightLowerArm",
+          "rightHand"
+        ],
+        "qaEvidence": "qa/deformation/wrist-range.md",
+        "metricsFile": "qa/metrics/deformation-wrist-range.json",
+        "thresholds": {
+          "maxSurfacePenetrationMeters": 0.0035,
+          "maxVolumeLossRatio": 0.1,
+          "maxNormalDeviationDegrees": 12.0
+        }
+      },
+      {
+        "name": "HipHighFlexion",
+        "semantics": [
+          "hips",
+          "leftUpperLeg",
+          "rightUpperLeg"
+        ],
+        "qaEvidence": "qa/deformation/hip-flexion.md",
+        "metricsFile": "qa/metrics/deformation-hip-high-flexion.json",
+        "thresholds": {
+          "maxSurfacePenetrationMeters": 0.0035,
+          "maxVolumeLossRatio": 0.1,
+          "maxNormalDeviationDegrees": 12.0
+        }
+      },
+      {
+        "name": "DeepSquat",
+        "semantics": [
+          "hips",
+          "leftUpperLeg",
+          "leftLowerLeg",
+          "rightUpperLeg",
+          "rightLowerLeg"
+        ],
+        "qaEvidence": "qa/deformation/deep-squat.md",
+        "metricsFile": "qa/metrics/deformation-deep-squat.json",
+        "thresholds": {
+          "maxSurfacePenetrationMeters": 0.0035,
+          "maxVolumeLossRatio": 0.1,
+          "maxNormalDeviationDegrees": 12.0
+        }
+      },
+      {
+        "name": "KneeDeepFlexion",
+        "semantics": [
+          "leftUpperLeg",
+          "leftLowerLeg",
+          "rightUpperLeg",
+          "rightLowerLeg"
+        ],
+        "qaEvidence": "qa/deformation/knee-flexion.md",
+        "metricsFile": "qa/metrics/deformation-knee-deep-flexion.json",
+        "thresholds": {
+          "maxSurfacePenetrationMeters": 0.0035,
+          "maxVolumeLossRatio": 0.1,
+          "maxNormalDeviationDegrees": 12.0
+        }
+      },
+      {
+        "name": "AnkleToeOff",
+        "semantics": [
+          "leftLowerLeg",
+          "leftFoot",
+          "rightLowerLeg",
+          "rightFoot"
+        ],
+        "qaEvidence": "qa/deformation/ankle-toe-off.md",
+        "metricsFile": "qa/metrics/deformation-ankle-toe-off.json",
+        "thresholds": {
+          "maxSurfacePenetrationMeters": 0.0035,
+          "maxVolumeLossRatio": 0.1,
+          "maxNormalDeviationDegrees": 12.0
+        }
+      }
+    ],
+    "handJoints": {
+      "leftThumb1": [
+        "LeftHandThumb1",
+        "mixamorig:LeftHandThumb1",
+        "thumb_01_l"
+      ],
+      "leftThumb2": [
+        "LeftHandThumb2",
+        "mixamorig:LeftHandThumb2",
+        "thumb_02_l"
+      ],
+      "leftThumb3": [
+        "LeftHandThumb3",
+        "mixamorig:LeftHandThumb3",
+        "thumb_03_l"
+      ],
+      "leftIndex1": [
+        "LeftHandIndex1",
+        "mixamorig:LeftHandIndex1",
+        "index_01_l"
+      ],
+      "leftIndex2": [
+        "LeftHandIndex2",
+        "mixamorig:LeftHandIndex2",
+        "index_02_l"
+      ],
+      "leftIndex3": [
+        "LeftHandIndex3",
+        "mixamorig:LeftHandIndex3",
+        "index_03_l"
+      ],
+      "leftMiddle1": [
+        "LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle1",
+        "middle_01_l"
+      ],
+      "leftMiddle2": [
+        "LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle2",
+        "middle_02_l"
+      ],
+      "leftMiddle3": [
+        "LeftHandMiddle3",
+        "mixamorig:LeftHandMiddle3",
+        "middle_03_l"
+      ],
+      "leftRing1": [
+        "LeftHandRing1",
+        "mixamorig:LeftHandRing1",
+        "ring_01_l"
+      ],
+      "leftRing2": [
+        "LeftHandRing2",
+        "mixamorig:LeftHandRing2",
+        "ring_02_l"
+      ],
+      "leftRing3": [
+        "LeftHandRing3",
+        "mixamorig:LeftHandRing3",
+        "ring_03_l"
+      ],
+      "leftPinky1": [
+        "LeftHandPinky1",
+        "mixamorig:LeftHandPinky1",
+        "pinky_01_l"
+      ],
+      "leftPinky2": [
+        "LeftHandPinky2",
+        "mixamorig:LeftHandPinky2",
+        "pinky_02_l"
+      ],
+      "leftPinky3": [
+        "LeftHandPinky3",
+        "mixamorig:LeftHandPinky3",
+        "pinky_03_l"
+      ],
+      "rightThumb1": [
+        "RightHandThumb1",
+        "mixamorig:RightHandThumb1",
+        "thumb_01_r"
+      ],
+      "rightThumb2": [
+        "RightHandThumb2",
+        "mixamorig:RightHandThumb2",
+        "thumb_02_r"
+      ],
+      "rightThumb3": [
+        "RightHandThumb3",
+        "mixamorig:RightHandThumb3",
+        "thumb_03_r"
+      ],
+      "rightIndex1": [
+        "RightHandIndex1",
+        "mixamorig:RightHandIndex1",
+        "index_01_r"
+      ],
+      "rightIndex2": [
+        "RightHandIndex2",
+        "mixamorig:RightHandIndex2",
+        "index_02_r"
+      ],
+      "rightIndex3": [
+        "RightHandIndex3",
+        "mixamorig:RightHandIndex3",
+        "index_03_r"
+      ],
+      "rightMiddle1": [
+        "RightHandMiddle1",
+        "mixamorig:RightHandMiddle1",
+        "middle_01_r"
+      ],
+      "rightMiddle2": [
+        "RightHandMiddle2",
+        "mixamorig:RightHandMiddle2",
+        "middle_02_r"
+      ],
+      "rightMiddle3": [
+        "RightHandMiddle3",
+        "mixamorig:RightHandMiddle3",
+        "middle_03_r"
+      ],
+      "rightRing1": [
+        "RightHandRing1",
+        "mixamorig:RightHandRing1",
+        "ring_01_r"
+      ],
+      "rightRing2": [
+        "RightHandRing2",
+        "mixamorig:RightHandRing2",
+        "ring_02_r"
+      ],
+      "rightRing3": [
+        "RightHandRing3",
+        "mixamorig:RightHandRing3",
+        "ring_03_r"
+      ],
+      "rightPinky1": [
+        "RightHandPinky1",
+        "mixamorig:RightHandPinky1",
+        "pinky_01_r"
+      ],
+      "rightPinky2": [
+        "RightHandPinky2",
+        "mixamorig:RightHandPinky2",
+        "pinky_02_r"
+      ],
+      "rightPinky3": [
+        "RightHandPinky3",
+        "mixamorig:RightHandPinky3",
+        "pinky_03_r"
+      ]
+    },
+    "handQa": {
+      "qaEvidence": "qa/hands.md",
+      "metricsFile": "qa/metrics/hands.json",
+      "thresholds": {
+        "maxFingerInterpenetrationMeters": 0.0025,
+        "maxJointLimitOvershootDegrees": 2.0
+      }
+    },
+    "lodConsistency": {
+      "qaEvidence": "qa/lod-consistency.md",
+      "metricsFile": "qa/metrics/lod-consistency.json",
+      "thresholds": {
+        "maxHeightDriftRatio": 0.005,
+        "maxGroundOffsetMeters": 0.004,
+        "maxSilhouetteDeviationRatio": 0.03,
+        "maxClipDurationDriftSeconds": 0.02
+      }
+    }
+  },
+  "animations": [
+    {
+      "name": "Idle",
+      "aliases": [
+        "idle"
+      ],
+      "loop": true,
+      "minDuration": 1.8,
+      "maxDuration": 8,
+      "qaEvidence": "qa/animations/idle.md"
+    },
+    {
+      "name": "Walk",
+      "aliases": [
+        "walk",
+        "walking"
+      ],
+      "loop": true,
+      "contactCritical": true,
+      "minDuration": 0.65,
+      "maxDuration": 1.8,
+      "requiredAnimatedSemantics": [
+        "hips",
+        "leftUpperLeg",
+        "leftLowerLeg",
+        "leftFoot",
+        "rightUpperLeg",
+        "rightLowerLeg",
+        "rightFoot",
+        "leftUpperArm",
+        "rightUpperArm"
+      ],
+      "qaEvidence": "qa/animations/walk.md",
+      "metricsFile": "qa/metrics/walk.json",
+      "thresholds": {
+        "maxFootSlideMeters": 0.012,
+        "maxContactHeightMeters": 0.01,
+        "maxRootVerticalJitterMeters": 0.008,
+        "maxLoopPoseErrorDegrees": 3.0
+      }
+    },
+    {
+      "name": "Run",
+      "aliases": [
+        "run",
+        "running"
+      ],
+      "loop": true,
+      "contactCritical": true,
+      "minDuration": 0.45,
+      "maxDuration": 1.25,
+      "requiredAnimatedSemantics": [
+        "hips",
+        "leftUpperLeg",
+        "leftLowerLeg",
+        "leftFoot",
+        "rightUpperLeg",
+        "rightLowerLeg",
+        "rightFoot",
+        "leftUpperArm",
+        "rightUpperArm"
+      ],
+      "qaEvidence": "qa/animations/run.md",
+      "metricsFile": "qa/metrics/run.json",
+      "thresholds": {
+        "maxFootSlideMeters": 0.012,
+        "maxContactHeightMeters": 0.01,
+        "maxRootVerticalJitterMeters": 0.008,
+        "maxLoopPoseErrorDegrees": 3.0
+      }
+    },
+    {
+      "name": "TurnLeft90",
+      "aliases": [
+        "turn_left_90",
+        "turnleft90"
+      ],
+      "loop": false,
+      "contactCritical": true,
+      "minDuration": 0.45,
+      "maxDuration": 1.6,
+      "requiredAnimatedSemantics": [
+        "hips",
+        "leftUpperLeg",
+        "rightUpperLeg",
+        "leftFoot",
+        "rightFoot"
+      ],
+      "qaEvidence": "qa/animations/turn-left-90.md",
+      "metricsFile": "qa/metrics/turn-left-90.json",
+      "thresholds": {
+        "maxFootSlideMeters": 0.018,
+        "maxContactHeightMeters": 0.01,
+        "maxRootVerticalJitterMeters": 0.008
+      }
+    },
+    {
+      "name": "TurnRight90",
+      "aliases": [
+        "turn_right_90",
+        "turnright90"
+      ],
+      "loop": false,
+      "contactCritical": true,
+      "minDuration": 0.45,
+      "maxDuration": 1.6,
+      "requiredAnimatedSemantics": [
+        "hips",
+        "leftUpperLeg",
+        "rightUpperLeg",
+        "leftFoot",
+        "rightFoot"
+      ],
+      "qaEvidence": "qa/animations/turn-right-90.md",
+      "metricsFile": "qa/metrics/turn-right-90.json",
+      "thresholds": {
+        "maxFootSlideMeters": 0.018,
+        "maxContactHeightMeters": 0.01,
+        "maxRootVerticalJitterMeters": 0.008
+      }
+    },
+    {
+      "name": "WalkStart",
+      "aliases": [
+        "walk_start"
+      ],
+      "loop": false,
+      "contactCritical": true,
+      "minDuration": 0.3,
+      "maxDuration": 1.2,
+      "requiredAnimatedSemantics": [
+        "hips",
+        "leftUpperLeg",
+        "rightUpperLeg",
+        "leftFoot",
+        "rightFoot"
+      ],
+      "qaEvidence": "qa/animations/walk-start.md",
+      "metricsFile": "qa/metrics/walk-start.json",
+      "thresholds": {
+        "maxFootSlideMeters": 0.018,
+        "maxContactHeightMeters": 0.01,
+        "maxRootVerticalJitterMeters": 0.008
+      }
+    },
+    {
+      "name": "WalkStop",
+      "aliases": [
+        "walk_stop"
+      ],
+      "loop": false,
+      "contactCritical": true,
+      "minDuration": 0.3,
+      "maxDuration": 1.2,
+      "requiredAnimatedSemantics": [
+        "hips",
+        "leftUpperLeg",
+        "rightUpperLeg",
+        "leftFoot",
+        "rightFoot"
+      ],
+      "qaEvidence": "qa/animations/walk-stop.md",
+      "metricsFile": "qa/metrics/walk-stop.json",
+      "thresholds": {
+        "maxFootSlideMeters": 0.018,
+        "maxContactHeightMeters": 0.01,
+        "maxRootVerticalJitterMeters": 0.008
+      }
+    },
+    {
+      "name": "RunStart",
+      "aliases": [
+        "run_start"
+      ],
+      "loop": false,
+      "contactCritical": true,
+      "minDuration": 0.25,
+      "maxDuration": 1,
+      "requiredAnimatedSemantics": [
+        "hips",
+        "leftUpperLeg",
+        "rightUpperLeg",
+        "leftFoot",
+        "rightFoot"
+      ],
+      "qaEvidence": "qa/animations/run-start.md",
+      "metricsFile": "qa/metrics/run-start.json",
+      "thresholds": {
+        "maxFootSlideMeters": 0.018,
+        "maxContactHeightMeters": 0.01,
+        "maxRootVerticalJitterMeters": 0.008
+      }
+    },
+    {
+      "name": "RunStop",
+      "aliases": [
+        "run_stop"
+      ],
+      "loop": false,
+      "contactCritical": true,
+      "minDuration": 0.25,
+      "maxDuration": 1,
+      "requiredAnimatedSemantics": [
+        "hips",
+        "leftUpperLeg",
+        "rightUpperLeg",
+        "leftFoot",
+        "rightFoot"
+      ],
+      "qaEvidence": "qa/animations/run-stop.md",
+      "metricsFile": "qa/metrics/run-stop.json",
+      "thresholds": {
+        "maxFootSlideMeters": 0.018,
+        "maxContactHeightMeters": 0.01,
+        "maxRootVerticalJitterMeters": 0.008
+      }
+    },
+    {
+      "name": "LookAround",
+      "aliases": [
+        "look_around"
+      ],
+      "loop": true,
+      "minDuration": 2,
+      "maxDuration": 8,
+      "requiredAnimatedSemantics": [
+        "neck",
+        "head"
+      ],
+      "qaEvidence": "qa/animations/look-around.md"
+    },
+    {
+      "name": "Wave",
+      "aliases": [
+        "wave"
+      ],
+      "loop": false,
+      "minDuration": 1,
+      "maxDuration": 4,
+      "requiredAnimatedSemantics": [
+        "rightShoulder",
+        "rightUpperArm",
+        "rightLowerArm",
+        "rightHand"
+      ],
+      "qaEvidence": "qa/animations/wave.md"
+    }
+  ],
+  "qa": {
+    "artDirection": "pending",
+    "topology": "pending",
+    "materials": "pending",
+    "rigging": "pending",
+    "animation": "pending",
+    "responsive": "pending",
+    "performance": "pending",
+    "license": "pending"
+  },
+  "qaEvidence": {
+    "artDirection": "qa/artDirection.md",
+    "topology": "qa/topology.md",
+    "materials": "qa/materials.md",
+    "rigging": "qa/rigging.md",
+    "animation": "qa/animation.md",
+    "responsive": "qa/responsive.md",
+    "performance": "qa/performance.md",
+    "license": "qa/license.md"
+  }
+}

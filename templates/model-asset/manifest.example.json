@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "slug": "modeled-object-01",
+  "title": "Modeled Object 01",
+  "kind": "Product",
+  "publish": false,
+  "presentation": "Floating",
+  "display": {
+    "scale": 1,
+    "position": [0, 0, 0],
+    "rotation": [0, 0, 0],
+    "cameraPosition": [0, 0.2, 4.2],
+    "cameraTarget": [0, 0, 0],
+    "tiers": {
+      "tablet": { "scale": 0.96, "cameraPosition": [0, 0.15, 4.5] },
+      "mobile": { "scale": 0.9, "cameraPosition": [0, 0.1, 5] }
+    }
+  },
+  "license": {
+    "id": "REPLACE-WITH-REDISTRIBUTABLE-LICENSE",
+    "author": "REPLACE",
+    "source": "REPLACE",
+    "redistribution": false,
+    "commercialUse": false
+  },
+  "tiers": {
+    "desktop": { "file": "object-high.glb", "maxBytes": 10485760, "maxTriangles": 120000, "maxTextures": 10, "sha256": "REPLACE-AFTER-FINAL-EXPORT" },
+    "tablet": { "file": "object-medium.glb", "maxBytes": 7340032, "maxTriangles": 70000, "maxTextures": 8, "sha256": "REPLACE-AFTER-FINAL-EXPORT" },
+    "mobile": { "file": "object-mobile.glb", "maxBytes": 4194304, "maxTriangles": 40000, "maxTextures": 6, "sha256": "REPLACE-AFTER-FINAL-EXPORT" }
+  },
+  "qa": {
+    "artDirection": "pending",
+    "topology": "pending",
+    "materials": "pending",
+    "rigging": "pending",
+    "animation": "pending",
+    "responsive": "pending",
+    "performance": "pending",
+    "license": "pending"
+  },
+  "qaEvidence": {
+    "artDirection": "qa/artDirection.md",
+    "topology": "qa/topology.md",
+    "materials": "qa/materials.md",
+    "rigging": "qa/rigging.md",
+    "animation": "qa/animation.md",
+    "responsive": "qa/responsive.md",
+    "performance": "qa/performance.md",
+    "license": "qa/license.md"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "MESHVARA — Open Three.js Asset Archive",
+  "short_name": "MESHVARA",
+  "description": "Free production-grade Three.js assets for the spatial web, developed by Aahav Labs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f2f0eb",
+  "theme_color": "#11110f",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

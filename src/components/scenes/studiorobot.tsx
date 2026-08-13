@@ -1,0 +1,10 @@
+import { useFrame } from '@react-three/fiber'
+import { useMemo, useRef } from 'react'
+import * as THREE from 'three'
+function Link({a,b,r=.09,color='#aeb3b5'}:{a:[number,number,number];b:[number,number,number];r?:number;color?:string}){const d=useMemo(()=>{const s=new THREE.Vector3(...a),e=new THREE.Vector3(...b),v=e.clone().sub(s);return{p:s.clone().add(e).multiplyScalar(.5),l:v.length(),q:new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize())}},[a,b]);return <mesh position={d.p} quaternion={d.q}><cylinderGeometry args={[r,r,d.l,26]} /><meshPhysicalMaterial color={color} metalness={.8} roughness={.25} /></mesh>}
+function StudioRobot(){const head=useRef<THREE.Group>(null);useFrame((s)=>{if(head.current)head.current.rotation.y=Math.sin(s.clock.elapsedTime*.35)*.18});return <group position={[0,-.62,0]} rotation={[0,-.32,0]}>
+  <mesh position={[0,-.72,0]}><cylinderGeometry args={[.55,.62,.28,52]} /><meshPhysicalMaterial color="#2d3335" metalness={.7} roughness={.3} /></mesh><Link a={[0,-.57,0]} b={[0,.42,0]} r={.12}/><mesh position={[0,.4,0]}><sphereGeometry args={[.23,32,32]} /><meshPhysicalMaterial color="#d0ad57" metalness={.88} roughness={.2} /></mesh>
+  <Link a={[0,.42,0]} b={[.5,.84,0]} r={.1}/><group ref={head} position={[.52,.86,0]}><mesh><capsuleGeometry args={[.3,.32,8,24]} /><meshPhysicalMaterial color="#d9dedf" metalness={.55} roughness={.24} /></mesh><mesh position={[.22,.04,.25]}><sphereGeometry args={[.055,20,20]} /><meshBasicMaterial color="#7df1df" toneMapped={false} /></mesh><mesh position={[-.08,.04,.31]}><sphereGeometry args={[.055,20,20]} /><meshBasicMaterial color="#7df1df" toneMapped={false} /></mesh></group>
+  {[-1,1].map(side=><group key={side}><Link a={[0,.28,0]} b={[side*.55,.05,0]} r={.075}/><Link a={[side*.55,.05,0]} b={[side*.78,-.35,.03]} r={.06}/><mesh position={[side*.8,-.4,.04]}><sphereGeometry args={[.11,24,24]} /><meshPhysicalMaterial color="#6e777a" metalness={.75} roughness={.28} /></mesh></group>)}
+</group>}
+export default StudioRobot
