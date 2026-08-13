@@ -79,3 +79,9 @@ Automated quality metrics are evidence and regression protection; they do not re
 Realistic product, furniture, vehicle, botanical, food, medical and scientific assets must not rely on box/cylinder assemblies for their primary silhouette. Geometry V2 assets use authored profiles, spline sweeps, lofted/custom BufferGeometry, lathed surfaces, extrusions or production GLB meshes. Primitive geometry remains acceptable for secondary hardware and physically appropriate components.
 
 The public homepage may feature only assets marked `geometryV2: true`. The automated Geometry V2 audit rejects featured assets that regress to primitive-dominated construction.
+
+## Geometry V2 phase 2
+
+Product, furniture, vehicle, medical and scientific assets promoted in phase 2 define their main silhouette with authored loft stations, revolved profiles, spline paths, custom buffer geometry or extruded profiles. `CurvedBox` remains acceptable for secondary construction where physically appropriate, but it is not sufficient as the primary modeling method.
+
+Phase 2 assets also require multiple primary curved/profile surfaces, explicit silhouette/profile data in the scene source, and the standard deterministic download rebuild before publication.

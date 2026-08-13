@@ -4,13 +4,14 @@ import { AssetCard } from '../components/AssetCard'
 import { ArrowDown, ArrowUpRight } from '../components/Icons'
 import { assets, categoryGroups } from '../data/assets'
 import { brand } from '../data/brand'
+import { isGeometryV2Asset } from '../data/geometryV2'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
 })
 
 function HomePage() {
-  const featured = assets.filter((asset) => asset.featured && asset.geometryV2).slice(-6).reverse()
+  const featured = assets.filter((asset) => asset.featured && isGeometryV2Asset(asset)).slice(-6).reverse()
   const [featuredPreview, setFeaturedPreview] = useState<string | null>(featured[0]?.slug ?? null)
   const heroAsset = assets.find((asset) => asset.slug === 'precision-chrono') ?? featured[0]
   return (

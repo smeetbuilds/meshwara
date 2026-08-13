@@ -1,34 +1,10 @@
-import { CurvedBox } from '../geometry/CurvedBox'
-
-function CantileverSofa() {
-  return (
-    <group rotation={[0.02, -0.38, 0]} position={[0, -0.42, 0]}>
-      <CurvedBox args={[2.85, 0.35, 1.18]} radius={0.18} smoothness={8} position={[0, -0.32, 0]}>
-        <meshPhysicalMaterial color="#c3b9aa" roughness={0.62} sheen={0.5} sheenColor="#d8cbbb" />
-      </CurvedBox>
-      <CurvedBox args={[2.72, 1.08, 0.32]} radius={0.18} smoothness={8} position={[0, 0.46, -0.48]} rotation={[-0.1, 0, 0]}>
-        <meshPhysicalMaterial color="#bcb1a2" roughness={0.64} sheen={0.52} sheenColor="#dbccbb" />
-      </CurvedBox>
-      {[-0.72, 0.72].map((x) => (
-        <CurvedBox key={x} args={[1.24, 0.18, 0.9]} radius={0.09} smoothness={6} position={[x, -0.02, 0.04]}>
-          <meshPhysicalMaterial color="#d0c6b8" roughness={0.58} />
-        </CurvedBox>
-      ))}
-      <mesh position={[0, -0.93, 0.1]}>
-        <boxGeometry args={[2.52, 0.09, 0.68]} />
-        <meshPhysicalMaterial color="#2b2e30" metalness={0.9} roughness={0.22} />
-      </mesh>
-      {[-1.0, 1.0].map((x) => (
-        <mesh key={x} position={[x, -1.08, 0.1]}>
-          <boxGeometry args={[0.08, 0.34, 0.72]} />
-          <meshPhysicalMaterial color="#2b2e30" metalness={0.9} roughness={0.22} />
-        </mesh>
-      ))}
-      <CurvedBox args={[0.38, 0.72, 0.18]} radius={0.09} smoothness={6} position={[0.92, 0.36, -0.22]} rotation={[0, 0, -0.12]}>
-        <meshPhysicalMaterial color="#8c6853" roughness={0.64} sheen={0.45} />
-      </CurvedBox>
-    </group>
-  )
-}
-
-export default CantileverSofa
+import { LoftSurface, SplineTube, type LoftStation } from '../geometry/GeometryV2'
+const seat:LoftStation[]=[{x:-1.55,width:.62,height:.12,exponent:3.6},{x:-.8,width:.76,height:.17,exponent:4},{x:0,width:.8,height:.18,exponent:4.2},{x:.8,width:.76,height:.17,exponent:4},{x:1.55,width:.62,height:.12,exponent:3.6}]
+const back:LoftStation[]=[{x:-1.5,width:.42,height:.12,exponent:3.2},{x:0,width:.55,height:.18,y:.06,exponent:3.8},{x:1.5,width:.42,height:.12,exponent:3.2}]
+const rail:Array<[number,number,number]>=[[-1.55,-.38,-.7],[-1.72,-.55,-.62],[-1.5,-.62,.52],[1.5,-.62,.52],[1.72,-.55,-.62],[1.55,-.38,-.7]]
+export default function CantileverSofa(){return <group rotation={[0,-.32,0]} position={[0,-.38,0]}>
+ <LoftSurface stations={seat}><meshPhysicalMaterial color="#b9b3a9" roughness={.68} sheen={.65}/></LoftSurface>
+ <LoftSurface stations={back} position={[0,.72,-.34]} rotation={[0,0,.02]}><meshPhysicalMaterial color="#aaa49a" roughness={.7} sheen={.6}/></LoftSurface>
+ <SplineTube points={rail} radius={.045}><meshPhysicalMaterial color="#5f6668" metalness={.86} roughness={.2}/></SplineTube>
+ {[-.75,.75].map(x=><LoftSurface key={x} stations={[{x:-.52,width:.52,height:.07,exponent:3},{x:0,width:.62,height:.11,exponent:3.4},{x:.52,width:.52,height:.07,exponent:3}]} position={[x,.22,.05]} scale={[.82,1,.78]}><meshPhysicalMaterial color="#c8c2b8" roughness={.72} sheen={.7}/></LoftSurface>)}
+</group>}

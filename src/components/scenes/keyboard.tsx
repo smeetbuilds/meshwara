@@ -1,35 +1,13 @@
-import { Instance, Instances } from '@react-three/drei'
+import { LoftSurface, SplineTube, RevolvedSurface, type LoftStation } from '../geometry/GeometryV2'
 import { CurvedBox } from '../geometry/CurvedBox'
-import { useMemo } from 'react'
-
-function MechanicalKeyboard() {
-  const keys = useMemo(() => {
-    const rows = [14, 14, 13, 12, 9]
-    const data: Array<{ position: [number, number, number]; scale: [number, number, number] }> = []
-    rows.forEach((count, row) => {
-      const z = -0.48 + row * 0.24
-      const offset = row === 2 ? 0.1 : row === 3 ? 0.2 : row === 4 ? 0.55 : 0
-      for (let i = 0; i < count; i++) {
-        const width = row === 4 && i === 4 ? 2.7 : row === 4 && (i === 0 || i === 8) ? 1.45 : 1
-        data.push({ position: [-1.56 + offset + i * 0.24, 0.21, z], scale: [0.2 * width, 0.11, 0.18] })
-      }
-    })
-    return data
-  }, [])
-  return (
-    <group rotation={[0.08, -0.36, -0.02]} position={[0, -0.15, 0]} scale={0.95}>
-      <CurvedBox args={[3.65, 0.34, 1.55]} radius={0.13} smoothness={7}>
-        <meshPhysicalMaterial color="#202326" metalness={0.64} roughness={0.3} clearcoat={0.38} />
-      </CurvedBox>
-      <Instances limit={80}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshPhysicalMaterial color="#d8d4cc" roughness={0.42} />
-        {keys.map((key, i) => <Instance key={i} position={key.position} scale={key.scale} />)}
-      </Instances>
-      <mesh position={[1.46, 0.22, 0.52]}><boxGeometry args={[0.46, 0.02, 0.03]} /><meshBasicMaterial color="#78f3c7" toneMapped={false} /></mesh>
-      <mesh position={[-1.56, 0.25, -0.58]}><cylinderGeometry args={[0.09, 0.09, 0.12, 28]} /><meshPhysicalMaterial color="#a88861" metalness={0.92} roughness={0.18} /></mesh>
-    </group>
-  )
-}
-
-export default MechanicalKeyboard
+const base:LoftStation[]=[{x:-1.85,width:.7,height:.11,y:-.08,exponent:5.2},{x:-1.35,width:.82,height:.15,y:-.05,exponent:5.6},{x:0,width:.86,height:.18,exponent:5.8},{x:1.35,width:.82,height:.15,y:-.05,exponent:5.6},{x:1.85,width:.7,height:.11,y:-.08,exponent:5.2}]
+const wrist:LoftStation[]=[{x:-1.7,width:.46,height:.09,y:-.26,exponent:4.4},{x:0,width:.54,height:.12,y:-.24,exponent:4.8},{x:1.7,width:.46,height:.09,y:-.26,exponent:4.4}]
+const cable:Array<[number,number,number]>=[[1.5,.02,-.76],[1.95,.08,-.92],[2.2,.22,-1.16],[2.05,.48,-1.42]]
+const knob:Array<[number,number]>=[[.05,-.09],[.14,-.08],[.17,0],[.14,.08],[.05,.09]]
+export default function MechanicalKeyboard(){return <group rotation={[-.12,-.38,0]} position={[0,-.25,0]}>
+ <LoftSurface stations={base} castShadow><meshPhysicalMaterial color="#242829" metalness={.55} roughness={.24}/></LoftSurface>
+ <LoftSurface stations={wrist}><meshPhysicalMaterial color="#171a1b" roughness={.46} clearcoat={.2}/></LoftSurface>
+ {Array.from({length:5},(_,r)=>Array.from({length:r===4?10:12},(_,c)=><CurvedBox key={`${r}-${c}`} args={[.23,.12,.22]} radius={.05} smoothness={5} position={[-1.35+c*.25+(r===4?.25:0),.12+r*.02,-.5+r*.24]}><meshStandardMaterial color={r===0?'#d5d1c7':'#ebe7dc'} roughness={.38}/></CurvedBox>))}
+ <SplineTube points={cable} radius={.035}><meshStandardMaterial color="#17191a" roughness={.55}/></SplineTube>
+ <RevolvedSurface profile={knob} position={[1.55,.18,-.52]}><meshPhysicalMaterial color="#b8a078" metalness={.82} roughness={.2}/></RevolvedSurface>
+</group>}

@@ -1,9 +1,11 @@
-import { CurvedBox } from '../geometry/CurvedBox'
-function ModularPhone(){return <group rotation={[.12,-.42,-.05]}>
-  <CurvedBox args={[1.45,2.8,.18]} radius={.14} smoothness={5}><meshPhysicalMaterial color="#b9bdc1" metalness={.92} roughness={.16} clearcoat={.8}/></CurvedBox>
-  <CurvedBox args={[1.34,2.67,.025]} radius={.11} smoothness={4} position={[0,0,.105]}><meshPhysicalMaterial color="#111316" metalness={.18} roughness={.18} clearcoat={.9}/></CurvedBox>
-  <mesh position={[0,.22,.126]}><planeGeometry args={[1.22,2.08]} /><meshBasicMaterial color="#20282f" /></mesh>
-  <mesh position={[0,-1.02,.132]}><boxGeometry args={[.42,.012,.01]} /><meshBasicMaterial color="#d8d7d1" /></mesh>
-  <group position={[-.43,.98,.16]}>{[[0,0],[.42,0],[0,-.42]].map(([x,y],i)=><group key={i} position={[x,y,0]}><mesh><cylinderGeometry args={[.18,.18,.065,48]} /><meshPhysicalMaterial color="#34383c" metalness={.72} roughness={.18}/></mesh><mesh position={[0,0,.038]}><cylinderGeometry args={[.115,.115,.012,48]} /><meshPhysicalMaterial color={i===1?'#24394a':'#161d24'} metalness={.4} roughness={.12} clearcoat={1}/></mesh></group>)}</group>
+import { LoftSurface, RevolvedSurface, SplineTube, type LoftStation } from '../geometry/GeometryV2'
+const chassis:LoftStation[]=[{x:-1.45,width:.38,height:.05,exponent:5.8},{x:-1.25,width:.46,height:.075,exponent:6},{x:0,width:.5,height:.08,exponent:6.2},{x:1.25,width:.46,height:.075,exponent:6},{x:1.45,width:.38,height:.05,exponent:5.8}]
+const glass:LoftStation[]=[{x:-1.39,width:.355,height:.018,y:.092,exponent:6},{x:0,width:.46,height:.02,y:.1,exponent:6.4},{x:1.39,width:.355,height:.018,y:.092,exponent:6}]
+const edge:Array<[number,number,number]>=[[-1.3,.105,.39],[-.55,.115,.49],[.55,.115,.49],[1.3,.105,.39]]
+const lens:Array<[number,number]>=[[.04,-.05],[.13,-.045],[.16,0],[.13,.045],[.04,.05]]
+export default function ModularSmartphone(){return <group rotation={[.34,-.5,-.06]}>
+ <LoftSurface stations={chassis} rotation={[0,0,Math.PI/2]} castShadow><meshPhysicalMaterial color="#595c5d" metalness={.86} roughness={.16} clearcoat={.35}/></LoftSurface>
+ <LoftSurface stations={glass} rotation={[0,0,Math.PI/2]}><meshPhysicalMaterial color="#132833" metalness={.1} roughness={.04} clearcoat={1}/></LoftSurface>
+ <SplineTube points={edge} radius={.012} rotation={[0,0,Math.PI/2]}><meshPhysicalMaterial color="#b8bfc0" metalness={1} roughness={.12}/></SplineTube>
+ {[[-.83,.25],[0,.25],[.83,.25]].map(([y,z],i)=><RevolvedSurface key={i} profile={lens} position={[.17,y,z]} rotation={[Math.PI/2,0,0]}><meshPhysicalMaterial color="#10222e" roughness={.05} clearcoat={1}/></RevolvedSurface>)}
 </group>}
-export default ModularPhone

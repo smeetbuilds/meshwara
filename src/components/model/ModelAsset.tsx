@@ -147,7 +147,9 @@ export function ModelAsset({
     return () => mixer.removeEventListener('finished', onFinished)
   }, [actions, animationFadeSeconds, clip, clipAliases, loopByClip, mixer, oneShotFallbackClip, reducedMotion])
 
-  useEffect(() => () => mixer.stopAllAction(), [mixer])
+  useEffect(() => () => {
+    mixer.stopAllAction()
+  }, [mixer])
 
   return (
     <group ref={root} {...groupProps}>

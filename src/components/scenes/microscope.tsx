@@ -1,33 +1,13 @@
-import { CurvedBox } from '../geometry/CurvedBox'
-import { useMemo } from 'react'
-import * as THREE from 'three'
-
-function TubeBetween({ a, b, radius, color }: { a: [number, number, number]; b: [number, number, number]; radius: number; color: string }) {
-  const data = useMemo(() => {
-    const s = new THREE.Vector3(...a), e = new THREE.Vector3(...b), d = e.clone().sub(s)
-    return { p: s.clone().add(e).multiplyScalar(0.5), l: d.length(), q: new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0), d.normalize()) }
-  }, [a,b])
-  return <mesh position={data.p} quaternion={data.q}><cylinderGeometry args={[radius,radius,data.l,24]} /><meshPhysicalMaterial color={color} metalness={0.72} roughness={0.24} /></mesh>
-}
-
-function PrecisionMicroscope() {
-  return (
-    <group position={[0,-0.72,0]} rotation={[0.02,-0.35,0]}>
-      <CurvedBox args={[1.8,0.16,1.35]} radius={0.08} smoothness={5} position={[0,-1,0]}><meshPhysicalMaterial color="#202426" metalness={0.7} roughness={0.28} /></CurvedBox>
-      <TubeBetween a={[-0.62,-0.9,0]} b={[-0.62,0.76,-0.08]} radius={0.095} color="#c7c9c7" />
-      <TubeBetween a={[-0.58,0.63,-0.05]} b={[0.22,1.03,0]} radius={0.11} color="#c9cbc9" />
-      <group position={[0.35,0.95,0]} rotation={[0,0,-0.34]}>
-        <mesh><cylinderGeometry args={[0.22,0.22,0.72,40]} /><meshPhysicalMaterial color="#ece9e1" roughness={0.28} clearcoat={0.35} /></mesh>
-        <mesh position={[0,0.42,0]}><cylinderGeometry args={[0.15,0.18,0.22,36]} /><meshPhysicalMaterial color="#171b1d" metalness={0.55} roughness={0.35} /></mesh>
-        <mesh position={[0,-0.43,0]}><cylinderGeometry args={[0.28,0.24,0.12,40]} /><meshPhysicalMaterial color="#8a8f90" metalness={0.92} roughness={0.18} /></mesh>
-        {[-0.16,0,0.16].map((x,i)=><mesh key={x} position={[x,-0.58,0]} rotation={[0,0,(i-1)*0.12]}><cylinderGeometry args={[0.055,0.045,0.3,24]} /><meshPhysicalMaterial color="#23282a" metalness={0.7} roughness={0.24} /></mesh>)}
-      </group>
-      <CurvedBox args={[1.05,0.09,0.78]} radius={0.04} smoothness={4} position={[0,-0.15,0]}><meshPhysicalMaterial color="#303638" metalness={0.76} roughness={0.24} /></CurvedBox>
-      <mesh position={[0,-0.095,0]}><boxGeometry args={[0.5,0.03,0.34]} /><meshPhysicalMaterial color="#dce6e7" transmission={0.12} roughness={0.12} /></mesh>
-      <mesh position={[-0.62,0.05,0.18]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[0.19,0.19,0.075,36]} /><meshPhysicalMaterial color="#222628" metalness={0.78} roughness={0.22} /></mesh>
-      <mesh position={[-0.62,0.05,-0.18]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[0.12,0.12,0.08,32]} /><meshPhysicalMaterial color="#4b5255" metalness={0.82} roughness={0.2} /></mesh>
-      <pointLight position={[0,-0.05,0.18]} intensity={0.7} color="#eefaff" distance={1.2} />
-    </group>
-  )
-}
-export default PrecisionMicroscope
+import { LoftSurface, SplineTube, RevolvedSurface, ExtrudedProfile, type LoftStation } from '../geometry/GeometryV2'
+const base:LoftStation[]=[{x:-1.0,width:.55,height:.08,exponent:4},{x:-.45,width:.7,height:.13,exponent:4.8},{x:.45,width:.7,height:.13,exponent:4.8},{x:1.0,width:.5,height:.08,exponent:4}]
+const head:LoftStation[]=[{x:-.5,width:.28,height:.22,exponent:2.8},{x:0,width:.38,height:.31,exponent:3.2},{x:.5,width:.28,height:.22,exponent:2.8}]
+const arm:Array<[number,number,number]>=[[-.55,.05,-.22],[-.7,.55,-.25],[-.55,1.18,-.18],[-.18,1.55,-.08],[.3,1.62,0]]
+const objective:Array<[number,number]>=[[.05,-.2],[.12,-.19],[.15,-.08],[.16,.08],[.12,.19],[.05,.2]]
+const stage:Array<[number,number]>=[[-.55,-.38],[.55,-.38],[.62,.3],[.48,.42],[-.48,.42],[-.62,.3]]
+export default function PrecisionMicroscope(){return <group rotation={[0,-.38,0]} position={[0,-.65,0]}>
+ <LoftSurface stations={base}><meshPhysicalMaterial color="#d9d9d2" metalness={.12} roughness={.25}/></LoftSurface>
+ <SplineTube points={arm} radius={.09}><meshPhysicalMaterial color="#bfc2be" metalness={.42} roughness={.22}/></SplineTube>
+ <LoftSurface stations={head} position={[.42,1.52,0]} rotation={[0,0,.12]}><meshPhysicalMaterial color="#e0e0d9" roughness={.22}/></LoftSurface>
+ <ExtrudedProfile points={stage} depth={.08} position={[.05,.55,0]} rotation={[Math.PI/2,0,0]}><meshPhysicalMaterial color="#3f4647" metalness={.65} roughness={.2}/></ExtrudedProfile>
+ {[-.18,0,.18].map((z,i)=><RevolvedSurface key={z} profile={objective} position={[.48,1.22,z]} rotation={[Math.PI/2,0,.12+i*.08]}><meshPhysicalMaterial color="#4c5557" metalness={.82} roughness={.18}/></RevolvedSurface>)}
+</group>}

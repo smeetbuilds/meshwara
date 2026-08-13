@@ -325,8 +325,6 @@ export type AssetSceneKind =
   | 'sushiservice'
   | 'performancesneaker'
   | 'creativeworkstationscene'
-export type AssetGroup = 'Visual Systems' | 'Living & Product' | 'Built & Mobility' | 'Nature & Life' | 'Science & Health'
-
   | 'ribbonreferencemicrophone'
   | 'compactnearfieldmonitor'
   | 'balancedheadphoneamplifier'
@@ -527,6 +525,8 @@ export type AssetGroup = 'Visual Systems' | 'Living & Product' | 'Built & Mobili
   | 'sculpturegallerycourtyard'
   | 'observatoryroofdeck'
   | 'roboticsassemblycell'
+
+export type AssetGroup = 'Visual Systems' | 'Living & Product' | 'Built & Mobility' | 'Nature & Life' | 'Science & Health'
 
 export type AssetComplexity = 'Light' | 'Balanced' | 'Cinematic'
 export type AssetInteraction = 'Idle' | 'Pointer'
