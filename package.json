@@ -10,7 +10,7 @@
     "validate": "bun scripts/validate-library.mjs",
     "qa": "bun run versions:check && bun run sources:check && bun run models:test && bun run quality:check && bun run packs && bun run handoff:check && bun run validate && bun run check && bun run build",
     "packs": "bun scripts/validate-modeled-assets.mjs && bun scripts/build-download-packs.mjs && bun scripts/build-geometry-v2-packs.mjs",
-    "handoff:check": "bun scripts/validate-developer-handoff.mjs",
+    "handoff:check": "bun tests/developer-handoff/playground-state.test.ts && bun scripts/validate-developer-handoff.mjs",
     "models:inspect": "bun scripts/model-inspector.mjs",
     "models:test": "bun tests/model-pipeline/source-registry.test.mjs && bun tests/model-pipeline/inspector.test.mjs && bun tests/model-pipeline/validator.test.mjs && bun tests/model-pipeline/young-man-contract.test.mjs && bun tests/model-pipeline/model-runtime.test.mjs",
     "models:check": "bun scripts/validate-modeled-assets.mjs",

@@ -1,6 +1,6 @@
 import { Bounds, ContactShadows, Environment, Float, Lightformer } from '@react-three/drei'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Suspense, useRef, type ReactNode } from 'react'
+import { Suspense, useEffect, useRef, type ReactNode } from 'react'
 import * as THREE from 'three'
 import type { AssetInteraction, AssetPresentation, AssetSceneKind } from '../lib/types'
 import { useReducedMotion } from '../lib/useReducedMotion'
@@ -9,14 +9,34 @@ import { sceneRegistry } from './sceneRegistry'
 export type AssetPreviewMotion = 'live' | 'paused'
 export type AssetPreviewQuality = 'efficient' | 'balanced' | 'crisp'
 
-function Rig({ children, enabled }: { children: ReactNode; enabled: boolean }) {
+export interface AssetSceneTuning {
+  cameraFov: number
+  cameraZoom: number
+  exposure: number
+  pointerStrength: number
+  floatSpeed: number
+  floatIntensity: number
+  rotationY: number
+}
+
+export const defaultAssetSceneTuning: AssetSceneTuning = {
+  cameraFov: 34,
+  cameraZoom: 1,
+  exposure: 1.08,
+  pointerStrength: 1,
+  floatSpeed: 0.78,
+  floatIntensity: 0.11,
+  rotationY: 0,
+}
+
+function Rig({ children, enabled, strength }: { children: ReactNode; enabled: boolean; strength: number }) {
   const ref = useRef<THREE.Group>(null)
   const { pointer } = useThree()
 
   useFrame((_, delta) => {
     if (!ref.current || !enabled) return
-    ref.current.rotation.y = THREE.MathUtils.damp(ref.current.rotation.y, pointer.x * 0.18, 4.2, delta)
-    ref.current.rotation.x = THREE.MathUtils.damp(ref.current.rotation.x, pointer.y * -0.1, 4.2, delta)
+    ref.current.rotation.y = THREE.MathUtils.damp(ref.current.rotation.y, pointer.x * 0.18 * strength, 4.2, delta)
+    ref.current.rotation.x = THREE.MathUtils.damp(ref.current.rotation.x, pointer.y * -0.1 * strength, 4.2, delta)
   })
 
   return <group ref={ref}>{children}</group>
@@ -55,6 +75,31 @@ function FramedScene({ children, compact }: { children: ReactNode; compact: bool
   return <Bounds fit clip observe margin={compact ? 1.32 : 1.16}>{children}</Bounds>
 }
 
+function CameraTuner({ fov, zoom }: { fov: number; zoom: number }) {
+  const { camera, invalidate } = useThree()
+
+  useEffect(() => {
+    if (!(camera instanceof THREE.PerspectiveCamera)) return
+    camera.fov = fov
+    camera.zoom = zoom
+    camera.updateProjectionMatrix()
+    invalidate()
+  }, [camera, fov, invalidate, zoom])
+
+  return null
+}
+
+function RendererTuner({ exposure }: { exposure: number }) {
+  const { gl, invalidate } = useThree()
+
+  useEffect(() => {
+    gl.toneMappingExposure = exposure
+    invalidate()
+  }, [exposure, gl, invalidate])
+
+  return null
+}
+
 export function AssetScene({
   kind,
   compact = false,
@@ -63,6 +108,7 @@ export function AssetScene({
   motion = 'live',
   pointerEnabled = true,
   quality = 'crisp',
+  tuning = defaultAssetSceneTuning,
 }: {
   kind: AssetSceneKind
   compact?: boolean
@@ -71,6 +117,7 @@ export function AssetScene({
   motion?: AssetPreviewMotion
   pointerEnabled?: boolean
   quality?: AssetPreviewQuality
+  tuning?: AssetSceneTuning
 }) {
   const Scene = sceneRegistry[kind]
   const reducedMotion = useReducedMotion()
@@ -85,17 +132,17 @@ export function AssetScene({
         : [1, 2]
 
   const content = presentation === 'Floating' ? (
-    <Rig enabled={pointerActive}>
+    <Rig enabled={pointerActive} strength={tuning.pointerStrength}>
       <Float
-        speed={paused ? 0 : compact ? 0.5 : 0.78}
+        speed={paused ? 0 : compact ? 0.5 : tuning.floatSpeed}
         rotationIntensity={paused ? 0 : 0.065}
-        floatIntensity={paused ? 0 : compact ? 0.08 : 0.11}
+        floatIntensity={paused ? 0 : compact ? 0.08 : tuning.floatIntensity}
       >
         <Scene />
       </Float>
     </Rig>
   ) : presentation === 'Grounded' ? (
-    <Rig enabled={pointerActive}><Scene /></Rig>
+    <Rig enabled={pointerActive} strength={tuning.pointerStrength}><Scene /></Rig>
   ) : <Scene />
 
   return (
@@ -107,13 +154,17 @@ export function AssetScene({
       frameloop={paused ? 'demand' : 'always'}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping
-        gl.toneMappingExposure = compact ? 1.02 : 1.08
+        gl.toneMappingExposure = compact ? 1.02 : tuning.exposure
         gl.outputColorSpace = THREE.SRGBColorSpace
       }}
     >
       <Suspense fallback={null}>
+        {!compact && <CameraTuner fov={tuning.cameraFov} zoom={tuning.cameraZoom} />}
+        {!compact && <RendererTuner exposure={tuning.exposure} />}
         <Studio compact={compact} quality={quality} />
-        <FramedScene compact={compact}>{content}</FramedScene>
+        <FramedScene compact={compact}>
+          <group rotation-y={THREE.MathUtils.degToRad(tuning.rotationY)}>{content}</group>
+        </FramedScene>
         {!compact && presentation !== 'Floating' && (
           <ContactShadows position={[0, -1.48, 0]} opacity={0.22} scale={8} blur={2.8} far={3.2} resolution={512} />
         )}

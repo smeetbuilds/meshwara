@@ -12,7 +12,46 @@ Every asset detail page must expose controls that operate on the actual live R3F
 - Stage: light or dark viewing surface.
 - `prefers-reduced-motion` remains authoritative even when the page control says live.
 
-The default remains equivalent to the prior high-quality preview: live motion, pointer interaction when supported, crisp DPR, light stage.
+The default remains equivalent to the authored high-quality preview: live motion, pointer interaction when supported, crisp DPR, light stage.
+
+## Playground contract
+
+The advanced playground extends the same hero preview. It must never mount a second `Canvas` merely to display customized state.
+
+Presentation-level controls are intentionally universal across heterogeneous assets:
+
+- Perspective field of view.
+- Camera zoom without replacing the automatic asset-specific Bounds framing.
+- Tone-mapping exposure.
+- Pointer-response strength when the asset supports pointer interaction.
+- Float speed and float intensity only when the asset uses the floating presentation contract.
+- Y-axis presentation orientation.
+- Optional custom stage color while retaining light/dark stage presets.
+
+The playground must not claim that every asset exposes identical geometry, shader, material, animation, or model internals. Asset-specific source remains canonical.
+
+### Reproducible state
+
+Playground state must be reproducible without a runtime backend:
+
+1. Preset JSON contains the asset slug, scene identifier, presentation, interaction contract, preview state, tuning values, and optional custom background.
+2. The preset can be copied to the clipboard.
+3. The preset can be exported locally as `<slug>.meshvara-preset.json` using a browser Blob.
+4. A share action encodes validated playground state in the `play` URL search parameter and points the URL at `#playground`.
+5. Shared numeric values are clamped to the same ranges exposed by the UI before they are applied.
+6. Invalid colors, quality values, stage values, and unsupported pointer state fall back safely.
+7. Navigating to a different asset without a shared preset restores that asset's authored defaults rather than leaking state from the prior asset.
+
+Shared state is client-side presentation data only. It must not require a database, account, API write, or server persistence.
+
+### Code synchronization
+
+The playground exposes two synchronized textual views:
+
+- `Preset JSON` — portable presentation state.
+- `R3F recipe` — a repository-level recipe using the open-source `AssetScene` runtime and the exact currently selected values.
+
+The R3F recipe must be described accurately. It is not a replacement for the standalone downloadable ZIP and must not be presented as if the downloaded asset exposes undocumented props.
 
 ## Clipboard handoff
 
@@ -52,25 +91,29 @@ The source-inspection action is separate from the direct downloadable pack so de
 
 ## Responsive behavior
 
-The workbench must remain usable across desktop, tablet, and narrow mobile layouts.
+The workbench and playground must remain usable across desktop, tablet, and narrow mobile layouts.
 
 - Preview controls collapse from four columns to two and then one.
+- Playground controls and code split collapse to one column before narrow tablet widths.
 - Code blocks retain horizontal scrolling rather than wrapping source destructively.
-- Delivery metadata becomes non-sticky on smaller screens.
-- Copy/install controls become full-width where necessary.
+- Sticky code/delivery metadata becomes non-sticky on smaller screens.
+- Copy, reset, export, install, and share controls become full-width where necessary.
+- Range controls remain operable with touch input.
 - No control may depend on hover for discoverability.
 
 ## QA invariant
 
-`bun run handoff:check` validates the handoff contract and is part of `bun run qa`.
+`bun run handoff:check` validates the handoff and playground contract and is part of `bun run qa`.
 
 The validator must fail when:
 
-- Asset detail pages stop rendering the preview controls or developer panel.
-- Motion, pointer, quality, or stage controls stop being wired to the live preview.
+- Asset detail pages stop rendering the preview controls, playground, or developer panel.
+- Motion, pointer, quality, stage, tuning, or custom background state stops being wired to the live preview.
+- The playground creates a second `Canvas`, introduces backend persistence, loses state clamping, reset, copy, local JSON export, share-link restoration, or synchronized preset/recipe views.
+- AssetScene loses reactive camera, exposure, pointer-strength, float, orientation, or quality behavior.
 - The workbench loses clipboard fallback, framework tabs, source inspection, direct download, or checksum support.
 - The copy-ready install command drifts from exact dependency pins in `package.json`.
 - Any public manifest entry has missing/invalid byte size or SHA-256 metadata.
 - This contract loses a required section.
 
-This automated invariant supplements visual QA; it does not replace testing the workbench on real desktop, tablet, mobile, reduced-motion, and clipboard-permission scenarios.
+This automated invariant supplements visual QA; it does not replace testing the workbench on real desktop, tablet, mobile, reduced-motion, clipboard-permission, custom-color, and shared-URL scenarios.

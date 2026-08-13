@@ -1,6 +1,7 @@
 import { useState, type CSSProperties } from 'react'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { AssetDeveloperPanel, AssetPreviewControls, defaultPreviewSettings } from '../../components/AssetDeveloperWorkbench'
+import { AssetPlayground, defaultAssetPlaygroundSettings } from '../../components/AssetPlayground'
 import { AssetScene } from '../../components/AssetScene'
 import { ArrowDown, ArrowUpRight } from '../../components/Icons'
 import { assets, getAsset, getAssetSubcategory } from '../../data/assets'
@@ -17,7 +18,11 @@ export const Route = createFileRoute('/assets/$slug')({
 
 function AssetDetail() {
   const asset = Route.useLoaderData()
-  const [preview, setPreview] = useState(defaultPreviewSettings)
+  const [preview, setPreview] = useState(() => ({ ...defaultPreviewSettings, pointer: asset.interaction === 'Pointer' }))
+  const [playground, setPlayground] = useState(() => ({
+    ...defaultAssetPlaygroundSettings,
+    tuning: { ...defaultAssetPlaygroundSettings.tuning },
+  }))
   const assetSubcategory = getAssetSubcategory(asset)
   const sameType = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) === assetSubcategory)
   const sameCategory = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) !== assetSubcategory)
@@ -32,6 +37,9 @@ function AssetDetail() {
       : preview.pointer
         ? 'MOVE POINTER'
         : 'LOCKED'
+  const stageStyle = playground.background
+    ? ({ '--playground-stage': playground.background } as CSSProperties)
+    : undefined
 
   return (
     <article className="detail-page" style={{ '--asset-accent': asset.accent } as CSSProperties}>
@@ -42,7 +50,12 @@ function AssetDetail() {
           <p>{asset.blurb}</p>
         </div>
         <div>
-          <div className="detail-stage" data-stage-theme={preview.stage}>
+          <div
+            className="detail-stage"
+            data-stage-theme={preview.stage}
+            data-custom-stage={playground.background ? 'true' : 'false'}
+            style={stageStyle}
+          >
             <div className="asset-gridlines" />
             <AssetScene
               kind={asset.scene}
@@ -51,10 +64,11 @@ function AssetDetail() {
               motion={preview.motion}
               pointerEnabled={preview.pointer}
               quality={preview.quality}
+              tuning={playground.tuning}
             />
             <div className="viewer-hud">
               <span>{brand.name} / 3D PREVIEW / {sourceLabel}</span>
-              <span>{previewStateLabel} / {preview.quality.toUpperCase()}</span>
+              <span>{previewStateLabel} / {preview.quality.toUpperCase()} / {playground.tuning.exposure.toFixed(2)} EXP</span>
             </div>
           </div>
           <AssetPreviewControls
@@ -62,6 +76,10 @@ function AssetDetail() {
             onChange={setPreview}
             supportsPointer={asset.interaction === 'Pointer'}
           />
+          <a className="playground-jump" href="#playground">
+            <span>Open advanced playground</span>
+            <span>Camera / light / motion / share ↓</span>
+          </a>
         </div>
         <a className="scroll-cue" href="#asset-info"><ArrowDown /> OBJECT DETAILS</a>
       </section>
@@ -86,6 +104,14 @@ function AssetDetail() {
           <p>Direct download with source included. No account required.</p>
         </aside>
       </section>
+
+      <AssetPlayground
+        asset={asset}
+        preview={preview}
+        onPreviewChange={setPreview}
+        value={playground}
+        onChange={setPlayground}
+      />
 
       <AssetDeveloperPanel asset={asset} />
 
