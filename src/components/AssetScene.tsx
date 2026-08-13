@@ -6,6 +6,9 @@ import type { AssetInteraction, AssetPresentation, AssetSceneKind } from '../lib
 import { useReducedMotion } from '../lib/useReducedMotion'
 import { sceneRegistry } from './sceneRegistry'
 
+export type AssetPreviewMotion = 'live' | 'paused'
+export type AssetPreviewQuality = 'efficient' | 'balanced' | 'crisp'
+
 function Rig({ children, enabled }: { children: ReactNode; enabled: boolean }) {
   const ref = useRef<THREE.Group>(null)
   const { pointer } = useThree()
@@ -19,7 +22,7 @@ function Rig({ children, enabled }: { children: ReactNode; enabled: boolean }) {
   return <group ref={ref}>{children}</group>
 }
 
-function Studio({ compact }: { compact: boolean }) {
+function Studio({ compact, quality }: { compact: boolean; quality: AssetPreviewQuality }) {
   if (compact) {
     return (
       <>
@@ -30,13 +33,15 @@ function Studio({ compact }: { compact: boolean }) {
     )
   }
 
+  const environmentResolution = quality === 'efficient' ? 96 : quality === 'balanced' ? 128 : 160
+
   return (
     <>
       <hemisphereLight color="#fffdf8" groundColor="#a8a49b" intensity={1.15} />
       <directionalLight position={[5.5, 6.5, 4.5]} intensity={2.6} />
       <directionalLight position={[-4.5, 2.2, -3.5]} intensity={1.3} />
       <pointLight position={[0, -1.6, 3.6]} intensity={0.55} distance={8} />
-      <Environment resolution={160}>
+      <Environment resolution={environmentResolution}>
         <Lightformer intensity={4.6} position={[0, 5, -2]} scale={[8, 1.6, 1]} />
         <Lightformer intensity={3.2} position={[-5, 0.5, 2]} rotation-y={Math.PI / 2} scale={[6, 1.5, 1]} />
         <Lightformer intensity={2.6} position={[5, -0.6, 1]} rotation-y={-Math.PI / 2} scale={[5, 1.1, 1]} />
@@ -55,35 +60,51 @@ export function AssetScene({
   compact = false,
   presentation = 'Floating',
   interaction = 'Pointer',
+  motion = 'live',
+  pointerEnabled = true,
+  quality = 'crisp',
 }: {
   kind: AssetSceneKind
   compact?: boolean
   presentation?: AssetPresentation
   interaction?: AssetInteraction
+  motion?: AssetPreviewMotion
+  pointerEnabled?: boolean
+  quality?: AssetPreviewQuality
 }) {
   const Scene = sceneRegistry[kind]
   const reducedMotion = useReducedMotion()
+  const paused = reducedMotion || motion === 'paused'
+  const pointerActive = !paused && pointerEnabled && interaction === 'Pointer'
+  const dpr: [number, number] = compact
+    ? [1, 1.2]
+    : quality === 'efficient'
+      ? [1, 1]
+      : quality === 'balanced'
+        ? [1, 1.5]
+        : [1, 2]
+
   const content = presentation === 'Floating' ? (
-    <Rig enabled={!reducedMotion && interaction === 'Pointer'}>
+    <Rig enabled={pointerActive}>
       <Float
-        speed={reducedMotion ? 0 : compact ? 0.5 : 0.78}
-        rotationIntensity={reducedMotion ? 0 : 0.065}
-        floatIntensity={reducedMotion ? 0 : compact ? 0.08 : 0.11}
+        speed={paused ? 0 : compact ? 0.5 : 0.78}
+        rotationIntensity={paused ? 0 : 0.065}
+        floatIntensity={paused ? 0 : compact ? 0.08 : 0.11}
       >
         <Scene />
       </Float>
     </Rig>
   ) : presentation === 'Grounded' ? (
-    <Rig enabled={!reducedMotion && interaction === 'Pointer'}><Scene /></Rig>
+    <Rig enabled={pointerActive}><Scene /></Rig>
   ) : <Scene />
 
   return (
     <Canvas
       className="asset-canvas"
-      dpr={compact ? [1, 1.2] : [1, 2]}
+      dpr={dpr}
       gl={{ antialias: !compact, alpha: true, powerPreference: 'high-performance', stencil: false }}
       camera={{ position: [0, 0, compact ? 5.8 : 4.8], fov: compact ? 38 : 34, near: 0.05, far: 120 }}
-      frameloop={reducedMotion ? 'demand' : 'always'}
+      frameloop={paused ? 'demand' : 'always'}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping
         gl.toneMappingExposure = compact ? 1.02 : 1.08
@@ -91,7 +112,7 @@ export function AssetScene({
       }}
     >
       <Suspense fallback={null}>
-        <Studio compact={compact} />
+        <Studio compact={compact} quality={quality} />
         <FramedScene compact={compact}>{content}</FramedScene>
         {!compact && presentation !== 'Floating' && (
           <ContactShadows position={[0, -1.48, 0]} opacity={0.22} scale={8} blur={2.8} far={3.2} resolution={512} />

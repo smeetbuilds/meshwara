@@ -1,5 +1,6 @@
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { AssetDeveloperPanel, AssetPreviewControls, defaultPreviewSettings } from '../../components/AssetDeveloperWorkbench'
 import { AssetScene } from '../../components/AssetScene'
 import { ArrowDown, ArrowUpRight } from '../../components/Icons'
 import { assets, getAsset, getAssetSubcategory } from '../../data/assets'
@@ -16,13 +17,21 @@ export const Route = createFileRoute('/assets/$slug')({
 
 function AssetDetail() {
   const asset = Route.useLoaderData()
+  const [preview, setPreview] = useState(defaultPreviewSettings)
   const assetSubcategory = getAssetSubcategory(asset)
   const sameType = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) === assetSubcategory)
   const sameCategory = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) !== assetSubcategory)
   const related = [...sameType, ...sameCategory].slice(0, 3)
   const interactionLabel = asset.interaction === 'Pointer' ? 'INTERACTIVE' : 'ANIMATED'
   const detailLabel = asset.complexity === 'Light' ? 'LIGHTWEIGHT' : asset.complexity === 'Cinematic' ? 'HIGH DETAIL' : 'BALANCED'
-  const sourceLabel = asset.sourceType === 'Procedural' ? 'CODE' : asset.sourceType === 'Hybrid' ? 'CODE + MATERIALS' : 'MODEL'
+  const sourceLabel = asset.sourceType === 'Procedural' ? 'CODE' : asset.sourceType === 'Hybrid' ? 'CODE + MATERIALS' : asset.sourceType === 'Shader' ? 'SHADER' : 'MODEL'
+  const previewStateLabel = preview.motion === 'paused'
+    ? 'PAUSED'
+    : asset.interaction !== 'Pointer'
+      ? 'IDLE'
+      : preview.pointer
+        ? 'MOVE POINTER'
+        : 'LOCKED'
 
   return (
     <article className="detail-page" style={{ '--asset-accent': asset.accent } as CSSProperties}>
@@ -32,13 +41,27 @@ function AssetDetail() {
           <h1>{asset.name}</h1>
           <p>{asset.blurb}</p>
         </div>
-        <div className="detail-stage">
-          <div className="asset-gridlines" />
-          <AssetScene kind={asset.scene} presentation={asset.presentation} interaction={asset.interaction} />
-          <div className="viewer-hud">
-            <span>{brand.name} / 3D PREVIEW / {sourceLabel}</span>
-            <span>{asset.interaction === 'Pointer' ? 'MOVE POINTER' : 'ANIMATED'} / RESPONSIVE</span>
+        <div>
+          <div className="detail-stage" data-stage-theme={preview.stage}>
+            <div className="asset-gridlines" />
+            <AssetScene
+              kind={asset.scene}
+              presentation={asset.presentation}
+              interaction={asset.interaction}
+              motion={preview.motion}
+              pointerEnabled={preview.pointer}
+              quality={preview.quality}
+            />
+            <div className="viewer-hud">
+              <span>{brand.name} / 3D PREVIEW / {sourceLabel}</span>
+              <span>{previewStateLabel} / {preview.quality.toUpperCase()}</span>
+            </div>
           </div>
+          <AssetPreviewControls
+            value={preview}
+            onChange={setPreview}
+            supportsPointer={asset.interaction === 'Pointer'}
+          />
         </div>
         <a className="scroll-cue" href="#asset-info"><ArrowDown /> OBJECT DETAILS</a>
       </section>
@@ -64,13 +87,7 @@ function AssetDetail() {
         </aside>
       </section>
 
-      <section className="integration page-pad">
-        <p className="section-label">IMPLEMENTATION</p>
-        <div className="code-panel">
-          <div className="code-top"><span>React Three Fiber</span><span>asset.tsx</span></div>
-          <pre><code>{`import { ${asset.name.replace(/\s+/g, '')} } from './${asset.slug}'\n\nexport function Scene() {\n  return <${asset.name.replace(/\s+/g, '')} />\n}`}</code></pre>
-        </div>
-      </section>
+      <AssetDeveloperPanel asset={asset} />
 
       <section className="related page-pad">
         <div className="section-head"><div><p className="section-label">RELATED</p><h2>Keep exploring.</h2></div><Link to="/assets" className="text-link">Full library ↗</Link></div>
