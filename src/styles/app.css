@@ -102,8 +102,6 @@ svg { width: 1em; height: 1em; display: block; }
 .asset-canvas { position: absolute !important; inset: 0; z-index: 1; touch-action: pan-y; transition: filter .3s ease, transform .65s cubic-bezier(.2,.75,.2,1); }
 .asset-index { position: absolute; z-index: 2; top: 14px; left: 14px; font-size: 9px; letter-spacing: .1em; }
 
-.live-preview-pill { position: absolute; z-index: 3; top: 13px; left: 50%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid rgba(17,17,15,.12); border-radius: 999px; background: rgba(239,237,231,.72); backdrop-filter: blur(10px); color: rgba(17,17,15,.7); font-size: 7px; letter-spacing: .12em; font-weight: 700; pointer-events: none; white-space: nowrap; }
-.live-preview-pill i { width: 5px; height: 5px; border-radius: 50%; background: var(--asset-accent, #d8ff62); box-shadow: 0 0 0 3px color-mix(in srgb, var(--asset-accent, #d8ff62) 22%, transparent); }
 .preview-open { position: absolute; z-index: 4; right: 12px; top: 52px; display: inline-flex; align-items: center; gap: 5px; min-height: 30px; padding: 0 9px; border-radius: 999px; background: rgba(17,17,15,.78); color: #fff; backdrop-filter: blur(8px); font-size: 7px; letter-spacing: .1em; opacity: 0; transform: translateY(-4px); transition: opacity .2s ease, transform .2s ease, background .2s ease; }
 .preview-open svg { font-size: 11px; }
 .asset-preview:hover .preview-open, .asset-preview:focus-within .preview-open { opacity: 1; transform: translateY(0); }
@@ -255,7 +253,6 @@ svg { width: 1em; height: 1em; display: block; }
   .asset-preview { aspect-ratio: 1.08 / 1; }
   .asset-card-blurb { width: 96%; }
   .preview-spec { font-size: 7px; }
-  .live-preview-pill { left: 14px; transform: none; }
   .preview-open { opacity: 1; transform: none; }
   .section-head { align-items: flex-start; flex-direction: column; }
   .free-statement { padding-left: 18px; padding-right: 18px; }
@@ -339,3 +336,21 @@ svg { width: 1em; height: 1em; display: block; }
 .world-tabs button small, .category-tabs button small, .subcategory-tabs button small { font-size: .82em; line-height: 1; opacity: .55; font-variant-numeric: tabular-nums; }
 .world-tabs button.is-active small, .category-tabs button.is-active small { opacity: .72; }
 .subcategory-tabs button.is-active small { opacity: .72; }
+
+/* Catalogue performance: one active WebGL preview at a time. */
+.asset-preview { cursor: default; }
+.preview-state-pill { position: absolute; z-index: 3; top: 13px; left: 50%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid rgba(17,17,15,.11); border-radius: 999px; background: rgba(239,237,231,.8); backdrop-filter: blur(8px); color: rgba(17,17,15,.68); font-size: 7px; letter-spacing: .11em; font-weight: 700; pointer-events: none; white-space: nowrap; }
+.preview-state-pill i { width: 5px; height: 5px; border-radius: 50%; background: var(--asset-accent, #d8ff62); }
+.preview-activate { position: absolute; z-index: 4; left: 50%; top: 50%; transform: translate(-50%, -50%); min-height: 38px; padding: 0 15px; border: 1px solid rgba(17,17,15,.14); border-radius: 999px; background: rgba(242,240,235,.9); color: var(--ink); font: inherit; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 30px rgba(17,17,15,.08); backdrop-filter: blur(10px); transition: transform .18s ease, background .18s ease; }
+.preview-activate:hover { transform: translate(-50%, -50%) scale(1.03); background: #fff; }
+.asset-card.is-previewing .preview-activate { display: none; }
+.asset-card:not(.is-previewing) .preview-open { opacity: 1; transform: none; }
+.lazy-scene-host[data-preview-state="idle"] .scene-skeleton { animation: none; background: radial-gradient(circle at 50% 43%, color-mix(in srgb, var(--asset-accent, #d8ff62) 18%, transparent), transparent 29%), linear-gradient(145deg, rgba(255,255,255,.2), transparent 55%); }
+.lazy-scene-host[data-preview-state="waiting"] .scene-skeleton { animation: preview-shimmer 1.4s ease-in-out infinite; }
+.asset-card:not(.is-previewing) .asset-gridlines { opacity: .28; }
+.asset-card.is-previewing .asset-preview { cursor: crosshair; }
+
+@media (max-width: 720px) {
+  .preview-state-pill { left: 14px; transform: none; }
+  .preview-activate { min-height: 42px; padding-inline: 17px; }
+}

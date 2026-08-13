@@ -20,11 +20,14 @@ function AssetDetail() {
   const sameType = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) === assetSubcategory)
   const sameCategory = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) !== assetSubcategory)
   const related = [...sameType, ...sameCategory].slice(0, 3)
+  const interactionLabel = asset.interaction === 'Pointer' ? 'INTERACTIVE' : 'ANIMATED'
+  const detailLabel = asset.complexity === 'Light' ? 'LIGHTWEIGHT' : asset.complexity === 'Cinematic' ? 'HIGH DETAIL' : 'BALANCED'
+  const sourceLabel = asset.sourceType === 'Procedural' ? 'CODE' : asset.sourceType === 'Hybrid' ? 'CODE + MATERIALS' : 'MODEL'
 
   return (
     <article className="detail-page" style={{ '--asset-accent': asset.accent } as CSSProperties}>
       <section className="detail-hero page-pad">
-        <div className="detail-topline"><span>{brand.name} / {asset.index} / {asset.category.toUpperCase()} / {assetSubcategory.toUpperCase()}</span><span>{asset.complexity.toUpperCase()} GPU PROFILE</span></div>
+        <div className="detail-topline"><span>{brand.name} / {asset.index} / {asset.category.toUpperCase()} / {assetSubcategory.toUpperCase()}</span><span>{detailLabel}</span></div>
         <div className="detail-title">
           <h1>{asset.name}</h1>
           <p>{asset.blurb}</p>
@@ -33,8 +36,8 @@ function AssetDetail() {
           <div className="asset-gridlines" />
           <AssetScene kind={asset.scene} presentation={asset.presentation} interaction={asset.interaction} />
           <div className="viewer-hud">
-            <span>{brand.name} / LIVE WEBGL / {asset.sourceType.toUpperCase()}</span>
-            <span>{asset.interaction.toUpperCase()} / RESPONSIVE</span>
+            <span>{brand.name} / 3D PREVIEW / {sourceLabel}</span>
+            <span>{asset.interaction === 'Pointer' ? 'MOVE POINTER' : 'ANIMATED'} / RESPONSIVE</span>
           </div>
         </div>
         <a className="scroll-cue" href="#asset-info"><ArrowDown /> OBJECT DETAILS</a>
@@ -49,16 +52,15 @@ function AssetDetail() {
         <aside className="spec-panel">
           <div><span>PRICE</span><strong>FREE</strong></div>
           <div><span>TYPE</span><strong>{assetSubcategory.toUpperCase()}</strong></div>
-          <div><span>SOURCE</span><strong>{asset.sourceType.toUpperCase()}</strong></div>
+          <div><span>SOURCE</span><strong>{sourceLabel}</strong></div>
           <div><span>FORMAT</span><strong>{asset.formats.join(' / ').toUpperCase()}</strong></div>
-          <div><span>INTERACTION</span><strong>{asset.interaction.toUpperCase()}</strong></div>
-          <div><span>PROFILE</span><strong>{asset.complexity.toUpperCase()}</strong></div>
-          <div><span>QUALITY</span><strong>FULL-CATALOG AUDITED</strong></div>
-          <div><span>DOWNLOAD</span><strong>SHA-256 VERIFIED ZIP</strong></div>
+          <div><span>INTERACTION</span><strong>{interactionLabel}</strong></div>
+          <div><span>DETAIL</span><strong>{detailLabel}</strong></div>
+          <div><span>DOWNLOAD</span><strong>ZIP + SOURCE</strong></div>
           <a className="download-button" href={asset.download} download>
             <span>Download from {brand.name}</span><ArrowDown />
           </a>
-          <p>{brand.name} direct ZIP · no account · checksum listed in the public integrity manifest · automated quality audit published at /quality/asset-audit.json.</p>
+          <p>Direct download with source included. No account required.</p>
         </aside>
       </section>
 

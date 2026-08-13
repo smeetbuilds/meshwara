@@ -1,9 +1,9 @@
 export const brand = {
   name: 'MESHVARA',
   displayName: 'Meshvara',
-  descriptor: 'Open Three.js Asset Archive',
-  productLine: 'Free production-grade Three.js assets for the spatial web',
-  shortLine: 'An open archive of production-grade Three.js assets.',
+  descriptor: 'Open Three.js Library',
+  productLine: 'Free Three.js assets for the spatial web',
+  shortLine: 'An open library of carefully made Three.js assets.',
   studio: 'Aahav Labs',
   studioUrl: 'https://aahavlabs.in',
   studioDisplayUrl: 'aahavlabs.in',

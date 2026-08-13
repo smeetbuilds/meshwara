@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { AssetCard } from '../components/AssetCard'
 import { ArrowDown, ArrowUpRight } from '../components/Icons'
@@ -11,6 +11,7 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   const featured = assets.filter((asset) => asset.featured).slice(-6).reverse()
+  const [featuredPreview, setFeaturedPreview] = useState<string | null>(featured[0]?.slug ?? null)
   const heroAsset = assets.find((asset) => asset.slug === 'precision-chrono') ?? featured[0]
   return (
     <>
@@ -25,7 +26,7 @@ function HomePage() {
             <span>for the <em>spatial</em> web.</span>
           </h1>
           <div className="hero-sidecopy">
-            <p>Meshvara is a growing archive of production-grade 3D assets, systems, materials and scenes for ambitious web experiences. Free to download. No account. No filler.</p>
+            <p>Meshvara is a growing library of carefully made 3D assets, materials and scenes for the web. Preview them in the browser, download the source, and use them freely.</p>
             <Link to="/assets" className="primary-link">Enter Meshvara · {assets.length} assets <ArrowUpRight /></Link>
           </div>
         </div>
@@ -62,13 +63,13 @@ function HomePage() {
       <section className="manifesto page-pad" id="principles">
         <p className="section-label">02 / STANDARD</p>
         <div className="manifesto-grid">
-          <h2>Not a model dump.<br />The Meshvara standard.</h2>
+          <h2>Made with intent.<br />Built for the web.</h2>
           <div className="manifesto-copy">
-            <p>Every Meshvara asset is designed to survive outside the demo: responsive composition, intentional materials, controlled motion, clean source and sensible GPU cost. The archive can scale in quantity; the publication threshold does not scale down.</p>
+            <p>Every Meshvara asset is shaped for real use: clear composition, thoughtful materials, responsive presentation, controlled motion and clean source you can adapt to your own project.</p>
             <div className="principle-list">
               <span><b>01</b> Art-directed</span>
               <span><b>02</b> Responsive</span>
-              <span><b>03</b> Production-ready</span>
+              <span><b>03</b> Easy to adapt</span>
               <span><b>04</b> Free forever</span>
             </div>
           </div>
@@ -84,7 +85,14 @@ function HomePage() {
           <Link to="/assets" className="text-link">View all {assets.length} assets ↗</Link>
         </div>
         <div className="asset-grid home-grid">
-          {featured.map((asset, index) => <AssetCard key={asset.slug} asset={asset} priority={index < 2} />)}
+          {featured.map((asset) => (
+            <AssetCard
+              key={asset.slug}
+              asset={asset}
+              previewActive={featuredPreview === asset.slug}
+              onPreviewActivate={() => setFeaturedPreview(asset.slug)}
+            />
+          ))}
         </div>
       </section>
 

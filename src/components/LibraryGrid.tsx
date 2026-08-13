@@ -7,7 +7,7 @@ import { CloseIcon, SearchIcon } from './Icons'
 
 type ProfileFilter = 'All profiles' | AssetComplexity
 type GroupFilter = 'All worlds' | AssetGroup
-const PAGE_SIZE = 24
+const PAGE_SIZE = 16
 
 export function LibraryGrid({ limit }: { limit?: number }) {
   const [query, setQuery] = useState('')
@@ -16,6 +16,7 @@ export function LibraryGrid({ limit }: { limit?: number }) {
   const [subcategory, setSubcategory] = useState('All types')
   const [profile, setProfile] = useState<ProfileFilter>('All profiles')
   const [visibleCount, setVisibleCount] = useState(limit ?? PAGE_SIZE)
+  const [activePreview, setActivePreview] = useState<string | null>(null)
   const loadMore = useRef<HTMLDivElement>(null)
 
   const groupCounts = useMemo(() => Object.fromEntries(
@@ -82,13 +83,20 @@ export function LibraryGrid({ limit }: { limit?: number }) {
   const canLoadMore = !limit && shown.length < filtered.length
 
   useEffect(() => {
+    setActivePreview((current) => {
+      if (current && shown.some((asset) => asset.slug === current)) return current
+      return shown[0]?.slug ?? null
+    })
+  }, [shown])
+
+  useEffect(() => {
     const node = loadMore.current
     if (!node || !canLoadMore || typeof IntersectionObserver === 'undefined') return
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setVisibleCount((count) => Math.min(count + PAGE_SIZE, filtered.length))
       },
-      { rootMargin: '700px 0px', threshold: 0.01 },
+      { rootMargin: '280px 0px', threshold: 0.01 },
     )
     observer.observe(node)
     return () => observer.disconnect()
@@ -151,12 +159,12 @@ export function LibraryGrid({ limit }: { limit?: number }) {
         </div>
         <div className="library-tools">
           <label className="profile-filter">
-            <span className="sr-only">GPU profile</span>
-            <select value={profile} onChange={(event) => setProfile(event.target.value as ProfileFilter)} aria-label="Filter by GPU profile">
-              <option>All profiles</option>
-              <option>Light</option>
-              <option>Balanced</option>
-              <option>Cinematic</option>
+            <span className="sr-only">Detail level</span>
+            <select value={profile} onChange={(event) => setProfile(event.target.value as ProfileFilter)} aria-label="Filter by detail level">
+              <option value="All profiles">All detail levels</option>
+              <option value="Light">Lightweight</option>
+              <option value="Balanced">Balanced</option>
+              <option value="Cinematic">High detail</option>
             </select>
           </label>
           <label className="search-field">
@@ -169,13 +177,20 @@ export function LibraryGrid({ limit }: { limit?: number }) {
 
       <div className="result-line" aria-live="polite">
         <span>{brand.name} / {String(filtered.length).padStart(3, '0')} ASSETS</span>
-        <span>{shown.length < filtered.length ? `SHOWING ${shown.length} / ${filtered.length}` : 'LIVE PREVIEWS / QUALITY AUDITED / DIRECT ZIP'}</span>
+        <span>{shown.length < filtered.length ? `SHOWING ${shown.length} / ${filtered.length}` : 'INTERACTIVE PREVIEWS · FREE DOWNLOADS'}</span>
       </div>
 
       {shown.length ? (
         <>
           <div className="asset-grid">
-            {shown.map((asset, index) => <AssetCard key={asset.slug} asset={asset} priority={index < 4} />)}
+            {shown.map((asset) => (
+              <AssetCard
+                key={asset.slug}
+                asset={asset}
+                previewActive={activePreview === asset.slug}
+                onPreviewActivate={() => setActivePreview(asset.slug)}
+              />
+            ))}
           </div>
           {canLoadMore && (
             <div ref={loadMore} className="catalog-sentinel" aria-label="Load more assets">
@@ -188,8 +203,8 @@ export function LibraryGrid({ limit }: { limit?: number }) {
         </>
       ) : (
         <div className="empty-state">
-          <p>{category === 'People' ? 'PEOPLE / QUALITY-GATED' : 'NO MATCHING OBJECTS'}</p>
-          {category === 'People' && <span>Human assets publish only after modeled rig, deformation, facial, locomotion, transition, contact and cross-LOD QA passes.</span>}
+          <p>{category === 'People' ? 'PEOPLE / COMING WHEN READY' : 'NO MATCHING OBJECTS'}</p>
+          {category === 'People' && <span>Character assets will be added when movement, facial detail and deformation are polished enough for the library.</span>}
           <button type="button" onClick={reset}>Reset filters</button>
         </div>
       )}

@@ -8,15 +8,13 @@ export function SiteFooter() {
       <div className="footer-grid">
         <div className="footer-intro">
           <span className="footer-label">MESHVARA / OPEN ARCHIVE</span>
-          <p>{brand.productLine}. Direct SHA-256-manifested ZIPs, complete source, no account wall.</p>
+          <p>{brand.productLine}. Preview in the browser, download the source, and make it your own.</p>
         </div>
         <div className="footer-column">
           <span className="footer-label">EXPLORE</span>
           <Link to="/assets">Full archive</Link>
           <a href="/#categories">Categories</a>
-          <a href="/#principles">Quality standard</a>
-          <a href="/downloads/manifest.json">Download integrity</a>
-          <a href="/quality/asset-audit.json">Asset quality audit</a>
+          <a href="/#principles">Principles</a>
         </div>
         <div className="footer-column footer-studio">
           <span className="footer-label">CREATED BY</span>
@@ -27,7 +25,7 @@ export function SiteFooter() {
       </div>
       <div className="footer-bottom">
         <p>© {brand.established} {brand.studio} · {brand.name}</p>
-        <div><span>FREE</span><span>NO AUTH</span><span>NO PAYWALL</span><span>DIRECT ZIP</span></div>
+        <div><span>FREE</span><span>OPEN SOURCE</span><span>DIRECT DOWNLOAD</span></div>
       </div>
     </footer>
   )
