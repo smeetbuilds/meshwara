@@ -29,7 +29,7 @@ Controls include:
 
 ## Key authoring workflow
 
-The selected key is now controller state rather than disposable component-local state, enabling deterministic commands:
+Selected-key and clipboard state remain transient editor state rather than project data. Pointer/editor selection stays scoped to the timeline UI, while the controller owns keyboard transport and project mutations. Together they enable deterministic commands without changing the published Studio Shell contract:
 
 - direct X/Y/Z editing;
 - previous/next key navigation (`[` / `]`);

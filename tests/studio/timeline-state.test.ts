@@ -83,6 +83,10 @@ assert.equal(migratedTimeline.rangeStart, 0)
 assert.equal(migratedTimeline.rangeEnd, 5)
 assert.deepEqual(migratedTimeline.keyframes, [])
 
+const fractionalRange = resolveStudioTimeline({ ...defaultStudioTimeline(), duration: 2, fps: 30, rangeStart: 0.051, rangeEnd: 1.049 })
+assert.equal(fractionalRange.rangeStart, 2 / 30)
+assert.equal(fractionalRange.rangeEnd, 31 / 30)
+
 const legacyFoundation = JSON.parse(JSON.stringify(project))
 delete legacyFoundation.nodes[0].timeline.rangeStart
 delete legacyFoundation.nodes[0].timeline.rangeEnd
