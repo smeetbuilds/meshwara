@@ -9,19 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as StudioRouteImport } from './routes/studio'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StudioRouteImport } from './routes/studio'
 import { Route as AssetsIndexRouteImport } from './routes/assets/index'
 import { Route as AssetsSlugRouteImport } from './routes/assets/$slug'
 
-const StudioRoute = StudioRouteImport.update({
-  id: '/studio',
-  path: '/studio',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssetsIndexRoute = AssetsIndexRouteImport.update({
@@ -37,52 +37,52 @@ const AssetsSlugRoute = AssetsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/studio': typeof StudioRoute
   '/assets/$slug': typeof AssetsSlugRoute
   '/assets/': typeof AssetsIndexRoute
-  '/studio': typeof StudioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/studio': typeof StudioRoute
   '/assets/$slug': typeof AssetsSlugRoute
   '/assets': typeof AssetsIndexRoute
-  '/studio': typeof StudioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/studio': typeof StudioRoute
   '/assets/$slug': typeof AssetsSlugRoute
   '/assets/': typeof AssetsIndexRoute
-  '/studio': typeof StudioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assets/$slug' | '/assets/' | '/studio'
+  fullPaths: '/' | '/studio' | '/assets/$slug' | '/assets/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assets/$slug' | '/assets' | '/studio'
-  id: '__root__' | '/' | '/assets/$slug' | '/assets/' | '/studio'
+  to: '/' | '/studio' | '/assets/$slug' | '/assets'
+  id: '__root__' | '/' | '/studio' | '/assets/$slug' | '/assets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  StudioRoute: typeof StudioRoute
   IndexRoute: typeof IndexRoute
+  StudioRoute: typeof StudioRoute
   AssetsSlugRoute: typeof AssetsSlugRoute
   AssetsIndexRoute: typeof AssetsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/studio': {
-      id: '/studio'
-      path: '/studio'
-      fullPath: '/studio'
-      preLoaderRoute: typeof StudioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assets/': {
@@ -103,8 +103,8 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  StudioRoute: StudioRoute,
   IndexRoute: IndexRoute,
+  StudioRoute: StudioRoute,
   AssetsSlugRoute: AssetsSlugRoute,
   AssetsIndexRoute: AssetsIndexRoute,
 }
