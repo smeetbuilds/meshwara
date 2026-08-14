@@ -8,5 +8,8 @@ dist
 tests/model-pipeline/.generated-validation.glb
 tests/model-pipeline/.generated-validation.gltf
 
+# Generated public registry. Production builds recreate it from the SHA-manifested downloads.
+public/registry/v1.json
+
 # Materialized third-party source bytes (verified locally, never committed)
 staging/materialized/

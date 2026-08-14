@@ -1,6 +1,7 @@
 import { useState, type CSSProperties } from 'react'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { AssetDeveloperPanel, AssetPreviewControls, defaultPreviewSettings } from '../../components/AssetDeveloperWorkbench'
+import { AssetInstallPanel } from '../../components/AssetInstallPanel'
 import { AssetPlayground, defaultAssetPlaygroundSettings } from '../../components/AssetPlayground'
 import { AssetScene } from '../../components/AssetScene'
 import { ArrowDown, ArrowUpRight } from '../../components/Icons'
@@ -59,6 +60,7 @@ function AssetDetail() {
         </aside>
       </section>
 
+      <AssetInstallPanel slug={asset.slug} name={asset.name} />
       <AssetPlayground asset={asset} preview={preview} onPreviewChange={setPreview} value={playground} onChange={setPlayground} />
       <AssetDeveloperPanel asset={asset} />
 

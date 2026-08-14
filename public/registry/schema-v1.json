@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://meshvara.invalid/registry/schema-v1.json",
+  "title": "MESHVARA Registry v1",
+  "type": "object",
+  "required": ["schemaVersion", "name", "brand", "license", "generatedFrom", "defaultInstallDirectory", "dependencies", "count", "assets"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "name": { "const": "MESHVARA Registry" },
+    "brand": { "type": "string", "minLength": 1 },
+    "license": { "const": "MIT" },
+    "generatedFrom": { "type": "string" },
+    "defaultInstallDirectory": { "type": "string", "minLength": 1 },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "count": { "type": "integer", "minimum": 1 },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slug", "name", "category", "subcategory", "archive"],
+        "properties": {
+          "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "name": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "subcategory": { "type": ["string", "null"] },
+          "archive": {
+            "type": "object",
+            "required": ["href", "bytes", "sha256"],
+            "properties": {
+              "href": { "type": "string", "pattern": "\\.zip$" },
+              "bytes": { "type": "integer", "minimum": 1 },
+              "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
