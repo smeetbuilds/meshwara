@@ -118,6 +118,23 @@ Studio still provides:
 
 Typed scene configuration includes hierarchy, source identity, scalar PBR overrides, local texture file references, animation/debug state and scene presentation. The generic R3F scene scaffold continues to require a consumer-supplied `renderSource(object)` resolver; Meshvara does not pretend browser-local IDs automatically resolve inside a third-party application.
 
+## Appearance and browser release gate
+
+Studio appearance is a browser-local preference, not project content. The default remains **Dark** for continuity with the original workbench, while the top bar exposes **Dark / Light / System**. The preference is stored under a versioned localStorage key and never enters `.meshvara-project`, source exports or cloud state. **System** listens to `prefers-color-scheme` changes live so an OS appearance change can update Studio without a reload.
+
+Light mode is a full editor theme rather than a page-background inversion: chrome, panels, controls, selected rows, material/texture cards, warning/success/danger states, form color-scheme and focus-visible outlines receive dedicated contrast-safe tokens. The Three.js scene background remains the project's authored scene setting; changing Studio chrome does not mutate the user's scene/export.
+
+A Playwright browser release gate lives at `playwright.config.ts` and `tests/e2e/studio.spec.ts`. It runs Chromium at desktop (1440×900), tablet (1024×768) and mobile (390×844) viewports and covers:
+
+- dark/light preference switching and persistence;
+- live System-theme response;
+- local IndexedDB project autosave across browser reload;
+- archive asset deep-link boot into an isolated Studio study;
+- keyboard transform-mode accessibility state;
+- viewport containment across the configured responsive breakpoints.
+
+`bun run e2e` is intentionally separate from the normal dependency/build QA because Playwright browser binaries are an explicit environment prerequisite. `bun run release:check` combines the existing full QA chain with the browser suite. `bun run e2e:install` installs the Chromium browser required by this repository's current E2E projects.
+
 ## Regression coverage
 
 `studio:check` now combines:
@@ -128,9 +145,10 @@ Typed scene configuration includes hierarchy, source identity, scalar PBR overri
 - texture binary validation tests;
 - local storage + portable GLB/texture round-trip tests using the no-IndexedDB memory fallback;
 - deterministic component-pack ZIP tests;
+- Studio appearance preference and contrast tests;
 - structural source-contract validation.
 
-These automated contracts are intentionally useful without a network or account. They supplement, rather than replace, real browser interaction testing.
+The pure contracts remain useful without a browser or account. Playwright adds real browser interaction coverage for the editor shell, preference persistence and responsive release surface; GPU-specific rendering and heavyweight binary workflows still require targeted browser QA.
 
 ## Known boundary
 
@@ -164,6 +182,8 @@ Those remain future compression, animation and archive-distribution tranches.
 - skeleton-safe loading, model diagnostics, animation playback or material/texture application disappear;
 - web export profiles stop using real `GLTFExporter.maxTextureSize` values or start claiming unavailable codecs;
 - deterministic imported-model component ZIP delivery disappears;
-- typed config/R3F scaffold delivery disappears.
+- typed config/R3F scaffold delivery disappears;
+- Dark / Light / System appearance, local preference persistence or live system-theme resolution disappears;
+- the Playwright desktop/tablet/mobile release gate or IndexedDB reload regression disappears.
 
-Real desktop/tablet/mobile interaction testing, IndexedDB quota pressure, very large model/texture memory behavior, browser-specific image decode behavior, GPU-specific material behavior and visual GLTFExporter round-trip parity still require browser QA.
+The configured Playwright suite covers desktop/tablet/mobile shell interaction and IndexedDB reload persistence. IndexedDB quota pressure, very large model/texture memory behavior, native file-picker edge cases, browser-specific image decode behavior, GPU-specific materials/WebGL behavior and visual GLTFExporter round-trip parity still require targeted browser QA.

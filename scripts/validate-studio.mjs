@@ -5,8 +5,8 @@ const root = process.cwd()
 const read = (path) => readFile(resolve(root, path), 'utf8')
 const [
   routeTree, studioRoute, shell, viewport, storage, project, transforms, inspector, outliner, library,
-  exportModule, modelTools, modelExport, textureResources, componentPack, browserZip,
-  header, assetsIndex, assetDetail, contract, packageJson,
+  exportModule, modelTools, modelExport, textureResources, componentPack, browserZip, themeModule, themeCss,
+  header, assetsIndex, assetDetail, contract, packageJson, playwrightConfig, e2eStudio,
 ] = await Promise.all([
   read('src/routeTree.gen.ts'),
   read('src/routes/studio.tsx'),
@@ -24,11 +24,15 @@ const [
   read('src/lib/studioTextureResources.ts'),
   read('src/lib/studioComponentPack.ts'),
   read('src/lib/browserZip.ts'),
+  read('src/lib/studioTheme.ts'),
+  read('src/styles/studio-theme.css'),
   read('src/components/SiteHeader.tsx'),
   read('src/routes/assets/index.tsx'),
   read('src/routes/assets/$slug.tsx'),
   read('STUDIO_ARCHITECTURE.md'),
   read('package.json'),
+  read('playwright.config.ts'),
+  read('tests/e2e/studio.spec.ts'),
 ])
 
 function assert(condition, message) {
@@ -42,6 +46,10 @@ assert(studioRoute.includes('validateSearch'), 'Studio asset deep-link search is
 assert(header.includes('to="/studio"'), 'desktop/mobile navigation does not expose Studio')
 assert(assetsIndex.includes('<LibraryGrid'), '/assets index does not render the existing archive grid')
 assert(assetDetail.includes('search={{ asset: asset.slug }}'), 'asset detail does not hand off directly into Studio')
+
+for (const token of ['STUDIO_THEME_STORAGE_KEY', "'dark' | 'light' | 'system'", 'resolveStudioTheme', 'readStudioThemePreference', 'writeStudioThemePreference']) assert(themeModule.includes(token), `appearance module missing ${token}`)
+for (const token of ['data-studio-theme="light"', '--studio-page-bg', '--studio-accent-soft', '.studio-theme-select', 'color-scheme:light', ':focus-visible']) assert(themeCss.includes(token), `light-theme stylesheet missing ${token}`)
+for (const token of ['readStudioThemePreference', 'resolveStudioTheme', 'writeStudioThemePreference', 'data-studio-theme={resolvedTheme}', 'Studio appearance', '<option value="light">LIGHT</option>', '<option value="system">SYSTEM</option>', 'aria-live="polite"']) assert(shell.includes(token), `Studio shell appearance/accessibility missing ${token}`)
 
 for (const token of [
   'createStudioHistory', 'undoStudioHistory', 'redoStudioHistory', 'duplicateStudioNodes', 'removeStudioNodes',
@@ -89,16 +97,19 @@ for (const forbidden of ['fetch(', 'XMLHttpRequest', 'supabase', 'firebase']) as
 for (const token of ['satisfies MeshvaraStudioConfig', 'parentId', 'materials', 'textures?: Partial<Record', 'animation', 'generateStudioR3FScaffold', 'renderSource', 'children.get(object.id)']) assert(exportModule.includes(token), `developer handoff missing ${token}`)
 for (const token of [
   'tests/studio/project-state.test.ts', 'tests/studio/glb-validation.test.ts', 'tests/studio/transform-preservation.test.ts',
-  'tests/studio/texture-validation.test.ts', 'tests/studio/local-storage.test.ts', 'tests/studio/component-pack.test.ts', 'scripts/validate-studio.mjs',
+  'tests/studio/texture-validation.test.ts', 'tests/studio/local-storage.test.ts', 'tests/studio/component-pack.test.ts', 'tests/studio/theme.test.ts', 'tests/studio/theme-contrast.test.mjs', 'scripts/validate-studio.mjs',
 ]) assert(packageJson.includes(token), `studio:check missing ${token}`)
+for (const token of ['"@playwright/test": "1.62.1"', '"e2e": "playwright test"', '"release:check": "bun run qa && bun run e2e"']) assert(packageJson.includes(token), `browser release gate missing ${token}`)
+for (const token of ['desktop-chromium', 'tablet-chromium', 'mobile-chromium', 'bun --bun vite dev', 'trace:', 'screenshot:']) assert(playwrightConfig.includes(token), `Playwright config missing ${token}`)
+for (const token of ['Studio appearance supports dark, light and live system preference', 'local project autosave survives a real browser reload', 'asset deep link opens an isolated Studio study', 'keyboard transform modes expose accessible pressed state', 'viewport-contained across configured breakpoints']) assert(e2eStudio.includes(token), `Studio browser regression missing ${token}`)
 
 for (const section of [
   'Local-first boundary', 'Project, hierarchy and transform model', 'Production model editor', 'Local texture workflow',
   'Local GLB validation and storage safety', 'Web GLB export profiles', 'Downloadable component delivery', 'Developer handoff',
-  'Regression coverage', 'Known boundary', 'QA invariant',
+  'Appearance and browser release gate', 'Regression coverage', 'Known boundary', 'QA invariant',
 ]) assert(contract.includes(`## ${section}`), `architecture contract missing ${section}`)
 
 assert(contract.includes('does **not** yet mean every existing Meshvara archive ZIP'), 'archive-pack parity boundary is not explicit')
 assert(contract.includes('Draco geometry compression') && contract.includes('Meshopt geometry compression') && contract.includes('KTX2/Basis texture transcoding'), 'codec boundary is not explicit')
 
-console.log('Meshvara Studio texture + local delivery contract passed')
+console.log('Meshvara Studio appearance + browser release contract passed')

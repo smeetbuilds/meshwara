@@ -44,12 +44,19 @@ import { generateStudioConfigModule, generateStudioR3FScaffold } from '../../lib
 import { exportStudioGlb, type StudioGlbExportProfile } from '../../lib/studioModelExport'
 import { createStudioComponentPack } from '../../lib/studioComponentPack'
 import type { StudioModelInspection } from '../../lib/studioModelTools'
+import {
+  readStudioThemePreference,
+  resolveStudioTheme,
+  writeStudioThemePreference,
+  type StudioThemePreference,
+} from '../../lib/studioTheme'
 import { StudioViewport, type StudioViewportMetrics } from './StudioViewport'
 import { StudioOutliner } from './StudioOutliner'
 import { StudioLibrary } from './StudioLibrary'
 import { StudioInspector } from './StudioInspector'
 import '../../styles/studio.css'
 import '../../styles/studio-model-editor.css'
+import '../../styles/studio-theme.css'
 
 function downloadText(filename: string, content: string, type = 'text/plain') {
   downloadBlob(filename, new Blob([content], { type }))
@@ -101,6 +108,8 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
   const [status, setStatus] = useState('LOCAL-FIRST · INITIALIZING')
   const [metrics, setMetrics] = useState<StudioViewportMetrics>({ calls: 0, triangles: 0, geometries: 0, textures: 0 })
   const [inspections, setInspections] = useState<Record<string, StudioModelInspection>>({})
+  const [themePreference, setThemePreference] = useState<StudioThemePreference>('dark')
+  const [systemPrefersLight, setSystemPrefersLight] = useState(false)
   const booted = useRef(false)
   const project = history.present
   const projectRef = useRef(project)
@@ -108,8 +117,29 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
   const selectedId = selectedIds.at(-1) ?? null
   const selectedNode = useMemo(() => project.nodes.find((node) => node.id === selectedId) ?? null, [project.nodes, selectedId])
   const selectedInspection = selectedId ? inspections[selectedId] : undefined
+  const resolvedTheme = resolveStudioTheme(themePreference, systemPrefersLight)
 
   const refreshProjects = useCallback(async () => setProjects(await listStudioProjects()), [])
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: light)')
+    const syncSystemTheme = () => setSystemPrefersLight(media.matches)
+    syncSystemTheme()
+    setThemePreference(readStudioThemePreference(window.localStorage))
+    if (typeof media.addEventListener === 'function') media.addEventListener('change', syncSystemTheme)
+    else media.addListener(syncSystemTheme)
+    return () => {
+      if (typeof media.removeEventListener === 'function') media.removeEventListener('change', syncSystemTheme)
+      else media.removeListener(syncSystemTheme)
+    }
+  }, [])
+
+  const changeTheme = (next: StudioThemePreference) => {
+    setThemePreference(next)
+    writeStudioThemePreference(next, window.localStorage)
+    const resolved = resolveStudioTheme(next, systemPrefersLight)
+    setStatus(`APPEARANCE · ${next.toUpperCase()}${next === 'system' ? ` → ${resolved.toUpperCase()}` : ''}`)
+  }
 
   const commit = useCallback((next: StudioProject, nextSelectedIds?: string[]) => {
     setHistory((current) => commitStudioHistory(current, next))
@@ -423,7 +453,7 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
   }, [])
 
   return (
-    <div className="studio-page">
+    <div className="studio-page" data-studio-theme={resolvedTheme} data-studio-theme-preference={themePreference}>
       <header className="studio-topbar">
         <div className="studio-brand-block">
           <Link to="/" className="studio-brand">MESHVARA <b>STUDIO</b></Link>
@@ -431,6 +461,14 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
         </div>
         <label className="studio-project-name"><span>PROJECT</span><input value={project.name} onChange={(event) => commit(renameStudioProject(project, event.currentTarget.value))} /></label>
         <div className="studio-top-actions">
+          <label className="studio-theme-select">
+            <span>THEME</span>
+            <select aria-label="Studio appearance" value={themePreference} onChange={(event) => changeTheme(event.currentTarget.value as StudioThemePreference)}>
+              <option value="dark">DARK</option>
+              <option value="light">LIGHT</option>
+              <option value="system">SYSTEM</option>
+            </select>
+          </label>
           <button type="button" onClick={newProject}>NEW</button>
           <label><input type="file" accept=".meshvara-project,application/json" onChange={(event) => { const file = event.currentTarget.files?.[0]; if (file) void importProject(file); event.currentTarget.value = '' }} />IMPORT PROJECT</label>
           <button type="button" onClick={exportProject}>EXPORT PROJECT</button>
@@ -461,12 +499,12 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
         <main className="studio-stage-column">
           <div className="studio-toolbar">
             <div className="studio-tool-group" aria-label="Transform mode">
-              {(['translate', 'rotate', 'scale'] as StudioTransformMode[]).map((item, index) => <button key={item} type="button" className={mode === item ? 'is-active' : ''} onClick={() => setMode(item)}>{index + 1} · {item.toUpperCase()}</button>)}
+              {(['translate', 'rotate', 'scale'] as StudioTransformMode[]).map((item, index) => <button key={item} type="button" className={mode === item ? 'is-active' : ''} aria-pressed={mode === item} onClick={() => setMode(item)}>{index + 1} · {item.toUpperCase()}</button>)}
             </div>
             <div className="studio-tool-group">
               <button type="button" disabled={!history.past.length} onClick={() => setHistory((current) => undoStudioHistory(current))}>UNDO</button>
               <button type="button" disabled={!history.future.length} onClick={() => setHistory((current) => redoStudioHistory(current))}>REDO</button>
-              <button type="button" onClick={() => commit(updateStudioScene(project, { snap: !project.scene.snap }))}>SNAP {project.scene.snap ? 'ON' : 'OFF'}</button>
+              <button type="button" aria-pressed={project.scene.snap} onClick={() => commit(updateStudioScene(project, { snap: !project.scene.snap }))}>SNAP {project.scene.snap ? 'ON' : 'OFF'}</button>
             </div>
             <div className="studio-tool-group studio-export-tools">
               <button type="button" onClick={() => void exportSource('config', true)}>COPY CONFIG</button>
@@ -487,8 +525,8 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
             onInspection={reportInspection}
           />
 
-          <footer className="studio-statusbar">
-            <span>{status}</span>
+          <footer className="studio-statusbar" aria-label="Studio status">
+            <span role="status" aria-live="polite">{status}</span>
             <span>{project.nodes.length} OBJECTS</span>
             <span>{selectedIds.length} SELECTED</span>
             <span>{metrics.calls} CALLS</span>

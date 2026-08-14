@@ -13,3 +13,6 @@ public/registry/v1.json
 
 # Materialized third-party source bytes (verified locally, never committed)
 staging/materialized/
+playwright-report/
+test-results/
+.playwright/
