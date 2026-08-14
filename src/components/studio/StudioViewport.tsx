@@ -16,6 +16,7 @@ import {
   type StudioModelInspection,
 } from '../../lib/studioModelTools'
 import type { StudioNode, StudioProject, StudioTransform, StudioTransformMode } from '../../lib/studioProject'
+import { loadStudioTextureResources, type StudioLoadedTextureResources } from '../../lib/studioTextureResources'
 
 export interface StudioViewportMetrics {
   calls: number
@@ -33,7 +34,7 @@ function ImportedObject({ node, onInspection }: { node: StudioNode; onInspection
     let objectUrl = ''
     if (!node.fileId) return
     loadStudioFile(node.fileId).then((record) => {
-      if (!active || !record) {
+      if (!active || !record || record.kind !== 'glb') {
         if (active) setError(true)
         return
       }
@@ -56,10 +57,30 @@ function LoadedGlb({ url, node, onInspection }: { url: string; node: StudioNode;
   const gltf = useLoader(GLTFLoader, url)
   const root = useRef<THREE.Group>(null)
   const scene = useMemo(() => cloneSkeleton(gltf.scene), [gltf.scene])
+  const [textureBundle, setTextureBundle] = useState<StudioLoadedTextureResources | null>(null)
+  const textureSignature = useMemo(() => JSON.stringify(Object.values(node.materialOverrides).map((override) => override.textures ?? null)), [node.materialOverrides])
+
+  useEffect(() => {
+    let active = true
+    let resolved: StudioLoadedTextureResources | null = null
+    setTextureBundle(null)
+    void loadStudioTextureResources(node.materialOverrides).then((bundle) => {
+      resolved = bundle
+      if (active) setTextureBundle(bundle)
+      else bundle.dispose()
+    })
+    return () => {
+      active = false
+      resolved?.dispose()
+    }
+  }, [textureSignature])
+
   const inspection = useMemo(() => {
-    prepareStudioModel(scene, node.materialOverrides, node.wireframe)
-    return inspectStudioModel(scene, gltf.animations)
-  }, [gltf.animations, node.materialOverrides, node.wireframe, scene])
+    prepareStudioModel(scene, node.materialOverrides, node.wireframe, textureBundle?.textures)
+    const report = inspectStudioModel(scene, gltf.animations)
+    if (textureBundle?.missing.length) report.warnings.push(`${textureBundle.missing.length} local texture replacement${textureBundle.missing.length === 1 ? '' : 's'} could not be restored.`)
+    return report
+  }, [gltf.animations, node.materialOverrides, node.wireframe, scene, textureBundle])
   const boundsHelper = useMemo(() => node.debug.bounds ? createBoundsHelper(scene) : null, [node.debug.bounds, scene])
   const skeletonHelper = useMemo(() => node.debug.skeleton ? createSkeletonHelper(scene) : null, [node.debug.skeleton, scene])
   const { actions, mixer } = useAnimations(gltf.animations, root)

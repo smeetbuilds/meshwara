@@ -1,3 +1,4 @@
+import { cloneTransform, invertStudioMatrix, localTransformForWorld, multiplyStudioMatrices, studioSelectedRootIds, studioWorldMatrix } from './studioTransforms'
 export const STUDIO_PROJECT_FORMAT = 'meshvara-project' as const
 export const STUDIO_PROJECT_VERSION = 1 as const
 export const STUDIO_HISTORY_LIMIT = 50
@@ -6,6 +7,7 @@ export const STUDIO_NODE_LIMIT = 250
 export type StudioTransformMode = 'translate' | 'rotate' | 'scale'
 export type StudioNodeKind = 'archive' | 'imported'
 export type StudioVec3 = [number, number, number]
+export type StudioTextureChannel = 'map' | 'normalMap' | 'roughnessMap' | 'metalnessMap' | 'emissiveMap' | 'alphaMap' | 'aoMap'
 
 export interface StudioTransform {
   position: StudioVec3
@@ -20,6 +22,8 @@ export interface StudioMaterialOverride {
   roughness?: number
   metalness?: number
   opacity?: number
+  /** file ID replaces the authored texture; null explicitly removes the authored channel. */
+  textures?: Partial<Record<StudioTextureChannel, string | null>>
 }
 
 export interface StudioAnimationState {
@@ -196,13 +200,64 @@ export function collectStudioDescendantIds(project: StudioProject, nodeId: strin
   return result
 }
 
-export function setStudioParent(project: StudioProject, nodeId: string, parentId?: string): StudioProject {
+export function setStudioParentPreserveWorld(project: StudioProject, nodeId: string, parentId?: string): { project: StudioProject; preserved: boolean; reason?: string } {
   const node = project.nodes.find((item) => item.id === nodeId)
-  if (!node) return project
-  if (!parentId) return updateStudioNode(project, nodeId, { parentId: undefined })
-  if (parentId === nodeId || !project.nodes.some((item) => item.id === parentId)) return project
-  if (collectStudioDescendantIds(project, nodeId).includes(parentId)) return project
-  return updateStudioNode(project, nodeId, { parentId })
+  if (!node) return { project, preserved: false, reason: 'Object no longer exists.' }
+  if (parentId === node.parentId) return { project, preserved: true }
+  if (parentId && (parentId === nodeId || !project.nodes.some((item) => item.id === parentId) || collectStudioDescendantIds(project, nodeId).includes(parentId))) {
+    return { project, preserved: false, reason: 'Parent would create an invalid hierarchy.' }
+  }
+  const world = studioWorldMatrix(project.nodes, nodeId)
+  if (!world) return { project, preserved: false, reason: 'World transform could not be resolved.' }
+  const local = localTransformForWorld(project.nodes, nodeId, parentId, world)
+  if (!local) return { project, preserved: false, reason: 'Reparenting would introduce shear that cannot be represented by Studio TRS.' }
+  return {
+    project: touch({
+      ...project,
+      nodes: project.nodes.map((item) => item.id === nodeId ? { ...item, parentId, transform: local } : item),
+    }),
+    preserved: true,
+  }
+}
+
+/** Backward-compatible alias; all current UI callers should use the preservation result. */
+export function setStudioParent(project: StudioProject, nodeId: string, parentId?: string): StudioProject {
+  return setStudioParentPreserveWorld(project, nodeId, parentId).project
+}
+
+export function updateStudioGroupTransform(
+  project: StudioProject,
+  selectedIds: Iterable<string>,
+  primaryId: string,
+  nextPrimaryTransform: StudioTransform,
+): { project: StudioProject; preserved: boolean; reason?: string } {
+  const selected = [...new Set(selectedIds)].filter((id) => project.nodes.some((node) => node.id === id))
+  if (!selected.includes(primaryId)) return { project, preserved: false, reason: 'Primary selection is not part of the group.' }
+  if (selected.length === 1) return { project: updateStudioTransform(project, primaryId, nextPrimaryTransform), preserved: true }
+  const oldPrimaryWorld = studioWorldMatrix(project.nodes, primaryId)
+  const newPrimaryWorld = studioWorldMatrix(project.nodes, primaryId, { nodeId: primaryId, transform: nextPrimaryTransform })
+  if (!oldPrimaryWorld || !newPrimaryWorld) return { project, preserved: false, reason: 'Group world transform could not be resolved.' }
+  const inverseOld = invertStudioMatrix(oldPrimaryWorld)
+  if (!inverseOld) return { project, preserved: false, reason: 'Primary transform is singular.' }
+  const delta = multiplyStudioMatrices(newPrimaryWorld, inverseOld)
+  const roots = studioSelectedRootIds(project.nodes, selected)
+  const replacements = new Map<string, StudioTransform>()
+  for (const id of roots) {
+    const node = project.nodes.find((item) => item.id === id)!
+    const world = studioWorldMatrix(project.nodes, id)
+    if (!world) return { project, preserved: false, reason: `World transform failed for ${node.name}.` }
+    const nextWorld = multiplyStudioMatrices(delta, world)
+    const local = localTransformForWorld(project.nodes, id, node.parentId, nextWorld)
+    if (!local) return { project, preserved: false, reason: `Group transform would introduce unsupported shear for ${node.name}.` }
+    replacements.set(id, cloneTransform(local))
+  }
+  return {
+    project: touch({
+      ...project,
+      nodes: project.nodes.map((node) => replacements.has(node.id) ? { ...node, transform: replacements.get(node.id)! } : node),
+    }),
+    preserved: true,
+  }
 }
 
 export function removeStudioNodes(project: StudioProject, nodeIds: Iterable<string>): StudioProject {
@@ -320,6 +375,16 @@ function sanitizeMaterialOverrides(value: unknown): Record<string, StudioMateria
     if (typeof input.roughness === 'number' && Number.isFinite(input.roughness)) override.roughness = clamp(input.roughness, 0, 1)
     if (typeof input.metalness === 'number' && Number.isFinite(input.metalness)) override.metalness = clamp(input.metalness, 0, 1)
     if (typeof input.opacity === 'number' && Number.isFinite(input.opacity)) override.opacity = clamp(input.opacity, 0, 1)
+    if (input.textures && typeof input.textures === 'object' && !Array.isArray(input.textures)) {
+      const allowed = new Set<StudioTextureChannel>(['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'emissiveMap', 'alphaMap', 'aoMap'])
+      const textures: Partial<Record<StudioTextureChannel, string | null>> = {}
+      for (const [channel, reference] of Object.entries(input.textures as Record<string, unknown>)) {
+        if (!allowed.has(channel as StudioTextureChannel)) continue
+        if (reference === null) textures[channel as StudioTextureChannel] = null
+        else if (typeof reference === 'string' && /^texture-[a-zA-Z0-9-]{4,120}$/.test(reference)) textures[channel as StudioTextureChannel] = reference
+      }
+      if (Object.keys(textures).length) override.textures = textures
+    }
     if (Object.keys(override).length) result[key] = override
   }
   return result
@@ -423,5 +488,12 @@ export function parseStudioProject(value: unknown): StudioProject | null {
 }
 
 export function collectStudioFileIds(project: StudioProject) {
-  return Array.from(new Set(project.nodes.flatMap((node) => node.kind === 'imported' && node.fileId ? [node.fileId] : [])))
+  const ids = new Set<string>()
+  for (const node of project.nodes) {
+    if (node.kind === 'imported' && node.fileId) ids.add(node.fileId)
+    for (const override of Object.values(node.materialOverrides)) {
+      for (const reference of Object.values(override.textures ?? {})) if (typeof reference === 'string') ids.add(reference)
+    }
+  }
+  return [...ids]
 }

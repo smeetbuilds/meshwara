@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import type { StudioMaterialOverride } from './studioProject'
+import type { StudioMaterialOverride, StudioTextureChannel } from './studioProject'
 
 export interface StudioMaterialSlot {
   id: string
@@ -34,7 +34,18 @@ export interface StudioModelInspection {
   warnings: string[]
 }
 
-const textureFields = ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'emissiveMap', 'alphaMap', 'aoMap', 'lightMap'] as const
+export const studioEditableTextureChannels = ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'emissiveMap', 'alphaMap', 'aoMap'] as const satisfies readonly StudioTextureChannel[]
+const textureFields = [...studioEditableTextureChannels, 'lightMap'] as const
+
+export function studioTextureColorSpace(channel: StudioTextureChannel) {
+  return channel === 'map' || channel === 'emissiveMap' ? THREE.SRGBColorSpace : THREE.NoColorSpace
+}
+
+export function studioTextureResourceKey(fileId: string, channel: StudioTextureChannel) {
+  return `${fileId}:${studioTextureColorSpace(channel) === THREE.SRGBColorSpace ? 'srgb' : 'linear'}`
+}
+
+export type StudioTextureResources = ReadonlyMap<string, THREE.Texture>
 
 function colorHex(value: THREE.Color | undefined) {
   return value ? `#${value.getHexString()}` : undefined
@@ -68,7 +79,12 @@ function materialDefaults(material: THREE.Material, id: string): StudioMaterialS
   }
 }
 
-function applyOverride(material: THREE.Material, override: StudioMaterialOverride | undefined, wireframe: boolean) {
+function applyOverride(
+  material: THREE.Material,
+  override: StudioMaterialOverride | undefined,
+  wireframe: boolean,
+  textures?: StudioTextureResources,
+) {
   if ('wireframe' in material) (material as THREE.MeshStandardMaterial).wireframe = wireframe
   if (!override) return
   if (material instanceof THREE.MeshStandardMaterial) {
@@ -82,6 +98,12 @@ function applyOverride(material: THREE.Material, override: StudioMaterialOverrid
     material.opacity = override.opacity
     material.transparent = override.opacity < 1
     material.depthWrite = override.opacity >= 1
+  }
+  for (const channel of studioEditableTextureChannels) {
+    if (!override.textures || !(channel in override.textures) || !(channel in material)) continue
+    const reference = override.textures[channel]
+    const next = typeof reference === 'string' ? textures?.get(studioTextureResourceKey(reference, channel)) ?? null : null
+    ;(material as THREE.MeshStandardMaterial & Record<StudioTextureChannel, THREE.Texture | null>)[channel] = next
   }
   material.needsUpdate = true
 }
@@ -118,7 +140,12 @@ function createMaterialState(root: THREE.Object3D): StudioMaterialState {
   return { slots, assignments, current: [] }
 }
 
-export function prepareStudioModel(root: THREE.Object3D, overrides: Record<string, StudioMaterialOverride>, wireframe: boolean) {
+export function prepareStudioModel(
+  root: THREE.Object3D,
+  overrides: Record<string, StudioMaterialOverride>,
+  wireframe: boolean,
+  textures?: StudioTextureResources,
+) {
   let state = modelMaterialStates.get(root)
   if (!state) {
     state = createMaterialState(root)
@@ -128,7 +155,7 @@ export function prepareStudioModel(root: THREE.Object3D, overrides: Record<strin
   const currentById = new Map<string, THREE.Material>()
   state.current = state.slots.map(({ id, template }) => {
     const material = template.clone()
-    applyOverride(material, overrides[id], wireframe)
+    applyOverride(material, overrides[id], wireframe, textures)
     currentById.set(id, material)
     return material
   })

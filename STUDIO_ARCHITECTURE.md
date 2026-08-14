@@ -1,121 +1,169 @@
 # Meshvara Studio architecture contract
 
-Meshvara Studio is the local-first composition and model-inspection layer for the open Meshvara archive. It deliberately favors portable browser primitives, explicit developer handoff and inspectable source state over accounts, hidden uploads or proprietary cloud project formats.
+Meshvara Studio is the free, no-login, local-first composition and model-delivery layer for the Meshvara archive. The editor must keep project data inspectable and portable, must never require a cloud persistence service for core work, and must distinguish real browser-side optimization from codecs or processing pipelines that are not actually bundled.
 
 ## Local-first boundary
 
-- Studio projects are persisted with native IndexedDB.
-- Imported `.glb` bytes live in a separate local IndexedDB object store and are never uploaded by Studio.
-- If IndexedDB is unavailable, the current session degrades to in-memory project/file stores rather than silently introducing remote persistence.
-- Studio has no sign-in, payment, email, Supabase, Firebase, analytics write or hosted project-sync requirement.
-- Imported GLBs are limited to 100 MB per file.
-- Manual storage cleanup removes only file records that are no longer referenced by any saved Studio project.
-- Deleting one project no longer blindly deletes a file that another saved project still references.
+- Studio projects persist with native IndexedDB.
+- Imported GLB and replacement texture bytes live in a separate local IndexedDB file store and are never uploaded by Studio.
+- If IndexedDB is unavailable, the active session degrades to in-memory project/file stores instead of introducing a network fallback.
+- Studio has no sign-in, payment, email, Supabase, Firebase, analytics-write or hosted project-sync requirement.
+- GLBs are limited to 100 MB per local source file.
+- Replacement textures are limited to 16 MB and must be binary PNG, JPEG or WebP. SVG is intentionally not accepted as a model texture payload.
+- Storage garbage collection removes only file IDs no longer referenced by any saved project, including material texture references. The active project's past/present/future undo snapshots are passed as protected file IDs so manual cleanup cannot break an undoable GLB or texture edit.
+- Deleting one project cannot destroy a GLB or texture still referenced by another saved project; when a non-active project is deleted, the active editor history is also protected from that cleanup pass.
 
-## Project and hierarchy model
+## Project, hierarchy and transform model
 
-`StudioProject` remains the backward-compatible `meshvara-project` version `1` format. The model now includes editor-safe optional state without invalidating existing version-1 projects:
+`StudioProject` remains the backward-compatible `meshvara-project` version `1` format. Optional editor state extends the format without invalidating earlier version-1 projects.
 
-- `archive` nodes reference a published Meshvara asset slug and reuse the canonical scene registry.
-- `imported` nodes reference browser-local GLB records.
-- Every node stores explicit position, rotation and scale plus visibility and locking state.
-- Nodes may reference a `parentId`. Reparenting rejects self-parenting and descendant cycles.
-- Removing a parent promotes surviving children back to scene root rather than leaving dangling references.
-- Multi-duplication remaps parent relationships when both parent and child are duplicated together.
-- Scene size is bounded to 250 editor nodes.
-- Undo/redo remains bounded to 50 committed project snapshots.
-- Imported nodes can persist PBR material overrides, animation state and editor-only debug flags.
+- `archive` nodes reference a published Meshvara asset slug.
+- `imported` nodes reference a browser-local GLB file ID.
+- Nodes store explicit local position/rotation/scale, visibility, locking and optional `parentId`.
+- Scene size remains bounded to 250 nodes and undo/redo to 50 committed snapshots.
+- Reparenting rejects self-parenting, descendant cycles and missing parents.
+- Reparenting now computes the current world matrix, derives the new local TRS under the requested parent, and commits only when the world transform can be represented without unsupported shear.
+- Multi-selection transform commits derive a world-space delta from the primary gizmo and apply it to selected root nodes. Selected descendants inherit the movement through their selected ancestor instead of receiving the delta twice.
+- Group-transform/reparent operations reject singular or shear-producing transformations rather than silently corrupting object placement.
 
-Portable `.meshvara-project` export embeds referenced GLB bytes so project transfer does not silently lose imported sources. Import sanitizes transforms, hierarchy, material values, animation controls, debug flags and binary file references before restoration.
+Portable `.meshvara-project` export embeds every referenced local GLB and replacement texture, so moving the project between browsers does not silently lose media. Import sanitizes transforms, hierarchy, material state, animation/debug state and file references before restoration.
 
 ## Production model editor
 
-Imported GLBs are no longer opaque viewport objects. The editor now provides:
+Imported GLBs provide:
 
-- Skeleton-safe scene cloning through Three.js `SkeletonUtils` for skinned assets.
-- Live model inspection: mesh, skinned-mesh, vertex, triangle, material and texture counts.
-- Bounds reporting and warnings for unusually expensive geometry/material/texture footprints, missing normals and suspicious authored scale.
-- Stable per-model material slots derived from first material encounter order.
-- Editable PBR base color, emissive color/intensity, roughness, metalness and opacity where the material supports those properties.
-- Animation clip discovery plus clip selection, play/pause, loop and playback-speed controls.
-- Editor-only wireframe, axes, bounds and skeleton debugging.
-- Hierarchical scene rendering so child transforms are evaluated under their Studio parent.
-- Hierarchical outliner presentation and additive Shift/Ctrl/Command multi-selection.
-- Bulk show/hide/lock/unlock/delete/duplicate operations while TransformControls remain attached to the primary selection.
+- skeleton-safe scene cloning through Three.js `SkeletonUtils`;
+- mesh, skinned-mesh, vertex, triangle, material and texture counts;
+- bounds and structural web-runtime warnings;
+- stable PBR material slots;
+- editable base color, emissive color/intensity, roughness, metalness and opacity;
+- animation clip discovery, play/pause, loop and speed controls;
+- wireframe, axes, bounds and skeleton editor debugging;
+- recursive Studio hierarchy rendering;
+- hierarchical outliner and additive Shift/Ctrl/Command multi-selection;
+- bulk show/hide/lock/unlock/delete/duplicate operations.
 
-Archive assets continue to render through the existing Meshvara scene registry. Studio does not pretend that every heterogeneous procedural/shader/archive scene exposes the same internal geometry or shader parameters.
+Archive assets continue to use the canonical scene registry. Studio still does not invent a fake universal geometry/shader API across 500 heterogeneous archive scenes.
+
+## Local texture workflow
+
+Material overrides can replace or explicitly remove these PBR texture channels:
+
+- `map`;
+- `normalMap`;
+- `roughnessMap`;
+- `metalnessMap`;
+- `emissiveMap`;
+- `alphaMap`;
+- `aoMap`.
+
+Replacement files are validated by binary signature, stored locally, embedded in portable project export and reference-counted by storage cleanup. Color textures (`map`, `emissiveMap`) use sRGB color space; data maps use no color space. Replacement textures use glTF-compatible `flipY = false` behavior. Material **Reset to authored** removes both scalar and texture overrides.
+
+The viewport reloads texture resources only when texture references change, so roughness/metalness/color slider changes do not repeatedly decode the same image files.
 
 ## Local GLB validation and storage safety
 
-A `.glb` filename is not trusted by itself. Before bytes enter Studio storage the local validator checks:
+A filename or MIME type is never sufficient validation.
 
-- minimum binary header/chunk structure;
-- glTF binary magic number;
+GLB validation checks:
+
+- binary glTF magic;
 - glTF version 2;
-- declared file length against actual payload length;
-- presence and bounds of the required JSON scene chunk;
-- the 100 MB safety ceiling.
+- declared file length;
+- required JSON chunk bounds/type;
+- parseable JSON chunk declaring glTF 2.x;
+- 100 MB size ceiling.
 
-Portable project restoration runs the same GLB validation before writing embedded files back to local storage.
+Texture validation checks binary PNG/JPEG/WebP signatures and the 16 MB ceiling. Portable project restoration verifies that imported-model source IDs resolve to GLB records and material texture IDs resolve to image records.
 
-## Local clean GLB export
+## Web GLB export profiles
 
-A primary imported model can be re-exported entirely in the browser through Three.js `GLTFLoader` + `GLTFExporter`.
+Imported models can be re-exported locally through Three.js `GLTFLoader` + `GLTFExporter` after applying current PBR and texture overrides.
 
-The clean export:
+Three honest profiles are exposed:
 
-- reloads the original local GLB bytes;
-- uses skeleton-safe cloning;
-- applies persisted PBR material overrides;
-- preserves discovered animation clips;
-- writes binary GLB with visible-object filtering and TRS output;
-- never sends the source to a remote optimization service;
-- reports source and output byte sizes in the Studio status bar.
+- **Preserve** — no Studio texture-dimension cap (`maxTextureSize: Infinity`).
+- **Web · 2K** — exporter texture dimensions capped at 2048 px.
+- **Mobile · 1K** — exporter texture dimensions capped at 1024 px.
 
-This is deliberately called **clean GLB export**, not compressed/optimized GLB export. Draco, Meshopt geometry compression and KTX2/Basis texture compression are not present in this tranche and must not be implied by UI copy or documentation.
+All profiles preserve discovered animation clips, export binary GLB, filter invisible objects and use TRS output. Studio reports source/output bytes and the size delta.
+
+These profiles are real texture-size optimization, but they are **not** geometry compression. No UI, README or quality contract may describe them as Draco, Meshopt or KTX2 compression.
+
+## Downloadable component delivery
+
+A primary imported model can be exported as a deterministic **R3F component ZIP** entirely in the browser. The ZIP contains:
+
+- the selected profile's exported GLB with current Studio material/texture edits baked in;
+- a typed React Three Fiber component;
+- discovered animation names as a TypeScript literal union;
+- `package.json` with exact Meshvara dependency pins;
+- `meshvara-preset.json` metadata;
+- `QUALITY.md`;
+- MIT license;
+- README/install example.
+
+The ZIP writer is implemented locally with deterministic stored entries and CRC32; no server-side archive service is involved. This closes downloadable-component parity for **Studio-imported GLB models**.
+
+It does **not** yet mean every existing Meshvara archive ZIP has been regenerated with the same Studio-specific API. Full 500-archive-pack parity remains a separate distribution tranche and must not be marked complete until the real public archives and manifest are regenerated and validated.
 
 ## Developer handoff
 
-Studio state can leave the editor in two source-oriented forms in addition to the portable project:
+Studio still provides:
 
-1. A typed `.meshvara-scene.ts` config containing hierarchy, source identity, transforms, scene presentation, visibility/locking, material overrides, animation state and debug metadata.
-2. A `.meshvara-scene.tsx` React Three Fiber integration scaffold.
+1. typed `.meshvara-scene.ts` configuration;
+2. `.meshvara-scene.tsx` React Three Fiber scaffold;
+3. portable `.meshvara-project` editor handoff;
+4. imported-model R3F component ZIP delivery.
 
-The R3F scaffold intentionally accepts a `renderSource(object)` resolver. It does not pretend that a browser-local GLB file ID or an internal Meshvara archive slug is automatically resolvable in a third-party application. The consumer connects those identities to its own asset pipeline while preserving the Studio hierarchy and transforms.
+Typed scene configuration includes hierarchy, source identity, scalar PBR overrides, local texture file references, animation/debug state and scene presentation. The generic R3F scene scaffold continues to require a consumer-supplied `renderSource(object)` resolver; Meshvara does not pretend browser-local IDs automatically resolve inside a third-party application.
 
-Both generated source forms remain explicit, readable and framework-level rather than a proprietary binary scene format.
+## Regression coverage
+
+`studio:check` now combines:
+
+- project/hierarchy/state sanitization tests;
+- GLB binary validation tests;
+- world-transform-preservation/group-transform tests;
+- texture binary validation tests;
+- local storage + portable GLB/texture round-trip tests using the no-IndexedDB memory fallback;
+- deterministic component-pack ZIP tests;
+- structural source-contract validation.
+
+These automated contracts are intentionally useful without a network or account. They supplement, rather than replace, real browser interaction testing.
 
 ## Known boundary
 
 This tranche does **not** claim completion of:
 
-- Draco or Meshopt geometry compression.
-- KTX2/Basis texture transcoding or texture resizing.
-- Texture replacement/import and UV editing.
-- Geometry decimation, mesh merging, atlas generation or automatic LOD authoring.
-- A keyframe timeline, animation retargeting or animation editing.
-- True group transform gizmos for multiple selected objects; the latest selected object remains the primary transform target.
-- World-transform-preserving reparenting. Reparenting changes hierarchy while keeping stored local TRS values.
-- Arbitrary internal GLTF mesh hierarchy editing; Studio hierarchy operates at top-level Studio object nodes.
-- Uniform asset-specific geometry/shader parameters for all 500 heterogeneous archive assets.
-- Cloud collaboration, user accounts or hosted project URLs.
-- Regeneration of all existing downloadable archive ZIPs with Studio-specific component props.
+- Draco geometry compression;
+- Meshopt geometry compression;
+- KTX2/Basis texture transcoding;
+- UV editing, texture painting or atlas generation;
+- geometry decimation, mesh merge or automatic LOD authoring;
+- keyframe timeline editing, retargeting or IK authoring;
+- live simultaneous gizmo movement for every selected object while dragging (group deltas commit on transform completion);
+- arbitrary editing of the internal GLTF node hierarchy below a Studio top-level object;
+- uniform deep shader/geometry customization for all 500 archive assets;
+- regeneration of all existing public archive ZIPs with Studio-specific component APIs;
+- cloud collaboration, accounts or hosted project URLs.
 
-Those belong to subsequent compression, texture, animation and downloadable-component-parity tranches.
+Those remain future compression, animation and archive-distribution tranches.
 
 ## QA invariant
 
-`bun run studio:check` remains part of `bun run qa` and must fail if:
+`bun run studio:check` must remain part of `bun run qa` and must fail if:
 
 - `/studio`, `/assets` or asset-to-Studio deep linking regress;
-- hierarchy/cycle protection, multi-object duplication/removal or bounded history disappear;
-- PBR material, animation or debug state falls out of the project schema/handoff;
-- local storage begins trusting file extensions without GLB binary validation;
-- deleting a project reintroduces unconditional referenced-file deletion;
-- Studio introduces remote/cloud persistence or remote model-processing calls;
-- skinned-safe cloning, model diagnostics, animation playback or material overrides disappear from the viewport path;
-- the hierarchical outliner or recursive viewport composition disappears;
-- local clean GLB export stops using GLTFLoader/GLTFExporter or starts claiming unavailable compression;
-- typed config or R3F scaffold export disappears.
+- bounded history, hierarchy/cycle protection or multi-object operations disappear;
+- world-preserving reparent/group transform math is removed;
+- PBR scalar or texture replacement state falls out of project sanitization/handoff;
+- texture references stop participating in portable project files or storage garbage collection;
+- GLB/texture storage starts trusting extensions without binary validation;
+- Studio introduces remote persistence or remote model-processing calls;
+- skeleton-safe loading, model diagnostics, animation playback or material/texture application disappear;
+- web export profiles stop using real `GLTFExporter.maxTextureSize` values or start claiming unavailable codecs;
+- deterministic imported-model component ZIP delivery disappears;
+- typed config/R3F scaffold delivery disappears.
 
-Automated contracts supplement manual browser QA. Real desktop/tablet/mobile testing, IndexedDB quota behavior, very large model memory pressure, malformed-but-header-valid glTF internals, animation edge cases, GPU-specific shader/material behavior and GLTFExporter round-trip visual parity still require browser-level verification.
+Real desktop/tablet/mobile interaction testing, IndexedDB quota pressure, very large model/texture memory behavior, browser-specific image decode behavior, GPU-specific material behavior and visual GLTFExporter round-trip parity still require browser QA.

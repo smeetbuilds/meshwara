@@ -3,6 +3,7 @@ import { Link } from '@tanstack/react-router'
 import { assets } from '../../data/assets'
 import {
   appendStudioNode,
+  collectStudioFileIds,
   commitStudioHistory,
   createArchiveStudioNode,
   createImportedStudioNode,
@@ -12,20 +13,23 @@ import {
   redoStudioHistory,
   removeStudioNodes,
   renameStudioProject,
-  setStudioParent,
+  setStudioParentPreserveWorld,
   undoStudioHistory,
   updateStudioNode,
   updateStudioNodes,
   updateStudioScene,
   updateStudioTransform,
+  updateStudioGroupTransform,
   type StudioMaterialOverride,
   type StudioProject,
   type StudioTransform,
   type StudioTransformMode,
+  type StudioTextureChannel,
 } from '../../lib/studioProject'
 import {
   createPortableStudioProject,
   deleteStudioProject,
+  deleteStudioFile,
   garbageCollectStudioFiles,
   listStudioProjects,
   loadStudioFile,
@@ -33,10 +37,12 @@ import {
   restorePortableStudioProject,
   saveStudioProject,
   storeStudioFile,
+  storeStudioTexture,
   type StudioProjectSummary,
 } from '../../lib/studioStorage'
 import { generateStudioConfigModule, generateStudioR3FScaffold } from '../../lib/studioExport'
-import { exportCleanStudioGlb } from '../../lib/studioModelExport'
+import { exportStudioGlb, type StudioGlbExportProfile } from '../../lib/studioModelExport'
+import { createStudioComponentPack } from '../../lib/studioComponentPack'
 import type { StudioModelInspection } from '../../lib/studioModelTools'
 import { StudioViewport, type StudioViewportMetrics } from './StudioViewport'
 import { StudioOutliner } from './StudioOutliner'
@@ -97,6 +103,8 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
   const [inspections, setInspections] = useState<Record<string, StudioModelInspection>>({})
   const booted = useRef(false)
   const project = history.present
+  const projectRef = useRef(project)
+  projectRef.current = project
   const selectedId = selectedIds.at(-1) ?? null
   const selectedNode = useMemo(() => project.nodes.find((node) => node.id === selectedId) ?? null, [project.nodes, selectedId])
   const selectedInspection = selectedId ? inspections[selectedId] : undefined
@@ -207,9 +215,11 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
     try {
       const record = await storeStudioFile(file)
       const node = createImportedStudioNode(record)
-      const next = appendStudioNode(project, node)
-      if (next === project) {
-        setStatus('SCENE LIMIT REACHED · IMPORT WAS STORED BUT NOT ADDED')
+      const liveProject = projectRef.current
+      const next = appendStudioNode(liveProject, node)
+      if (next === liveProject) {
+        await deleteStudioFile(record.id)
+        setStatus('SCENE LIMIT REACHED · IMPORT DISCARDED WITHOUT LEAVING ORPHAN STORAGE')
         return
       }
       commit(next, [node.id])
@@ -244,14 +254,18 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
   const removeProject = async (id: string) => {
     const target = await loadStudioProject(id)
     if (!target) return
-    await deleteStudioProject(target)
+    const protectedFiles = id === project.id
+      ? []
+      : new Set([...history.past, history.present, ...history.future].flatMap(collectStudioFileIds))
+    await deleteStudioProject(target, protectedFiles)
     if (id === project.id) await newProject()
     else await refreshProjects()
     setStatus('LOCAL PROJECT DELETED · SHARED MODEL REFERENCES PRESERVED')
   }
 
   const cleanStorage = async () => {
-    const result = await garbageCollectStudioFiles()
+    const protectedFiles = new Set([...history.past, history.present, ...history.future].flatMap(collectStudioFileIds))
+    const result = await garbageCollectStudioFiles(protectedFiles)
     setStatus(`LOCAL STORAGE CLEAN · ${result.deletedFiles} ORPHAN FILE${result.deletedFiles === 1 ? '' : 'S'} REMOVED · ${formatBytes(result.reclaimedBytes)} RECLAIMED`)
   }
 
@@ -296,24 +310,92 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
     setStatus(`${label} EXPORTED`)
   }
 
-  const exportSelectedGlb = async () => {
+  const exportSelectedGlb = async (profile: StudioGlbExportProfile, componentPack = false) => {
     if (!selectedNode || selectedNode.kind !== 'imported' || !selectedNode.fileId) {
-      setStatus('CLEAN GLB EXPORT REQUIRES ONE IMPORTED MODEL AS PRIMARY SELECTION')
+      setStatus('LOCAL DELIVERY REQUIRES ONE IMPORTED MODEL AS PRIMARY SELECTION')
       return
     }
     try {
-      setStatus('LOCAL GLB RE-EXPORT · PROCESSING IN BROWSER')
+      setStatus(`${componentPack ? 'R3F COMPONENT PACK' : 'WEB GLB EXPORT'} · PROCESSING LOCALLY`)
       const record = await loadStudioFile(selectedNode.fileId)
-      if (!record) throw new Error('Source GLB is missing from local storage.')
-      const result = await exportCleanStudioGlb(record, selectedNode)
-      downloadBlob(`${safeFilename(selectedNode.name)}-clean.glb`, new Blob([result.bytes], { type: 'model/gltf-binary' }))
-      setStatus(`CLEAN GLB EXPORTED · ${formatBytes(result.sourceBytes)} → ${formatBytes(result.outputBytes)} · NO REMOTE PROCESSING`)
+      if (!record || record.kind !== 'glb') throw new Error('Source GLB is missing from local storage.')
+      const result = await exportStudioGlb(record, selectedNode, profile)
+      const profileSuffix = profile === 'source' ? 'preserve' : profile === 'desktop' ? 'web-2k' : 'mobile-1k'
+      if (componentPack) {
+        const pack = createStudioComponentPack(selectedNode, result.inspection, result, profile)
+        downloadBlob(pack.filename, new Blob([pack.bytes.buffer.slice(pack.bytes.byteOffset, pack.bytes.byteOffset + pack.bytes.byteLength) as ArrayBuffer], { type: 'application/zip' }))
+        setStatus(`R3F COMPONENT ZIP EXPORTED · ${formatBytes(result.outputBytes)} GLB · ${profileSuffix.toUpperCase()} · NO ACCOUNT`)
+        return
+      }
+      downloadBlob(`${safeFilename(selectedNode.name)}-${profileSuffix}.glb`, new Blob([result.bytes], { type: 'model/gltf-binary' }))
+      const delta = result.savingsPercent >= 0 ? `${result.savingsPercent.toFixed(1)}% SMALLER` : `${Math.abs(result.savingsPercent).toFixed(1)}% LARGER`
+      setStatus(`WEB GLB EXPORTED · ${formatBytes(result.sourceBytes)} → ${formatBytes(result.outputBytes)} · ${delta} · LOCAL ONLY`)
     } catch (error) {
-      setStatus(error instanceof Error ? `GLB EXPORT FAILED · ${error.message.toUpperCase()}` : 'GLB EXPORT FAILED')
+      setStatus(error instanceof Error ? `LOCAL DELIVERY FAILED · ${error.message.toUpperCase()}` : 'LOCAL DELIVERY FAILED')
     }
   }
 
   const patchNode = (id: string, patch: Parameters<typeof updateStudioNode>[2]) => commit(updateStudioNode(project, id, patch))
+
+  const commitPrimaryTransform = (id: string, patch: Partial<StudioTransform>) => {
+    const node = project.nodes.find((item) => item.id === id)
+    if (!node) return
+    const nextTransform: StudioTransform = { ...node.transform, ...patch }
+    if (selectedIds.length > 1 && selectedIds.includes(id)) {
+      const result = updateStudioGroupTransform(project, selectedIds, id, nextTransform)
+      if (!result.preserved) {
+        setStatus(`GROUP TRANSFORM REJECTED · ${(result.reason ?? 'UNREPRESENTABLE TRS').toUpperCase()}`)
+        return
+      }
+      commit(result.project)
+      setStatus(`${selectedIds.length} OBJECT GROUP TRANSFORM COMMITTED`)
+      return
+    }
+    commit(updateStudioTransform(project, id, nextTransform))
+  }
+
+  const reparentSelected = (parentId?: string) => {
+    if (!selectedId) return
+    const result = setStudioParentPreserveWorld(project, selectedId, parentId)
+    if (!result.preserved) {
+      setStatus(`REPARENT REJECTED · ${(result.reason ?? 'WORLD TRANSFORM COULD NOT BE PRESERVED').toUpperCase()}`)
+      return
+    }
+    commit(result.project)
+    setStatus('PARENT UPDATED · WORLD TRANSFORM PRESERVED')
+  }
+
+  const patchTextureReference = (slotId: string, channel: StudioTextureChannel, reference: string | null | undefined) => {
+    if (!selectedNode) return
+    const current = selectedNode.materialOverrides[slotId] ?? {}
+    const textures = { ...(current.textures ?? {}) }
+    if (reference === undefined) delete textures[channel]
+    else textures[channel] = reference
+    const next: StudioMaterialOverride = { ...current }
+    if (Object.keys(textures).length) next.textures = textures
+    else delete next.textures
+    patchMaterial(slotId, next)
+  }
+
+  const importTexture = async (slotId: string, channel: StudioTextureChannel, file: File) => {
+    if (!selectedNode || selectedNode.kind !== 'imported') return
+    const nodeId = selectedNode.id
+    try {
+      const record = await storeStudioTexture(file)
+      const liveProject = projectRef.current
+      const live = liveProject.nodes.find((node) => node.id === nodeId)
+      if (!live) {
+        await deleteStudioFile(record.id)
+        return
+      }
+      const current = live.materialOverrides[slotId] ?? {}
+      const materialOverrides = { ...live.materialOverrides, [slotId]: { ...current, textures: { ...(current.textures ?? {}), [channel]: record.id } } }
+      commit(updateStudioNode(liveProject, nodeId, { materialOverrides }))
+      setStatus(`${channel.toUpperCase()} REPLACED · ${file.name.toUpperCase()} STORED LOCALLY`)
+    } catch (error) {
+      setStatus(error instanceof Error ? `TEXTURE REJECTED · ${error.message.toUpperCase()}` : 'TEXTURE IMPORT FAILED')
+    }
+  }
 
   const deleteSelected = () => {
     if (!selectedIds.length) return
@@ -400,7 +482,7 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
             primarySelectedId={selectedId}
             mode={mode}
             onSelect={(id) => setSelectedIds(id ? [id] : [])}
-            onTransform={(id, transform: StudioTransform) => commit(updateStudioTransform(project, id, transform))}
+            onTransform={(id, transform: StudioTransform) => commitPrimaryTransform(id, transform)}
             onMetrics={setMetrics}
             onInspection={reportInspection}
           />
@@ -422,17 +504,20 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
           selectedIds={selectedIds}
           inspection={selectedInspection}
           onRename={(name) => selectedId && patchNode(selectedId, { name })}
-          onTransform={(transform) => selectedId && commit(updateStudioTransform(project, selectedId, transform))}
+          onTransform={(transform) => selectedId && commitPrimaryTransform(selectedId, transform)}
           onNodePatch={(patch) => selectedId && patchNode(selectedId, patch)}
           onScenePatch={(patch) => commit(updateStudioScene(project, patch))}
-          onParent={(parentId) => selectedId && commit(setStudioParent(project, selectedId, parentId))}
+          onParent={reparentSelected}
           onMaterialPatch={patchMaterial}
+          onTextureImport={(slotId, channel, file) => void importTexture(slotId, channel, file)}
+          onTextureReference={patchTextureReference}
           onAnimationPatch={(patch) => selectedNode && patchNode(selectedNode.id, { animation: { ...selectedNode.animation, ...patch } })}
           onDebugPatch={(patch) => selectedNode && patchNode(selectedNode.id, { debug: { ...selectedNode.debug, ...patch } })}
           onBulkPatch={(patch) => commit(updateStudioNodes(project, selectedIds, patch))}
           onDuplicate={duplicateSelected}
           onDelete={deleteSelected}
-          onExportGlb={() => void exportSelectedGlb()}
+          onExportGlb={(profile) => void exportSelectedGlb(profile, false)}
+          onExportComponent={(profile) => void exportSelectedGlb(profile, true)}
         />
       </div>
     </div>

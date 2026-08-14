@@ -3,6 +3,7 @@ import {
   STUDIO_HISTORY_LIMIT,
   appendStudioNode,
   commitStudioHistory,
+  collectStudioFileIds,
   createArchiveStudioNode,
   createImportedStudioNode,
   createStudioHistory,
@@ -36,7 +37,7 @@ assert.equal(cycleAttempt.nodes.find((node) => node.id === parent.id)?.parentId,
 project = updateStudioTransform(project, child.id, { position: [1, 2, 3], scale: [2, 2, 2] })
 project = updateStudioNode(project, child.id, {
   materialOverrides: {
-    'material-0': { color: '#abcdef', roughness: 0.25, metalness: 0.75, opacity: 0.8, emissive: '#102030', emissiveIntensity: 2 },
+    'material-0': { color: '#abcdef', roughness: 0.25, metalness: 0.75, opacity: 0.8, emissive: '#102030', emissiveIntensity: 2, textures: { map: 'texture-demo', normalMap: null } },
   },
   animation: { clip: 'Walk', playing: true, speed: 1.5, loop: false },
   debug: { bounds: true, axes: true, skeleton: true },
@@ -50,6 +51,8 @@ const duplicateChild = duplicated.project.nodes.find((node) => node.id === dupli
 assert.ok(duplicateParent && duplicateChild)
 assert.equal(duplicateChild.parentId, duplicateParent.id)
 assert.equal(duplicateChild.materialOverrides['material-0'].color, '#abcdef')
+assert.equal(duplicateChild.materialOverrides['material-0'].textures?.map, 'texture-demo')
+assert.deepEqual(new Set(collectStudioFileIds(project)), new Set(['file-demo', 'texture-demo']))
 
 const removedParent = removeStudioNodes(project, [parent.id])
 assert.equal(removedParent.nodes.length, 1)
@@ -70,7 +73,7 @@ hostile.scene.exposure = 999
 hostile.scene.background = 'javascript:alert(1)'
 hostile.nodes[1].transform.position = [Infinity, -Infinity, 999999999]
 hostile.nodes[1].materialOverrides = {
-  'material-0': { color: 'red', roughness: 9, metalness: -2, opacity: 4, emissive: '#ABCDEF', emissiveIntensity: 999 },
+  'material-0': { color: 'red', roughness: 9, metalness: -2, opacity: 4, emissive: '#ABCDEF', emissiveIntensity: 999, textures: { map: 'texture-valid-1234', normalMap: 'file-wrong-kind', alphaMap: null, evil: 'texture-evil' } },
   '<script>': { color: '#ffffff' },
 }
 hostile.nodes[1].animation = { clip: 'x'.repeat(500), playing: true, speed: 99, loop: false }
@@ -86,6 +89,9 @@ assert.equal(sanitized.nodes[1].materialOverrides['material-0'].metalness, 0)
 assert.equal(sanitized.nodes[1].materialOverrides['material-0'].opacity, 1)
 assert.equal(sanitized.nodes[1].materialOverrides['material-0'].emissive, '#abcdef')
 assert.equal(sanitized.nodes[1].materialOverrides['material-0'].emissiveIntensity, 20)
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].textures?.map, 'texture-valid-1234')
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].textures?.normalMap, undefined)
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].textures?.alphaMap, null)
 assert.equal(sanitized.nodes[1].materialOverrides['<script>'], undefined)
 assert.equal(sanitized.nodes[1].animation.speed, 4)
 assert.equal(sanitized.nodes[1].animation.clip?.length, 120)
@@ -107,8 +113,10 @@ const importedConfig = config.objects.find((object) => object.source.type === 'l
 assert.ok(importedConfig)
 assert.equal(importedConfig.parentId, parent.id)
 assert.equal(importedConfig.materials['material-0'].color, '#abcdef')
+assert.equal(importedConfig.materials['material-0'].textures?.map, 'texture-demo')
 assert.equal(importedConfig.animation.clip, 'Walk')
 assert.match(generateStudioConfigModule(project), /satisfies MeshvaraStudioConfig/)
+assert.match(generateStudioConfigModule(project), /normalMap/)
 assert.match(generateStudioR3FScaffold(project), /renderSource/)
 assert.match(generateStudioR3FScaffold(project), /children\.get\(object\.id\)/)
 
