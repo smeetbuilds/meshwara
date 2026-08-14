@@ -4,35 +4,56 @@ import {
   appendStudioNode,
   commitStudioHistory,
   createArchiveStudioNode,
+  createImportedStudioNode,
   createStudioHistory,
   createStudioProject,
-  duplicateStudioNode,
+  duplicateStudioNodes,
   parseStudioProject,
   redoStudioHistory,
+  removeStudioNodes,
+  setStudioParent,
   undoStudioHistory,
+  updateStudioNode,
   updateStudioScene,
   updateStudioTransform,
 } from '../../src/lib/studioProject.ts'
-import { createStudioConfig, generateStudioConfigModule } from '../../src/lib/studioExport.ts'
+import { createStudioConfig, generateStudioConfigModule, generateStudioR3FScaffold } from '../../src/lib/studioExport.ts'
 
-const empty = createStudioProject('Foundation test')
+const empty = createStudioProject('Model editor test')
 assert.equal(empty.nodes.length, 0)
 assert.equal(empty.format, 'meshvara-project')
 assert.equal(empty.version, 1)
 
-const archive = createArchiveStudioNode({ slug: 'precision-chrono', name: 'Precision Chrono' })
-assert.equal(archive.assetSlug, 'precision-chrono')
-assert.equal(archive.kind, 'archive')
+const parent = createArchiveStudioNode({ slug: 'precision-chrono', name: 'Precision Chrono' })
+const child = createImportedStudioNode({ id: 'file-demo', name: 'Demo.glb' })
+let project = appendStudioNode(appendStudioNode(empty, parent), child)
+project = setStudioParent(project, child.id, parent.id)
+assert.equal(project.nodes.find((node) => node.id === child.id)?.parentId, parent.id)
 
-let project = appendStudioNode(empty, archive)
-project = updateStudioTransform(project, archive.id, { position: [1, 2, 3], scale: [2, 2, 2] })
-assert.deepEqual(project.nodes[0].transform.position, [1, 2, 3])
-assert.deepEqual(project.nodes[0].transform.scale, [2, 2, 2])
+const cycleAttempt = setStudioParent(project, parent.id, child.id)
+assert.equal(cycleAttempt.nodes.find((node) => node.id === parent.id)?.parentId, undefined)
 
-const duplicated = duplicateStudioNode(project, archive.id)
-assert.equal(duplicated.project.nodes.length, 2)
-assert.notEqual(duplicated.nodeId, archive.id)
-assert.equal(duplicated.project.nodes[1].assetSlug, 'precision-chrono')
+project = updateStudioTransform(project, child.id, { position: [1, 2, 3], scale: [2, 2, 2] })
+project = updateStudioNode(project, child.id, {
+  materialOverrides: {
+    'material-0': { color: '#abcdef', roughness: 0.25, metalness: 0.75, opacity: 0.8, emissive: '#102030', emissiveIntensity: 2 },
+  },
+  animation: { clip: 'Walk', playing: true, speed: 1.5, loop: false },
+  debug: { bounds: true, axes: true, skeleton: true },
+})
+assert.deepEqual(project.nodes.find((node) => node.id === child.id)?.transform.position, [1, 2, 3])
+
+const duplicated = duplicateStudioNodes(project, [parent.id, child.id])
+assert.equal(duplicated.nodeIds.length, 2)
+const duplicateParent = duplicated.project.nodes.find((node) => node.id === duplicated.nodeIds[0])
+const duplicateChild = duplicated.project.nodes.find((node) => node.id === duplicated.nodeIds[1])
+assert.ok(duplicateParent && duplicateChild)
+assert.equal(duplicateChild.parentId, duplicateParent.id)
+assert.equal(duplicateChild.materialOverrides['material-0'].color, '#abcdef')
+
+const removedParent = removeStudioNodes(project, [parent.id])
+assert.equal(removedParent.nodes.length, 1)
+assert.equal(removedParent.nodes[0].parentId, undefined)
 
 let history = createStudioHistory(project)
 history = commitStudioHistory(history, updateStudioScene(project, { exposure: 1.5 }))
@@ -41,28 +62,54 @@ history = undoStudioHistory(history)
 assert.equal(history.present.scene.exposure, 1)
 history = redoStudioHistory(history)
 assert.equal(history.present.scene.exposure, 1.5)
-
-for (let index = 0; index < STUDIO_HISTORY_LIMIT + 10; index += 1) {
-  history = commitStudioHistory(history, updateStudioScene(history.present, { exposure: 1 + index / 100 }))
-}
+for (let index = 0; index < STUDIO_HISTORY_LIMIT + 10; index += 1) history = commitStudioHistory(history, updateStudioScene(history.present, { exposure: 1 + index / 100 }))
 assert.equal(history.past.length, STUDIO_HISTORY_LIMIT)
 
 const hostile = JSON.parse(JSON.stringify(project))
 hostile.scene.exposure = 999
 hostile.scene.background = 'javascript:alert(1)'
-hostile.nodes[0].transform.position = [Infinity, -Infinity, 999999999]
+hostile.nodes[1].transform.position = [Infinity, -Infinity, 999999999]
+hostile.nodes[1].materialOverrides = {
+  'material-0': { color: 'red', roughness: 9, metalness: -2, opacity: 4, emissive: '#ABCDEF', emissiveIntensity: 999 },
+  '<script>': { color: '#ffffff' },
+}
+hostile.nodes[1].animation = { clip: 'x'.repeat(500), playing: true, speed: 99, loop: false }
+hostile.nodes[1].debug = { bounds: 1, axes: true, skeleton: true }
 const sanitized = parseStudioProject(hostile)
 assert.ok(sanitized)
 assert.equal(sanitized.scene.exposure, 3)
 assert.equal(sanitized.scene.background, '#101112')
-assert.deepEqual(sanitized.nodes[0].transform.position, [0, 0, 10000])
+assert.deepEqual(sanitized.nodes[1].transform.position, [0, 0, 10000])
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].color, undefined)
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].roughness, 1)
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].metalness, 0)
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].opacity, 1)
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].emissive, '#abcdef')
+assert.equal(sanitized.nodes[1].materialOverrides['material-0'].emissiveIntensity, 20)
+assert.equal(sanitized.nodes[1].materialOverrides['<script>'], undefined)
+assert.equal(sanitized.nodes[1].animation.speed, 4)
+assert.equal(sanitized.nodes[1].animation.clip?.length, 120)
+assert.equal(sanitized.nodes[1].debug.bounds, false)
+assert.equal(sanitized.nodes[1].debug.axes, true)
+
+const cyclic = JSON.parse(JSON.stringify(project))
+cyclic.nodes[0].parentId = cyclic.nodes[1].id
+cyclic.nodes[1].parentId = cyclic.nodes[0].id
+const cycleSanitized = parseStudioProject(cyclic)
+assert.ok(cycleSanitized)
+assert.ok(cycleSanitized.nodes.some((node) => !node.parentId))
 
 const wrongVersion = { ...project, version: 2 }
 assert.equal(parseStudioProject(wrongVersion), null)
 
 const config = createStudioConfig(project)
-assert.equal(config.objects[0].source.type, 'meshvara')
-assert.equal(config.objects[0].source.slug, 'precision-chrono')
+const importedConfig = config.objects.find((object) => object.source.type === 'local-glb')
+assert.ok(importedConfig)
+assert.equal(importedConfig.parentId, parent.id)
+assert.equal(importedConfig.materials['material-0'].color, '#abcdef')
+assert.equal(importedConfig.animation.clip, 'Walk')
 assert.match(generateStudioConfigModule(project), /satisfies MeshvaraStudioConfig/)
+assert.match(generateStudioR3FScaffold(project), /renderSource/)
+assert.match(generateStudioR3FScaffold(project), /children\.get\(object\.id\)/)
 
-console.log('Meshvara Studio project-state contract passed')
+console.log('Meshvara Studio model-editor project contract passed')

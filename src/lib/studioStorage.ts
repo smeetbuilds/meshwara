@@ -10,6 +10,10 @@ const DB_NAME = 'meshvara-studio'
 const DB_VERSION = 1
 const PROJECT_STORE = 'projects'
 const FILE_STORE = 'files'
+const MAX_STUDIO_GLB_BYTES = 100 * 1024 * 1024
+const GLB_MAGIC = 0x46546c67
+const GLB_VERSION = 2
+const GLB_JSON_CHUNK = 0x4e4f534a
 
 export interface StudioFileRecord {
   id: string
@@ -24,6 +28,12 @@ export interface StudioProjectSummary {
   name: string
   updatedAt: string
   objectCount: number
+}
+
+export interface StudioStorageGcResult {
+  referencedFiles: number
+  deletedFiles: number
+  reclaimedBytes: number
 }
 
 interface PortableStudioFile {
@@ -89,6 +99,27 @@ async function withStore<T>(storeName: string, mode: IDBTransactionMode, action:
   }
 }
 
+export function validateStudioGlbBytes(bytes: ArrayBuffer) {
+  if (bytes.byteLength < 20) throw new Error('GLB header or JSON chunk is incomplete.')
+  if (bytes.byteLength > MAX_STUDIO_GLB_BYTES) throw new Error('GLB exceeds the 100 MB local safety limit.')
+  const header = new DataView(bytes, 0, 12)
+  if (header.getUint32(0, true) !== GLB_MAGIC) throw new Error('File is not a valid binary glTF (GLB).')
+  if (header.getUint32(4, true) !== GLB_VERSION) throw new Error('Studio supports glTF 2.0 GLB files only.')
+  if (header.getUint32(8, true) !== bytes.byteLength) throw new Error('GLB declared length does not match the file payload.')
+  const chunkHeader = new DataView(bytes, 12, 8)
+  const jsonChunkLength = chunkHeader.getUint32(0, true)
+  const jsonChunkType = chunkHeader.getUint32(4, true)
+  if (!jsonChunkLength || jsonChunkType !== GLB_JSON_CHUNK || 20 + jsonChunkLength > bytes.byteLength) throw new Error('GLB is missing a valid JSON scene chunk.')
+  try {
+    const jsonText = new TextDecoder().decode(new Uint8Array(bytes, 20, jsonChunkLength)).replace(/\u0000+$/g, '').trim()
+    const json = JSON.parse(jsonText) as { asset?: { version?: unknown } }
+    if (typeof json.asset?.version !== 'string' || !json.asset.version.startsWith('2')) throw new Error('asset version')
+  } catch {
+    throw new Error('GLB JSON chunk is invalid or does not declare glTF 2.x.')
+  }
+  return true
+}
+
 export async function saveStudioProject(project: StudioProject) {
   memoryProjects.set(project.id, cloneProject(project))
   await withStore(PROJECT_STORE, 'readwrite', (store) => store.put(project))
@@ -100,12 +131,16 @@ export async function loadStudioProject(id: string): Promise<StudioProject | nul
   return parsed ? cloneProject(parsed) : null
 }
 
-export async function listStudioProjects(): Promise<StudioProjectSummary[]> {
+async function loadAllProjects() {
   const stored = await withStore<StudioProject[]>(PROJECT_STORE, 'readonly', (store) => store.getAll())
-  const source = stored ?? Array.from(memoryProjects.values())
-  return source
-    .map(parseStudioProject)
-    .filter((project): project is StudioProject => Boolean(project))
+  const merged = new Map<string, StudioProject>()
+  for (const project of stored ?? []) merged.set(project.id, project)
+  for (const project of memoryProjects.values()) merged.set(project.id, project)
+  return [...merged.values()].map(parseStudioProject).filter((project): project is StudioProject => Boolean(project))
+}
+
+export async function listStudioProjects(): Promise<StudioProjectSummary[]> {
+  return (await loadAllProjects())
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
     .map((project) => ({ id: project.id, name: project.name, updatedAt: project.updatedAt, objectCount: project.nodes.length }))
 }
@@ -113,19 +148,21 @@ export async function listStudioProjects(): Promise<StudioProjectSummary[]> {
 export async function deleteStudioProject(project: StudioProject) {
   memoryProjects.delete(project.id)
   await withStore(PROJECT_STORE, 'readwrite', (store) => store.delete(project.id))
-  await Promise.all(collectStudioFileIds(project).map(deleteStudioFile))
+  await garbageCollectStudioFiles()
 }
 
 export async function storeStudioFile(file: File): Promise<StudioFileRecord> {
+  const bytes = await file.arrayBuffer()
+  validateStudioGlbBytes(bytes)
   const id = typeof crypto !== 'undefined' && crypto.randomUUID
     ? `file-${crypto.randomUUID()}`
     : `file-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
   const record: StudioFileRecord = {
     id,
-    name: file.name,
+    name: file.name.slice(0, 240),
     type: file.type || 'model/gltf-binary',
-    size: file.size,
-    bytes: await file.arrayBuffer(),
+    size: bytes.byteLength,
+    bytes,
   }
   memoryFiles.set(id, cloneFile(record))
   await withStore(FILE_STORE, 'readwrite', (store) => store.put(record))
@@ -133,8 +170,10 @@ export async function storeStudioFile(file: File): Promise<StudioFileRecord> {
 }
 
 export async function putStudioFile(record: StudioFileRecord) {
-  memoryFiles.set(record.id, cloneFile(record))
-  await withStore(FILE_STORE, 'readwrite', (store) => store.put(record))
+  validateStudioGlbBytes(record.bytes)
+  const safe = { ...record, size: record.bytes.byteLength, name: record.name.slice(0, 240) }
+  memoryFiles.set(record.id, cloneFile(safe))
+  await withStore(FILE_STORE, 'readwrite', (store) => store.put(safe))
 }
 
 export async function loadStudioFile(id: string): Promise<StudioFileRecord | null> {
@@ -143,18 +182,39 @@ export async function loadStudioFile(id: string): Promise<StudioFileRecord | nul
   return record ? cloneFile(record) : null
 }
 
+export async function listStudioFiles(): Promise<StudioFileRecord[]> {
+  const stored = await withStore<StudioFileRecord[]>(FILE_STORE, 'readonly', (store) => store.getAll())
+  const merged = new Map<string, StudioFileRecord>()
+  for (const file of stored ?? []) merged.set(file.id, file)
+  for (const file of memoryFiles.values()) merged.set(file.id, file)
+  return [...merged.values()].map(cloneFile)
+}
+
 export async function deleteStudioFile(id: string) {
   memoryFiles.delete(id)
   await withStore(FILE_STORE, 'readwrite', (store) => store.delete(id))
+}
+
+export async function garbageCollectStudioFiles(): Promise<StudioStorageGcResult> {
+  const projects = await loadAllProjects()
+  const referenced = new Set(projects.flatMap(collectStudioFileIds))
+  const files = await listStudioFiles()
+  let deletedFiles = 0
+  let reclaimedBytes = 0
+  for (const file of files) {
+    if (referenced.has(file.id)) continue
+    await deleteStudioFile(file.id)
+    deletedFiles += 1
+    reclaimedBytes += file.size
+  }
+  return { referencedFiles: referenced.size, deletedFiles, reclaimedBytes }
 }
 
 function bytesToBase64(bytes: ArrayBuffer) {
   const view = new Uint8Array(bytes)
   let binary = ''
   const chunk = 0x8000
-  for (let index = 0; index < view.length; index += chunk) {
-    binary += String.fromCharCode(...view.subarray(index, Math.min(index + chunk, view.length)))
-  }
+  for (let index = 0; index < view.length; index += chunk) binary += String.fromCharCode(...view.subarray(index, Math.min(index + chunk, view.length)))
   return btoa(binary)
 }
 
@@ -170,29 +230,15 @@ export async function createPortableStudioProject(project: StudioProject): Promi
   for (const fileId of collectStudioFileIds(project)) {
     const record = await loadStudioFile(fileId)
     if (!record) throw new Error(`Imported file ${fileId} is missing from local storage.`)
-    files.push({
-      id: record.id,
-      name: record.name,
-      type: record.type,
-      size: record.size,
-      base64: bytesToBase64(record.bytes),
-    })
+    files.push({ id: record.id, name: record.name, type: record.type, size: record.size, base64: bytesToBase64(record.bytes) })
   }
-  return {
-    format: STUDIO_PROJECT_FORMAT,
-    version: STUDIO_PROJECT_VERSION,
-    exportedAt: new Date().toISOString(),
-    project: cloneProject(project),
-    files,
-  }
+  return { format: STUDIO_PROJECT_FORMAT, version: STUDIO_PROJECT_VERSION, exportedAt: new Date().toISOString(), project: cloneProject(project), files }
 }
 
 export async function restorePortableStudioProject(value: unknown): Promise<StudioProject> {
   if (!value || typeof value !== 'object') throw new Error('Project file is not a valid object.')
   const portable = value as Record<string, unknown>
-  if (portable.format !== STUDIO_PROJECT_FORMAT || portable.version !== STUDIO_PROJECT_VERSION) {
-    throw new Error('Unsupported Meshvara Studio project version.')
-  }
+  if (portable.format !== STUDIO_PROJECT_FORMAT || portable.version !== STUDIO_PROJECT_VERSION) throw new Error('Unsupported Meshvara Studio project version.')
   const project = parseStudioProject(portable.project)
   if (!project) throw new Error('Project scene data failed validation.')
   if (!Array.isArray(portable.files)) throw new Error('Project file payload is invalid.')
@@ -204,11 +250,13 @@ export async function restorePortableStudioProject(value: unknown): Promise<Stud
     const file = raw as Record<string, unknown>
     if (typeof file.id !== 'string' || !expected.has(file.id) || restored.has(file.id)) throw new Error('Unexpected imported file reference.')
     if (typeof file.name !== 'string' || typeof file.base64 !== 'string') throw new Error('Imported file metadata is invalid.')
+    if (file.base64.length > Math.ceil(MAX_STUDIO_GLB_BYTES * 4 / 3) + 16) throw new Error('Embedded GLB exceeds the 100 MB local safety limit.')
     const bytes = base64ToBytes(file.base64)
+    validateStudioGlbBytes(bytes)
     if (typeof file.size === 'number' && file.size !== bytes.byteLength) throw new Error(`Imported file ${file.name} failed size validation.`)
     await putStudioFile({
       id: file.id,
-      name: file.name.slice(0, 240),
+      name: file.name,
       type: typeof file.type === 'string' ? file.type : 'model/gltf-binary',
       size: bytes.byteLength,
       bytes,
