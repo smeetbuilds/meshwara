@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StudioRouteImport } from './routes/studio'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AssetsIndexRouteImport } from './routes/assets/index'
 import { Route as AssetsSlugRouteImport } from './routes/assets/$slug'
 
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -33,27 +39,31 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assets/$slug': typeof AssetsSlugRoute
   '/assets/': typeof AssetsIndexRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assets/$slug': typeof AssetsSlugRoute
   '/assets': typeof AssetsIndexRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assets/$slug': typeof AssetsSlugRoute
   '/assets/': typeof AssetsIndexRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assets/$slug' | '/assets/'
+  fullPaths: '/' | '/assets/$slug' | '/assets/' | '/studio'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assets/$slug' | '/assets'
-  id: '__root__' | '/' | '/assets/$slug' | '/assets/'
+  to: '/' | '/assets/$slug' | '/assets' | '/studio'
+  id: '__root__' | '/' | '/assets/$slug' | '/assets/' | '/studio'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  StudioRoute: typeof StudioRoute
   IndexRoute: typeof IndexRoute
   AssetsSlugRoute: typeof AssetsSlugRoute
   AssetsIndexRoute: typeof AssetsIndexRoute
@@ -61,6 +71,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -86,6 +103,7 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  StudioRoute: StudioRoute,
   IndexRoute: IndexRoute,
   AssetsSlugRoute: AssetsSlugRoute,
   AssetsIndexRoute: AssetsIndexRoute,

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Link, Outlet, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
 import appCss from '../styles/app.css?url'
 import { SiteHeader } from '../components/SiteHeader'
 import { SiteFooter } from '../components/SiteFooter'
@@ -30,11 +30,10 @@ export const Route = createRootRoute({
 })
 
 function RootComponent() {
+  const studio = useRouterState({ select: (state) => state.location.pathname.startsWith('/studio') })
   return (
     <RootDocument>
-      <SiteHeader />
-      <main><Outlet /></main>
-      <SiteFooter />
+      {studio ? <Outlet /> : <><SiteHeader /><main><Outlet /></main><SiteFooter /></>}
     </RootDocument>
   )
 }
