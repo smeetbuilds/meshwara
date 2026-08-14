@@ -11,11 +11,12 @@ import {
   sha256Hex,
   stripSingleRoot,
 } from './distribution/core.mjs'
+import { inspectPackContract } from './distribution/pack-contract.mjs'
 
 const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/smeetbuilds/meshwara/main/public/downloads/manifest.json'
 
 function usage() {
-  return `MESHVARA CLI\n\nUsage:\n  meshvara list [query] [--json]\n  meshvara info <slug> [--json]\n  meshvara verify <slug> [--registry <url|file>] [--archive <zip>]\n  meshvara add <slug> [--dir <path>] [--registry <url|file>] [--archive <zip>] [--dry-run] [--force]\n  meshvara doctor [--registry <url|file>]\n\nDefaults:\n  registry  ${DEFAULT_REGISTRY}\n  directory src/components/meshvara/<slug>\n\nCore commands never require authentication or upload project data.`
+  return `MESHVARA CLI\n\nUsage:\n  meshvara list [query] [--json]\n  meshvara info <slug> [--json]\n  meshvara verify <slug> [--registry <url|file>] [--archive <zip>] [--require-pack-v1]\n  meshvara add <slug> [--dir <path>] [--registry <url|file>] [--archive <zip>] [--dry-run] [--force] [--require-pack-v1]\n  meshvara doctor [--registry <url|file>]\n\nDefaults:\n  registry  ${DEFAULT_REGISTRY}\n  directory src/components/meshvara/<slug>\n\nCore commands never require authentication or upload project data.`
 }
 
 function parseArgs(argv) {
@@ -29,7 +30,7 @@ function parseArgs(argv) {
       continue
     }
     const key = value.slice(2)
-    if (['dry-run', 'force', 'json'].includes(key)) options[key] = true
+    if (['dry-run', 'force', 'json', 'require-pack-v1'].includes(key)) options[key] = true
     else {
       const next = rest[index + 1]
       if (!next || next.startsWith('--')) throw new Error(`--${key} requires a value.`)
@@ -73,14 +74,22 @@ async function archiveFor(asset, registryLocation, override) {
   return { location, bytes }
 }
 
-function dependencyHint(entries) {
+function dependencyHint(entries, contract) {
+  const deps = contract?.metadata?.dependencies && typeof contract.metadata.dependencies === 'object'
+    ? Object.entries(contract.metadata.dependencies)
+    : null
+  if (deps?.length) return `bun add ${deps.map(([name, version]) => `${name}@${version}`).join(' ')}`
   const pkg = entries.find((entry) => entry.relative === 'package.json')
   if (!pkg) return null
   try {
     const parsed = JSON.parse(pkg.bytes.toString('utf8'))
-    const deps = Object.entries(parsed.dependencies ?? {})
-    return deps.length ? `bun add ${deps.map(([name, version]) => `${name}@${version}`).join(' ')}` : null
+    const fallback = Object.entries(parsed.dependencies ?? {})
+    return fallback.length ? `bun add ${fallback.map(([name, version]) => `${name}@${version}`).join(' ')}` : null
   } catch { return null }
+}
+
+function validateArchiveContract(asset, entries, requireV1 = false) {
+  return inspectPackContract(asset, entries, { requireV1 })
 }
 
 async function commandList(registry, query, asJson) {
@@ -93,21 +102,24 @@ async function commandList(registry, query, asJson) {
 
 async function commandInfo(registry, slug, asJson) {
   const asset = findAsset(registry, slug)
-  if (asJson) return console.log(JSON.stringify(asset, null, 2))
-  console.log(`${asset.name}\nslug      ${asset.slug}\ncategory  ${asset.category}${asset.subcategory ? ` / ${asset.subcategory}` : ''}\narchive   ${asset.bytes.toLocaleString()} bytes\nsha256    ${asset.sha256}`)
+  if (asJson) return console.log(JSON.stringify({ ...asset, packSchemaVersion: registry.packSchemaVersion }, null, 2))
+  console.log(`${asset.name}\nslug      ${asset.slug}\ncategory  ${asset.category}${asset.subcategory ? ` / ${asset.subcategory}` : ''}\narchive   ${asset.bytes.toLocaleString()} bytes\nsha256    ${asset.sha256}\npack      ${registry.packSchemaVersion === 1 ? 'Pack-v1 release' : 'legacy/unspecified'}`)
 }
 
-async function commandVerify(registry, registryLocation, slug, archiveOverride) {
+async function commandVerify(registry, registryLocation, slug, archiveOverride, requireV1 = false) {
   const asset = findAsset(registry, slug)
   const archive = await archiveFor(asset, registryLocation, archiveOverride)
   const entries = stripSingleRoot(readZipEntries(archive.bytes), slug)
-  console.log(`Verified ${asset.name}: SHA-256 + ${entries.length} ZIP file entries (${archive.location})`)
+  const contract = validateArchiveContract(asset, entries, requireV1 || registry.packSchemaVersion === 1)
+  const label = contract.version === 1 ? `Pack-v1 + ${contract.metadata.files.length} manifested payload files` : `${entries.length} ZIP file entries · legacy pack contract`
+  console.log(`Verified ${asset.name}: SHA-256 + ${label} (${archive.location})`)
 }
 
 async function commandAdd(registry, registryLocation, slug, options) {
   const asset = findAsset(registry, slug)
   const archive = await archiveFor(asset, registryLocation, options.archive)
   const entries = stripSingleRoot(readZipEntries(archive.bytes), slug)
+  const contract = validateArchiveContract(asset, entries, options['require-pack-v1'] || registry.packSchemaVersion === 1)
   const destination = resolve(options.dir ?? 'src/components/meshvara', slug)
   const planned = entries.map((entry) => ({ entry, target: outputPath(destination, entry.relative) }))
   const conflicts = []
@@ -117,6 +129,7 @@ async function commandAdd(registry, registryLocation, slug, options) {
   console.log(`${options['dry-run'] ? 'Dry run' : 'Installing'} ${asset.name}`)
   console.log(`archive   ${archive.location}`)
   console.log(`verified  sha256:${asset.sha256}`)
+  console.log(`pack      ${contract.version === 1 ? `Pack-v1 · ${contract.metadata.sourceKind} · ${contract.metadata.component ?? 'source entrypoint'}` : 'legacy metadata contract'}`)
   console.log(`target    ${destination}`)
   for (const item of planned) console.log(`${options['dry-run'] ? 'would write' : 'write'}    ${item.entry.relative}`)
   if (options['dry-run']) return
@@ -125,7 +138,7 @@ async function commandAdd(registry, registryLocation, slug, options) {
     await mkdir(resolve(item.target, '..'), { recursive: true })
     await writeFile(item.target, item.entry.bytes)
   }
-  const hint = dependencyHint(entries)
+  const hint = dependencyHint(entries, contract)
   console.log(`\nInstalled ${planned.length} files. No account or runtime Meshvara API is required.`)
   if (hint) console.log(`Dependencies from the pack:\n  ${hint}`)
 }
@@ -137,10 +150,10 @@ async function main() {
   const registry = await loadRegistry(registryLocation)
   if (command === 'list') return commandList(registry, positionals[0], options.json)
   if (command === 'info') return commandInfo(registry, positionals[0], options.json)
-  if (command === 'verify') return commandVerify(registry, registryLocation, positionals[0], options.archive)
+  if (command === 'verify') return commandVerify(registry, registryLocation, positionals[0], options.archive, options['require-pack-v1'])
   if (command === 'add') return commandAdd(registry, registryLocation, positionals[0], options)
   if (command === 'doctor') {
-    console.log(`MESHVARA CLI ready\nregistry  ${registryLocation}\nassets    ${registry.count}\nnode      ${process.version}\nnetwork   ${/^https?:/.test(registryLocation) ? 'registry reachable' : 'local registry'}`)
+    console.log(`MESHVARA CLI ready\nregistry  ${registryLocation}\nassets    ${registry.count}\npack      ${registry.packSchemaVersion === 1 ? 'Pack-v1' : 'legacy/unspecified'}\nnode      ${process.version}\nnetwork   ${/^https?:/.test(registryLocation) ? 'registry reachable' : 'local registry'}`)
     return
   }
   throw new Error(`Unknown command: ${command}\n\n${usage()}`)

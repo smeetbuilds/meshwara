@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { Buffer } from 'node:buffer'
 import { appendStudioNode, createImportedStudioNode, createStudioProject, updateStudioNode } from '../../src/lib/studioProject.ts'
 import {
   createPortableStudioProject,
@@ -12,9 +13,9 @@ import {
   storeStudioTexture,
 } from '../../src/lib/studioStorage.ts'
 
-function validMinimalGlb() {
+function validMinimalGlb(extensionsRequired: string[] = []) {
   const encoder = new TextEncoder()
-  const raw = encoder.encode(JSON.stringify({ asset: { version: '2.0' }, scene: 0, scenes: [{}] }))
+  const raw = encoder.encode(JSON.stringify({ asset: { version: '2.0' }, scene: 0, scenes: [{}], ...(extensionsRequired.length ? { extensionsUsed: extensionsRequired, extensionsRequired } : {}) }))
   const paddedLength = Math.ceil(raw.length / 4) * 4
   const bytes = new ArrayBuffer(20 + paddedLength)
   const view = new DataView(bytes)
@@ -65,6 +66,14 @@ assert.equal(await loadStudioFile(texture.id), null)
 assert.ok(await loadStudioFile(historyOnly.id), 'project deletion must preserve media protected by active history')
 await garbageCollectStudioFiles()
 assert.equal(await loadStudioFile(historyOnly.id), null)
+
+
+const dracoBytes = validMinimalGlb(['KHR_draco_mesh_compression'])
+const dracoPortable = structuredClone(portable)
+const dracoFile = dracoPortable.files.find((file) => file.kind === 'glb')!
+dracoFile.size = dracoBytes.byteLength
+dracoFile.base64 = Buffer.from(new Uint8Array(dracoBytes)).toString('base64')
+await assert.rejects(restorePortableStudioProject(dracoPortable), /Draco geometry compression/i)
 
 const restored = await restorePortableStudioProject(portable)
 assert.equal(restored.nodes.length, 1)

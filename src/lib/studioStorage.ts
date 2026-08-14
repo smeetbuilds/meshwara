@@ -1,3 +1,4 @@
+import { assertStudioGlbCapabilities } from './studioGlbCapabilities'
 import {
   STUDIO_PROJECT_FORMAT,
   STUDIO_PROJECT_VERSION,
@@ -127,9 +128,11 @@ export function validateStudioGlbBytes(bytes: ArrayBuffer) {
   if (!jsonChunkLength || jsonChunkType !== GLB_JSON_CHUNK || 20 + jsonChunkLength > bytes.byteLength) throw new Error('GLB is missing a valid JSON scene chunk.')
   try {
     const jsonText = new TextDecoder().decode(new Uint8Array(bytes, 20, jsonChunkLength)).replace(/\u0000+$/g, '').trim()
-    const json = JSON.parse(jsonText) as { asset?: { version?: unknown } }
+    const json = JSON.parse(jsonText) as { asset?: { version?: unknown }; extensionsUsed?: unknown; extensionsRequired?: unknown }
     if (typeof json.asset?.version !== 'string' || !json.asset.version.startsWith('2')) throw new Error('asset version')
-  } catch {
+    assertStudioGlbCapabilities(json)
+  } catch (error) {
+    if (error instanceof Error && error.message.startsWith('GLB requires ')) throw error
     throw new Error('GLB JSON chunk is invalid or does not declare glTF 2.x.')
   }
   return true

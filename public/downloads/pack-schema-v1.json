@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://meshvara.invalid/downloads/pack-schema-v1.json",
+  "title": "MESHVARA Pack v1 metadata",
+  "type": "object",
+  "required": ["schemaVersion", "slug", "name", "category", "subcategory", "sourceKind", "entrypoint", "component", "license", "capabilities", "dependencies", "files"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "name": { "type": "string", "minLength": 1 },
+    "category": { "type": "string", "minLength": 1 },
+    "subcategory": { "type": ["string", "null"] },
+    "sourceKind": { "enum": ["procedural", "model"] },
+    "entrypoint": { "type": "string", "minLength": 1 },
+    "component": { "type": ["string", "null"] },
+    "license": { "enum": ["MIT", "mixed-reviewed"] },
+    "capabilities": {
+      "type": "object",
+      "required": ["reactThreeFiber", "source", "models", "qaEvidence"],
+      "properties": {
+        "reactThreeFiber": { "type": "boolean" },
+        "source": { "type": "boolean" },
+        "models": { "type": "boolean" },
+        "qaEvidence": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "dependencies": { "type": "object", "additionalProperties": { "type": "string" } },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "bytes": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

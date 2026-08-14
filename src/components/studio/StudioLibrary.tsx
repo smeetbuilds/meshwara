@@ -48,6 +48,7 @@ export function StudioLibrary({
             />
             IMPORT LOCAL GLB
           </label>
+          <p className="studio-outliner-hint">GLB 2.0 · required Draco / Meshopt / KTX2 codecs are detected before local storage.</p>
           <div className="studio-asset-list">
             {shownAssets.map((asset) => (
               <button key={asset.slug} type="button" onClick={() => onAddAsset(asset.slug)}>

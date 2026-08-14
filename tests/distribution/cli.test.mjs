@@ -14,6 +14,7 @@ import {
   sha256Hex,
   stripSingleRoot,
 } from '../../scripts/distribution/core.mjs'
+import { buildPackMetadata } from '../../scripts/distribution/pack-contract.mjs'
 
 const exec = promisify(execFile)
 const ROOT = resolve(new URL('../..', import.meta.url).pathname)
@@ -44,7 +45,7 @@ function storedZip(files) {
 }
 
 const manifest = normalizeManifest({
-  brand: 'MESHVARA', count: 1, assets: [{
+  brand: 'MESHVARA', packSchemaVersion: 1, count: 1, assets: [{
     slug: 'mercury-fold', name: 'Mercury Fold', category: 'Sculptures', subcategory: null,
     file: '/downloads/mercury-fold.zip', bytes: 10, sha256: 'a'.repeat(64),
   }],
@@ -56,24 +57,34 @@ assert.equal(
   'https://raw.githubusercontent.com/smeetbuilds/meshwara/main/public/downloads/mercury-fold.zip',
 )
 
-const archive = storedZip([
+const legacyArchive = storedZip([
   ['mercury-fold/README.md', '# Mercury Fold\n'],
   ['mercury-fold/package.json', JSON.stringify({ dependencies: { three: '0.185.1', react: '19.2.8' } })],
-  ['mercury-fold/src/index.ts', 'export const mercuryFold = true\n'],
+  ['mercury-fold/src/index.ts', "export { MercuryFold } from './MercuryFold'\n"],
+  ['mercury-fold/src/MercuryFold.tsx', 'export function MercuryFold(){ return null }\n'],
+])
+const legacyParsed = stripSingleRoot(readZipEntries(legacyArchive), 'mercury-fold')
+assert.equal(legacyParsed[0].bytes.toString(), '# Mercury Fold\n')
+const assetIdentity = { slug: 'mercury-fold', name: 'Mercury Fold', category: 'Sculptures', subcategory: null }
+const metadata = buildPackMetadata(assetIdentity, legacyParsed)
+const archive = storedZip([
+  ...legacyParsed.map((entry) => [`mercury-fold/${entry.relative}`, entry.bytes]),
+  ['mercury-fold/meshvara.json', JSON.stringify(metadata)],
 ])
 const parsed = stripSingleRoot(readZipEntries(archive), 'mercury-fold')
-assert.deepEqual(parsed.map((entry) => entry.relative), ['README.md', 'package.json', 'src/index.ts'])
-assert.equal(parsed[0].bytes.toString(), '# Mercury Fold\n')
+assert.deepEqual(parsed.map((entry) => entry.relative), ['README.md', 'package.json', 'src/index.ts', 'src/MercuryFold.tsx', 'meshvara.json'])
 
 const unsafe = storedZip([['../escape.txt', 'nope']])
 assert.throws(() => readZipEntries(unsafe), /Unsafe ZIP traversal/)
+const duplicate = storedZip([['same.txt', 'one'], ['same.txt', 'two']])
+assert.throws(() => readZipEntries(duplicate), /Duplicate ZIP path/)
 
 const temp = await mkdtemp(join(tmpdir(), 'meshvara-cli-'))
 const archivePath = join(temp, 'mercury-fold.zip')
 await writeFile(archivePath, archive)
 const registryPath = join(temp, 'manifest.json')
 await writeFile(registryPath, JSON.stringify({
-  brand: 'MESHVARA', count: 1, assets: [{
+  brand: 'MESHVARA', packSchemaVersion: 1, count: 1, assets: [{
     slug: 'mercury-fold', name: 'Mercury Fold', category: 'Sculptures', subcategory: null,
     file: '/downloads/mercury-fold.zip', bytes: archive.length, sha256: sha256Hex(archive),
   }],
@@ -86,15 +97,35 @@ assert.match(dry.stdout, /Dry run Mercury Fold/)
 await assert.rejects(readFile(join(destination, 'mercury-fold', 'README.md')), /ENOENT/)
 
 const install = await exec(process.execPath, [CLI, 'add', 'mercury-fold', '--registry', registryPath, '--archive', archivePath, '--dir', destination])
-assert.match(install.stdout, /Installed 3 files/)
-assert.equal(await readFile(join(destination, 'mercury-fold', 'src/index.ts'), 'utf8'), 'export const mercuryFold = true\n')
+assert.match(install.stdout, /Installed 5 files/)
+assert.match(install.stdout, /Pack-v1/)
+assert.equal(JSON.parse(await readFile(join(destination, 'mercury-fold', 'meshvara.json'), 'utf8')).schemaVersion, 1)
+assert.equal(await readFile(join(destination, 'mercury-fold', 'src/index.ts'), 'utf8'), "export { MercuryFold } from './MercuryFold'\n")
 
 await assert.rejects(
   exec(process.execPath, [CLI, 'add', 'mercury-fold', '--registry', registryPath, '--archive', archivePath, '--dir', destination]),
   (error) => /Refusing to overwrite/.test(error.stderr),
 )
-const verify = await exec(process.execPath, [CLI, 'verify', 'mercury-fold', '--registry', registryPath, '--archive', archivePath])
+const verify = await exec(process.execPath, [CLI, 'verify', 'mercury-fold', '--registry', registryPath, '--archive', archivePath, '--require-pack-v1'])
 assert.match(verify.stdout, /Verified Mercury Fold/)
+assert.match(verify.stdout, /Pack-v1/)
+
+
+const legacyPath = join(temp, 'legacy.zip')
+await writeFile(legacyPath, legacyArchive)
+const legacyRegistryPath = join(temp, 'legacy-manifest.json')
+await writeFile(legacyRegistryPath, JSON.stringify({ brand: 'MESHVARA', count: 1, assets: [{ ...assetIdentity, file: '/downloads/mercury-fold.zip', bytes: legacyArchive.length, sha256: sha256Hex(legacyArchive) }] }))
+await assert.rejects(
+  exec(process.execPath, [CLI, 'verify', 'mercury-fold', '--registry', legacyRegistryPath, '--archive', legacyPath, '--require-pack-v1']),
+  (error) => /missing meshvara.json/.test(error.stderr),
+)
+
+const strictRegistryPath = join(temp, 'strict-manifest.json')
+await writeFile(strictRegistryPath, JSON.stringify({ brand: 'MESHVARA', packSchemaVersion: 1, count: 1, assets: [{ ...assetIdentity, file: '/downloads/mercury-fold.zip', bytes: legacyArchive.length, sha256: sha256Hex(legacyArchive) }] }))
+await assert.rejects(
+  exec(process.execPath, [CLI, 'verify', 'mercury-fold', '--registry', strictRegistryPath, '--archive', legacyPath]),
+  (error) => /missing meshvara.json/.test(error.stderr),
+)
 
 const tamperedPath = join(temp, 'tampered.zip')
 const tampered = Buffer.from(archive)

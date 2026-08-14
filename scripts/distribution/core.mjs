@@ -36,7 +36,7 @@ export function normalizeManifest(input) {
     })
   }
   if (typeof input.count === 'number' && input.count !== assets.length) throw new Error(`Registry count mismatch: expected ${input.count}, found ${assets.length}.`)
-  return { brand: typeof input.brand === 'string' ? input.brand : 'MESHVARA', count: assets.length, assets }
+  return { brand: typeof input.brand === 'string' ? input.brand : 'MESHVARA', packSchemaVersion: input.packSchemaVersion === 1 ? 1 : 0, count: assets.length, assets }
 }
 
 export function buildRegistry(manifest, packageJson = {}) {
@@ -51,6 +51,7 @@ export function buildRegistry(manifest, packageJson = {}) {
     name: 'MESHVARA Registry',
     brand: normalized.brand,
     license: 'MIT',
+    packSchemaVersion: normalized.packSchemaVersion,
     generatedFrom: '/downloads/manifest.json',
     defaultInstallDirectory: 'src/components/meshvara',
     dependencies,
@@ -88,7 +89,7 @@ export function normalizeRegistry(input) {
         sha256: archive.sha256.toLowerCase(),
       }
     })
-    return { brand: typeof input.brand === 'string' ? input.brand : 'MESHVARA', count: assets.length, assets }
+    return { brand: typeof input.brand === 'string' ? input.brand : 'MESHVARA', packSchemaVersion: input.packSchemaVersion === 1 ? 1 : 0, count: assets.length, assets }
   }
   return normalizeManifest(input)
 }
@@ -151,6 +152,7 @@ export function readZipEntries(buffer) {
   let offset = centralOffset
   let expanded = 0
   const entries = []
+  const seenNames = new Set()
   for (let index = 0; index < entryCount; index += 1) {
     if (view.getUint32(offset, true) !== CENTRAL_SIGNATURE) throw new Error('ZIP central directory is corrupt.')
     const method = view.getUint16(offset + 10, true)
@@ -163,6 +165,8 @@ export function readZipEntries(buffer) {
     const externalAttributes = view.getUint32(offset + 38, true)
     const localOffset = view.getUint32(offset + 42, true)
     const name = safeEntryName(bytes.subarray(offset + 46, offset + 46 + nameLength).toString('utf8'))
+    if (seenNames.has(name)) throw new Error(`Duplicate ZIP path: ${name}`)
+    seenNames.add(name)
     offset += 46 + nameLength + extraLength + commentLength
 
     const isDirectory = name.endsWith('/') || ((externalAttributes >>> 16) & 0o170000) === 0o040000

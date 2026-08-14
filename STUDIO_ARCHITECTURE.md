@@ -72,9 +72,12 @@ GLB validation checks:
 - declared file length;
 - required JSON chunk bounds/type;
 - parseable JSON chunk declaring glTF 2.x;
+- required-extension capability compatibility;
 - 100 MB size ceiling.
 
-Texture validation checks binary PNG/JPEG/WebP signatures and the 16 MB ceiling. Portable project restoration verifies that imported-model source IDs resolve to GLB records and material texture IDs resolve to image records.
+Studio currently has no bundled offline Draco, Meshopt or KTX2/BasisU decoder path. If a GLB lists `KHR_draco_mesh_compression`, `EXT_meshopt_compression`, or `KHR_texture_basisu` in `extensionsRequired`, import is rejected **before local storage** with a precise codec message. The same extension in `extensionsUsed` without being required remains allowed because the glTF may provide a valid fallback representation. This is a capability gate, not codec support.
+
+Texture validation checks binary PNG/JPEG/WebP signatures and the 16 MB ceiling. Portable project restoration verifies that imported-model source IDs resolve to GLB records and material texture IDs resolve to image records and runs the same GLB capability validation before restoration.
 
 ## Web GLB export profiles
 
@@ -124,7 +127,7 @@ Studio appearance is a browser-local preference, not project content. The defaul
 
 Light mode is a full editor theme rather than a page-background inversion: chrome, panels, controls, selected rows, material/texture cards, warning/success/danger states, form color-scheme and focus-visible outlines receive dedicated contrast-safe tokens. The Three.js scene background remains the project's authored scene setting; changing Studio chrome does not mutate the user's scene/export.
 
-A Playwright browser release gate lives at `playwright.config.ts` and `tests/e2e/studio.spec.ts`. It runs Chromium at desktop (1440×900), tablet (1024×768) and mobile (390×844) viewports and covers:
+A Playwright browser release gate lives at `playwright.config.ts` and `tests/e2e/studio.spec.ts`. It runs Chromium at desktop (1440×900), tablet (1024×768) and mobile (390×844) viewports. The lightweight cross-device surface covers:
 
 - dark/light preference switching and persistence;
 - live System-theme response;
@@ -132,6 +135,17 @@ A Playwright browser release gate lives at `playwright.config.ts` and `tests/e2e
 - archive asset deep-link boot into an isolated Studio study;
 - keyboard transform-mode accessibility state;
 - viewport containment across the configured responsive breakpoints.
+
+The desktop release path additionally drives real binary workflows using an in-memory glTF 2.0 triangle fixture and PNG texture:
+
+- local GLB file upload and live model inspection;
+- PBR texture replacement through the actual file input;
+- portable `.meshvara-project` download containing GLB + texture bytes;
+- new-project reset followed by portable project re-import;
+- R3F component ZIP download and ZIP-content inspection;
+- required-codec GLB rejection before a scene node is created.
+
+Every browser test records uncaught page errors and `console.error` messages and fails the test if either surface emits an unexpected runtime error.
 
 `bun run e2e` is intentionally separate from the normal dependency/build QA because Playwright browser binaries are an explicit environment prerequisite. `bun run release:check` combines the existing full QA chain with the browser suite. `bun run e2e:install` installs the Chromium browser required by this repository's current E2E projects.
 
@@ -141,6 +155,7 @@ A Playwright browser release gate lives at `playwright.config.ts` and `tests/e2e
 
 - project/hierarchy/state sanitization tests;
 - GLB binary validation tests;
+- required-codec capability-gate tests for Draco/Meshopt/KTX2 declarations;
 - world-transform-preservation/group-transform tests;
 - texture binary validation tests;
 - local storage + portable GLB/texture round-trip tests using the no-IndexedDB memory fallback;
@@ -148,15 +163,15 @@ A Playwright browser release gate lives at `playwright.config.ts` and `tests/e2e
 - Studio appearance preference and contrast tests;
 - structural source-contract validation.
 
-The pure contracts remain useful without a browser or account. Playwright adds real browser interaction coverage for the editor shell, preference persistence and responsive release surface; GPU-specific rendering and heavyweight binary workflows still require targeted browser QA.
+The pure contracts remain useful without a browser or account. Playwright adds real browser interaction coverage for the editor shell, preference persistence, responsive surface, representative GLB/texture import, portable-project round trips and component downloads. Very large binary/quota/GPU-specific workflows still require targeted browser QA.
 
 ## Known boundary
 
 This tranche does **not** claim completion of:
 
-- Draco geometry compression;
-- Meshopt geometry compression;
-- KTX2/Basis texture transcoding;
+- Draco geometry compression **decode/encode support** (required Draco imports are detected and rejected clearly);
+- Meshopt geometry compression **decode/encode support** (required Meshopt imports are detected and rejected clearly);
+- KTX2/Basis texture transcoding **decode/encode support** (required BasisU imports are detected and rejected clearly);
 - UV editing, texture painting or atlas generation;
 - geometry decimation, mesh merge or automatic LOD authoring;
 - keyframe timeline editing, retargeting or IK authoring;
@@ -178,12 +193,13 @@ Those remain future compression, animation and archive-distribution tranches.
 - PBR scalar or texture replacement state falls out of project sanitization/handoff;
 - texture references stop participating in portable project files or storage garbage collection;
 - GLB/texture storage starts trusting extensions without binary validation;
+- GLBs requiring unbundled Draco/Meshopt/KTX2 codecs can enter local storage silently;
 - Studio introduces remote persistence or remote model-processing calls;
 - skeleton-safe loading, model diagnostics, animation playback or material/texture application disappear;
 - web export profiles stop using real `GLTFExporter.maxTextureSize` values or start claiming unavailable codecs;
 - deterministic imported-model component ZIP delivery disappears;
 - typed config/R3F scaffold delivery disappears;
 - Dark / Light / System appearance, local preference persistence or live system-theme resolution disappears;
-- the Playwright desktop/tablet/mobile release gate or IndexedDB reload regression disappears.
+- the Playwright desktop/tablet/mobile release gate, IndexedDB reload regression, binary import/project round-trip, component-download or browser error guard disappears.
 
-The configured Playwright suite covers desktop/tablet/mobile shell interaction and IndexedDB reload persistence. IndexedDB quota pressure, very large model/texture memory behavior, native file-picker edge cases, browser-specific image decode behavior, GPU-specific materials/WebGL behavior and visual GLTFExporter round-trip parity still require targeted browser QA.
+The configured Playwright suite covers desktop/tablet/mobile shell interaction, IndexedDB reload persistence, a representative imported GLB, local PNG texture replacement, portable project download/re-import, component ZIP output and required-codec rejection. IndexedDB quota pressure, very large model/texture memory behavior, native file-picker edge cases, browser-specific image decode behavior, GPU-specific materials/WebGL behavior and visual GLTFExporter round-trip parity still require targeted browser QA.
