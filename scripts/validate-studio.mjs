@@ -4,9 +4,10 @@ import { resolve } from 'node:path'
 const root = process.cwd()
 const read = (path) => readFile(resolve(root, path), 'utf8')
 const [
-  routeTree, studioRoute, shell, viewport, storage, project, transforms, inspector, outliner, library,
-  exportModule, modelTools, modelExport, textureResources, componentPack, browserZip, themeModule, themeCss, codecCapabilities, codecRuntime,
+  routeTree, studioRoute, shell, viewport, storage, project, projectCore, transforms, inspector, outliner, library,
+  exportModule, modelTools, modelExport, textureResources, componentPack, componentPackCore, browserZip, themeModule, themeCss, codecCapabilities, codecRuntime,
   header, assetsIndex, assetDetail, contract, packageJson, playwrightConfig, e2eStudio, e2eFixtures,
+  timeline, timelineController, timelineUi, animationContract, releaseContract,
 ] = await Promise.all([
   read('src/routeTree.gen.ts'),
   read('src/routes/studio.tsx'),
@@ -14,6 +15,7 @@ const [
   read('src/components/studio/StudioViewport.tsx'),
   read('src/lib/studioStorage.ts'),
   read('src/lib/studioProject.ts'),
+  read('src/lib/studioProjectCore.ts'),
   read('src/lib/studioTransforms.ts'),
   read('src/components/studio/StudioInspector.tsx'),
   read('src/components/studio/StudioOutliner.tsx'),
@@ -23,6 +25,7 @@ const [
   read('src/lib/studioModelExport.ts'),
   read('src/lib/studioTextureResources.ts'),
   read('src/lib/studioComponentPack.ts'),
+  read('src/lib/studioComponentPackCore.ts'),
   read('src/lib/browserZip.ts'),
   read('src/lib/studioTheme.ts'),
   read('src/styles/studio-theme.css'),
@@ -36,6 +39,11 @@ const [
   read('playwright.config.ts'),
   read('tests/e2e/studio.spec.ts'),
   read('tests/e2e/fixtures/studio-fixtures.ts'),
+  read('src/lib/studioTimeline.ts'),
+  read('src/components/studio/useStudioTimelineController.ts'),
+  read('src/components/studio/StudioTimeline.tsx'),
+  read('ANIMATION_STUDIO.md'),
+  read('RELEASE_READINESS.md'),
 ])
 
 function assert(condition, message) {
@@ -56,14 +64,16 @@ for (const token of ['readStudioThemePreference', 'resolveStudioTheme', 'writeSt
 
 for (const token of [
   'createStudioHistory', 'undoStudioHistory', 'redoStudioHistory', 'duplicateStudioNodes', 'removeStudioNodes',
-  'setStudioParentPreserveWorld', 'updateStudioGroupTransform', 'storeStudioTexture', 'garbageCollectStudioFiles', 'collectStudioFileIds',
-  'exportStudioGlb', 'createStudioComponentPack', 'generateStudioR3FScaffold', '<StudioViewport', '<StudioOutliner', '<StudioLibrary', '<StudioInspector',
+  'setStudioParentPreserveWorld', 'storeStudioTexture', 'garbageCollectStudioFiles', 'collectStudioFileIds',
+  'exportStudioGlb', 'createStudioComponentPack', 'generateStudioR3FScaffold', '<StudioViewport', '<StudioOutliner', '<StudioLibrary', '<StudioInspector', '<StudioTimeline',
+  'useStudioTimelineController',
 ]) assert(shell.includes(token), `Studio shell missing ${token}`)
 
 for (const token of [
   'STUDIO_HISTORY_LIMIT = 50', 'STUDIO_NODE_LIMIT = 250', 'StudioTextureChannel', 'textures?: Partial<Record<StudioTextureChannel',
   'setStudioParentPreserveWorld', 'updateStudioGroupTransform', 'studioSelectedRootIds', 'sanitizeMaterialOverrides', 'collectStudioFileIds',
-]) assert(project.includes(token), `project model missing ${token}`)
+]) assert(projectCore.includes(token), `project core missing ${token}`)
+for (const token of ['STUDIO_KEYFRAME_LIMIT = 600', 'StudioTransformKeyframe', 'StudioTimelineState', 'timeline?: StudioTimelineState', 'sanitizeStudioTimeline', 'parseStudioProject', 'duplicateStudioNodes']) assert(project.includes(token), `project timeline facade missing ${token}`)
 for (const token of ['composeStudioMatrix', 'invertStudioMatrix', 'decomposeStudioMatrix', 'studioWorldMatrix', 'localTransformForWorld', 'matricesApproximatelyEqual']) assert(transforms.includes(token), `transform math missing ${token}`)
 
 for (const token of ['studioOfflineRequiredGlbCodecs', 'offlineCodecsUsed', 'offlineCodecsRequired', 'KHR_draco_mesh_compression', 'EXT_meshopt_compression', 'KHR_texture_basisu', 'assertStudioGlbCapabilities']) assert(codecCapabilities.includes(token), `codec capability reporting missing ${token}`)
@@ -81,10 +91,11 @@ for (const forbidden of ['fetch(', 'supabase', 'firebase', 'localStorage.setItem
 for (const token of [
   '<Canvas', '<TransformControls', '<OrbitControls', '<Grid', 'GLTFLoader', 'cloneSkeleton', 'useAnimations', 'prepareStudioModel',
   'loadStudioTextureResources', 'textureSignature', 'sceneRegistry', 'children.get(node.id)', 'node.debug.bounds', 'node.debug.skeleton',
-  'state.gl.info.render.triangles', 'toneMappingExposure', 'configureStudioGltfLoader',
+  'state.gl.info.render.triangles', 'toneMappingExposure', 'configureStudioGltfLoader', 'evaluateStudioTransform', 'resolveStudioTimeline(node.timeline)', 'timelineTime', 'timelinePlaying',
 ]) assert(viewport.includes(token), `viewport missing ${token}`)
 assert(!viewport.includes('<Environment'), 'Studio viewport must not silently depend on remote HDR environment assets')
 assert(viewport.includes('configureStudioGltfLoader(loader, renderer)'), 'Studio viewport does not configure the same-origin codec runtime')
+assert(viewport.includes('if (!primary || node.locked || playing) return content'), 'gizmo must not commit moving transforms during timeline playback')
 
 for (const token of [
   'PBR + TEXTURES', 'TEXTURE CHANNELS', 'MODEL REPORT', 'ANIMATION', 'DEBUG VIEW', 'preserves world transform',
@@ -100,15 +111,27 @@ for (const token of ['GLTFExporter', 'GLTFLoader', 'loadStudioTextureResources',
 assert(!modelExport.includes('fetch('), 'local GLB export introduced a remote processing dependency')
 
 for (const token of ['createBrowserZip', 'crc32', '0x04034b50', '0x02014b50', '0x06054b50', 'Duplicate ZIP path']) assert(browserZip.includes(token), `browser ZIP implementation missing ${token}`)
-for (const token of ['createStudioComponentPack', '@react-three/drei', '10.7.7', '@react-three/fiber', '9.7.0', '0.185.1', 'meshvara-preset.json', 'QUALITY.md', 'src/models/', 'SkeletonUtils']) assert(componentPack.includes(token), `component pack missing ${token}`)
-for (const forbidden of ['fetch(', 'XMLHttpRequest', 'supabase', 'firebase']) assert(!componentPack.includes(forbidden), `component pack introduced remote dependency ${forbidden}`)
+for (const token of ['createStudioComponentPack', '@react-three/drei', '10.7.7', '@react-three/fiber', '9.7.0', '0.185.1', 'meshvara-preset.json', 'QUALITY.md', 'src/models/', 'SkeletonUtils']) assert(componentPackCore.includes(token), `component pack core missing ${token}`)
+for (const token of ['readStoredEntries', 'meshvara-preset.json', 'resolveStudioTimeline(node.timeline)', 'Transform timeline', 'createBrowserZip(entries)']) assert(componentPack.includes(token), `timeline component-pack adapter missing ${token}`)
+for (const forbidden of ['fetch(', 'XMLHttpRequest', 'supabase', 'firebase']) assert(!(componentPack + componentPackCore).includes(forbidden), `component pack introduced remote dependency ${forbidden}`)
 
-for (const token of ['satisfies MeshvaraStudioConfig', 'parentId', 'materials', 'textures?: Partial<Record', 'animation', 'customization', 'generateStudioR3FScaffold', 'renderSource', 'children.get(object.id)']) assert(exportModule.includes(token), `developer handoff missing ${token}`)
+for (const token of ['satisfies MeshvaraStudioConfig', 'parentId', 'materials', 'textures?: Partial<Record', 'animation', 'keyframes', 'duration', 'fps', 'customization', 'generateStudioR3FScaffold', 'renderSource', 'children.get(object.id)']) assert(exportModule.includes(token), `developer handoff missing ${token}`)
+
+for (const token of ['snapStudioTime', 'updateStudioTimelineTiming', 'upsertStudioTransformKeyframe', 'updateStudioTransformKeyframe', 'removeStudioTransformKeyframe', 'evaluateStudioTransform', 'normalizeStudioPlaybackTime', 'studioProjectTimelineDuration']) assert(timeline.includes(token), `timeline runtime missing ${token}`)
+for (const token of ['requestAnimationFrame', "event.code === 'Space'", "event.key.toLowerCase() === 'k'", 'autoKey', 'commitTransform', 'updateStudioGroupTransform']) assert(timelineController.includes(token), `timeline controller missing ${token}`)
+for (const token of ['ANIMATION TIMELINE', 'AUTO KEY', '+ POSITION', '+ ROTATION', '+ SCALE', 'DELETE KEY', 'easing', 'type="range"']) assert(timelineUi.includes(token), `timeline UI missing ${token}`)
+assert(animationContract.includes('frame-snapped') && animationContract.includes('not skeletal keyframing') && animationContract.includes('undo/redo'), 'Animation Studio boundary is not explicit')
+assert(releaseContract.includes('500') && releaseContract.includes('13') && releaseContract.includes('release blocker'), 'physical release-readiness contract is incomplete')
+
 for (const token of [
   'tests/studio/project-state.test.ts', 'tests/studio/glb-validation.test.ts', 'tests/studio/codec-capabilities.test.ts', 'tests/studio/transform-preservation.test.ts',
-  'tests/studio/customization-project.test.ts', 'tests/studio/texture-validation.test.ts', 'tests/studio/local-storage.test.ts', 'tests/studio/component-pack.test.ts', 'tests/studio/theme.test.ts', 'tests/studio/theme-contrast.test.mjs', 'scripts/validate-studio.mjs',
+  'tests/studio/customization-project.test.ts', 'tests/studio/texture-validation.test.ts', 'tests/studio/local-storage.test.ts', 'tests/studio/component-pack.test.ts', 'tests/studio/theme.test.ts', 'tests/studio/theme-contrast.test.mjs', 'scripts/validate-studio.mjs', 'animation:check',
 ]) assert(packageJson.includes(token), `studio:check missing ${token}`)
-for (const token of ['"@playwright/test": "1.62.1"', '"e2e": "playwright test"', '"release:check": "bun run qa && bun run e2e"']) assert(packageJson.includes(token), `browser release gate missing ${token}`)
+for (const token of [
+  '"@playwright/test": "1.62.1"', '"e2e": "playwright test"',
+  '"release:audit": "node scripts/audit-release-readiness.mjs"',
+  '"release:check": "bun run qa && bun run release:audit && bun run e2e"',
+]) assert(packageJson.includes(token), `browser/release gate missing ${token}`)
 for (const token of ['desktop-chromium', 'tablet-chromium', 'mobile-chromium', 'node scripts/sync-codecs.mjs && bun --bun vite dev', 'trace:', 'screenshot:']) assert(playwrightConfig.includes(token), `Playwright config missing ${token}`)
 for (const token of [
   'Studio appearance supports dark, light and live system preference', 'local project autosave survives a real browser reload',
@@ -134,4 +157,4 @@ assert(contract.includes("worker-src 'self' blob:") && contract.includes('no dec
 assert(contract.includes('13 flagship procedural archive assets') && contract.includes('enrich-customizable-packs.mjs'), 'typed archive customization parity contract is not explicit')
 assert(contract.includes('export encoding/re-compression') && contract.includes('export encoding'), 'codec re-encoding boundary is not explicit')
 
-console.log('Meshvara Studio offline-codec + typed-customization + browser release contract passed')
+console.log('Meshvara Studio model-editor + animation + offline-codec + typed-customization + browser release contract passed')

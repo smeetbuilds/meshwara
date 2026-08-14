@@ -40,6 +40,7 @@ project = updateStudioNode(project, child.id, {
     'material-0': { color: '#abcdef', roughness: 0.25, metalness: 0.75, opacity: 0.8, emissive: '#102030', emissiveIntensity: 2, textures: { map: 'texture-demo', normalMap: null } },
   },
   animation: { clip: 'Walk', playing: true, speed: 1.5, loop: false },
+  timeline: { duration: 5, fps: 30, loop: true, keyframes: [{ id: 'key-fixture-1234', time: 0, channel: 'position', value: [1, 2, 3], easing: 'linear' }] },
   debug: { bounds: true, axes: true, skeleton: true },
 })
 assert.deepEqual(project.nodes.find((node) => node.id === child.id)?.transform.position, [1, 2, 3])
@@ -77,6 +78,13 @@ hostile.nodes[1].materialOverrides = {
   '<script>': { color: '#ffffff' },
 }
 hostile.nodes[1].animation = { clip: 'x'.repeat(500), playing: true, speed: 99, loop: false }
+hostile.nodes[1].timeline = {
+  duration: 999, fps: 999, loop: false,
+  keyframes: [
+    { id: 'key-valid-1234', time: 999, channel: 'position', value: [999999, -999999, 5], easing: 'ease-in-out' },
+    { id: '<script>', time: 1, channel: 'position', value: [1, 2, 3], easing: 'evil' },
+  ],
+}
 hostile.nodes[1].debug = { bounds: 1, axes: true, skeleton: true }
 const sanitized = parseStudioProject(hostile)
 assert.ok(sanitized)
@@ -95,6 +103,10 @@ assert.equal(sanitized.nodes[1].materialOverrides['material-0'].textures?.alphaM
 assert.equal(sanitized.nodes[1].materialOverrides['<script>'], undefined)
 assert.equal(sanitized.nodes[1].animation.speed, 4)
 assert.equal(sanitized.nodes[1].animation.clip?.length, 120)
+assert.equal(sanitized.nodes[1].timeline?.duration, 120)
+assert.equal(sanitized.nodes[1].timeline?.fps, 60)
+assert.equal(sanitized.nodes[1].timeline?.keyframes.length, 1)
+assert.deepEqual(sanitized.nodes[1].timeline?.keyframes[0].value, [10000, -10000, 5])
 assert.equal(sanitized.nodes[1].debug.bounds, false)
 assert.equal(sanitized.nodes[1].debug.axes, true)
 
@@ -115,9 +127,13 @@ assert.equal(importedConfig.parentId, parent.id)
 assert.equal(importedConfig.materials['material-0'].color, '#abcdef')
 assert.equal(importedConfig.materials['material-0'].textures?.map, 'texture-demo')
 assert.equal(importedConfig.animation.clip, 'Walk')
+assert.equal(importedConfig.timeline.duration, 5)
+assert.equal(importedConfig.timeline.fps, 30)
+assert.equal(importedConfig.timeline.keyframes.length, 1)
 assert.match(generateStudioConfigModule(project), /satisfies MeshvaraStudioConfig/)
 assert.match(generateStudioConfigModule(project), /normalMap/)
 assert.match(generateStudioR3FScaffold(project), /renderSource/)
 assert.match(generateStudioR3FScaffold(project), /children\.get\(object\.id\)/)
+assert.match(generateStudioR3FScaffold(project), /keyframes/)
 
-console.log('Meshvara Studio model-editor project contract passed')
+console.log('Meshvara Studio model-editor + timeline project contract passed')

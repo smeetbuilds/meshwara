@@ -16,7 +16,8 @@ import {
   prepareStudioModel,
   type StudioModelInspection,
 } from '../../lib/studioModelTools'
-import type { StudioNode, StudioProject, StudioTransform, StudioTransformMode } from '../../lib/studioProject'
+import { resolveStudioTimeline, type StudioNode, type StudioProject, type StudioTransform, type StudioTransformMode } from '../../lib/studioProject'
+import { evaluateStudioTransform } from '../../lib/studioTimeline'
 import { loadStudioTextureResources, type StudioLoadedTextureResources } from '../../lib/studioTextureResources'
 import { configureStudioGltfLoader } from '../../lib/studioCodecRuntime'
 
@@ -147,9 +148,11 @@ function ArchiveObject({ node }: { node: StudioNode }) {
 
 function StudioObject({
   node,
+  displayTransform,
   children,
   selected,
   primary,
+  playing,
   mode,
   scene,
   onSelect,
@@ -157,9 +160,11 @@ function StudioObject({
   onInspection,
 }: {
   node: StudioNode
+  displayTransform: StudioTransform
   children: ReactNode
   selected: boolean
   primary: boolean
+  playing: boolean
   mode: StudioTransformMode
   scene: StudioProject['scene']
   onSelect: (id: string) => void
@@ -170,9 +175,9 @@ function StudioObject({
   const content = (
     <group
       ref={group}
-      position={node.transform.position}
-      rotation={node.transform.rotation}
-      scale={node.transform.scale}
+      position={displayTransform.position}
+      rotation={displayTransform.rotation}
+      scale={displayTransform.scale}
       visible={node.visible}
       onClick={(event) => {
         event.stopPropagation()
@@ -186,7 +191,7 @@ function StudioObject({
     </group>
   )
 
-  if (!primary || node.locked) return content
+  if (!primary || node.locked || playing) return content
   return (
     <TransformControls
       mode={mode}
@@ -239,6 +244,8 @@ function SceneNodes({
   selectedIds,
   primarySelectedId,
   mode,
+  timelineTime,
+  timelinePlaying,
   onSelect,
   onTransform,
   onInspection,
@@ -247,6 +254,8 @@ function SceneNodes({
   selectedIds: string[]
   primarySelectedId: string | null
   mode: StudioTransformMode
+  timelineTime: number
+  timelinePlaying: boolean
   onSelect: (id: string) => void
   onTransform: (id: string, transform: StudioTransform) => void
   onInspection: (id: string, report: StudioModelInspection) => void
@@ -268,8 +277,10 @@ function SceneNodes({
     <StudioObject
       key={node.id}
       node={node}
+      displayTransform={evaluateStudioTransform(resolveStudioTimeline(node.timeline), node.transform, timelineTime)}
       selected={selected.has(node.id)}
       primary={node.id === primarySelectedId}
+      playing={timelinePlaying}
       mode={mode}
       scene={project.scene}
       onSelect={onSelect}
@@ -288,6 +299,8 @@ export function StudioViewport({
   selectedIds,
   primarySelectedId,
   mode,
+  timelineTime,
+  timelinePlaying,
   onSelect,
   onTransform,
   onMetrics,
@@ -297,6 +310,8 @@ export function StudioViewport({
   selectedIds: string[]
   primarySelectedId: string | null
   mode: StudioTransformMode
+  timelineTime: number
+  timelinePlaying: boolean
   onSelect: (id: string | null) => void
   onTransform: (id: string, transform: StudioTransform) => void
   onMetrics: (metrics: StudioViewportMetrics) => void
@@ -326,6 +341,8 @@ export function StudioViewport({
             selectedIds={selectedIds}
             primarySelectedId={primarySelectedId}
             mode={mode}
+            timelineTime={timelineTime}
+            timelinePlaying={timelinePlaying}
             onSelect={(id) => onSelect(id)}
             onTransform={onTransform}
             onInspection={onInspection}

@@ -67,13 +67,18 @@ assert.ok(await loadStudioFile(historyOnly.id), 'project deletion must preserve 
 await garbageCollectStudioFiles()
 assert.equal(await loadStudioFile(historyOnly.id), null)
 
-
+// Same-origin codec support must survive portable project restoration. This fixture only
+// verifies storage/capability acceptance; actual decoder correctness is covered by the
+// codec runtime/browser integration gates.
 const dracoBytes = validMinimalGlb(['KHR_draco_mesh_compression'])
 const dracoPortable = structuredClone(portable)
 const dracoFile = dracoPortable.files.find((file) => file.kind === 'glb')!
 dracoFile.size = dracoBytes.byteLength
 dracoFile.base64 = Buffer.from(new Uint8Array(dracoBytes)).toString('base64')
-await assert.rejects(restorePortableStudioProject(dracoPortable), /Draco geometry compression/i)
+const dracoRestored = await restorePortableStudioProject(dracoPortable)
+assert.equal(dracoRestored.nodes.length, 1)
+assert.equal((await loadStudioFile(model.id))?.kind, 'glb')
+assert.equal((await loadStudioFile(model.id))?.size, dracoBytes.byteLength)
 
 const restored = await restorePortableStudioProject(portable)
 assert.equal(restored.nodes.length, 1)
@@ -81,4 +86,4 @@ assert.equal((await loadStudioFile(model.id))?.kind, 'glb')
 assert.equal((await loadStudioFile(texture.id))?.kind, 'texture')
 assert.equal((await listStudioFiles()).length, 2)
 
-console.log('Meshvara Studio local storage + portable media contract passed')
+console.log('Meshvara Studio local storage + offline-codec portable media contract passed')

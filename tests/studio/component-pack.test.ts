@@ -7,6 +7,10 @@ import type { StudioGlbExportResult } from '../../src/lib/studioModelExport.ts'
 const node = createImportedStudioNode({ id: 'file-demo', name: 'Demo Robot.glb' })
 node.materialOverrides['material-0'] = { color: '#abcdef', textures: { map: 'texture-demo' } }
 node.animation = { clip: 'Walk', playing: true, speed: 1, loop: true }
+node.timeline = {
+  duration: 4, fps: 30, loop: true,
+  keyframes: [{ id: 'key-demo-1234', time: 0, channel: 'position', value: [0, 0, 0], easing: 'linear' }],
+}
 const inspection: StudioModelInspection = {
   meshes: 2, skinnedMeshes: 1, vertices: 1200, triangles: 800, materials: 2, textures: 1, missingNormals: 0,
   bounds: { size: [1, 2, 1], center: [0, 1, 0] },
@@ -35,6 +39,8 @@ assert.match(text, /src\/models\/demo-robot\.glb/)
 assert.match(text, /@react-three\/fiber/)
 assert.match(text, /10\.7\.7/)
 assert.match(text, /meshvara-preset\.json/)
+assert.match(text, /"keyframes"/)
+assert.match(text, /key-demo-1234/)
 assert.match(text, /does not claim Draco, Meshopt or KTX2 compression/)
 
-console.log('Meshvara Studio deterministic component-pack contract passed')
+console.log('Meshvara Studio deterministic component-pack + timeline preset contract passed')

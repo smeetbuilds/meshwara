@@ -18,8 +18,6 @@ import {
   updateStudioNode,
   updateStudioNodes,
   updateStudioScene,
-  updateStudioTransform,
-  updateStudioGroupTransform,
   type StudioMaterialOverride,
   type StudioProject,
   type StudioTransform,
@@ -54,8 +52,11 @@ import { StudioViewport, type StudioViewportMetrics } from './StudioViewport'
 import { StudioOutliner } from './StudioOutliner'
 import { StudioLibrary } from './StudioLibrary'
 import { StudioInspector } from './StudioInspector'
+import { StudioTimeline } from './StudioTimeline'
+import { useStudioTimelineController } from './useStudioTimelineController'
 import '../../styles/studio.css'
 import '../../styles/studio-model-editor.css'
+import '../../styles/studio-animation.css'
 import '../../styles/studio-theme.css'
 
 function downloadText(filename: string, content: string, type = 'text/plain') {
@@ -145,6 +146,15 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
     setHistory((current) => commitStudioHistory(current, next))
     if (nextSelectedIds) setSelectedIds(nextSelectedIds)
   }, [])
+
+  const timeline = useStudioTimelineController({
+    project,
+    selectedIds,
+    selectedId,
+    mode,
+    commit,
+    setStatus,
+  })
 
   useEffect(() => {
     if (booted.current) return
@@ -367,23 +377,6 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
 
   const patchNode = (id: string, patch: Parameters<typeof updateStudioNode>[2]) => commit(updateStudioNode(project, id, patch))
 
-  const commitPrimaryTransform = (id: string, patch: Partial<StudioTransform>) => {
-    const node = project.nodes.find((item) => item.id === id)
-    if (!node) return
-    const nextTransform: StudioTransform = { ...node.transform, ...patch }
-    if (selectedIds.length > 1 && selectedIds.includes(id)) {
-      const result = updateStudioGroupTransform(project, selectedIds, id, nextTransform)
-      if (!result.preserved) {
-        setStatus(`GROUP TRANSFORM REJECTED · ${(result.reason ?? 'UNREPRESENTABLE TRS').toUpperCase()}`)
-        return
-      }
-      commit(result.project)
-      setStatus(`${selectedIds.length} OBJECT GROUP TRANSFORM COMMITTED`)
-      return
-    }
-    commit(updateStudioTransform(project, id, nextTransform))
-  }
-
   const reparentSelected = (parentId?: string) => {
     if (!selectedId) return
     const result = setStudioParentPreserveWorld(project, selectedId, parentId)
@@ -519,16 +512,35 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
             selectedIds={selectedIds}
             primarySelectedId={selectedId}
             mode={mode}
+            timelineTime={timeline.time}
+            timelinePlaying={timeline.playing}
             onSelect={(id) => setSelectedIds(id ? [id] : [])}
-            onTransform={(id, transform: StudioTransform) => commitPrimaryTransform(id, transform)}
+            onTransform={(id, transform: StudioTransform) => timeline.commitTransform(id, transform)}
             onMetrics={setMetrics}
             onInspection={reportInspection}
+          />
+
+          <StudioTimeline
+            nodes={project.nodes}
+            selectedNode={selectedNode}
+            time={timeline.time}
+            playing={timeline.playing}
+            autoKey={timeline.autoKey}
+            onTime={timeline.seek}
+            onPlaying={timeline.setPlaying}
+            onAutoKey={timeline.setAutoKey}
+            onAnimationPatch={timeline.patchSelectedAnimation}
+            onAddKeyframe={timeline.addKeyframe}
+            onUpdateKeyframe={timeline.updateKeyframe}
+            onRemoveKeyframe={timeline.removeKeyframe}
           />
 
           <footer className="studio-statusbar" aria-label="Studio status">
             <span role="status" aria-live="polite">{status}</span>
             <span>{project.nodes.length} OBJECTS</span>
             <span>{selectedIds.length} SELECTED</span>
+            <span>{Math.round(timeline.time * timeline.fps)} FRAME</span>
+            <span>{timeline.autoKey ? 'AUTO KEY' : 'MANUAL KEY'}</span>
             <span>{metrics.calls} CALLS</span>
             <span>{metrics.triangles.toLocaleString()} TRI</span>
             <span>{metrics.geometries} GEO</span>
@@ -542,7 +554,7 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
           selectedIds={selectedIds}
           inspection={selectedInspection}
           onRename={(name) => selectedId && patchNode(selectedId, { name })}
-          onTransform={(transform) => selectedId && commitPrimaryTransform(selectedId, transform)}
+          onTransform={(transform) => selectedId && timeline.commitTransform(selectedId, transform)}
           onNodePatch={(patch) => selectedId && patchNode(selectedId, patch)}
           onScenePatch={(patch) => commit(updateStudioScene(project, patch))}
           onParent={reparentSelected}
