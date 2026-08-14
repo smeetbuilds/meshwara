@@ -8,7 +8,7 @@ const node = createImportedStudioNode({ id: 'file-demo', name: 'Demo Robot.glb' 
 node.materialOverrides['material-0'] = { color: '#abcdef', textures: { map: 'texture-demo' } }
 node.animation = { clip: 'Walk', playing: true, speed: 1, loop: true }
 node.timeline = {
-  duration: 4, fps: 30, loop: true,
+  duration: 4, fps: 30, loop: true, rangeStart: 0.5, rangeEnd: 3.5,
   keyframes: [{ id: 'key-demo-1234', time: 0, channel: 'position', value: [0, 0, 0], easing: 'linear' }],
 }
 const inspection: StudioModelInspection = {
@@ -41,6 +41,9 @@ assert.match(text, /10\.7\.7/)
 assert.match(text, /meshvara-preset\.json/)
 assert.match(text, /"keyframes"/)
 assert.match(text, /key-demo-1234/)
+assert.match(text, /\"rangeStart\": 0.5/)
+assert.match(text, /\"rangeEnd\": 3.5/)
+assert.match(text, /shortest path with quaternion interpolation/)
 assert.match(text, /does not claim Draco, Meshopt or KTX2 compression/)
 
 console.log('Meshvara Studio deterministic component-pack + timeline preset contract passed')

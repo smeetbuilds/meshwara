@@ -40,7 +40,7 @@ project = updateStudioNode(project, child.id, {
     'material-0': { color: '#abcdef', roughness: 0.25, metalness: 0.75, opacity: 0.8, emissive: '#102030', emissiveIntensity: 2, textures: { map: 'texture-demo', normalMap: null } },
   },
   animation: { clip: 'Walk', playing: true, speed: 1.5, loop: false },
-  timeline: { duration: 5, fps: 30, loop: true, keyframes: [{ id: 'key-fixture-1234', time: 0, channel: 'position', value: [1, 2, 3], easing: 'linear' }] },
+  timeline: { duration: 5, fps: 30, loop: true, rangeStart: 0, rangeEnd: 5, keyframes: [{ id: 'key-fixture-1234', time: 0, channel: 'position', value: [1, 2, 3], easing: 'linear' }] },
   debug: { bounds: true, axes: true, skeleton: true },
 })
 assert.deepEqual(project.nodes.find((node) => node.id === child.id)?.transform.position, [1, 2, 3])
@@ -79,7 +79,7 @@ hostile.nodes[1].materialOverrides = {
 }
 hostile.nodes[1].animation = { clip: 'x'.repeat(500), playing: true, speed: 99, loop: false }
 hostile.nodes[1].timeline = {
-  duration: 999, fps: 999, loop: false,
+  duration: 999, fps: 999, loop: false, rangeStart: 999, rangeEnd: -20,
   keyframes: [
     { id: 'key-valid-1234', time: 999, channel: 'position', value: [999999, -999999, 5], easing: 'ease-in-out' },
     { id: '<script>', time: 1, channel: 'position', value: [1, 2, 3], easing: 'evil' },

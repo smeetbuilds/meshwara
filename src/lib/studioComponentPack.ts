@@ -53,7 +53,7 @@ export function createStudioComponentPack(
     } else if (entry.name === readmePath) {
       const raw = entry.data instanceof Uint8Array ? entry.data : new Uint8Array(entry.data as ArrayBuffer)
       const readme = decoder.decode(raw)
-      entry.data = encoder.encode(`${readme.trimEnd()}\n\n## Transform timeline\n\n\`meshvara-preset.json\` includes the Studio object transform timeline separately from native GLB animation clips. It contains duration, fps, loop state and frame-snapped position/rotation/scale keys.\n`)
+      entry.data = encoder.encode(`${readme.trimEnd()}\n\n## Transform timeline\n\n\`meshvara-preset.json\` includes the Studio object transform timeline separately from native GLB animation clips. It contains duration, fps, loop state, the playback work area, and frame-snapped position/rotation/scale keys. Rotation keys remain editable Euler XYZ values while Meshvara Studio previews the shortest path with quaternion interpolation.\n`)
     }
   }
 

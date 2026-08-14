@@ -35,7 +35,7 @@ Transform keys are deliberately object-local instead of a second global persiste
 - three numeric values;
 - interpolation/easing mode.
 
-The current version keeps Euler rotation interpolation because Studio's transform editor already stores Euler TRS. Quaternion/slerp rotation tracks are the next correctness upgrade before character-oriented animation work.
+Rotation keys continue to store editable Euler XYZ values because Studio's transform editor uses Euler TRS, but preview interpolation converts the endpoints to normalized quaternions and uses shortest-path slerp before converting the evaluated result back to XYZ. This avoids long-spin wraparound while preserving project/export compatibility.
 
 ## Editing semantics
 
@@ -56,11 +56,10 @@ This tranche is **not skeletal keyframing**. It does not yet provide:
 - root-motion extraction;
 - dope-sheet multi-bone editing;
 - tangent/Bezier curve handles;
-- quaternion curve editing;
 - onion-skin/ghost poses;
 - animation clip baking back into GLB.
 
-Those belong to the next Animation Studio phases. This foundation supplies the persistent timeline, transport, interpolation, UI and delivery contract those systems require.
+Those belong to later Animation Studio phases. The precision-authoring tranche documented in `ANIMATION_PRECISION.md` builds on this foundation with quaternion-correct rotation playback, persistent work ranges, direct key values and key clipboard/navigation tools.
 
 ## QA contract
 

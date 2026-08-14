@@ -24,6 +24,10 @@ export interface StudioTimelineState {
   duration: number
   fps: number
   loop: boolean
+  /** Inclusive playback work-area start in seconds. Scrubbing can still inspect the full duration. */
+  rangeStart: number
+  /** Inclusive playback work-area end in seconds. */
+  rangeEnd: number
   keyframes: StudioTransformKeyframe[]
 }
 
@@ -52,13 +56,17 @@ function sanitizeVec3(value: unknown, fallback: core.StudioVec3, min: number, ma
 }
 
 export function defaultStudioTimeline(): StudioTimelineState {
-  return { duration: 5, fps: 30, loop: true, keyframes: [] }
+  return { duration: 5, fps: 30, loop: true, rangeStart: 0, rangeEnd: 5, keyframes: [] }
 }
 
 export function sanitizeStudioTimeline(value: unknown): StudioTimelineState {
   const input = value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {}
   const duration = clamp(finite(input.duration, 5), 0.25, 120)
   const fps = Math.round(clamp(finite(input.fps, 30), 12, 60))
+  const rawRangeStart = clamp(finite(input.rangeStart, 0), 0, duration)
+  const rawRangeEnd = clamp(finite(input.rangeEnd, duration), 0, duration)
+  const rangeStart = Math.min(rawRangeStart, rawRangeEnd)
+  const rangeEnd = Math.max(rawRangeStart, rawRangeEnd)
   const channels = new Set<StudioTimelineChannel>(['position', 'rotation', 'scale'])
   const easings = new Set<StudioTimelineEasing>(['linear', 'ease-in', 'ease-out', 'ease-in-out', 'step'])
   const occupied = new Set<string>()
@@ -91,7 +99,7 @@ export function sanitizeStudioTimeline(value: unknown): StudioTimelineState {
   }
 
   keyframes.sort((a, b) => a.time - b.time || a.channel.localeCompare(b.channel) || a.id.localeCompare(b.id))
-  return { duration, fps, loop: input.loop !== false, keyframes }
+  return { duration, fps, loop: input.loop !== false, rangeStart, rangeEnd, keyframes }
 }
 
 export function resolveStudioTimeline(value?: StudioTimelineState | null): StudioTimelineState {

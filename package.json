@@ -1,5 +1,5 @@
 {
-  "name": "meshvara",
+  "name": "meshwara",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
     "packs": "bun scripts/validate-modeled-assets.mjs && bun scripts/build-download-packs.mjs && bun scripts/build-geometry-v2-packs.mjs && node scripts/enrich-customizable-packs.mjs && node scripts/standardize-download-packs.mjs",
     "handoff:check": "bun tests/developer-handoff/playground-state.test.ts && bun scripts/validate-developer-handoff.mjs",
     "studio:check": "bun tests/studio/project-state.test.ts && bun tests/studio/glb-validation.test.ts && bun tests/studio/codec-capabilities.test.ts && bun tests/studio/customization-project.test.ts && bun tests/studio/transform-preservation.test.ts && bun tests/studio/texture-validation.test.ts && bun tests/studio/local-storage.test.ts && bun tests/studio/component-pack.test.ts && bun tests/studio/theme.test.ts && node tests/studio/theme-contrast.test.mjs && bun run animation:check && bun scripts/validate-studio.mjs",
-    "animation:check": "bun tests/studio/timeline-state.test.ts && node scripts/validate-animation-studio.mjs",
+    "animation:check": "bun tests/studio/timeline-state.test.ts && bun run animation:precision:check && node scripts/validate-animation-studio.mjs",
     "models:inspect": "bun scripts/model-inspector.mjs",
     "models:test": "bun tests/model-pipeline/source-registry.test.mjs && bun tests/model-pipeline/inspector.test.mjs && bun tests/model-pipeline/validator.test.mjs && bun tests/model-pipeline/young-man-contract.test.mjs && bun tests/model-pipeline/model-runtime.test.mjs",
     "models:check": "bun scripts/validate-modeled-assets.mjs",
@@ -23,14 +23,15 @@
     "registry:build": "node scripts/build-registry.mjs",
     "distribution:check": "node tests/distribution/registry.test.mjs && node tests/distribution/pack-contract.test.mjs && node tests/distribution/pack-standardize.test.mjs && node tests/distribution/customization-pack.test.mjs && node tests/distribution/zip-determinism.test.mjs && node tests/distribution/cli.test.mjs && node tests/distribution/registry-build.test.mjs && node scripts/validate-distribution.mjs",
     "e2e": "playwright test",
-    "e2e:studio": "playwright test tests/e2e/studio.spec.ts tests/e2e/studio-animation.spec.ts",
+    "e2e:studio": "playwright test tests/e2e/studio.spec.ts tests/e2e/studio-animation.spec.ts tests/e2e/studio-animation-precision.spec.ts",
     "e2e:install": "playwright install chromium",
     "release:audit": "node scripts/audit-release-readiness.mjs",
     "release:check": "bun run qa && bun run release:audit && bun run e2e",
     "pack:check": "node scripts/validate-pack-parity.mjs",
     "customization:check": "bun tests/developer-handoff/customization-state.test.ts && bun tests/studio/customization-project.test.ts && node tests/distribution/customization-pack.test.mjs && node scripts/validate-customization.mjs",
     "codecs:sync": "node scripts/sync-codecs.mjs",
-    "codecs:check": "node tests/studio/codec-sync.test.mjs && node scripts/validate-codecs.mjs"
+    "codecs:check": "node tests/studio/codec-sync.test.mjs && node scripts/validate-codecs.mjs",
+    "animation:precision:check": "bun tests/studio/timeline-authoring.test.ts && node scripts/validate-animation-precision.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.7",
