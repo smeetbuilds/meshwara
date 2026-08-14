@@ -10,7 +10,7 @@ MESHVARA distribution follows the same product rule as the archive: assets are f
 
 ## Pack-v1 archive contract
 
-`scripts/standardize-download-packs.mjs` runs after the procedural/model and Geometry V2 pack builders. It rewrites each generated archive deterministically and injects `<slug>/meshvara.json` without changing the public archive URL.
+`scripts/standardize-download-packs.mjs` is the final archive-rewrite stage. It injects `<slug>/meshvara.json` after all content builders/enrichers have finished, without changing the public archive URL.
 
 `meshvara.json` includes:
 
@@ -28,6 +28,23 @@ The metadata deliberately does **not** hash itself, avoiding recursive/self-refe
 `public/downloads/pack-schema-v1.json` documents the machine-readable shape. `scripts/validate-pack-parity.mjs` is the strict release validator: it requires Pack-v1, validates archive byte size + outer SHA-256, verifies ZIP CRCs/path safety, then validates every internal file digest and metadata/payload invariant. On the canonical repository it also requires exactly 500 manifest assets.
 
 The ZIP writer uses a fixed timestamp with UTC date/time getters. This makes archive bytes independent of the developer/CI host time zone; the regression suite compares output across UTC, Asia/Kolkata, and America/Los_Angeles.
+
+## Typed customization pack enrichment
+
+The 13 flagship procedural assets, indexes 001–013, have one canonical typed material/form contract shared by the site, Studio and downloadable source packs.
+
+`scripts/enrich-customizable-packs.mjs` runs after ordinary pack generation and Geometry V2 updates, but **before** Pack-v1 standardization. For each curated asset it verifies the asset↔scene identity and injects:
+
+- `src/customization.ts` — types, authored defaults, presets, sanitization/resolution;
+- `src/CustomizationLayer.tsx` — non-destructive cloned-material application;
+- `src/CustomizableScene.tsx` — scene wrapper receiving the typed state;
+- `CUSTOMIZATION.json` — machine-readable curated contract;
+- component/index exports exposing the customization prop/types/presets;
+- README usage for the same prop surface.
+
+The stage removes stale `meshvara.json` metadata before changing payload bytes; Pack-v1 is then rebuilt over the final enriched archive, so its internal digests and outer manifest SHA cover the customization source exactly as shipped. The enrichment transform is deterministic and regression-tested for idempotence.
+
+This parity applies to the curated 13 assets. It does not pretend that all 500 heterogeneous archive scenes expose identical deep shader/geometry controls.
 
 ## CLI
 
@@ -90,20 +107,22 @@ Every asset detail page exposes the verified CLI install path next to direct ZIP
 
 The distribution release chain is intentionally layered:
 
-- `bun run packs` builds normal archives, applies Geometry V2 updates, then standardizes all generated ZIPs to Pack-v1;
+- `bun run codecs:sync` emits the same-origin Draco/Basis runtime from the exact pinned Three.js package and `codecs:check` verifies hashes/version/runtime wiring;
+- `bun run customization:check` validates the exact 13 asset↔scene typed contract across preview, Playground, Studio, handoff and pack enrichment;
+- `bun run packs` builds normal archives, applies Geometry V2 updates, enriches the curated typed-customization packs, then standardizes every generated ZIP to Pack-v1;
 - `bun run pack:check` verifies the complete generated archive set against the manifest and Pack-v1 contract;
 - `bun run registry:build` derives the public registry from the newly updated manifest;
-- `bun run distribution:check` runs registry, Pack-v1 metadata, deterministic standardization, cross-time-zone ZIP determinism, real CLI subprocess installation, registry-build and structural tests;
+- `bun run distribution:check` runs registry, Pack-v1 metadata, customization-pack enrichment, deterministic standardization, cross-time-zone ZIP determinism, real CLI subprocess installation, registry-build and structural tests;
 - `bun run qa` runs those checks in release order before TypeScript/build validation.
 
-The synthetic Pack-v1 tests are network-free and verify idempotent ZIP standardization. The CLI fixture covers dry-run, Pack-v1 install, overwrite refusal, strict legacy refusal, SHA mismatch refusal, CRC/path-safe parsing and `verify` behavior.
+The synthetic Pack-v1 and customization-pack tests are network-free and verify idempotent archive transforms. The CLI fixture covers dry-run, Pack-v1 install, overwrite refusal, strict legacy refusal, SHA mismatch refusal, CRC/path-safe parsing and `verify` behavior.
 
 ## Current boundary
 
-This tranche defines and wires the **actual 500-archive regeneration/parity pipeline**, but this execution environment cannot run the repository's complete Bun pack build because the full source tree, Bun installation and generated archive corpus are not mounted here. Therefore the committed release pipeline is strict, but this response does not claim that all 500 checked-in ZIP binaries were physically regenerated in this environment.
+This tranche defines and wires the **actual 500-archive regeneration/parity pipeline** and the **13-asset typed customization enrichment pipeline**, but this execution environment cannot run the repository's complete Bun pack build because the full source tree, Bun installation, dependency installation and generated archive corpus are not mounted here. Therefore the committed release pipeline can be strict without falsely claiming that all 500 checked-in ZIP binaries—or the 13 curated public ZIPs—were physically regenerated in this environment.
 
-Pack-v1 standardizes delivery metadata/integrity; it does not invent deep per-asset shader/geometry customization APIs that the source pack does not already expose.
+Pack-v1 standardizes delivery metadata/integrity. The curated layer adds real typed customization for assets 001–013; it does not invent uniform deep shader/geometry APIs for the other 487 assets.
 
-Draco, Meshopt, and KTX2 encoder/decoder delivery is also still not claimed. Studio now detects GLBs that *require* those codecs and rejects them with an explicit capability message before storing them. Actual offline codec support remains a separate implementation task until the runtime binaries, licensing, CSP path and output correctness are bundled and tested.
+Studio input decoding now has an offline/same-origin runtime contract for Draco, Meshopt and KTX2/BasisU. Draco and Basis worker assets are emitted from the exact pinned Three.js installation and retain Apache-2.0 licensing/notice files; Meshopt is bundled from Three.js. This is **input delivery/runtime support**, not a claim that Meshvara's GLB exporter or pack pipeline currently re-encodes geometry with Draco/Meshopt or textures with KTX2/BasisU.
 
 A future npm-published zero-dependency CLI can shorten the GitHub execution command, but npm publication is not required for the current no-login workflow.

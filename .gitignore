@@ -16,3 +16,9 @@ staging/materialized/
 playwright-report/
 test-results/
 .playwright/
+
+# Same-origin codec runtime emitted from the exact pinned three package.
+# README stays tracked; build/dev/release recreate these bytes deterministically.
+public/codecs/draco/
+public/codecs/basis/
+public/codecs/manifest.json

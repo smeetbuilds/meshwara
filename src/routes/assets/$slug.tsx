@@ -2,7 +2,7 @@ import { useState, type CSSProperties } from 'react'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { AssetDeveloperPanel, AssetPreviewControls, defaultPreviewSettings } from '../../components/AssetDeveloperWorkbench'
 import { AssetInstallPanel } from '../../components/AssetInstallPanel'
-import { AssetPlayground, defaultAssetPlaygroundSettings } from '../../components/AssetPlayground'
+import { AssetPlayground, createDefaultAssetPlaygroundSettings } from '../../components/AssetPlayground'
 import { AssetScene } from '../../components/AssetScene'
 import { ArrowDown, ArrowUpRight } from '../../components/Icons'
 import { assets, getAsset, getAssetSubcategory } from '../../data/assets'
@@ -20,7 +20,7 @@ export const Route = createFileRoute('/assets/$slug')({
 function AssetDetail() {
   const asset = Route.useLoaderData()
   const [preview, setPreview] = useState(() => ({ ...defaultPreviewSettings, pointer: asset.interaction === 'Pointer' }))
-  const [playground, setPlayground] = useState(() => ({ ...defaultAssetPlaygroundSettings, tuning: { ...defaultAssetPlaygroundSettings.tuning } }))
+  const [playground, setPlayground] = useState(() => createDefaultAssetPlaygroundSettings(asset.scene))
   const assetSubcategory = getAssetSubcategory(asset)
   const sameType = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) === assetSubcategory)
   const sameCategory = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) !== assetSubcategory)
@@ -39,12 +39,21 @@ function AssetDetail() {
         <div>
           <div className="detail-stage" data-stage-theme={preview.stage} data-custom-stage={playground.background ? 'true' : 'false'} style={stageStyle}>
             <div className="asset-gridlines" />
-            <AssetScene kind={asset.scene} presentation={asset.presentation} interaction={asset.interaction} motion={preview.motion} pointerEnabled={preview.pointer} quality={preview.quality} tuning={playground.tuning} />
+            <AssetScene
+              kind={asset.scene}
+              presentation={asset.presentation}
+              interaction={asset.interaction}
+              motion={preview.motion}
+              pointerEnabled={preview.pointer}
+              quality={preview.quality}
+              tuning={playground.tuning}
+              customization={playground.customization}
+            />
             <div className="viewer-hud"><span>{brand.name} / 3D PREVIEW / {sourceLabel}</span><span>{previewStateLabel} / {preview.quality.toUpperCase()} / {playground.tuning.exposure.toFixed(2)} EXP</span></div>
           </div>
           <AssetPreviewControls value={preview} onChange={setPreview} supportsPointer={asset.interaction === 'Pointer'} />
           <div className="asset-workflow-links">
-            <a className="playground-jump" href="#playground"><span>Open advanced playground</span><span>Camera / light / motion / share ↓</span></a>
+            <a className="playground-jump" href="#playground"><span>Open advanced playground</span><span>Camera / material / motion / share ↓</span></a>
             <Link className="playground-jump" to="/studio" search={{ asset: asset.slug }}><span>Compose in Meshvara Studio</span><span>Scene / transforms / local project ↗</span></Link>
           </div>
         </div>

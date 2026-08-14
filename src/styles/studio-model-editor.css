@@ -5,3 +5,25 @@
 .studio-material-reset{width:100%;border:1px solid var(--studio-border);background:transparent;color:var(--studio-muted);padding:7px;font:inherit;font-size:9px;letter-spacing:.08em;cursor:pointer}.studio-material-reset:hover{color:var(--studio-text);border-color:#596063}
 .studio-texture-editor{display:grid;gap:5px;padding-top:8px;border-top:1px solid var(--studio-border)}.studio-texture-editor .studio-section-title{margin-bottom:2px}.studio-texture-row{display:grid;grid-template-columns:minmax(0,1fr) 62px 58px;gap:4px;align-items:center;padding:6px;border:1px solid #25292b;background:#0e1011}.studio-texture-row>div{display:grid;gap:2px;min-width:0}.studio-texture-row strong{font-size:9px;font-weight:600;overflow:hidden;text-overflow:ellipsis}.studio-texture-row small{font-size:8px;color:var(--studio-muted)}.studio-texture-upload,.studio-texture-row>button{border:1px solid var(--studio-border);background:#17191a;color:var(--studio-text);padding:7px 5px;text-align:center;font:inherit;font-size:8px;letter-spacing:.06em;cursor:pointer}.studio-texture-upload input{display:none}.studio-texture-row>button{color:var(--studio-muted)}.studio-texture-upload:hover,.studio-texture-row>button:hover{border-color:#596063;color:var(--studio-accent)}.studio-export-profile{padding-bottom:2px}.studio-delivery-actions{display:grid;grid-template-columns:1fr 1fr;gap:5px}.studio-delivery-actions .studio-primary-action{height:100%}.studio-delivery-actions .studio-primary-action:last-child{background:#1b2114}.studio-delivery-actions .studio-primary-action:last-child:hover{background:#252d1b}
 @media(max-width:760px){.studio-texture-row{grid-template-columns:minmax(0,1fr) 66px 60px}.studio-delivery-actions{grid-template-columns:1fr}}
+
+/* Typed archive customization */
+.studio-archive-customization {
+  display: grid;
+  gap: 10px;
+}
+
+.studio-customization-colors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.studio-customization-colors .studio-mini-color {
+  min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .studio-customization-colors {
+    grid-template-columns: 1fr;
+  }
+}

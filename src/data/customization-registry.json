@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "fields": {
+    "palette": { "type": "enum", "values": ["authored", "mono", "duotone"] },
+    "primaryColor": { "type": "color" },
+    "secondaryColor": { "type": "color" },
+    "roughnessScale": { "type": "number", "min": 0, "max": 2, "step": 0.05 },
+    "metalnessScale": { "type": "number", "min": 0, "max": 2, "step": 0.05 },
+    "emissiveScale": { "type": "number", "min": 0, "max": 3, "step": 0.05 },
+    "opacity": { "type": "number", "min": 0.25, "max": 1, "step": 0.05 },
+    "geometryScale": { "type": "number", "min": 0.5, "max": 1.5, "step": 0.05 },
+    "wireframe": { "type": "boolean" }
+  },
+  "scenes": {
+    "mercury": {
+      "assetSlug": "mercury-fold", "label": "Mercury Fold", "component": "MercuryFold",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#070809", "secondaryColor": "#6f7880", "roughnessScale": 0.55, "metalnessScale": 1.35, "emissiveScale": 0.8, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "electric-lime", "label": "Electric Lime", "value": { "palette": "duotone", "primaryColor": "#d7ff45", "secondaryColor": "#18230d", "roughnessScale": 0.8, "metalnessScale": 0.9, "emissiveScale": 1.25, "opacity": 1, "geometryScale": 1.04, "wireframe": false } },
+        { "id": "polar-glass", "label": "Polar Glass", "value": { "palette": "duotone", "primaryColor": "#dcecff", "secondaryColor": "#53749e", "roughnessScale": 0.45, "metalnessScale": 0.45, "emissiveScale": 1.05, "opacity": 0.88, "geometryScale": 0.96, "wireframe": false } }
+      ]
+    },
+    "prism": {
+      "assetSlug": "prismatic-vault", "label": "Prismatic Vault", "component": "PrismaticVault",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#090a0d", "secondaryColor": "#7a8291", "roughnessScale": 0.5, "metalnessScale": 1.4, "emissiveScale": 0.7, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "violet-spectrum", "label": "Violet Spectrum", "value": { "palette": "duotone", "primaryColor": "#8d69ff", "secondaryColor": "#2cf0ff", "roughnessScale": 0.7, "metalnessScale": 0.8, "emissiveScale": 1.5, "opacity": 0.96, "geometryScale": 1, "wireframe": false } },
+        { "id": "ice-prism", "label": "Ice Prism", "value": { "palette": "duotone", "primaryColor": "#f0fbff", "secondaryColor": "#7db9d8", "roughnessScale": 0.4, "metalnessScale": 0.35, "emissiveScale": 1.1, "opacity": 0.82, "geometryScale": 1.03, "wireframe": false } }
+      ]
+    },
+    "halo": {
+      "assetSlug": "halo-assembly", "label": "Halo Assembly", "component": "HaloAssembly",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#060708", "secondaryColor": "#737a80", "roughnessScale": 0.55, "metalnessScale": 1.45, "emissiveScale": 0.7, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "solar-halo", "label": "Solar Halo", "value": { "palette": "duotone", "primaryColor": "#ffbf45", "secondaryColor": "#fff1b5", "roughnessScale": 0.65, "metalnessScale": 0.85, "emissiveScale": 1.6, "opacity": 1, "geometryScale": 1.05, "wireframe": false } },
+        { "id": "signal-halo", "label": "Signal Halo", "value": { "palette": "duotone", "primaryColor": "#d7ff45", "secondaryColor": "#315c39", "roughnessScale": 0.8, "metalnessScale": 0.75, "emissiveScale": 1.35, "opacity": 0.95, "geometryScale": 0.98, "wireframe": false } }
+      ]
+    },
+    "bloom": {
+      "assetSlug": "porcelain-bloom", "label": "Porcelain Bloom", "component": "PorcelainBloom",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "mono", "primaryColor": "#111214", "secondaryColor": "#111214", "roughnessScale": 0.62, "metalnessScale": 1.15, "emissiveScale": 0.6, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "warm-porcelain", "label": "Warm Porcelain", "value": { "palette": "duotone", "primaryColor": "#fff8ed", "secondaryColor": "#d8bfa7", "roughnessScale": 1.2, "metalnessScale": 0.15, "emissiveScale": 0.85, "opacity": 1, "geometryScale": 1.03, "wireframe": false } },
+        { "id": "ink-bloom", "label": "Ink Bloom", "value": { "palette": "duotone", "primaryColor": "#1b2028", "secondaryColor": "#60738b", "roughnessScale": 0.95, "metalnessScale": 0.55, "emissiveScale": 1, "opacity": 0.96, "geometryScale": 0.97, "wireframe": false } }
+      ]
+    },
+    "lens": {
+      "assetSlug": "liquid-lens", "label": "Liquid Lens", "component": "LiquidLens",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#06070a", "secondaryColor": "#606a76", "roughnessScale": 0.35, "metalnessScale": 1.25, "emissiveScale": 0.75, "opacity": 0.9, "geometryScale": 1, "wireframe": false } },
+        { "id": "cyan-fluid", "label": "Cyan Fluid", "value": { "palette": "duotone", "primaryColor": "#d9fbff", "secondaryColor": "#2ca8c8", "roughnessScale": 0.35, "metalnessScale": 0.3, "emissiveScale": 1.2, "opacity": 0.78, "geometryScale": 1.05, "wireframe": false } },
+        { "id": "violet-fluid", "label": "Violet Fluid", "value": { "palette": "duotone", "primaryColor": "#f0e7ff", "secondaryColor": "#754fc8", "roughnessScale": 0.42, "metalnessScale": 0.4, "emissiveScale": 1.25, "opacity": 0.82, "geometryScale": 0.95, "wireframe": false } }
+      ]
+    },
+    "spine": {
+      "assetSlug": "carbon-spine", "label": "Carbon Spine", "component": "CarbonSpine",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#08090b", "secondaryColor": "#4c5259", "roughnessScale": 0.55, "metalnessScale": 1.45, "emissiveScale": 0.6, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "carbon-lime", "label": "Carbon Lime", "value": { "palette": "duotone", "primaryColor": "#151a13", "secondaryColor": "#bddd3f", "roughnessScale": 0.75, "metalnessScale": 1.1, "emissiveScale": 1.2, "opacity": 1, "geometryScale": 1.04, "wireframe": false } },
+        { "id": "oxide", "label": "Oxide", "value": { "palette": "duotone", "primaryColor": "#2a1612", "secondaryColor": "#b85f3e", "roughnessScale": 1.1, "metalnessScale": 0.85, "emissiveScale": 0.8, "opacity": 1, "geometryScale": 0.96, "wireframe": false } }
+      ]
+    },
+    "filament": {
+      "assetSlug": "magnetic-filaments", "label": "Magnetic Filaments", "component": "MagneticFilaments",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#08090c", "secondaryColor": "#737b89", "roughnessScale": 0.6, "metalnessScale": 1.3, "emissiveScale": 0.8, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "magenta-field", "label": "Magenta Field", "value": { "palette": "duotone", "primaryColor": "#ff4bb4", "secondaryColor": "#492379", "roughnessScale": 0.75, "metalnessScale": 0.6, "emissiveScale": 1.75, "opacity": 0.95, "geometryScale": 1.06, "wireframe": false } },
+        { "id": "ion-field", "label": "Ion Field", "value": { "palette": "duotone", "primaryColor": "#45f3ff", "secondaryColor": "#275cf5", "roughnessScale": 0.7, "metalnessScale": 0.7, "emissiveScale": 1.65, "opacity": 0.92, "geometryScale": 0.96, "wireframe": false } }
+      ]
+    },
+    "shards": {
+      "assetSlug": "gravity-shards", "label": "Gravity Shards", "component": "GravityShards",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#06070a", "secondaryColor": "#707783", "roughnessScale": 0.5, "metalnessScale": 1.5, "emissiveScale": 0.65, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "ember-shards", "label": "Ember Shards", "value": { "palette": "duotone", "primaryColor": "#ff6b2c", "secondaryColor": "#51150d", "roughnessScale": 0.7, "metalnessScale": 0.75, "emissiveScale": 1.65, "opacity": 1, "geometryScale": 1.08, "wireframe": false } },
+        { "id": "ice-shards", "label": "Ice Shards", "value": { "palette": "duotone", "primaryColor": "#e5f8ff", "secondaryColor": "#4988b8", "roughnessScale": 0.4, "metalnessScale": 0.45, "emissiveScale": 1.15, "opacity": 0.86, "geometryScale": 0.96, "wireframe": false } }
+      ]
+    },
+    "coil": {
+      "assetSlug": "signal-coil", "label": "Signal Coil", "component": "SignalCoil",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#08090a", "secondaryColor": "#737b80", "roughnessScale": 0.55, "metalnessScale": 1.4, "emissiveScale": 0.7, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "signal-lime", "label": "Signal Lime", "value": { "palette": "duotone", "primaryColor": "#d7ff45", "secondaryColor": "#29401e", "roughnessScale": 0.7, "metalnessScale": 0.8, "emissiveScale": 1.6, "opacity": 1, "geometryScale": 1.04, "wireframe": false } },
+        { "id": "signal-blue", "label": "Signal Blue", "value": { "palette": "duotone", "primaryColor": "#5ae7ff", "secondaryColor": "#24369b", "roughnessScale": 0.65, "metalnessScale": 0.9, "emissiveScale": 1.5, "opacity": 0.95, "geometryScale": 0.98, "wireframe": false } }
+      ]
+    },
+    "needles": {
+      "assetSlug": "vector-needles", "label": "Vector Needles", "component": "VectorNeedles",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#07080a", "secondaryColor": "#767e87", "roughnessScale": 0.5, "metalnessScale": 1.5, "emissiveScale": 0.65, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "warning", "label": "Warning", "value": { "palette": "duotone", "primaryColor": "#ffbe32", "secondaryColor": "#be3029", "roughnessScale": 0.75, "metalnessScale": 0.8, "emissiveScale": 1.35, "opacity": 1, "geometryScale": 1.05, "wireframe": false } },
+        { "id": "vector-cyan", "label": "Vector Cyan", "value": { "palette": "duotone", "primaryColor": "#60efff", "secondaryColor": "#1d4b71", "roughnessScale": 0.65, "metalnessScale": 0.85, "emissiveScale": 1.45, "opacity": 0.95, "geometryScale": 0.97, "wireframe": false } }
+      ]
+    },
+    "monolith": {
+      "assetSlug": "obsidian-monolith", "label": "Obsidian Monolith", "component": "ObsidianMonolith",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#050607", "secondaryColor": "#464b51", "roughnessScale": 0.45, "metalnessScale": 1.5, "emissiveScale": 0.5, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "obsidian-red", "label": "Obsidian Red", "value": { "palette": "duotone", "primaryColor": "#0d0c10", "secondaryColor": "#8d242e", "roughnessScale": 0.6, "metalnessScale": 1.1, "emissiveScale": 1.25, "opacity": 1, "geometryScale": 1.04, "wireframe": false } },
+        { "id": "moonstone", "label": "Moonstone", "value": { "palette": "duotone", "primaryColor": "#dfe4e9", "secondaryColor": "#66717d", "roughnessScale": 0.85, "metalnessScale": 0.55, "emissiveScale": 0.95, "opacity": 1, "geometryScale": 0.97, "wireframe": false } }
+      ]
+    },
+    "shell": {
+      "assetSlug": "chromatic-shell", "label": "Chromatic Shell", "component": "ChromaticShell",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#07080a", "secondaryColor": "#737b84", "roughnessScale": 0.5, "metalnessScale": 1.45, "emissiveScale": 0.65, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "chromatic-pop", "label": "Chromatic Pop", "value": { "palette": "duotone", "primaryColor": "#ff4f9a", "secondaryColor": "#3de7ff", "roughnessScale": 0.6, "metalnessScale": 0.7, "emissiveScale": 1.45, "opacity": 0.96, "geometryScale": 1.05, "wireframe": false } },
+        { "id": "pearl", "label": "Pearl", "value": { "palette": "duotone", "primaryColor": "#fff7f2", "secondaryColor": "#c9d4e8", "roughnessScale": 0.72, "metalnessScale": 0.35, "emissiveScale": 1.05, "opacity": 0.94, "geometryScale": 0.97, "wireframe": false } }
+      ]
+    },
+    "velvet": {
+      "assetSlug": "velvet-orbit", "label": "Velvet Orbit", "component": "VelvetOrbit",
+      "defaults": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false },
+      "presets": [
+        { "id": "authored", "label": "Authored", "value": { "palette": "authored", "primaryColor": "#ffffff", "secondaryColor": "#ffffff", "roughnessScale": 1, "metalnessScale": 1, "emissiveScale": 1, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "black-chrome", "label": "Black Chrome", "value": { "palette": "duotone", "primaryColor": "#07080a", "secondaryColor": "#666d75", "roughnessScale": 0.55, "metalnessScale": 1.3, "emissiveScale": 0.7, "opacity": 1, "geometryScale": 1, "wireframe": false } },
+        { "id": "deep-velvet", "label": "Deep Velvet", "value": { "palette": "duotone", "primaryColor": "#26153e", "secondaryColor": "#9d43a8", "roughnessScale": 1.25, "metalnessScale": 0.25, "emissiveScale": 0.95, "opacity": 1, "geometryScale": 1.04, "wireframe": false } },
+        { "id": "forest-velvet", "label": "Forest Velvet", "value": { "palette": "duotone", "primaryColor": "#10251f", "secondaryColor": "#4b9b71", "roughnessScale": 1.15, "metalnessScale": 0.3, "emissiveScale": 0.9, "opacity": 1, "geometryScale": 0.97, "wireframe": false } }
+      ]
+    }
+  }
+}

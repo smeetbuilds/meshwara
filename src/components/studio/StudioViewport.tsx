@@ -6,6 +6,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { assets } from '../../data/assets'
 import { sceneRegistry } from '../sceneRegistry'
+import { AssetCustomizationLayer } from '../AssetCustomizationLayer'
 import { loadStudioFile } from '../../lib/studioStorage'
 import {
   createBoundsHelper,
@@ -17,6 +18,7 @@ import {
 } from '../../lib/studioModelTools'
 import type { StudioNode, StudioProject, StudioTransform, StudioTransformMode } from '../../lib/studioProject'
 import { loadStudioTextureResources, type StudioLoadedTextureResources } from '../../lib/studioTextureResources'
+import { configureStudioGltfLoader } from '../../lib/studioCodecRuntime'
 
 export interface StudioViewportMetrics {
   calls: number
@@ -54,7 +56,8 @@ function ImportedObject({ node, onInspection }: { node: StudioNode; onInspection
 }
 
 function LoadedGlb({ url, node, onInspection }: { url: string; node: StudioNode; onInspection: (report: StudioModelInspection) => void }) {
-  const gltf = useLoader(GLTFLoader, url)
+  const renderer = useThree((state) => state.gl)
+  const gltf = useLoader(GLTFLoader, url, (loader) => configureStudioGltfLoader(loader, renderer))
   const root = useRef<THREE.Group>(null)
   const scene = useMemo(() => cloneSkeleton(gltf.scene), [gltf.scene])
   const [textureBundle, setTextureBundle] = useState<StudioLoadedTextureResources | null>(null)
@@ -131,11 +134,15 @@ function LoadedGlb({ url, node, onInspection }: { url: string; node: StudioNode;
   )
 }
 
-function ArchiveObject({ assetSlug }: { assetSlug: string }) {
-  const asset = assets.find((item) => item.slug === assetSlug)
+function ArchiveObject({ node }: { node: StudioNode }) {
+  const asset = assets.find((item) => item.slug === node.assetSlug)
   if (!asset) return null
   const Scene = sceneRegistry[asset.scene]
-  return <Scene />
+  return (
+    <AssetCustomizationLayer scene={asset.scene} customization={node.customization}>
+      <Scene />
+    </AssetCustomizationLayer>
+  )
 }
 
 function StudioObject({
@@ -172,7 +179,7 @@ function StudioObject({
         onSelect(node.id)
       }}
     >
-      {node.kind === 'archive' && node.assetSlug ? <ArchiveObject assetSlug={node.assetSlug} /> : null}
+      {node.kind === 'archive' && node.assetSlug ? <ArchiveObject node={node} /> : null}
       {node.kind === 'imported' && node.fileId ? <ImportedObject node={node} onInspection={(report) => onInspection(node.id, report)} /> : null}
       {selected && !node.debug.bounds ? <axesHelper args={[0.42]} /> : null}
       {children}

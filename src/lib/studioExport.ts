@@ -11,6 +11,7 @@ export interface MeshvaraStudioConfigObject {
   visible: boolean
   locked: boolean
   wireframe: boolean
+  customization: StudioNode['customization']
   materials: StudioNode['materialOverrides']
   animation: StudioNode['animation']
   debug: StudioNode['debug']
@@ -49,6 +50,7 @@ export function createStudioConfig(project: StudioProject): MeshvaraStudioConfig
       visible: node.visible,
       locked: node.locked,
       wireframe: node.wireframe,
+      customization: { ...node.customization },
       materials: JSON.parse(JSON.stringify(node.materialOverrides)) as StudioNode['materialOverrides'],
       animation: { ...node.animation },
       debug: { ...node.debug },
@@ -56,7 +58,7 @@ export function createStudioConfig(project: StudioProject): MeshvaraStudioConfig
   }
 }
 
-const configType = `export type MeshvaraStudioConfig = {\n  version: 1\n  project: string\n  scene: {\n    background: string\n    exposure: number\n    grid: boolean\n    snap: boolean\n    translateSnap: number\n    rotateSnap: number\n    scaleSnap: number\n  }\n  objects: Array<{\n    id: string\n    name: string\n    parentId?: string\n    source: { type: 'meshvara'; slug: string } | { type: 'local-glb'; fileId: string }\n    position: [number, number, number]\n    rotation: [number, number, number]\n    scale: [number, number, number]\n    visible: boolean\n    locked: boolean\n    wireframe: boolean\n    materials: Record<string, { color?: string; emissive?: string; emissiveIntensity?: number; roughness?: number; metalness?: number; opacity?: number; textures?: Partial<Record<'map' | 'normalMap' | 'roughnessMap' | 'metalnessMap' | 'emissiveMap' | 'alphaMap' | 'aoMap', string | null>> }>\n    animation: { clip?: string; playing: boolean; speed: number; loop: boolean }\n    debug: { bounds: boolean; axes: boolean; skeleton: boolean }\n  }>\n}`
+const configType = `export type MeshvaraStudioConfig = {\n  version: 1\n  project: string\n  scene: {\n    background: string\n    exposure: number\n    grid: boolean\n    snap: boolean\n    translateSnap: number\n    rotateSnap: number\n    scaleSnap: number\n  }\n  objects: Array<{\n    id: string\n    name: string\n    parentId?: string\n    source: { type: 'meshvara'; slug: string } | { type: 'local-glb'; fileId: string }\n    position: [number, number, number]\n    rotation: [number, number, number]\n    scale: [number, number, number]\n    visible: boolean\n    locked: boolean\n    wireframe: boolean\n    customization: { palette: 'authored' | 'mono' | 'duotone'; primaryColor: string; secondaryColor: string; roughnessScale: number; metalnessScale: number; emissiveScale: number; opacity: number; geometryScale: number; wireframe: boolean }\n    materials: Record<string, { color?: string; emissive?: string; emissiveIntensity?: number; roughness?: number; metalness?: number; opacity?: number; textures?: Partial<Record<'map' | 'normalMap' | 'roughnessMap' | 'metalnessMap' | 'emissiveMap' | 'alphaMap' | 'aoMap', string | null>> }>\n    animation: { clip?: string; playing: boolean; speed: number; loop: boolean }\n    debug: { bounds: boolean; axes: boolean; skeleton: boolean }\n  }>\n}`
 
 export function generateStudioConfigModule(project: StudioProject) {
   const config = JSON.stringify(createStudioConfig(project), null, 2)
@@ -65,5 +67,5 @@ export function generateStudioConfigModule(project: StudioProject) {
 
 export function generateStudioR3FScaffold(project: StudioProject) {
   const config = JSON.stringify(createStudioConfig(project), null, 2)
-  return `import type { ReactNode } from 'react'\n\n${configType}\n\nexport const meshvaraScene = ${config} satisfies MeshvaraStudioConfig\n\ntype ObjectConfig = MeshvaraStudioConfig['objects'][number]\n\nexport interface MeshvaraStudioSceneProps {\n  /** Resolve archive slugs and local GLB file IDs with your own production asset pipeline. */\n  renderSource: (object: ObjectConfig) => ReactNode\n}\n\nexport function MeshvaraStudioScene({ renderSource }: MeshvaraStudioSceneProps) {\n  const children = new Map<string | undefined, ObjectConfig[]>()\n  for (const object of meshvaraScene.objects) {\n    const bucket = children.get(object.parentId) ?? []\n    bucket.push(object)\n    children.set(object.parentId, bucket)\n  }\n\n  const renderObject = (object: ObjectConfig): ReactNode => (\n    <group\n      key={object.id}\n      name={object.name}\n      position={object.position}\n      rotation={object.rotation}\n      scale={object.scale}\n      visible={object.visible}\n      userData={{ meshvara: { materials: object.materials, animation: object.animation } }}\n    >\n      {renderSource(object)}\n      {(children.get(object.id) ?? []).map(renderObject)}\n    </group>\n  )\n\n  return <group name={meshvaraScene.project}>{(children.get(undefined) ?? []).map(renderObject)}</group>\n}\n\nexport default MeshvaraStudioScene\n`
+  return `import type { ReactNode } from 'react'\n\n${configType}\n\nexport const meshvaraScene = ${config} satisfies MeshvaraStudioConfig\n\ntype ObjectConfig = MeshvaraStudioConfig['objects'][number]\n\nexport interface MeshvaraStudioSceneProps {\n  /** Resolve archive slugs and local GLB file IDs with your own production asset pipeline. */\n  renderSource: (object: ObjectConfig) => ReactNode\n}\n\nexport function MeshvaraStudioScene({ renderSource }: MeshvaraStudioSceneProps) {\n  const children = new Map<string | undefined, ObjectConfig[]>()\n  for (const object of meshvaraScene.objects) {\n    const bucket = children.get(object.parentId) ?? []\n    bucket.push(object)\n    children.set(object.parentId, bucket)\n  }\n\n  const renderObject = (object: ObjectConfig): ReactNode => (\n    <group\n      key={object.id}\n      name={object.name}\n      position={object.position}\n      rotation={object.rotation}\n      scale={object.scale}\n      visible={object.visible}\n      userData={{ meshvara: { customization: object.customization, materials: object.materials, animation: object.animation } }}\n    >\n      {renderSource(object)}\n      {(children.get(object.id) ?? []).map(renderObject)}\n    </group>\n  )\n\n  return <group name={meshvaraScene.project}>{(children.get(undefined) ?? []).map(renderObject)}</group>\n}\n\nexport default MeshvaraStudioScene\n`
 }

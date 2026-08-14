@@ -1,4 +1,13 @@
 import { cloneTransform, invertStudioMatrix, localTransformForWorld, multiplyStudioMatrices, studioSelectedRootIds, studioWorldMatrix } from './studioTransforms'
+import {
+  defaultAssetCustomization,
+  resolveAssetCustomization,
+  resolveAssetCustomizationForAsset,
+  sanitizeAssetCustomization,
+  type AssetCustomization,
+} from './assetCustomization'
+import type { AssetSceneKind } from './types'
+
 export const STUDIO_PROJECT_FORMAT = 'meshvara-project' as const
 export const STUDIO_PROJECT_VERSION = 1 as const
 export const STUDIO_HISTORY_LIMIT = 50
@@ -50,6 +59,7 @@ export interface StudioNode {
   visible: boolean
   locked: boolean
   wireframe: boolean
+  customization: AssetCustomization
   materialOverrides: Record<string, StudioMaterialOverride>
   animation: StudioAnimationState
   debug: StudioDebugState
@@ -124,21 +134,25 @@ export function createStudioProject(name = 'Untitled Scene'): StudioProject {
   }
 }
 
-function baseNode(name: string): Omit<StudioNode, 'id' | 'kind'> {
+function baseNode(name: string, customization: AssetCustomization = defaultAssetCustomization): Omit<StudioNode, 'id' | 'kind'> {
   return {
     name,
     transform: defaultStudioTransform(),
     visible: true,
     locked: false,
     wireframe: false,
+    customization: { ...customization },
     materialOverrides: {},
     animation: defaultStudioAnimation(),
     debug: defaultStudioDebug(),
   }
 }
 
-export function createArchiveStudioNode(asset: { slug: string; name: string }): StudioNode {
-  return { id: uid('node'), kind: 'archive', assetSlug: asset.slug, ...baseNode(asset.name) }
+export function createArchiveStudioNode(asset: { slug: string; name: string; scene?: AssetSceneKind | string }): StudioNode {
+  const customization = asset.scene
+    ? resolveAssetCustomization(asset.scene)
+    : resolveAssetCustomizationForAsset(asset.slug)
+  return { id: uid('node'), kind: 'archive', assetSlug: asset.slug, ...baseNode(asset.name, customization) }
 }
 
 export function createImportedStudioNode(file: { id: string; name: string }): StudioNode {
@@ -444,16 +458,21 @@ export function parseStudioProject(value: unknown): StudioProject | null {
     if (node.kind === 'imported' && typeof node.fileId !== 'string') return null
     ids.add(node.id)
     const transform = node.transform && typeof node.transform === 'object' ? node.transform as Record<string, unknown> : {}
+    const assetSlug = node.kind === 'archive' ? String(node.assetSlug) : undefined
+    const customization = node.kind === 'archive' && assetSlug
+      ? resolveAssetCustomizationForAsset(assetSlug, node.customization as Partial<AssetCustomization> | undefined)
+      : sanitizeAssetCustomization(node.customization, defaultAssetCustomization)
     nodes.push({
       id: node.id,
       name: typeof node.name === 'string' ? node.name.slice(0, 100) : 'Object',
       kind: node.kind,
-      assetSlug: node.kind === 'archive' ? String(node.assetSlug) : undefined,
+      assetSlug,
       fileId: node.kind === 'imported' ? String(node.fileId) : undefined,
       parentId: typeof node.parentId === 'string' ? node.parentId : undefined,
       visible: node.visible !== false,
       locked: node.locked === true,
       wireframe: node.wireframe === true,
+      customization,
       materialOverrides: sanitizeMaterialOverrides(node.materialOverrides),
       animation: sanitizeAnimation(node.animation),
       debug: sanitizeDebug(node.debug),

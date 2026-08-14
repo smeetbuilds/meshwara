@@ -182,10 +182,38 @@ test('mobile Studio can add an archive object and edit it through the stacked in
   expect(overflow).toBeLessThanOrEqual(2)
 })
 
-test('desktop Studio rejects unsupported required codec GLBs before local storage', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'desktop-chromium', 'Codec rejection only needs one browser target.')
+test('desktop Studio serves the generated Draco and Basis runtimes from the same origin', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-chromium', 'Offline codec delivery only needs one browser target.')
   await page.goto('/studio')
-  await importGlb(page, 'draco-required.glb', ['KHR_draco_mesh_compression'])
-  await expect(page.getByRole('status')).toContainText('DRACO GEOMETRY COMPRESSION')
-  await expect(page.locator('.studio-object-main strong', { hasText: 'draco-required' })).toHaveCount(0)
+  for (const path of [
+    '/codecs/draco/draco_decoder.wasm',
+    '/codecs/draco/draco_wasm_wrapper.js',
+    '/codecs/basis/basis_transcoder.wasm',
+    '/codecs/basis/basis_transcoder.js',
+  ]) {
+    const response = await page.request.get(path)
+    expect(response.ok(), `${path} should be emitted by the dev/build codec sync`).toBeTruthy()
+    expect(new URL(response.url()).origin).toBe(new URL(page.url()).origin)
+    expect((await response.body()).byteLength).toBeGreaterThan(1_000)
+  }
+})
+
+test('desktop flagship customization persists into a downloaded portable project', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-chromium', 'Typed customization persistence only needs one browser target.')
+  await page.goto('/studio?asset=mercury-fold')
+  const customization = page.locator('.studio-archive-customization')
+  await expect(customization.getByText('TYPED CUSTOMIZATION')).toBeVisible()
+  await customization.getByText('Preset').locator('..').locator('select').selectOption('black-chrome')
+  await expect(customization.getByText('Palette').locator('..').locator('select')).toHaveValue('duotone')
+
+  const exportEvent = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'EXPORT PROJECT' }).click()
+  const download = await exportEvent
+  const path = await download.path()
+  expect(path).toBeTruthy()
+  const portable = JSON.parse(await readFile(path!, 'utf8'))
+  const node = portable.project.nodes.find((item: { assetSlug?: string }) => item.assetSlug === 'mercury-fold')
+  expect(node.customization.palette).toBe('duotone')
+  expect(node.customization.primaryColor).toBe('#7c838a')
+  expect(node.customization.secondaryColor).toBe('#090b0d')
 })

@@ -1,6 +1,6 @@
 # Meshvara Studio architecture contract
 
-Meshvara Studio is the free, no-login, local-first composition and model-delivery layer for the Meshvara archive. The editor must keep project data inspectable and portable, must never require a cloud persistence service for core work, and must distinguish real browser-side optimization from codecs or processing pipelines that are not actually bundled.
+Meshvara Studio is the free, no-login, local-first composition and model-delivery layer for the Meshvara archive. The editor must keep project data inspectable and portable, must never require a cloud persistence service for core work, and must distinguish input-decoding support from export/encoding pipelines that are not actually implemented.
 
 ## Local-first boundary
 
@@ -20,13 +20,14 @@ Meshvara Studio is the free, no-login, local-first composition and model-deliver
 - `archive` nodes reference a published Meshvara asset slug.
 - `imported` nodes reference a browser-local GLB file ID.
 - Nodes store explicit local position/rotation/scale, visibility, locking and optional `parentId`.
+- Archive nodes may carry the canonical typed customization state. Older version-1 projects without that field resolve to the authored default instead of failing import.
 - Scene size remains bounded to 250 nodes and undo/redo to 50 committed snapshots.
 - Reparenting rejects self-parenting, descendant cycles and missing parents.
-- Reparenting now computes the current world matrix, derives the new local TRS under the requested parent, and commits only when the world transform can be represented without unsupported shear.
+- Reparenting computes the current world matrix, derives the new local TRS under the requested parent, and commits only when the world transform can be represented without unsupported shear.
 - Multi-selection transform commits derive a world-space delta from the primary gizmo and apply it to selected root nodes. Selected descendants inherit the movement through their selected ancestor instead of receiving the delta twice.
 - Group-transform/reparent operations reject singular or shear-producing transformations rather than silently corrupting object placement.
 
-Portable `.meshvara-project` export embeds every referenced local GLB and replacement texture, so moving the project between browsers does not silently lose media. Import sanitizes transforms, hierarchy, material state, animation/debug state and file references before restoration.
+Portable `.meshvara-project` export embeds every referenced local GLB and replacement texture, so moving the project between browsers does not silently lose media. Import sanitizes transforms, hierarchy, archive customization, material state, animation/debug state and file references before restoration.
 
 ## Production model editor
 
@@ -43,7 +44,7 @@ Imported GLBs provide:
 - hierarchical outliner and additive Shift/Ctrl/Command multi-selection;
 - bulk show/hide/lock/unlock/delete/duplicate operations.
 
-Archive assets continue to use the canonical scene registry. Studio still does not invent a fake universal geometry/shader API across 500 heterogeneous archive scenes.
+Archive assets continue to use the canonical scene registry. The curated flagship set adds one typed material/form contract; Studio still does not invent a fake universal shader/geometry API across all 500 heterogeneous archive scenes.
 
 ## Local texture workflow
 
@@ -72,12 +73,63 @@ GLB validation checks:
 - declared file length;
 - required JSON chunk bounds/type;
 - parseable JSON chunk declaring glTF 2.x;
-- required-extension capability compatibility;
-- 100 MB size ceiling.
+- 100 MB size ceiling;
+- `extensionsUsed` / `extensionsRequired`, including whether Draco, Meshopt or KTX2/BasisU decoding is required.
 
-Studio currently has no bundled offline Draco, Meshopt or KTX2/BasisU decoder path. If a GLB lists `KHR_draco_mesh_compression`, `EXT_meshopt_compression`, or `KHR_texture_basisu` in `extensionsRequired`, import is rejected **before local storage** with a precise codec message. The same extension in `extensionsUsed` without being required remains allowed because the glTF may provide a valid fallback representation. This is a capability gate, not codec support.
+Known offline codecs are reported by validation but are accepted because the Studio loader is configured for the same codec contract. Unknown extension errors remain loader-level failures rather than being silently ignored.
 
-Texture validation checks binary PNG/JPEG/WebP signatures and the 16 MB ceiling. Portable project restoration verifies that imported-model source IDs resolve to GLB records and material texture IDs resolve to image records and runs the same GLB capability validation before restoration.
+Texture validation checks binary PNG/JPEG/WebP signatures and the 16 MB ceiling. Portable project restoration verifies that imported-model source IDs resolve to GLB records and material texture IDs resolve to image records.
+
+## Offline codec runtime
+
+Studio input loading supports the three compressed glTF paths that matter to the current archive/editor workflow:
+
+- `KHR_draco_mesh_compression` through Three.js `DRACOLoader`;
+- `EXT_meshopt_compression` through Three.js `MeshoptDecoder`;
+- `KHR_texture_basisu` through Three.js `KTX2Loader` / Basis Universal transcoding.
+
+The runtime deliberately has **no decoder CDN dependency**. `scripts/sync-codecs.mjs` reads the exact pinned `three@0.185.1` installation and deterministically copies the official Draco decoder JS/WASM files and Basis transcoder JS/WASM files into same-origin `/public/codecs/draco/` and `/public/codecs/basis/`. It records byte counts and SHA-256 digests in generated `/public/codecs/manifest.json`. `scripts/validate-codecs.mjs` verifies that output against the package pin and the runtime wiring.
+
+Meshopt is imported as an ESM module from the pinned Three.js package and bundled with the application. `StudioViewport` configures each `GLTFLoader` with the shared Draco loader, Meshopt decoder and renderer-aware KTX2 loader; KTX2 support detection is run against the active WebGL renderer.
+
+The generated decoder/transcoder bytes are build artifacts, not hand-copied source blobs. Draco and Basis payloads retain their upstream Apache-2.0 license; `public/codecs/THIRD_PARTY_LICENSES.md` and `APACHE-2.0.txt` ship the notice/license alongside the runtime contract. Dev, build and release QA run the sync step, and `.gitignore` excludes only the generated decoder directories/manifest while preserving the codec documentation/licenses.
+
+Three's Draco/KTX2 implementations use Web Workers/Blob worker sources. A strict production CSP therefore needs a compatible worker policy, typically `worker-src 'self' blob:`. That is a deployment requirement, not a reason to fall back to a remote decoder host.
+
+This is **input decoding/transcoding support**. It does not mean Studio GLB export re-encodes geometry with Draco/Meshopt or converts textures to KTX2/BasisU.
+
+## Typed archive customization parity
+
+Exactly 13 flagship procedural archive assets (001–013) share a canonical versioned customization contract in `src/data/customization-registry.json`:
+
+1. Mercury Fold;
+2. Prismatic Vault;
+3. Halo Assembly;
+4. Porcelain Bloom;
+5. Liquid Lens;
+6. Carbon Spine;
+7. Magnetic Filaments;
+8. Gravity Shards;
+9. Signal Coil;
+10. Vector Needles;
+11. Obsidian Monolith;
+12. Chromatic Shell;
+13. Velvet Orbit.
+
+The typed state covers palette mode, primary/secondary colors, roughness/metalness/emissive multipliers, opacity, object scale and wireframe, with authored defaults plus curated presets. The material layer clones mounted materials and applies changes relative to authored values, so resetting restores the source look instead of accumulating destructive edits.
+
+The same state is used by:
+
+- the asset-detail WebGL preview;
+- Playground controls, v2 share URLs and exported preset JSON;
+- Studio archive nodes and Inspector controls;
+- portable `.meshvara-project` files;
+- typed `.meshvara-scene.ts` / R3F developer handoff;
+- the generated downloadable component pack.
+
+Backward compatibility is explicit: v1 Playground links and older version-1 Studio projects that have no customization payload resolve to authored defaults.
+
+`scripts/enrich-customizable-packs.mjs` runs after normal/Geometry V2 pack generation but before Pack-v1 standardization. For those 13 packs it injects the typed customization runtime, layer, wrapper, preset data and exports; only then does Pack-v1 compute final payload hashes. The contract does **not** claim that every one of the other 487 assets exposes identical deep material/shader/geometry parameters.
 
 ## Web GLB export profiles
 
@@ -91,7 +143,7 @@ Three honest profiles are exposed:
 
 All profiles preserve discovered animation clips, export binary GLB, filter invisible objects and use TRS output. Studio reports source/output bytes and the size delta.
 
-These profiles are real texture-size optimization, but they are **not** geometry compression. No UI, README or quality contract may describe them as Draco, Meshopt or KTX2 compression.
+These profiles are real texture-size optimization, but they are **not codec re-encoding**. No UI, README or quality contract may describe them as Draco/Meshopt geometry compression or KTX2/BasisU texture encoding.
 
 ## Downloadable component delivery
 
@@ -108,80 +160,58 @@ A primary imported model can be exported as a deterministic **R3F component ZIP*
 
 The ZIP writer is implemented locally with deterministic stored entries and CRC32; no server-side archive service is involved. This closes downloadable-component parity for **Studio-imported GLB models**.
 
-It does **not** yet mean every existing Meshvara archive ZIP has been regenerated with the same Studio-specific API. Full 500-archive-pack parity remains a separate distribution tranche and must not be marked complete until the real public archives and manifest are regenerated and validated.
+For archive assets, the 13-asset enrichment pipeline now defines equivalent typed customization delivery on the next canonical pack build. That does **not** mean the checked-in public ZIP corpus has been physically regenerated in this execution environment; full binary regeneration remains a release action that must pass the 500-pack parity gate.
 
 ## Developer handoff
 
-Studio still provides:
+Studio provides:
 
 1. typed `.meshvara-scene.ts` configuration;
 2. `.meshvara-scene.tsx` React Three Fiber scaffold;
 3. portable `.meshvara-project` editor handoff;
-4. imported-model R3F component ZIP delivery.
+4. imported-model R3F component ZIP delivery;
+5. typed archive customization state for the 13 curated flagship assets.
 
-Typed scene configuration includes hierarchy, source identity, scalar PBR overrides, local texture file references, animation/debug state and scene presentation. The generic R3F scene scaffold continues to require a consumer-supplied `renderSource(object)` resolver; Meshvara does not pretend browser-local IDs automatically resolve inside a third-party application.
+Typed scene configuration includes hierarchy, source identity, archive customization, scalar PBR overrides, local texture file references, animation/debug state and scene presentation. The generic R3F scene scaffold continues to require a consumer-supplied `renderSource(object)` resolver; Meshvara does not pretend browser-local IDs automatically resolve inside a third-party application.
 
 ## Appearance and browser release gate
 
-Studio appearance is a browser-local preference, not project content. The default remains **Dark** for continuity with the original workbench, while the top bar exposes **Dark / Light / System**. The preference is stored under a versioned localStorage key and never enters `.meshvara-project`, source exports or cloud state. **System** listens to `prefers-color-scheme` changes live so an OS appearance change can update Studio without a reload.
-
-Light mode is a full editor theme rather than a page-background inversion: chrome, panels, controls, selected rows, material/texture cards, warning/success/danger states, form color-scheme and focus-visible outlines receive dedicated contrast-safe tokens. The Three.js scene background remains the project's authored scene setting; changing Studio chrome does not mutate the user's scene/export.
-
-A Playwright browser release gate lives at `playwright.config.ts` and `tests/e2e/studio.spec.ts`. It runs Chromium at desktop (1440×900), tablet (1024×768) and mobile (390×844) viewports. The lightweight cross-device surface covers:
-
-- dark/light preference switching and persistence;
-- live System-theme response;
-- local IndexedDB project autosave across browser reload;
-- archive asset deep-link boot into an isolated Studio study;
-- keyboard transform-mode accessibility state;
-- viewport containment across the configured responsive breakpoints.
-
-The desktop release path additionally drives real binary workflows using an in-memory glTF 2.0 triangle fixture and PNG texture:
-
-- local GLB file upload and live model inspection;
-- PBR texture replacement through the actual file input;
-- portable `.meshvara-project` download containing GLB + texture bytes;
-- new-project reset followed by portable project re-import;
-- R3F component ZIP download and ZIP-content inspection;
-- required-codec GLB rejection before a scene node is created.
-
-Every browser test records uncaught page errors and `console.error` messages and fails the test if either surface emits an unexpected runtime error.
-
-`bun run e2e` is intentionally separate from the normal dependency/build QA because Playwright browser binaries are an explicit environment prerequisite. `bun run release:check` combines the existing full QA chain with the browser suite. `bun run e2e:install` installs the Chromium browser required by this repository's current E2E projects.
+Studio keeps the dark/light/system appearance contract and responsive desktop/tablet/mobile workbench behavior. Browser release tests cover real binary file controls and same-origin runtime resources rather than checking only rendered labels.
 
 ## Regression coverage
 
-`studio:check` now combines:
+`studio:check` combines:
 
 - project/hierarchy/state sanitization tests;
-- GLB binary validation tests;
-- required-codec capability-gate tests for Draco/Meshopt/KTX2 declarations;
+- GLB binary validation and offline-codec capability tests;
+- curated archive customization/project-migration tests;
 - world-transform-preservation/group-transform tests;
 - texture binary validation tests;
 - local storage + portable GLB/texture round-trip tests using the no-IndexedDB memory fallback;
 - deterministic component-pack ZIP tests;
-- Studio appearance preference and contrast tests;
+- Studio theme/contrast tests;
 - structural source-contract validation.
 
-The pure contracts remain useful without a browser or account. Playwright adds real browser interaction coverage for the editor shell, preference persistence, responsive surface, representative GLB/texture import, portable-project round trips and component downloads. Very large binary/quota/GPU-specific workflows still require targeted browser QA.
+The Playwright release suite additionally exercises real GLB upload, texture replacement, portable project round-trip, component ZIP inspection, same-origin Draco/Basis runtime endpoints, asset-to-Studio handoff and persisted flagship customization.
+
+These automated contracts are useful without an account or cloud service. Full browser execution still requires a provisioned repository with Bun, dependencies and Playwright browser binaries.
 
 ## Known boundary
 
 This tranche does **not** claim completion of:
 
-- Draco geometry compression **decode/encode support** (required Draco imports are detected and rejected clearly);
-- Meshopt geometry compression **decode/encode support** (required Meshopt imports are detected and rejected clearly);
-- KTX2/Basis texture transcoding **decode/encode support** (required BasisU imports are detected and rejected clearly);
+- Draco or Meshopt **export encoding/re-compression**;
+- KTX2/BasisU **export encoding**;
 - UV editing, texture painting or atlas generation;
 - geometry decimation, mesh merge or automatic LOD authoring;
 - keyframe timeline editing, retargeting or IK authoring;
 - live simultaneous gizmo movement for every selected object while dragging (group deltas commit on transform completion);
 - arbitrary editing of the internal GLTF node hierarchy below a Studio top-level object;
 - uniform deep shader/geometry customization for all 500 archive assets;
-- regeneration of all existing public archive ZIPs with Studio-specific component APIs;
+- physical regeneration of all existing public archive ZIP binaries in an environment where the canonical pack build has not actually run;
 - cloud collaboration, accounts or hosted project URLs.
 
-Those remain future compression, animation and archive-distribution tranches.
+Those remain future optimization, animation and archive-release work.
 
 ## QA invariant
 
@@ -191,15 +221,14 @@ Those remain future compression, animation and archive-distribution tranches.
 - bounded history, hierarchy/cycle protection or multi-object operations disappear;
 - world-preserving reparent/group transform math is removed;
 - PBR scalar or texture replacement state falls out of project sanitization/handoff;
+- archive typed customization falls out of preview, Playground, Studio, portable-project or typed-export parity;
 - texture references stop participating in portable project files or storage garbage collection;
 - GLB/texture storage starts trusting extensions without binary validation;
-- GLBs requiring unbundled Draco/Meshopt/KTX2 codecs can enter local storage silently;
-- Studio introduces remote persistence or remote model-processing calls;
+- the same-origin Draco/Basis paths, Meshopt wiring or renderer-aware KTX2 setup disappear;
+- Studio introduces remote persistence, decoder CDNs or remote model-processing calls;
 - skeleton-safe loading, model diagnostics, animation playback or material/texture application disappear;
-- web export profiles stop using real `GLTFExporter.maxTextureSize` values or start claiming unavailable codecs;
+- web export profiles stop using real `GLTFExporter.maxTextureSize` values or start claiming codec re-encoding;
 - deterministic imported-model component ZIP delivery disappears;
-- typed config/R3F scaffold delivery disappears;
-- Dark / Light / System appearance, local preference persistence or live system-theme resolution disappears;
-- the Playwright desktop/tablet/mobile release gate, IndexedDB reload regression, binary import/project round-trip, component-download or browser error guard disappears.
+- typed config/R3F scaffold delivery disappears.
 
-The configured Playwright suite covers desktop/tablet/mobile shell interaction, IndexedDB reload persistence, a representative imported GLB, local PNG texture replacement, portable project download/re-import, component ZIP output and required-codec rejection. IndexedDB quota pressure, very large model/texture memory behavior, native file-picker edge cases, browser-specific image decode behavior, GPU-specific materials/WebGL behavior and visual GLTFExporter round-trip parity still require targeted browser QA.
+Real desktop/tablet/mobile interaction testing, IndexedDB quota pressure, very large model/texture memory behavior, browser-specific image decode behavior, GPU-specific material behavior, codec performance on representative compressed assets and visual GLTFExporter round-trip parity still require browser QA.

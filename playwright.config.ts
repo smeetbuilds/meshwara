@@ -22,7 +22,7 @@ export default defineConfig({
     { name: 'mobile-chromium', use: { browserName: 'chromium', viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } },
   ],
   webServer: {
-    command: 'bun --bun vite dev --host 127.0.0.1 --port 4173',
+    command: 'node scripts/sync-codecs.mjs && bun --bun vite dev --host 127.0.0.1 --port 4173',
     url: `${baseURL}/studio`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

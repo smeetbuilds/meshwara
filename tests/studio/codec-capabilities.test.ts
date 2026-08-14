@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { assertStudioGlbCapabilities, inspectStudioGlbCapabilities } from '../../src/lib/studioGlbCapabilities.ts'
+import { assertStudioGlbCapabilities, inspectStudioGlbCapabilities, studioOfflineRequiredGlbCodecs } from '../../src/lib/studioGlbCapabilities.ts'
 import { validateStudioGlbBytes } from '../../src/lib/studioStorage.ts'
 
 function glbWithExtensions(extensionsUsed: string[] = [], extensionsRequired: string[] = []) {
@@ -19,28 +19,24 @@ function glbWithExtensions(extensionsUsed: string[] = [], extensionsRequired: st
 }
 
 const report = inspectStudioGlbCapabilities({
-  extensionsUsed: ['KHR_materials_unlit', 'KHR_draco_mesh_compression'],
-  extensionsRequired: ['KHR_materials_unlit'],
+  extensionsUsed: ['KHR_materials_unlit', 'KHR_draco_mesh_compression', 'EXT_meshopt_compression'],
+  extensionsRequired: ['KHR_draco_mesh_compression'],
 })
-assert.deepEqual(report.unsupportedRequired, [])
-assert.deepEqual(report.extensionsUsed, ['KHR_materials_unlit', 'KHR_draco_mesh_compression'])
+assert.deepEqual(report.extensionsUsed, ['KHR_materials_unlit', 'KHR_draco_mesh_compression', 'EXT_meshopt_compression'])
+assert.deepEqual(report.offlineCodecsUsed, ['KHR_draco_mesh_compression', 'EXT_meshopt_compression'])
+assert.deepEqual(report.offlineCodecsRequired, ['KHR_draco_mesh_compression'])
 assert.doesNotThrow(() => assertStudioGlbCapabilities({ extensionsRequired: ['KHR_materials_unlit'] }))
-assert.equal(validateStudioGlbBytes(glbWithExtensions(['KHR_draco_mesh_compression'], [])), true, 'optional extension with fallback remains importable')
 
-for (const [extension, label] of [
-  ['KHR_draco_mesh_compression', 'Draco geometry compression'],
-  ['EXT_meshopt_compression', 'Meshopt geometry compression'],
-  ['KHR_texture_basisu', 'KTX2/BasisU texture compression'],
-] as const) {
-  assert.throws(() => validateStudioGlbBytes(glbWithExtensions([extension], [extension])), new RegExp(label.replace('/', '\\/'), 'i'))
+for (const extension of Object.keys(studioOfflineRequiredGlbCodecs)) {
+  assert.equal(validateStudioGlbBytes(glbWithExtensions([extension], [extension])), true, `${extension} should pass pre-storage validation because Studio bundles its offline decoder`)
 }
 
-assert.throws(
-  () => validateStudioGlbBytes(glbWithExtensions(
-    ['KHR_draco_mesh_compression', 'KHR_texture_basisu'],
-    ['KHR_draco_mesh_compression', 'KHR_texture_basisu'],
-  )),
-  /Draco geometry compression.*KTX2\/BasisU texture compression/i,
-)
+assert.equal(validateStudioGlbBytes(glbWithExtensions(
+  ['KHR_draco_mesh_compression', 'EXT_meshopt_compression', 'KHR_texture_basisu'],
+  ['KHR_draco_mesh_compression', 'EXT_meshopt_compression', 'KHR_texture_basisu'],
+)), true)
 
-console.log('Meshvara Studio codec-capability gate passed')
+const prototypeReport = inspectStudioGlbCapabilities({ extensionsRequired: ['toString', '__proto__', 'constructor'] })
+assert.deepEqual(prototypeReport.offlineCodecsRequired, [], 'prototype names must never be mistaken for supported codec keys')
+
+console.log('Meshvara Studio offline codec capability contract passed')

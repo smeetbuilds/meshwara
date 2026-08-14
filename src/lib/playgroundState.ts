@@ -1,3 +1,10 @@
+import {
+  defaultAssetCustomization,
+  resolveAssetCustomization,
+  sanitizeAssetCustomization,
+  type AssetCustomization,
+} from './assetCustomization'
+
 export type PlaygroundMotion = 'live' | 'paused'
 export type PlaygroundQuality = 'efficient' | 'balanced' | 'crisp'
 export type PlaygroundStage = 'light' | 'dark'
@@ -16,6 +23,7 @@ export interface PlaygroundSerializableState {
   floatIntensity: number
   rotationY: number
   background: string
+  customization: AssetCustomization
 }
 
 export const playgroundDefaults: Omit<PlaygroundSerializableState, 'assetSlug'> = {
@@ -31,6 +39,7 @@ export const playgroundDefaults: Omit<PlaygroundSerializableState, 'assetSlug'> 
   floatIntensity: 0.11,
   rotationY: 0,
   background: '',
+  customization: { ...defaultAssetCustomization },
 }
 
 export const playgroundRanges = {
@@ -56,8 +65,26 @@ function validColor(value: string | null) {
   return value && /^#[0-9a-f]{6}$/i.test(value) ? value.toLowerCase() : ''
 }
 
+function decodeCustomization(params: URLSearchParams, scene?: string): AssetCustomization {
+  const fallback = resolveAssetCustomization(scene ?? '', undefined)
+  const paletteCode = params.get('pm')
+  const encoded: Partial<AssetCustomization> = {
+    palette: paletteCode === 'm' ? 'mono' : paletteCode === 'd' ? 'duotone' : 'authored',
+    primaryColor: validColor(params.get('pc')) || fallback.primaryColor,
+    secondaryColor: validColor(params.get('sc')) || fallback.secondaryColor,
+    roughnessScale: finite(params.get('rs'), fallback.roughnessScale, [0, 2]),
+    metalnessScale: finite(params.get('ms'), fallback.metalnessScale, [0, 2]),
+    emissiveScale: finite(params.get('es'), fallback.emissiveScale, [0, 3]),
+    opacity: finite(params.get('op'), fallback.opacity, [0.25, 1]),
+    geometryScale: finite(params.get('gs'), fallback.geometryScale, [0.5, 1.5]),
+    wireframe: params.get('wf') === '1',
+  }
+  return sanitizeAssetCustomization(encoded, fallback)
+}
+
 export function encodePlaygroundState(state: PlaygroundSerializableState) {
   const params = new URLSearchParams()
+  params.set('v', '2')
   params.set('a', state.assetSlug)
   params.set('m', state.motion === 'paused' ? 'p' : 'l')
   params.set('p', state.pointer ? '1' : '0')
@@ -71,15 +98,30 @@ export function encodePlaygroundState(state: PlaygroundSerializableState) {
   params.set('fi', String(state.floatIntensity))
   params.set('ry', String(state.rotationY))
   if (state.background) params.set('bg', state.background)
+  const customization = sanitizeAssetCustomization(state.customization)
+  params.set('pm', customization.palette === 'mono' ? 'm' : customization.palette === 'duotone' ? 'd' : 'a')
+  params.set('pc', customization.primaryColor)
+  params.set('sc', customization.secondaryColor)
+  params.set('rs', String(customization.roughnessScale))
+  params.set('ms', String(customization.metalnessScale))
+  params.set('es', String(customization.emissiveScale))
+  params.set('op', String(customization.opacity))
+  params.set('gs', String(customization.geometryScale))
+  params.set('wf', customization.wireframe ? '1' : '0')
   return params.toString()
 }
 
-export function decodePlaygroundState(encoded: string, assetSlug: string, supportsPointer: boolean): PlaygroundSerializableState | null {
+/**
+ * Version 1 playground links had no material customization fields. They remain
+ * valid and resolve to the authored customization defaults for the current scene.
+ */
+export function decodePlaygroundState(encoded: string, assetSlug: string, supportsPointer: boolean, scene?: string): PlaygroundSerializableState | null {
   const params = new URLSearchParams(encoded)
   if (params.get('a') !== assetSlug) return null
 
   const quality = params.get('q')
   const stage = params.get('s')
+  const v2 = params.get('v') === '2'
 
   return {
     assetSlug,
@@ -95,5 +137,6 @@ export function decodePlaygroundState(encoded: string, assetSlug: string, suppor
     floatIntensity: finite(params.get('fi'), playgroundDefaults.floatIntensity, playgroundRanges.floatIntensity),
     rotationY: finite(params.get('ry'), playgroundDefaults.rotationY, playgroundRanges.rotationY),
     background: validColor(params.get('bg')),
+    customization: v2 ? decodeCustomization(params, scene) : resolveAssetCustomization(scene ?? '', undefined),
   }
 }

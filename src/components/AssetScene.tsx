@@ -1,9 +1,11 @@
 import { Bounds, ContactShadows, Environment, Float, Lightformer } from '@react-three/drei'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Suspense, useEffect, useRef, type ReactNode } from 'react'
+import { Suspense, useEffect, useMemo, useRef, type ReactNode } from 'react'
 import * as THREE from 'three'
 import type { AssetInteraction, AssetPresentation, AssetSceneKind } from '../lib/types'
+import { resolveAssetCustomization, type AssetCustomization } from '../lib/assetCustomization'
 import { useReducedMotion } from '../lib/useReducedMotion'
+import { AssetCustomizationLayer } from './AssetCustomizationLayer'
 import { sceneRegistry } from './sceneRegistry'
 
 export type AssetPreviewMotion = 'live' | 'paused'
@@ -109,6 +111,7 @@ export function AssetScene({
   pointerEnabled = true,
   quality = 'crisp',
   tuning = defaultAssetSceneTuning,
+  customization,
 }: {
   kind: AssetSceneKind
   compact?: boolean
@@ -118,11 +121,13 @@ export function AssetScene({
   pointerEnabled?: boolean
   quality?: AssetPreviewQuality
   tuning?: AssetSceneTuning
+  customization?: Partial<AssetCustomization>
 }) {
   const Scene = sceneRegistry[kind]
   const reducedMotion = useReducedMotion()
   const paused = reducedMotion || motion === 'paused'
   const pointerActive = !paused && pointerEnabled && interaction === 'Pointer'
+  const resolvedCustomization = useMemo(() => resolveAssetCustomization(kind, customization), [customization, kind])
   const dpr: [number, number] = compact
     ? [1, 1.2]
     : quality === 'efficient'
@@ -131,6 +136,12 @@ export function AssetScene({
         ? [1, 1.5]
         : [1, 2]
 
+  const sceneObject = (
+    <AssetCustomizationLayer scene={kind} customization={resolvedCustomization}>
+      <Scene />
+    </AssetCustomizationLayer>
+  )
+
   const content = presentation === 'Floating' ? (
     <Rig enabled={pointerActive} strength={tuning.pointerStrength}>
       <Float
@@ -138,12 +149,12 @@ export function AssetScene({
         rotationIntensity={paused ? 0 : 0.065}
         floatIntensity={paused ? 0 : compact ? 0.08 : tuning.floatIntensity}
       >
-        <Scene />
+        {sceneObject}
       </Float>
     </Rig>
   ) : presentation === 'Grounded' ? (
-    <Rig enabled={pointerActive} strength={tuning.pointerStrength}><Scene /></Rig>
-  ) : <Scene />
+    <Rig enabled={pointerActive} strength={tuning.pointerStrength}>{sceneObject}</Rig>
+  ) : sceneObject
 
   return (
     <Canvas

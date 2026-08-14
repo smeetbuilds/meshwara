@@ -48,7 +48,7 @@ export function StudioLibrary({
             />
             IMPORT LOCAL GLB
           </label>
-          <p className="studio-outliner-hint">GLB 2.0 · required Draco / Meshopt / KTX2 codecs are detected before local storage.</p>
+          <p className="studio-outliner-hint">GLB 2.0 · Draco, Meshopt and KTX2/BasisU inputs decode through Meshvara’s same-origin offline codec runtime.</p>
           <div className="studio-asset-list">
             {shownAssets.map((asset) => (
               <button key={asset.slug} type="button" onClick={() => onAddAsset(asset.slug)}>
