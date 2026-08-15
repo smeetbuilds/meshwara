@@ -1,5 +1,5 @@
 import { createBrowserZip, type BrowserZipEntry } from './browserZip'
-import { resolveStudioTimeline, type StudioNode } from './studioProject'
+import { resolveStudioRig, resolveStudioTimeline, type StudioNode } from './studioProject'
 import { createStudioComponentPack as createCoreStudioComponentPack } from './studioComponentPackCore'
 import type { StudioModelInspection } from './studioModelTools'
 import type { StudioGlbExportProfile, StudioGlbExportResult } from './studioModelExport'
@@ -48,12 +48,13 @@ export function createStudioComponentPack(
       const raw = entry.data instanceof Uint8Array ? entry.data : new Uint8Array(entry.data as ArrayBuffer)
       const preset = JSON.parse(decoder.decode(raw)) as Record<string, unknown>
       preset.timeline = resolveStudioTimeline(node.timeline)
+      if (node.kind === 'imported') preset.rig = resolveStudioRig(node.rig)
       entry.data = `${JSON.stringify(preset, null, 2)}\n`
       presetFound = true
     } else if (entry.name === readmePath) {
       const raw = entry.data instanceof Uint8Array ? entry.data : new Uint8Array(entry.data as ArrayBuffer)
       const readme = decoder.decode(raw)
-      entry.data = encoder.encode(`${readme.trimEnd()}\n\n## Transform timeline\n\n\`meshvara-preset.json\` includes the Studio object transform timeline separately from native GLB animation clips. It contains duration, fps, loop state, the playback work area, and frame-snapped position/rotation/scale keys. Rotation keys remain editable Euler XYZ values while Meshvara Studio previews the shortest path with quaternion interpolation.\n`)
+      entry.data = encoder.encode(`${readme.trimEnd()}\n\n## Transform timeline\n\n\`meshvara-preset.json\` includes the Studio object transform timeline separately from native GLB animation clips. It contains duration, fps, loop state, the playback work area, and frame-snapped position/rotation/scale keys. Rotation keys remain editable Euler XYZ values while Meshvara Studio previews the shortest path with quaternion interpolation.\n\n## Skeletal rig + poses\n\nFor imported rigged GLBs, \`meshvara-preset.json\` also carries the sanitized humanoid role mapping and local pose library. Pose transforms are stored per stable bone-path ID as local position, normalized quaternion rotation and scale. Meshvara keeps this metadata separate from native GLB clips and does not claim IK/retargeting in this foundation.\n`)
     }
   }
 

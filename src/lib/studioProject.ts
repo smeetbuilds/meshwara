@@ -1,9 +1,18 @@
 import * as core from './studioProjectCore'
 import type { AssetSceneKind } from './types'
+import {
+  cloneStudioRigWithFreshPoseIds,
+  defaultStudioRig,
+  resolveStudioRig,
+  sanitizeStudioRig,
+  type StudioRigState,
+} from './studioRigState'
 
 export * from './studioProjectCore'
 export { resolveAssetCustomization, resolveAssetCustomizationForAsset } from './assetCustomization'
 export type { AssetCustomization } from './assetCustomization'
+export { defaultStudioRig, resolveStudioRig, sanitizeStudioRig } from './studioRigState'
+export type { StudioRigState, StudioPose, StudioHumanoidRole, StudioRigInspection } from './studioRigState'
 
 // The core StudioNode contract persists `customization: AssetCustomization`; this facade re-exports its resolvers.
 
@@ -35,6 +44,8 @@ declare module './studioProjectCore' {
   interface StudioNode {
     /** Local object-transform timeline. Native GLB clip state remains in `animation`. */
     timeline?: StudioTimelineState
+    /** Imported-model skeletal mapping and local pose library. */
+    rig?: StudioRigState
   }
 }
 
@@ -119,7 +130,7 @@ export function createArchiveStudioNode(asset: { slug: string; name: string; sce
 
 export function createImportedStudioNode(file: { id: string; name: string }): core.StudioNode {
   const node = core.createImportedStudioNode(file)
-  return { ...node, timeline: defaultStudioTimeline() }
+  return { ...node, timeline: defaultStudioTimeline(), rig: defaultStudioRig() }
 }
 
 export function duplicateStudioNodes(project: core.StudioProject, nodeIds: Iterable<string>): { project: core.StudioProject; nodeIds: string[] } {
@@ -132,7 +143,11 @@ export function duplicateStudioNodes(project: core.StudioProject, nodeIds: Itera
       nodes: result.project.nodes.map((node) => {
         if (!duplicated.has(node.id)) return node
         const timeline = resolveStudioTimeline(node.timeline)
-        return { ...node, timeline: { ...timeline, keyframes: timeline.keyframes.map((keyframe) => ({ ...keyframe, id: keyId() })) } }
+        return {
+          ...node,
+          timeline: { ...timeline, keyframes: timeline.keyframes.map((keyframe) => ({ ...keyframe, id: keyId() })) },
+          rig: node.kind === 'imported' ? cloneStudioRigWithFreshPoseIds(node.rig) : undefined,
+        }
       }),
     },
   }
@@ -157,6 +172,7 @@ export function parseStudioProject(value: unknown): core.StudioProject | null {
     nodes: project.nodes.map((node) => ({
       ...node,
       timeline: sanitizeStudioTimeline(rawById.get(node.id)?.timeline),
+      rig: node.kind === 'imported' ? sanitizeStudioRig(rawById.get(node.id)?.rig) : undefined,
     })),
   }
 }
