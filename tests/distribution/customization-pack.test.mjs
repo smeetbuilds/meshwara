@@ -26,7 +26,7 @@ assert.ok(!files.has('meshvara.json'), 'stale Pack-v1 metadata must be removed b
 assert.match(files.get(`src/${component}.tsx`), /customization\?: Partial<AssetCustomization>/)
 assert.match(files.get(`src/${component}.tsx`), /<SceneObject customization=\{customization\} \/>/)
 assert.match(files.get('src/index.ts'), /MercuryFoldCustomization/)
-assert.match(files.get('src/customization.ts'), /titanium-blue/)
+assert.match(files.get('src/customization.ts'), /black-chrome/)
 assert.match(files.get('src/CustomizationLayer.tsx'), /material\.depthWrite = authored\.depthWrite && material\.opacity >= 0\.999/)
 assert.match(files.get('README.md'), /## Typed customization/)
 assert.deepEqual(JSON.parse(files.get('CUSTOMIZATION.json')).assetSlug, asset.slug)

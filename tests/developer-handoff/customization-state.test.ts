@@ -25,9 +25,9 @@ assert.equal(definition.presets[0].id, 'authored')
 assert.equal(getAssetCustomizationDefinitionByAssetSlug('mercury-fold')?.scene, 'mercury')
 assert.deepEqual(resolveAssetCustomizationForAsset('mercury-fold'), definition.defaults)
 
-const titanium = getAssetCustomizationPreset('mercury', 'titanium-blue')
-assert.ok(titanium)
-assert.equal(identifyAssetCustomizationPreset('mercury', titanium), 'titanium-blue')
+const blackChrome = getAssetCustomizationPreset('mercury', 'black-chrome')
+assert.ok(blackChrome)
+assert.equal(identifyAssetCustomizationPreset('mercury', blackChrome), 'black-chrome')
 
 const hostile = resolveAssetCustomization('mercury', {
   palette: 'duotone',
@@ -52,12 +52,12 @@ assert.equal(hostile.wireframe, true)
 const encoded = encodePlaygroundState({
   assetSlug: 'mercury-fold',
   ...playgroundDefaults,
-  customization: titanium,
+  customization: blackChrome,
 })
 assert.match(encoded, /(?:^|&)v=2(?:&|$)/)
 const decoded = decodePlaygroundState(encoded, 'mercury-fold', true, 'mercury')
 assert.ok(decoded)
-assert.deepEqual(decoded.customization, titanium)
+assert.deepEqual(decoded.customization, blackChrome)
 
 const legacy = decodePlaygroundState('a=mercury-fold&m=l&p=1&q=crisp&s=light', 'mercury-fold', true, 'mercury')
 assert.ok(legacy)
