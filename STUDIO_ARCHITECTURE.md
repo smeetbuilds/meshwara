@@ -90,7 +90,7 @@ Studio input loading supports the three compressed glTF paths that matter to the
 
 The runtime deliberately has **no decoder CDN dependency**. `scripts/sync-codecs.mjs` reads the exact pinned `three@0.185.1` installation and deterministically copies the official Draco decoder JS/WASM files and Basis transcoder JS/WASM files into same-origin `/public/codecs/draco/` and `/public/codecs/basis/`. It records byte counts and SHA-256 digests in generated `/public/codecs/manifest.json`. `scripts/validate-codecs.mjs` verifies that output against the package pin and the runtime wiring.
 
-Meshopt is imported as an ESM module from the pinned Three.js package and bundled with the application. `StudioViewport` configures each `GLTFLoader` with the shared Draco loader, Meshopt decoder and renderer-aware KTX2 loader; KTX2 support detection is run against the active WebGL renderer.
+Meshopt is imported as an ESM module from the pinned Three.js package and bundled with the application. `StudioImportedObject` configures each `GLTFLoader` with the shared Draco loader, Meshopt decoder and renderer-aware KTX2 loader; KTX2 support detection is run against the active WebGL renderer.
 
 The generated decoder/transcoder bytes are build artifacts, not hand-copied source blobs. Draco and Basis payloads retain their upstream Apache-2.0 license; `public/codecs/THIRD_PARTY_LICENSES.md` and `APACHE-2.0.txt` ship the notice/license alongside the runtime contract. Dev, build and release QA run the sync step, and `.gitignore` excludes only the generated decoder directories/manifest while preserving the codec documentation/licenses.
 
@@ -204,7 +204,7 @@ This tranche does **not** claim completion of:
 - KTX2/BasisU **export encoding**;
 - UV editing, texture painting or atlas generation;
 - geometry decimation, mesh merge or automatic LOD authoring;
-- keyframe timeline editing, retargeting or IK authoring;
+- skeletal keyframe authoring, humanoid retargeting or IK solvers;
 - live simultaneous gizmo movement for every selected object while dragging (group deltas commit on transform completion);
 - arbitrary editing of the internal GLTF node hierarchy below a Studio top-level object;
 - uniform deep shader/geometry customization for all 500 archive assets;

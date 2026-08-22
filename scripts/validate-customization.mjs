@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 
 const root = process.cwd()
 const read = (path) => readFile(resolve(root, path), 'utf8')
-const [registryText, assetsSource, customizationRuntime, layer, assetScene, playgroundState, playground, assetDetail, studioProject, studioViewport, studioInspector, studioShell, studioExport, packEnricher, packageText] = await Promise.all([
+const [registryText, assetsSource, customizationRuntime, layer, assetScene, playgroundState, playground, assetDetail, studioProject, studioViewport, studioInspector, studioInspectorCore, studioShell, studioExport, packEnricher, packageText] = await Promise.all([
   read('src/data/customization-registry.json'),
   read('src/data/assets.ts'),
   read('src/lib/assetCustomization.ts'),
@@ -15,6 +15,7 @@ const [registryText, assetsSource, customizationRuntime, layer, assetScene, play
   read('src/lib/studioProject.ts'),
   read('src/components/studio/StudioViewport.tsx'),
   read('src/components/studio/StudioInspector.tsx'),
+  read('src/components/studio/StudioInspectorCore.tsx'),
   read('src/components/studio/StudioShell.tsx'),
   read('src/lib/studioExport.ts'),
   read('scripts/enrich-customizable-packs.mjs'),
@@ -22,6 +23,7 @@ const [registryText, assetsSource, customizationRuntime, layer, assetScene, play
 ])
 const registry = JSON.parse(registryText)
 const pkg = JSON.parse(packageText)
+const studioInspectorSurface = `${studioInspector}\n${studioInspectorCore}`
 
 function assert(condition, message) {
   if (!condition) throw new Error(`Customization contract failed: ${message}`)
@@ -68,8 +70,8 @@ assert(assetDetail.includes('customization={playground.customization}') && asset
 
 for (const token of ['customization: AssetCustomization', 'resolveAssetCustomization', 'resolveAssetCustomizationForAsset']) assert(studioProject.includes(token), `Studio project model missing ${token}`)
 assert(studioViewport.includes('<AssetCustomizationLayer') && studioViewport.includes('customization={node.customization}'), 'Studio archive viewport does not render the typed customization state')
-for (const token of ['TYPED CUSTOMIZATION', 'onCustomizationPatch', 'getAssetCustomizationDefinition', 'Object scale', 'PACK PARITY']) assert(studioInspector.includes(token), `Studio Inspector missing ${token}`)
-assert(studioInspector.includes('onCustomizationPatch={(customization) => onNodePatch({ customization })}'), 'Studio Inspector does not commit customization through the history-backed node patch channel')
+for (const token of ['TYPED CUSTOMIZATION', 'onCustomizationPatch', 'getAssetCustomizationDefinition', 'Object scale', 'PACK PARITY']) assert(studioInspectorSurface.includes(token), `Studio Inspector missing ${token}`)
+assert(studioInspectorSurface.includes('onCustomizationPatch={(customization) => onNodePatch({ customization })}'), 'Studio Inspector does not commit customization through the history-backed node patch channel')
 assert(studioShell.includes('onNodePatch={(patch) => selectedId && patchNode(selectedId, patch)}') && studioShell.includes('commit(updateStudioNode(project, id, patch))'), 'Studio shell does not persist generic Inspector node patches through project history')
 assert(studioExport.includes("customization: StudioNode['customization']") && studioExport.includes('customization: object.customization'), 'Studio typed export drops customization state')
 

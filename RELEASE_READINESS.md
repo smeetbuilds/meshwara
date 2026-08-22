@@ -16,4 +16,6 @@ The audit requires:
 
 If the 13 customization packs or the wider 500-pack corpus have not been regenerated after a source-pipeline change, `release:audit` is expected to fail. That failure is intentional: regenerate with `bun run packs`, rebuild the registry, rerun distribution QA, then rerun the release audit.
 
+Any `release:audit` failure is a release blocker; do not publish until the committed corpus passes the audit.
+
 The audit does not claim output codec encoding. Draco/Meshopt/KTX2 support remains input decoding/transcoding unless an encoder pipeline is separately implemented and measured.
