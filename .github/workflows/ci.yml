@@ -30,11 +30,14 @@ jobs:
       - name: Show regenerated lockfile diff
         run: git diff -- bun.lock
 
+      - name: Run QA and release audit
+        run: bun run qa && bun run release:audit
+
       - name: Install Playwright browsers
         run: bunx playwright install --with-deps chromium firefox webkit
 
-      - name: Run release gate
-        run: bun run release:check
+      - name: Run E2E
+        run: bun run e2e
 
       - name: Show working-tree diff
         if: always()
