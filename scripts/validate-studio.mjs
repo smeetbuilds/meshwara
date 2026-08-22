@@ -4,7 +4,7 @@ import { resolve } from 'node:path'
 const root = process.cwd()
 const read = (path) => readFile(resolve(root, path), 'utf8')
 const [
-  routeTree, studioRoute, shell, viewport, storage, project, projectCore, transforms, inspector, outliner, library,
+  routeTree, studioRoute, shell, viewport, importedObject, storage, project, projectCore, transforms, inspector, inspectorCore, outliner, library,
   exportModule, modelTools, modelExport, textureResources, componentPack, componentPackCore, browserZip, themeModule, themeCss, codecCapabilities, codecRuntime,
   header, assetsIndex, assetDetail, contract, packageJson, playwrightConfig, e2eStudio, e2eFixtures,
   timeline, timelineController, timelineUi, animationContract, releaseContract,
@@ -13,11 +13,13 @@ const [
   read('src/routes/studio.tsx'),
   read('src/components/studio/StudioShell.tsx'),
   read('src/components/studio/StudioViewport.tsx'),
+  read('src/components/studio/StudioImportedObject.tsx'),
   read('src/lib/studioStorage.ts'),
   read('src/lib/studioProject.ts'),
   read('src/lib/studioProjectCore.ts'),
   read('src/lib/studioTransforms.ts'),
   read('src/components/studio/StudioInspector.tsx'),
+  read('src/components/studio/StudioInspectorCore.tsx'),
   read('src/components/studio/StudioOutliner.tsx'),
   read('src/components/studio/StudioLibrary.tsx'),
   read('src/lib/studioExport.ts'),
@@ -45,6 +47,9 @@ const [
   read('ANIMATION_STUDIO.md'),
   read('RELEASE_READINESS.md'),
 ])
+
+const viewportSurface = `${viewport}\n${importedObject}`
+const inspectorSurface = `${inspector}\n${inspectorCore}`
 
 function assert(condition, message) {
   if (!condition) throw new Error(`Studio contract failed: ${message}`)
@@ -92,16 +97,16 @@ for (const token of [
   '<Canvas', '<TransformControls', '<OrbitControls', '<Grid', 'GLTFLoader', 'cloneSkeleton', 'useAnimations', 'prepareStudioModel',
   'loadStudioTextureResources', 'textureSignature', 'sceneRegistry', 'children.get(node.id)', 'node.debug.bounds', 'node.debug.skeleton',
   'state.gl.info.render.triangles', 'toneMappingExposure', 'configureStudioGltfLoader', 'evaluateStudioTransform', 'resolveStudioTimeline(node.timeline)', 'timelineTime', 'timelinePlaying',
-]) assert(viewport.includes(token), `viewport missing ${token}`)
-assert(!viewport.includes('<Environment'), 'Studio viewport must not silently depend on remote HDR environment assets')
-assert(viewport.includes('configureStudioGltfLoader(loader, renderer)'), 'Studio viewport does not configure the same-origin codec runtime')
+]) assert(viewportSurface.includes(token), `Studio viewport/imported-object surface missing ${token}`)
+assert(!viewportSurface.includes('<Environment'), 'Studio viewport must not silently depend on remote HDR environment assets')
+assert(importedObject.includes('configureStudioGltfLoader(loader, renderer)'), 'Studio imported-object loader does not configure the same-origin codec runtime')
 assert(viewport.includes('if (!primary || node.locked || playing) return content'), 'gizmo must not commit moving transforms during timeline playback')
 
 for (const token of [
   'PBR + TEXTURES', 'TEXTURE CHANNELS', 'MODEL REPORT', 'ANIMATION', 'DEBUG VIEW', 'preserves world transform',
   'EXPORT WEB GLB', 'R3F COMPONENT ZIP', 'RESET TO AUTHORED', 'studioGlbExportProfiles', 'selectedIds.length > 1',
   'TYPED CUSTOMIZATION', 'onCustomizationPatch', 'getAssetCustomizationDefinition',
-]) assert(inspector.includes(token), `model inspector missing ${token}`)
+]) assert(inspectorSurface.includes(token), `model inspector surface missing ${token}`)
 assert(outliner.includes('Shift / Ctrl / ⌘ click') && outliner.includes('node.parentId'), 'hierarchical multi-select outliner is incomplete')
 assert(library.includes('IMPORT LOCAL GLB') && library.includes('PROJECTS') && library.includes('assets.filter') && library.includes('same-origin offline codec runtime'), 'asset/project library is incomplete')
 
@@ -132,7 +137,10 @@ for (const token of [
   '"release:audit": "node scripts/audit-release-readiness.mjs"',
   '"release:check": "bun run qa && bun run release:audit && bun run e2e"',
 ]) assert(packageJson.includes(token), `browser/release gate missing ${token}`)
-for (const token of ['desktop-chromium', 'tablet-chromium', 'mobile-chromium', 'node scripts/sync-codecs.mjs && bun --bun vite dev', 'trace:', 'screenshot:']) assert(playwrightConfig.includes(token), `Playwright config missing ${token}`)
+for (const token of [
+  'desktop-chromium', 'tablet-chromium', 'mobile-chromium', 'desktop-firefox', 'desktop-webkit', 'mobile-webkit',
+  'bun run build && bun --bun vite preview', 'MESHVARA_SITE_URL: baseURL', 'trace:', 'screenshot:',
+]) assert(playwrightConfig.includes(token), `Playwright config missing ${token}`)
 for (const token of [
   'Studio appearance supports dark, light and live system preference', 'local project autosave survives a real browser reload',
   'asset deep link opens an isolated Studio study', 'asset detail hands off into Studio through the real UI link',
