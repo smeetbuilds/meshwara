@@ -69,7 +69,7 @@ for (const token of [
   'R3F recipe',
   '<AssetPreviewControls',
   "onPreviewChange({ ...defaultPreviewSettings, pointer: supportsPointer })",
-  "onChange({ tuning: { ...defaultAssetSceneTuning }, background: '' })",
+  'onChange(createDefaultAssetPlaygroundSettings(asset.scene))',
 ]) {
   assert(playground.includes(token), `asset playground is missing ${token}`)
 }
