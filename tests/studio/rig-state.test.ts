@@ -48,7 +48,12 @@ const mirrored = mirrorStudioPoseDirection(pose, mapping, 'left-to-right')
 assert.equal(mirrored.bones[right].position[0], -pose.bones[left].position[0])
 assert.equal(mirrored.bones[right].position[1], pose.bones[left].position[1])
 assert.ok(Math.abs(mirrored.bones[right].rotation[1] + pose.bones[left].rotation[1] / Math.hypot(...pose.bones[left].rotation)) < 1e-8)
-assert.deepEqual(mirrored.bones[left], pose.bones[left], 'source side stays untouched during directional mirror')
+assert.deepEqual(mirrored.bones[left].position, pose.bones[left].position, 'source position stays untouched during directional mirror')
+assert.deepEqual(mirrored.bones[left].scale, pose.bones[left].scale, 'source scale stays untouched during directional mirror')
+assert.ok(
+  mirrored.bones[left].rotation.every((value, index) => Math.abs(value - pose.bones[left].rotation[index]) < 1e-12),
+  'source rotation stays orientation-equivalent after safety normalization',
+)
 
 let rig = addStudioPose({ ...defaultStudioRig(), mapping }, pose)
 assert.equal(rig.activePoseId, pose.id)
