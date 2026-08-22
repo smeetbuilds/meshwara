@@ -124,7 +124,9 @@ for (const token of ['satisfies MeshvaraStudioConfig', 'parentId', 'materials', 
 
 for (const token of ['snapStudioTime', 'updateStudioTimelineTiming', 'upsertStudioTransformKeyframe', 'updateStudioTransformKeyframe', 'removeStudioTransformKeyframe', 'evaluateStudioTransform', 'normalizeStudioPlaybackTime', 'studioProjectTimelineDuration']) assert(timeline.includes(token), `timeline runtime missing ${token}`)
 for (const token of ['requestAnimationFrame', "event.code === 'Space'", "event.key.toLowerCase() === 'k'", 'autoKey', 'commitTransform', 'updateStudioGroupTransform']) assert(timelineController.includes(token), `timeline controller missing ${token}`)
-for (const token of ['ANIMATION TIMELINE', 'AUTO KEY', '+ POSITION', '+ ROTATION', '+ SCALE', 'DELETE KEY', 'easing', 'type="range"']) assert(timelineUi.includes(token), `timeline UI missing ${token}`)
+for (const token of ['ANIMATION TIMELINE', 'AUTO KEY', 'DELETE KEY', 'easing', 'type="range"']) assert(timelineUi.includes(token), `timeline UI missing ${token}`)
+assert(timelineUi.includes("const CHANNELS: StudioTimelineChannel[] = ['position', 'rotation', 'scale']"), 'timeline UI is missing the transform channel contract')
+assert(timelineUi.includes('CHANNELS.map((channel)') && timelineUi.includes('channel.toUpperCase()'), 'timeline UI is not rendering add-key controls from the transform channel contract')
 assert(animationContract.includes('frame-snapped') && animationContract.includes('not skeletal keyframing') && animationContract.includes('undo/redo'), 'Animation Studio boundary is not explicit')
 assert(releaseContract.includes('500') && releaseContract.includes('13') && releaseContract.includes('release blocker'), 'physical release-readiness contract is incomplete')
 

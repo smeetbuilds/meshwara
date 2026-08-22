@@ -30,15 +30,45 @@ jobs:
       - name: Show regenerated lockfile diff
         run: git diff -- bun.lock
 
-      - name: Run QA and release audit
-        run: bun run qa && bun run release:audit
+      - name: Run QA
+        id: qa
+        continue-on-error: true
+        run: bun run qa
+
+      - name: Run release audit
+        id: release_audit
+        continue-on-error: true
+        run: bun run release:audit
+
+      - name: Upload regenerated release corpus
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-probe-output
+          if-no-files-found: error
+          retention-days: 1
+          path: |
+            bun.lock
+            public/downloads/manifest.json
+            public/downloads/*.zip
+            public/registry/v1.json
+            public/quality/asset-audit.json
 
       - name: Install Playwright browsers
         run: bunx playwright install --with-deps chromium firefox webkit
 
       - name: Run E2E
+        id: e2e
+        continue-on-error: true
         run: bun run e2e
 
       - name: Show working-tree diff
         if: always()
         run: git status --short && git diff -- bun.lock
+
+      - name: Finalize probe result
+        if: always()
+        run: |
+          test "${{ steps.qa.outcome }}" = "success"
+          test "${{ steps.release_audit.outcome }}" = "success"
+          test "${{ steps.e2e.outcome }}" = "success"
