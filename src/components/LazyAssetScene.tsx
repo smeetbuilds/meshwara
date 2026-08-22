@@ -2,16 +2,20 @@ import { Component, useEffect, useRef, useState, type ErrorInfo, type ReactNode 
 import type { AssetInteraction, AssetPresentation, AssetSceneKind } from '../lib/types'
 import { AssetScene } from './AssetScene'
 
-class PreviewErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+export class PreviewErrorBoundary extends Component<{ children: ReactNode; detail?: boolean }, { failed: boolean }> {
   state = { failed: false }
   static getDerivedStateFromError() { return { failed: true } }
-  componentDidCatch(_error: Error, _info: ErrorInfo) {}
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    const report = (globalThis as typeof globalThis & { reportError?: (error: unknown) => void }).reportError
+    if (typeof report === 'function') report(error)
+    else console.error('Meshvara asset preview failed.', error, info.componentStack)
+  }
   render() {
     if (this.state.failed) {
       return (
         <div className="scene-error" role="status">
           <span>Preview unavailable</span>
-          <small>Open the asset page to view details or download the source.</small>
+          <small>{this.props.detail ? 'Asset details and source download remain available below.' : 'Open the asset page to view details or download the source.'}</small>
         </div>
       )
     }

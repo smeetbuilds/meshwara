@@ -11,6 +11,10 @@ tests/model-pipeline/.generated-validation.gltf
 # Generated public registry. Production builds recreate it from the SHA-manifested downloads.
 public/registry/v1.json
 
+# Generated crawl metadata. Builds recreate these using MESHVARA_SITE_URL.
+public/robots.txt
+public/sitemap.xml
+
 # Materialized third-party source bytes (verified locally, never committed)
 staging/materialized/
 playwright-report/

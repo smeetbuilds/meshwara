@@ -446,10 +446,11 @@ export function parseStudioProject(value: unknown): StudioProject | null {
   if (input.format !== STUDIO_PROJECT_FORMAT || input.version !== STUDIO_PROJECT_VERSION) return null
   if (typeof input.id !== 'string' || typeof input.name !== 'string') return null
   if (!Array.isArray(input.nodes) || !input.scene || typeof input.scene !== 'object') return null
+  if (input.nodes.length > STUDIO_NODE_LIMIT) return null
 
   const nodes: StudioNode[] = []
   const ids = new Set<string>()
-  for (const raw of input.nodes.slice(0, STUDIO_NODE_LIMIT)) {
+  for (const raw of input.nodes) {
     if (!raw || typeof raw !== 'object') return null
     const node = raw as Record<string, unknown>
     if (typeof node.id !== 'string' || !node.id || ids.has(node.id)) return null

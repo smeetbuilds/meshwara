@@ -30,17 +30,21 @@ bun --bun run dev
 Production build with static prerendering:
 
 ```bash
-bun --bun run build
+MESHVARA_SITE_URL=https://your-production-domain.example bun --bun run build
 bun --bun run preview
 ```
+
+`MESHVARA_SITE_URL` is used only at build time to generate canonical `robots.txt` and `sitemap.xml` URLs. If it is omitted, the build still succeeds and emits `robots.txt`, but intentionally skips `sitemap.xml` rather than publishing an incorrect production origin. Hosting environments may also provide `VERCEL_PROJECT_PRODUCTION_URL`, `VERCEL_URL`, or `URL` instead.
 
 Project QA:
 
 ```bash
 bun run qa
+bun run e2e:install
+bun run release:check
 ```
 
-The full QA chain verifies exact dependency pins, staged third-party source provenance, model-inspector/validator fixtures, modeled-asset publish gates, scene-quality floors, deterministic download-pack generation, catalog/archive consistency, interaction-contract parity, TypeScript types, and the production static build. `packs` rebuilds every public ZIP deterministically from canonical source and pinned dependency manifests. `quality:check` rejects placeholder markers, exact scene duplicates, weak scaled-batch metadata, and under-authored new scene sources. `validate` checks duplicate slugs/indexes/scenes, contiguous numbering, lazy-registry parity, deterministic scene rules, ZIP CRC/content, pinned pack dependencies and reduced-motion support before a catalog update is considered publishable. Every pack build also writes `public/downloads/manifest.json` with the file size and SHA-256 digest of all public downloads.
+The full QA chain verifies exact dependency pins, staged third-party source provenance, model-inspector/validator fixtures, modeled-asset publish gates, scene-quality floors, public contrast, deterministic download-pack generation, catalog/archive consistency, interaction-contract parity, TypeScript types, and the production static build. `release:check` additionally runs the browser suite against the built preview in Chromium, Firefox and WebKit targets. `packs` rebuilds every public ZIP deterministically from canonical source and pinned dependency manifests. `quality:check` rejects placeholder markers, exact scene duplicates, weak scaled-batch metadata, and under-authored new scene sources. `validate` checks duplicate slugs/indexes/scenes, contiguous numbering, lazy-registry parity, deterministic scene rules, ZIP CRC/content, pinned pack dependencies and reduced-motion support before a catalog update is considered publishable. Every pack build also writes `public/downloads/manifest.json` with the file size and SHA-256 digest of all public downloads.
 
 ## Dependency integrity
 

@@ -1,4 +1,4 @@
-import { defineConfig } from '@playwright/test'
+import { defineConfig, devices } from '@playwright/test'
 
 const baseURL = 'http://127.0.0.1:4173'
 
@@ -20,10 +20,14 @@ export default defineConfig({
     { name: 'desktop-chromium', use: { browserName: 'chromium', viewport: { width: 1440, height: 900 } } },
     { name: 'tablet-chromium', use: { browserName: 'chromium', viewport: { width: 1024, height: 768 } } },
     { name: 'mobile-chromium', use: { browserName: 'chromium', viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } },
+    { name: 'desktop-firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'desktop-webkit', use: { ...devices['Desktop Safari'] } },
+    { name: 'mobile-webkit', use: { ...devices['iPhone 12'] } },
   ],
   webServer: {
-    command: 'node scripts/sync-codecs.mjs && bun --bun vite dev --host 127.0.0.1 --port 4173',
+    command: 'bun run build && bun --bun vite preview --host 127.0.0.1 --port 4173',
     url: `${baseURL}/studio`,
+    env: { MESHVARA_SITE_URL: baseURL },
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

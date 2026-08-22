@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import {
   STUDIO_HISTORY_LIMIT,
+  STUDIO_NODE_LIMIT,
   appendStudioNode,
   commitStudioHistory,
   collectStudioFileIds,
@@ -119,6 +120,14 @@ assert.ok(cycleSanitized.nodes.some((node) => !node.parentId))
 
 const wrongVersion = { ...project, version: 2 }
 assert.equal(parseStudioProject(wrongVersion), null)
+
+const oversized = JSON.parse(JSON.stringify(project))
+oversized.nodes = Array.from({ length: STUDIO_NODE_LIMIT + 1 }, (_, index) => ({
+  ...JSON.parse(JSON.stringify(parent)),
+  id: `overflow-${index}`,
+  parentId: undefined,
+}))
+assert.equal(parseStudioProject(oversized), null)
 
 const config = createStudioConfig(project)
 const importedConfig = config.objects.find((object) => object.source.type === 'local-glb')

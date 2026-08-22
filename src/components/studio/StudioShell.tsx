@@ -170,7 +170,12 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
         setSelectedIds([node.id])
       }
       setHistory(createStudioHistory(active))
-      await saveStudioProject(active)
+      try {
+        await saveStudioProject(active)
+      } catch {
+        setStatus('LOCAL AUTOSAVE DEGRADED · SESSION STILL ACTIVE')
+        return
+      }
       await refreshProjects()
       setStatus('LOCAL PROJECT READY · AUTOSAVE ON')
     })()
@@ -271,12 +276,22 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
 
   const newProject = async () => {
     const next = createStudioProject()
-    await saveStudioProject(next)
+    let durable = true
+    try {
+      await saveStudioProject(next)
+    } catch {
+      durable = false
+    }
     setHistory(createStudioHistory(next))
     setSelectedIds([])
     setInspections({})
-    await refreshProjects()
-    setStatus('NEW LOCAL SCENE CREATED')
+    if (durable) {
+      await refreshProjects()
+      setStatus('NEW LOCAL SCENE CREATED')
+    } else {
+      setStatus('NEW SCENE READY · SESSION ONLY · LOCAL STORAGE UNAVAILABLE')
+    }
+    return durable
   }
 
   const openProject = async (id: string) => {
@@ -297,16 +312,31 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
     const protectedFiles = id === project.id
       ? []
       : new Set([...history.past, history.present, ...history.future].flatMap(collectStudioFileIds))
-    await deleteStudioProject(target, protectedFiles)
-    if (id === project.id) await newProject()
-    else await refreshProjects()
-    setStatus('LOCAL PROJECT DELETED · SHARED MODEL REFERENCES PRESERVED')
+    try {
+      await deleteStudioProject(target, protectedFiles)
+    } catch {
+      setStatus('LOCAL PROJECT DELETE/CLEANUP FAILED · REFRESH TO VERIFY')
+      return
+    }
+    if (id === project.id) {
+      const durable = await newProject()
+      setStatus(durable
+        ? 'LOCAL PROJECT DELETED · SHARED MODEL REFERENCES PRESERVED'
+        : 'PROJECT DELETED · NEW SCENE SESSION ONLY · LOCAL STORAGE UNAVAILABLE')
+    } else {
+      await refreshProjects()
+      setStatus('LOCAL PROJECT DELETED · SHARED MODEL REFERENCES PRESERVED')
+    }
   }
 
   const cleanStorage = async () => {
     const protectedFiles = new Set([...history.past, history.present, ...history.future].flatMap(collectStudioFileIds))
-    const result = await garbageCollectStudioFiles(protectedFiles)
-    setStatus(`LOCAL STORAGE CLEAN · ${result.deletedFiles} ORPHAN FILE${result.deletedFiles === 1 ? '' : 'S'} REMOVED · ${formatBytes(result.reclaimedBytes)} RECLAIMED`)
+    try {
+      const result = await garbageCollectStudioFiles(protectedFiles)
+      setStatus(`LOCAL STORAGE CLEAN · ${result.deletedFiles} ORPHAN FILE${result.deletedFiles === 1 ? '' : 'S'} REMOVED · ${formatBytes(result.reclaimedBytes)} RECLAIMED`)
+    } catch {
+      setStatus('LOCAL STORAGE CLEAN FAILED · SESSION DATA LEFT UNCHANGED')
+    }
   }
 
   const exportProject = async () => {

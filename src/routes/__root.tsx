@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { HeadContent, Link, Outlet, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
 import appCss from '../styles/app.css?url'
+import publicA11yCss from '../styles/public-a11y.css?url'
 import { SiteHeader } from '../components/SiteHeader'
 import { SiteFooter } from '../components/SiteFooter'
 import { brand } from '../data/brand'
@@ -21,6 +22,7 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
+      { rel: 'stylesheet', href: publicA11yCss },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
       { rel: 'manifest', href: '/site.webmanifest' },
     ],

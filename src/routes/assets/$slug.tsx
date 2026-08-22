@@ -5,6 +5,7 @@ import { AssetInstallPanel } from '../../components/AssetInstallPanel'
 import { AssetPlayground, createDefaultAssetPlaygroundSettings } from '../../components/AssetPlayground'
 import { AssetScene } from '../../components/AssetScene'
 import { ArrowDown, ArrowUpRight } from '../../components/Icons'
+import { PreviewErrorBoundary } from '../../components/LazyAssetScene'
 import { assets, getAsset, getAssetSubcategory } from '../../data/assets'
 import { brand } from '../../data/brand'
 
@@ -13,6 +14,18 @@ export const Route = createFileRoute('/assets/$slug')({
     const asset = getAsset(params.slug)
     if (!asset) throw notFound()
     return asset
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {}
+    return {
+      meta: [
+        { title: `${loaderData.name} — ${brand.name}` },
+        { name: 'description', content: loaderData.description },
+        { property: 'og:title', content: `${loaderData.name} — ${brand.name}` },
+        { property: 'og:description', content: loaderData.blurb },
+      ],
+      links: [{ rel: 'canonical', href: `/assets/${loaderData.slug}` }],
+    }
   },
   component: AssetDetail,
 })
@@ -39,16 +52,18 @@ function AssetDetail() {
         <div>
           <div className="detail-stage" data-stage-theme={preview.stage} data-custom-stage={playground.background ? 'true' : 'false'} style={stageStyle}>
             <div className="asset-gridlines" />
-            <AssetScene
-              kind={asset.scene}
-              presentation={asset.presentation}
-              interaction={asset.interaction}
-              motion={preview.motion}
-              pointerEnabled={preview.pointer}
-              quality={preview.quality}
-              tuning={playground.tuning}
-              customization={playground.customization}
-            />
+            <PreviewErrorBoundary key={asset.slug} detail>
+              <AssetScene
+                kind={asset.scene}
+                presentation={asset.presentation}
+                interaction={asset.interaction}
+                motion={preview.motion}
+                pointerEnabled={preview.pointer}
+                quality={preview.quality}
+                tuning={playground.tuning}
+                customization={playground.customization}
+              />
+            </PreviewErrorBoundary>
             <div className="viewer-hud"><span>{brand.name} / 3D PREVIEW / {sourceLabel}</span><span>{previewStateLabel} / {preview.quality.toUpperCase()} / {playground.tuning.exposure.toFixed(2)} EXP</span></div>
           </div>
           <AssetPreviewControls value={preview} onChange={setPreview} supportsPointer={asset.interaction === 'Pointer'} />

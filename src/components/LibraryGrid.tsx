@@ -7,17 +7,40 @@ import { CloseIcon, SearchIcon } from './Icons'
 
 type ProfileFilter = 'All profiles' | AssetComplexity
 type GroupFilter = 'All worlds' | AssetGroup
+export type LibrarySearchState = {
+  q?: string
+  world?: AssetGroup
+  category?: AssetCategory
+  type?: string
+  profile?: AssetComplexity
+}
 const PAGE_SIZE = 16
 
-export function LibraryGrid({ limit }: { limit?: number }) {
-  const [query, setQuery] = useState('')
-  const [group, setGroup] = useState<GroupFilter>('All worlds')
-  const [category, setCategory] = useState<'All' | AssetCategory>('All')
-  const [subcategory, setSubcategory] = useState('All types')
-  const [profile, setProfile] = useState<ProfileFilter>('All profiles')
+export function LibraryGrid({
+  limit,
+  search,
+  onSearchChange,
+}: {
+  limit?: number
+  search?: LibrarySearchState
+  onSearchChange?: (next: LibrarySearchState, replace?: boolean) => void
+}) {
+  const [localSearch, setLocalSearch] = useState<LibrarySearchState>({})
+  const currentSearch = search ?? localSearch
+  const query = currentSearch.q ?? ''
+  const group: GroupFilter = currentSearch.world ?? 'All worlds'
+  const category: 'All' | AssetCategory = currentSearch.category ?? 'All'
+  const subcategory = currentSearch.type ?? 'All types'
+  const profile: ProfileFilter = currentSearch.profile ?? 'All profiles'
   const [visibleCount, setVisibleCount] = useState(limit ?? PAGE_SIZE)
   const [activePreview, setActivePreview] = useState<string | null>(null)
   const loadMore = useRef<HTMLDivElement>(null)
+
+  const updateSearch = (patch: Partial<LibrarySearchState>, replace = false) => {
+    const next = { ...currentSearch, ...patch }
+    if (search !== undefined && onSearchChange) onSearchChange(next, replace)
+    else setLocalSearch(next)
+  }
 
   const groupCounts = useMemo(() => Object.fromEntries(
     categoryGroups.map((item) => [item.name, assets.filter((asset) => item.categories.includes(asset.category)).length]),
@@ -64,15 +87,6 @@ export function LibraryGrid({ limit }: { limit?: number }) {
   }, [query, group, category, subcategory, profile])
 
   useEffect(() => {
-    setCategory('All')
-    setSubcategory('All types')
-  }, [group])
-
-  useEffect(() => {
-    setSubcategory('All types')
-  }, [category])
-
-  useEffect(() => {
     setVisibleCount(limit ?? PAGE_SIZE)
   }, [query, group, category, subcategory, profile, limit])
 
@@ -103,11 +117,9 @@ export function LibraryGrid({ limit }: { limit?: number }) {
   }, [canLoadMore, filtered.length])
 
   const reset = () => {
-    setQuery('')
-    setGroup('All worlds')
-    setCategory('All')
-    setSubcategory('All types')
-    setProfile('All profiles')
+    const next: LibrarySearchState = {}
+    if (search !== undefined && onSearchChange) onSearchChange(next)
+    else setLocalSearch(next)
   }
 
   return (
@@ -119,7 +131,11 @@ export function LibraryGrid({ limit }: { limit?: number }) {
             type="button"
             aria-pressed={group === item}
             className={group === item ? 'is-active' : ''}
-            onClick={() => setGroup(item)}
+            onClick={() => updateSearch({
+              world: item === 'All worlds' ? undefined : item,
+              category: undefined,
+              type: undefined,
+            })}
           >
             <span>{item}</span><small>{item === 'All worlds' ? assets.length : groupCounts[item as AssetGroup]}</small>
           </button>
@@ -135,9 +151,9 @@ export function LibraryGrid({ limit }: { limit?: number }) {
                 type="button"
                 aria-pressed={category === item}
                 className={category === item ? 'is-active' : ''}
-                onClick={() => setCategory(item as 'All' | AssetCategory)}
+                onClick={() => updateSearch({ category: item === 'All' ? undefined : item as AssetCategory, type: undefined })}
               >
-                <span>{item}</span><small>{item === 'All' ? assets.length : categoryCounts[item as AssetCategory]}</small>
+                <span>{item}</span><small>{item === 'All' ? (group === 'All worlds' ? assets.length : groupCounts[group]) : categoryCounts[item as AssetCategory]}</small>
               </button>
             ))}
           </div>
@@ -149,7 +165,7 @@ export function LibraryGrid({ limit }: { limit?: number }) {
                   type="button"
                   aria-pressed={subcategory === item}
                   className={subcategory === item ? 'is-active' : ''}
-                  onClick={() => setSubcategory(item)}
+                  onClick={() => updateSearch({ type: item === 'All types' ? undefined : item })}
                 >
                   <span>{item}</span><small>{item === 'All types' ? assets.filter((asset) => asset.category === category).length : subcategoryCounts[item] ?? 0}</small>
                 </button>
@@ -160,7 +176,14 @@ export function LibraryGrid({ limit }: { limit?: number }) {
         <div className="library-tools">
           <label className="profile-filter">
             <span className="sr-only">Detail level</span>
-            <select value={profile} onChange={(event) => setProfile(event.target.value as ProfileFilter)} aria-label="Filter by detail level">
+            <select
+              value={profile}
+              onChange={(event) => {
+                const next = event.target.value as ProfileFilter
+                updateSearch({ profile: next === 'All profiles' ? undefined : next })
+              }}
+              aria-label="Filter by detail level"
+            >
               <option value="All profiles">All detail levels</option>
               <option value="Light">Lightweight</option>
               <option value="Balanced">Balanced</option>
@@ -169,8 +192,8 @@ export function LibraryGrid({ limit }: { limit?: number }) {
           </label>
           <label className="search-field">
             <SearchIcon />
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search asset, type, technique…" aria-label="Search assets" />
-            {query && <button type="button" onClick={() => setQuery('')} aria-label="Clear search"><CloseIcon /></button>}
+            <input value={query} onChange={(event) => updateSearch({ q: event.target.value || undefined }, true)} placeholder="Search asset, type, technique…" aria-label="Search assets" />
+            {query && <button type="button" onClick={() => updateSearch({ q: undefined }, true)} aria-label="Clear search"><CloseIcon /></button>}
           </label>
         </div>
       </div>

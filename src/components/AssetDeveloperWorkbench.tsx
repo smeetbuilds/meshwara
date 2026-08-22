@@ -179,9 +179,11 @@ export function AssetDeveloperPanel({ asset }: { asset: AssetRecord }) {
 
   useEffect(() => {
     let active = true
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 10_000)
     setIntegrityState('loading')
 
-    fetch('/downloads/manifest.json', { cache: 'force-cache' })
+    fetch('/downloads/manifest.json', { cache: 'force-cache', signal: controller.signal })
       .then((response) => {
         if (!response.ok) throw new Error(`Manifest request failed with ${response.status}`)
         return response.json() as Promise<DownloadManifest>
@@ -198,9 +200,12 @@ export function AssetDeveloperPanel({ asset }: { asset: AssetRecord }) {
         setIntegrity(null)
         setIntegrityState('error')
       })
+      .finally(() => window.clearTimeout(timeout))
 
     return () => {
       active = false
+      window.clearTimeout(timeout)
+      controller.abort()
     }
   }, [asset.slug])
 
@@ -236,19 +241,17 @@ export function AssetDeveloperPanel({ asset }: { asset: AssetRecord }) {
 
       <div className="workbench-grid">
         <div className="workbench-main">
-          <div className="workbench-tabs" role="tablist" aria-label="Integration framework">
+          <div className="workbench-tabs" role="group" aria-label="Integration framework">
             <button
               type="button"
-              role="tab"
-              aria-selected={framework === 'react'}
+              aria-pressed={framework === 'react'}
               onClick={() => setFramework('react')}
             >
               React / Vite
             </button>
             <button
               type="button"
-              role="tab"
-              aria-selected={framework === 'next'}
+              aria-pressed={framework === 'next'}
               onClick={() => setFramework('next')}
             >
               Next.js

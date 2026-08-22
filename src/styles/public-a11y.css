@@ -1,0 +1,8 @@
+:root {
+  --muted: #6d6b65;
+}
+
+.footer-label,
+.footer-bottom {
+  color: #8a8881;
+}

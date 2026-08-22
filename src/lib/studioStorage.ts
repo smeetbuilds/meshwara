@@ -1,5 +1,6 @@
 import { assertStudioGlbCapabilities } from './studioGlbCapabilities'
 import {
+  STUDIO_NODE_LIMIT,
   STUDIO_PROJECT_FORMAT,
   STUDIO_PROJECT_VERSION,
   collectStudioFileIds,
@@ -83,18 +84,29 @@ function normalizeStoredFile(record: StudioFileRecord | (Omit<StudioFileRecord, 
 function openDatabase(): Promise<IDBDatabase | null> {
   if (dbPromise) return dbPromise
   if (typeof indexedDB === 'undefined') return Promise.resolve(null)
-  dbPromise = new Promise((resolve) => {
+  const pending = new Promise<IDBDatabase | null>((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, DB_VERSION)
     request.onupgradeneeded = () => {
       const db = request.result
       if (!db.objectStoreNames.contains(PROJECT_STORE)) db.createObjectStore(PROJECT_STORE, { keyPath: 'id' })
       if (!db.objectStoreNames.contains(FILE_STORE)) db.createObjectStore(FILE_STORE, { keyPath: 'id' })
     }
-    request.onsuccess = () => resolve(request.result)
-    request.onerror = () => resolve(null)
-    request.onblocked = () => resolve(null)
+    request.onsuccess = () => {
+      const db = request.result
+      db.onversionchange = () => {
+        db.close()
+        if (dbPromise === pending) dbPromise = null
+      }
+      resolve(db)
+    }
+    request.onerror = () => reject(request.error ?? new Error('Persistent browser storage could not be opened.'))
+    request.onblocked = () => reject(new Error('Persistent browser storage is blocked by another page.'))
   })
-  return dbPromise
+  dbPromise = pending
+  void pending.catch(() => {
+    if (dbPromise === pending) dbPromise = null
+  })
+  return pending
 }
 
 function requestValue<T>(request: IDBRequest<T>) {
@@ -104,15 +116,60 @@ function requestValue<T>(request: IDBRequest<T>) {
   })
 }
 
+function transactionDone(transaction: IDBTransaction) {
+  return new Promise<void>((resolve, reject) => {
+    transaction.oncomplete = () => resolve()
+    transaction.onabort = () => reject(transaction.error ?? new Error('IndexedDB transaction aborted'))
+    transaction.onerror = () => {}
+  })
+}
+
+function unavailableStorageError() {
+  return new Error('Persistent browser storage is unavailable. Session changes are not durable.')
+}
+
 async function withStore<T>(storeName: string, mode: IDBTransactionMode, action: (store: IDBObjectStore) => IDBRequest<T>) {
-  const db = await openDatabase()
-  if (!db) return null
   try {
+    const db = await openDatabase()
+    if (!db) return null
     const transaction = db.transaction(storeName, mode)
     return await requestValue(action(transaction.objectStore(storeName)))
   } catch {
     return null
   }
+}
+
+async function writeStore<T>(storeName: string, action: (store: IDBObjectStore) => IDBRequest<T>) {
+  const db = await openDatabase()
+  if (!db) {
+    if (typeof window !== 'undefined') throw unavailableStorageError()
+    return
+  }
+  const transaction = db.transaction(storeName, 'readwrite')
+  const done = transactionDone(transaction)
+  const result = requestValue(action(transaction.objectStore(storeName)))
+  await Promise.all([result, done])
+}
+
+async function persistPortableProject(project: StudioProject, files: StudioFileRecord[]) {
+  const db = await openDatabase()
+  if (!db) {
+    if (typeof window !== 'undefined') throw unavailableStorageError()
+    for (const file of files) memoryFiles.set(file.id, cloneFile(file))
+    memoryProjects.set(project.id, cloneProject(project))
+    return
+  }
+
+  const transaction = db.transaction([FILE_STORE, PROJECT_STORE], 'readwrite')
+  const done = transactionDone(transaction)
+  const requests: Promise<unknown>[] = []
+  const fileStore = transaction.objectStore(FILE_STORE)
+  for (const file of files) requests.push(requestValue(fileStore.put(file)))
+  requests.push(requestValue(transaction.objectStore(PROJECT_STORE).put(project)))
+  await Promise.all([...requests, done])
+
+  for (const file of files) memoryFiles.set(file.id, cloneFile(file))
+  memoryProjects.set(project.id, cloneProject(project))
 }
 
 export function validateStudioGlbBytes(bytes: ArrayBuffer) {
@@ -158,8 +215,8 @@ function validateStudioFileRecord(record: StudioFileRecord) {
 }
 
 export async function saveStudioProject(project: StudioProject) {
+  await writeStore(PROJECT_STORE, (store) => store.put(project))
   memoryProjects.set(project.id, cloneProject(project))
-  await withStore(PROJECT_STORE, 'readwrite', (store) => store.put(project))
 }
 
 export async function loadStudioProject(id: string): Promise<StudioProject | null> {
@@ -183,8 +240,8 @@ export async function listStudioProjects(): Promise<StudioProjectSummary[]> {
 }
 
 export async function deleteStudioProject(project: StudioProject, protectedFileIds: Iterable<string> = []) {
+  await writeStore(PROJECT_STORE, (store) => store.delete(project.id))
   memoryProjects.delete(project.id)
-  await withStore(PROJECT_STORE, 'readwrite', (store) => store.delete(project.id))
   await garbageCollectStudioFiles(protectedFileIds)
 }
 
@@ -206,8 +263,8 @@ async function storeBrowserFile(file: File, kind: StudioFileKind): Promise<Studi
     size: bytes.byteLength,
     bytes,
   }
+  await writeStore(FILE_STORE, (store) => store.put(record))
   memoryFiles.set(record.id, cloneFile(record))
-  await withStore(FILE_STORE, 'readwrite', (store) => store.put(record))
   return record
 }
 
@@ -223,8 +280,8 @@ export async function putStudioFile(input: StudioFileRecord | (Omit<StudioFileRe
   const record = normalizeStoredFile(input)
   const detectedType = validateStudioFileRecord(record)
   const safe: StudioFileRecord = { ...record, type: record.kind === 'texture' ? detectedType : 'model/gltf-binary' }
+  await writeStore(FILE_STORE, (store) => store.put(safe))
   memoryFiles.set(safe.id, cloneFile(safe))
-  await withStore(FILE_STORE, 'readwrite', (store) => store.put(safe))
 }
 
 export async function loadStudioFile(id: string): Promise<StudioFileRecord | null> {
@@ -242,8 +299,8 @@ export async function listStudioFiles(): Promise<StudioFileRecord[]> {
 }
 
 export async function deleteStudioFile(id: string) {
+  await writeStore(FILE_STORE, (store) => store.delete(id))
   memoryFiles.delete(id)
-  await withStore(FILE_STORE, 'readwrite', (store) => store.delete(id))
 }
 
 export async function garbageCollectStudioFiles(protectedFileIds: Iterable<string> = []): Promise<StudioStorageGcResult> {
@@ -290,7 +347,12 @@ export async function restorePortableStudioProject(value: unknown): Promise<Stud
   if (!value || typeof value !== 'object') throw new Error('Project file is not a valid object.')
   const portable = value as Record<string, unknown>
   if (portable.format !== STUDIO_PROJECT_FORMAT || portable.version !== STUDIO_PROJECT_VERSION) throw new Error('Unsupported Meshvara Studio project version.')
-  const project = parseStudioProject(portable.project)
+  const projectPayload = portable.project
+  if (projectPayload && typeof projectPayload === 'object') {
+    const nodes = (projectPayload as Record<string, unknown>).nodes
+    if (Array.isArray(nodes) && nodes.length > STUDIO_NODE_LIMIT) throw new Error(`Project contains ${nodes.length} objects; Studio supports at most ${STUDIO_NODE_LIMIT}.`)
+  }
+  const project = parseStudioProject(projectPayload)
   if (!project) throw new Error('Project scene data failed validation.')
   if (!Array.isArray(portable.files)) throw new Error('Project file payload is invalid.')
 
@@ -298,6 +360,7 @@ export async function restorePortableStudioProject(value: unknown): Promise<Stud
   const glbReferences = new Set(project.nodes.flatMap((node) => node.kind === 'imported' && node.fileId ? [node.fileId] : []))
   const textureReferences = new Set(project.nodes.flatMap((node) => Object.values(node.materialOverrides).flatMap((override) => Object.values(override.textures ?? {}).filter((value): value is string => typeof value === 'string'))))
   const restored = new Set<string>()
+  const validatedFiles: StudioFileRecord[] = []
   for (const raw of portable.files) {
     if (!raw || typeof raw !== 'object') throw new Error('Imported file payload is invalid.')
     const file = raw as Record<string, unknown>
@@ -313,10 +376,10 @@ export async function restorePortableStudioProject(value: unknown): Promise<Stud
       ? validateStudioTextureBytes(bytes, typeof file.type === 'string' ? file.type : '')
       : (validateStudioGlbBytes(bytes), 'model/gltf-binary')
     if (typeof file.size === 'number' && file.size !== bytes.byteLength) throw new Error(`Imported file ${file.name} failed size validation.`)
-    await putStudioFile({ id: file.id, kind, name: file.name, type, size: bytes.byteLength, bytes })
+    validatedFiles.push({ id: file.id, kind, name: file.name, type, size: bytes.byteLength, bytes })
     restored.add(file.id)
   }
   if (restored.size !== expected.size) throw new Error('Project is missing one or more local GLB/texture payloads.')
-  await saveStudioProject(project)
+  await persistPortableProject(project, validatedFiles)
   return project
 }

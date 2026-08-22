@@ -14,6 +14,9 @@ import {
 import { inspectPackContract } from './distribution/pack-contract.mjs'
 
 const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/smeetbuilds/meshwara/main/public/downloads/manifest.json'
+const MAX_REGISTRY_BYTES = 8 * 1024 * 1024
+const MAX_ARCHIVE_BYTES = 256 * 1024 * 1024
+const DEFAULT_FETCH_TIMEOUT_MS = 120_000
 
 function usage() {
   return `MESHVARA CLI\n\nUsage:\n  meshvara list [query] [--json]\n  meshvara info <slug> [--json]\n  meshvara verify <slug> [--registry <url|file>] [--archive <zip>] [--require-pack-v1]\n  meshvara add <slug> [--dir <path>] [--registry <url|file>] [--archive <zip>] [--dry-run] [--force] [--require-pack-v1]\n  meshvara doctor [--registry <url|file>]\n\nDefaults:\n  registry  ${DEFAULT_REGISTRY}\n  directory src/components/meshvara/<slug>\n\nCore commands never require authentication or upload project data.`
@@ -45,17 +48,62 @@ async function exists(path) {
   try { await access(path, constants.F_OK); return true } catch { return false }
 }
 
-async function readLocation(location) {
+function fetchTimeoutMs() {
+  const configured = Number(process.env.MESHVARA_FETCH_TIMEOUT_MS)
+  return Number.isFinite(configured) && configured > 0 ? Math.floor(configured) : DEFAULT_FETCH_TIMEOUT_MS
+}
+
+function payloadLimitMessage(maxBytes) {
+  return `Remote payload exceeds the ${Math.floor(maxBytes / (1024 * 1024))} MB safety limit.`
+}
+
+async function readLocation(location, maxBytes = MAX_ARCHIVE_BYTES) {
   if (/^https?:\/\//i.test(location)) {
-    const response = await fetch(location, { redirect: 'follow', headers: { 'user-agent': 'meshvara-cli/1' } })
-    if (!response.ok) throw new Error(`HTTP ${response.status} while reading ${location}`)
-    return Buffer.from(await response.arrayBuffer())
+    const controller = new AbortController()
+    const timeoutMs = fetchTimeoutMs()
+    const timeout = setTimeout(() => controller.abort(), timeoutMs)
+    try {
+      const response = await fetch(location, {
+        redirect: 'follow',
+        headers: { 'user-agent': 'meshvara-cli/1' },
+        signal: controller.signal,
+      })
+      if (!response.ok) throw new Error(`HTTP ${response.status} while reading ${location}`)
+      const declaredBytes = Number(response.headers.get('content-length'))
+      if (Number.isFinite(declaredBytes) && declaredBytes > maxBytes) throw new Error(payloadLimitMessage(maxBytes))
+      if (!response.body) {
+        const bytes = Buffer.from(await response.arrayBuffer())
+        if (bytes.byteLength > maxBytes) throw new Error(payloadLimitMessage(maxBytes))
+        return bytes
+      }
+      const reader = response.body.getReader()
+      const chunks = []
+      let total = 0
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        total += value.byteLength
+        if (total > maxBytes) {
+          await reader.cancel()
+          throw new Error(payloadLimitMessage(maxBytes))
+        }
+        chunks.push(Buffer.from(value))
+      }
+      return Buffer.concat(chunks, total)
+    } catch (error) {
+      if (controller.signal.aborted) throw new Error(`Timed out after ${timeoutMs} ms while reading ${location}.`)
+      throw error
+    } finally {
+      clearTimeout(timeout)
+    }
   }
-  return readFile(resolve(location))
+  const bytes = await readFile(resolve(location))
+  if (bytes.byteLength > maxBytes) throw new Error(`Local payload exceeds the ${Math.floor(maxBytes / (1024 * 1024))} MB safety limit.`)
+  return bytes
 }
 
 async function loadRegistry(location) {
-  const raw = await readLocation(location)
+  const raw = await readLocation(location, MAX_REGISTRY_BYTES)
   return normalizeRegistry(JSON.parse(raw.toString('utf8')))
 }
 
@@ -66,8 +114,9 @@ function findAsset(registry, slug) {
 }
 
 async function archiveFor(asset, registryLocation, override) {
+  if (asset.bytes > MAX_ARCHIVE_BYTES) throw new Error(`${asset.slug}: archive exceeds the 256 MB CLI safety limit.`)
   const location = override ? resolve(override) : resolveArchiveLocation(registryLocation, asset.file)
-  const bytes = await readLocation(location)
+  const bytes = await readLocation(location, asset.bytes)
   if (bytes.byteLength !== asset.bytes) throw new Error(`${asset.slug}: archive byte-size mismatch (expected ${asset.bytes}, received ${bytes.byteLength}).`)
   const digest = sha256Hex(bytes)
   if (digest !== asset.sha256) throw new Error(`${asset.slug}: SHA-256 mismatch. Refusing to extract untrusted bytes.`)
