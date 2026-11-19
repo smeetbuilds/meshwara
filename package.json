@@ -23,7 +23,7 @@
     "quality:audit": "bun scripts/audit-asset-quality.mjs",
     "public:check": "node tests/public-contrast.test.mjs",
     "registry:build": "node scripts/build-registry.mjs",
-    "distribution:check": "node tests/distribution/registry.test.mjs && node tests/distribution/pack-contract.test.mjs && node tests/distribution/pack-standardize.test.mjs && node tests/distribution/customization-pack.test.mjs && node tests/distribution/zip-determinism.test.mjs && node tests/distribution/cli.test.mjs && node tests/distribution/cli-network.test.mjs && node tests/distribution/registry-build.test.mjs && node scripts/validate-distribution.mjs",
+    "distribution:check": "node tests/distribution/zip-resource-limits.test.mjs && node tests/distribution/registry.test.mjs && node tests/distribution/pack-contract.test.mjs && node tests/distribution/pack-standardize.test.mjs && node tests/distribution/customization-pack.test.mjs && node tests/distribution/zip-determinism.test.mjs && node tests/distribution/cli.test.mjs && node tests/distribution/cli-network.test.mjs && node tests/distribution/registry-build.test.mjs && node scripts/validate-distribution.mjs",
     "e2e": "playwright test",
     "e2e:studio": "playwright test tests/e2e/studio.spec.ts tests/e2e/studio-animation.spec.ts tests/e2e/studio-animation-precision.spec.ts tests/e2e/studio-rig.spec.ts",
     "e2e:install": "playwright install chromium firefox webkit",

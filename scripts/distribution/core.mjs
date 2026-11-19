@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { inflateRawSync } from 'node:zlib'
+import { inflateZipMember } from './zip-inflate-safety.mjs'
 import { dirname, resolve, sep } from 'node:path'
 
 const MAX_ARCHIVE_BYTES = 256 * 1024 * 1024
@@ -178,10 +178,15 @@ export function readZipEntries(buffer) {
     const localNameLength = view.getUint16(localOffset + 26, true)
     const localExtraLength = view.getUint16(localOffset + 28, true)
     const dataStart = localOffset + 30 + localNameLength + localExtraLength
+    if (dataStart > bytes.length || compressedSize > bytes.length - dataStart) {
+      throw new Error(`${name}: ZIP member payload is truncated.`)
+    }
+    const remaining = MAX_EXPANDED_BYTES - expanded
+    if (uncompressedSize > remaining) throw new Error('Expanded archive exceeds the 512 MB CLI safety limit.')
     const compressed = bytes.subarray(dataStart, dataStart + compressedSize)
     let output
     if (method === 0) output = Buffer.from(compressed)
-    else if (method === 8) output = inflateRawSync(compressed)
+    else if (method === 8) output = inflateZipMember(compressed, uncompressedSize, remaining)
     else throw new Error(`${name}: unsupported ZIP compression method ${method}.`)
     if (output.byteLength !== uncompressedSize) throw new Error(`${name}: ZIP size validation failed.`)
     if (crc32(output) !== expectedCrc) throw new Error(`${name}: ZIP CRC validation failed.`)

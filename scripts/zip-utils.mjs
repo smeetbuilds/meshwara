@@ -1,4 +1,5 @@
-import { deflateRawSync, inflateRawSync } from 'node:zlib'
+import { deflateRawSync } from 'node:zlib'
+import { inflateZipMember } from './distribution/zip-inflate-safety.mjs'
 
 const crcTable = (() => {
   const table = new Uint32Array(256)
@@ -98,6 +99,7 @@ export function readZip(input) {
 
   const count = data.readUInt16LE(endOffset + 10)
   let cursor = data.readUInt32LE(endOffset + 16)
+  let expanded = 0
   const entries = new Map()
 
   for (let i = 0; i < count; i += 1) {
@@ -116,10 +118,18 @@ export function readZip(input) {
     const localNameLength = data.readUInt16LE(localOffset + 26)
     const localExtraLength = data.readUInt16LE(localOffset + 28)
     const payloadOffset = localOffset + 30 + localNameLength + localExtraLength
+    if (payloadOffset > data.length || compressedSize > data.length - payloadOffset) {
+      throw new Error(`Truncated ZIP payload for ${name}`)
+    }
+    const remaining = 512 * 1024 * 1024 - expanded
+    if (uncompressedSize > remaining) throw new Error('Expanded archive exceeds the 512 MB CLI safety limit.')
     const compressed = data.subarray(payloadOffset, payloadOffset + compressedSize)
-    const raw = method === 8 ? inflateRawSync(compressed) : method === 0 ? Buffer.from(compressed) : null
+    const raw = method === 8
+      ? inflateZipMember(compressed, uncompressedSize, remaining)
+      : method === 0 ? Buffer.from(compressed) : null
     if (!raw) throw new Error(`Unsupported ZIP compression method ${method} for ${name}`)
     if (raw.length !== uncompressedSize) throw new Error(`Size mismatch for ${name}`)
+    expanded += raw.length
     if (crc32(raw) !== expectedCrc) throw new Error(`CRC mismatch for ${name}`)
     entries.set(name, raw)
 
