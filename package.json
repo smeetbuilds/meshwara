@@ -35,7 +35,9 @@
     "codecs:check": "node tests/studio/codec-sync.test.mjs && node scripts/validate-codecs.mjs",
     "animation:precision:check": "bun tests/studio/timeline-authoring.test.ts && node scripts/validate-animation-precision.mjs",
     "study:check": "node scripts/check-study-lockfile.mjs && node tests/security/study-lockfile.test.mjs && node tests/security/study-history.test.mjs && node tests/security/study-archive.test.mjs",
-    "study:history": "node scripts/audit-study-history.mjs"
+    "study:history": "node scripts/audit-study-history.mjs",
+    "release:candidate:plan": "node scripts/prepare-pack-v1-release.mjs --plan",
+    "release:candidate:test": "node tests/release/prepare-pack-v1-release.test.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.7",
