@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/sync-codecs.mjs && bun --bun vite dev",
-    "build": "node scripts/sync-codecs.mjs && node scripts/build-registry.mjs && node scripts/generate-sitemap.mjs && bun --bun vite build && node scripts/verify-static-output.mjs && node scripts/generate-sitemap.mjs --clean",
+    "build": "node scripts/sync-codecs.mjs && node scripts/build-registry.mjs && node scripts/generate-sitemap.mjs && bun --bun vite build && node scripts/verify-static-output.mjs && node scripts/verify-asset-pages.mjs && node scripts/generate-sitemap.mjs --clean",
     "preview": "bun --bun vite preview",
     "check": "tsc --noEmit",
     "validate": "bun scripts/validate-library.mjs",
@@ -38,7 +38,7 @@
     "study:history": "node scripts/audit-study-history.mjs",
     "release:candidate:plan": "node scripts/prepare-pack-v1-release.mjs --plan",
     "release:candidate:test": "node tests/release/prepare-pack-v1-release.test.mjs",
-    "deployment:check": "node --experimental-strip-types tests/deployment/static-target.test.mjs && node tests/deployment/static-output.test.mjs"
+    "deployment:check": "node --experimental-strip-types tests/deployment/static-target.test.mjs && node tests/deployment/static-output.test.mjs && node tests/deployment/asset-pages.test.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.7",
