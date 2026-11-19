@@ -109,7 +109,7 @@ test('desktop Studio imports a real GLB, replaces a texture and round-trips a po
   await material.locator('summary').click()
   const mapRow = material.locator('.studio-texture-row').filter({ has: page.getByText('map', { exact: true }) })
   await mapRow.locator('input[type="file"]').setInputFiles({ name: 'red.png', mimeType: 'image/png', buffer: STUDIO_RED_PIXEL_PNG })
-  await expect(page.getByRole('status')).toContainText('MAP REPLACED')
+  await expect(page.locator('span[role="status"][aria-live="polite"]')).toContainText('MAP REPLACED')
   await expect(mapRow).toContainText('LOCAL')
   await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur())
 
@@ -166,7 +166,7 @@ test('desktop Studio rejects malformed GLB bytes through the real import control
     mimeType: 'model/gltf-binary',
     buffer: Buffer.from('not a glb'),
   })
-  await expect(page.getByRole('status')).toContainText('GLB REJECTED')
+  await expect(page.locator('span[role="status"][aria-live="polite"]')).toContainText('GLB REJECTED')
   await expect(page.locator('.studio-object-main strong', { hasText: 'broken' })).toHaveCount(0)
 })
 

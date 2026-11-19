@@ -46,7 +46,7 @@ for (const token of ['DEFAULT_REGISTRY', "command === 'list'", "command === 'inf
   assert(cli.includes(token), `CLI missing ${token}`)
 }
 for (const token of ['require-pack-v1', 'inspectPackContract', 'Pack-v1', 'legacy metadata contract']) assert(cli.includes(token), `CLI Pack-v1 migration support missing ${token}`)
-for (const token of ['sha256Hex', 'readZipEntries', 'crc32', 'inflateRawSync', 'Unsafe ZIP traversal', 'MAX_ARCHIVE_BYTES', 'MAX_EXPANDED_BYTES', 'outputPath']) {
+for (const token of ['sha256Hex', 'readZipEntries', 'crc32', 'inflateZipMember', 'Unsafe ZIP traversal', 'MAX_ARCHIVE_BYTES', 'MAX_EXPANDED_BYTES', 'outputPath']) {
   assert(core.includes(token), `archive safety core missing ${token}`)
 }
 for (const token of ['MESHVARA_PACK_SCHEMA_VERSION', 'buildPackMetadata', 'inspectPackContract', 'files:', 'sha256Hex', 'required pack file', 'dependency metadata']) assert(packContract.includes(token), `Pack-v1 contract missing ${token}`)

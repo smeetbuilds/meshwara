@@ -69,8 +69,10 @@ const project = { ...createStudioProject('Timeline fixture'), nodes: [node] }
 const parsed = parseStudioProject(JSON.parse(JSON.stringify(project)))
 assert.ok(parsed)
 assert.deepEqual(resolveStudioTimeline(parsed.nodes[0].timeline).keyframes, timeline.keyframes)
-assert.equal(resolveStudioTimeline(parsed.nodes[0].timeline).rangeStart, timeline.rangeStart)
-assert.equal(resolveStudioTimeline(parsed.nodes[0].timeline).rangeEnd, timeline.rangeEnd)
+assert.deepEqual(
+  studioTimelinePlaybackRange(resolveStudioTimeline(parsed.nodes[0].timeline)),
+  studioTimelinePlaybackRange(timeline),
+)
 
 const legacy = JSON.parse(JSON.stringify(project))
 delete legacy.nodes[0].timeline

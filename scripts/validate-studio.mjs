@@ -12,12 +12,12 @@ const [
   read('src/routeTree.gen.ts'),
   read('src/routes/studio.tsx'),
   read('src/components/studio/StudioShell.tsx'),
-  read('src/components/studio/StudioViewport.tsx'),
+  Promise.all([read('src/components/studio/StudioViewport.tsx'), read('src/components/studio/StudioImportedObject.tsx')]).then((parts) => parts.join('\n')),
   read('src/lib/studioStorage.ts'),
   read('src/lib/studioProject.ts'),
   read('src/lib/studioProjectCore.ts'),
   read('src/lib/studioTransforms.ts'),
-  read('src/components/studio/StudioInspector.tsx'),
+  Promise.all([read('src/components/studio/StudioInspector.tsx'), read('src/components/studio/StudioInspectorCore.tsx')]).then((parts) => parts.join('\n')),
   read('src/components/studio/StudioOutliner.tsx'),
   read('src/components/studio/StudioLibrary.tsx'),
   read('src/lib/studioExport.ts'),
@@ -119,9 +119,9 @@ for (const token of ['satisfies MeshvaraStudioConfig', 'parentId', 'materials', 
 
 for (const token of ['snapStudioTime', 'updateStudioTimelineTiming', 'upsertStudioTransformKeyframe', 'updateStudioTransformKeyframe', 'removeStudioTransformKeyframe', 'evaluateStudioTransform', 'normalizeStudioPlaybackTime', 'studioProjectTimelineDuration']) assert(timeline.includes(token), `timeline runtime missing ${token}`)
 for (const token of ['requestAnimationFrame', "event.code === 'Space'", "event.key.toLowerCase() === 'k'", 'autoKey', 'commitTransform', 'updateStudioGroupTransform']) assert(timelineController.includes(token), `timeline controller missing ${token}`)
-for (const token of ['ANIMATION TIMELINE', 'AUTO KEY', '+ POSITION', '+ ROTATION', '+ SCALE', 'DELETE KEY', 'easing', 'type="range"']) assert(timelineUi.includes(token), `timeline UI missing ${token}`)
+for (const token of ['ANIMATION TIMELINE', 'AUTO KEY', 'CHANNELS: StudioTimelineChannel[]', 'position', 'rotation', 'scale', 'onAddKeyframe(channel)', '+ {channel.toUpperCase()}', 'DELETE KEY', 'easing', 'type="range"']) assert(timelineUi.includes(token), `timeline UI missing ${token}`)
 assert(animationContract.includes('frame-snapped') && animationContract.includes('not skeletal keyframing') && animationContract.includes('undo/redo'), 'Animation Studio boundary is not explicit')
-assert(releaseContract.includes('500') && releaseContract.includes('13') && releaseContract.includes('release blocker'), 'physical release-readiness contract is incomplete')
+assert(releaseContract.includes('500') && releaseContract.includes('13') && releaseContract.includes('pack:check'), 'physical release-readiness contract is incomplete')
 
 for (const token of [
   'tests/studio/project-state.test.ts', 'tests/studio/glb-validation.test.ts', 'tests/studio/codec-capabilities.test.ts', 'tests/studio/transform-preservation.test.ts',
@@ -132,7 +132,7 @@ for (const token of [
   '"release:audit": "node scripts/audit-release-readiness.mjs"',
   '"release:check": "bun run qa && bun run release:audit && bun run e2e"',
 ]) assert(packageJson.includes(token), `browser/release gate missing ${token}`)
-for (const token of ['desktop-chromium', 'tablet-chromium', 'mobile-chromium', 'node scripts/sync-codecs.mjs && bun --bun vite dev', 'trace:', 'screenshot:']) assert(playwrightConfig.includes(token), `Playwright config missing ${token}`)
+for (const token of ['desktop-chromium', 'tablet-chromium', 'mobile-chromium', 'bun run build && bun --bun vite preview', 'trace:', 'screenshot:']) assert(playwrightConfig.includes(token), `Playwright config missing ${token}`)
 for (const token of [
   'Studio appearance supports dark, light and live system preference', 'local project autosave survives a real browser reload',
   'asset deep link opens an isolated Studio study', 'asset detail hands off into Studio through the real UI link',

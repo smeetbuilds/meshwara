@@ -14,7 +14,7 @@ const [registryText, assetsSource, customizationRuntime, layer, assetScene, play
   read('src/routes/assets/$slug.tsx'),
   read('src/lib/studioProject.ts'),
   read('src/components/studio/StudioViewport.tsx'),
-  read('src/components/studio/StudioInspector.tsx'),
+  read('src/components/studio/StudioInspectorCore.tsx'),
   read('src/components/studio/StudioShell.tsx'),
   read('src/lib/studioExport.ts'),
   read('scripts/enrich-customizable-packs.mjs'),

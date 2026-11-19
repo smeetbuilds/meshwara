@@ -24,7 +24,7 @@ export function SiteHeader() {
       </Link>
       <nav className="desktop-nav" aria-label="Primary">
         <Link to="/assets" activeProps={{ className: 'is-active' }}>Archive</Link>
-        <Link to="/studio" activeProps={{ className: 'is-active' }}>Studio</Link>
+        <Link to="/studio" search={{ asset: undefined }} activeProps={{ className: 'is-active' }}>Studio</Link>
         <a href="/#categories">Categories</a>
         <a href="/#principles">Standard</a>
         <span className="free-badge">OPEN / FREE</span>
@@ -35,7 +35,7 @@ export function SiteHeader() {
       {open && (
         <div className="mobile-menu">
           <Link to="/assets" onClick={() => setOpen(false)}>Archive</Link>
-          <Link to="/studio" onClick={() => setOpen(false)}>Meshvara Studio</Link>
+          <Link to="/studio" search={{ asset: undefined }} onClick={() => setOpen(false)}>Meshvara Studio</Link>
           <a href="/#categories" onClick={() => setOpen(false)}>Categories</a>
           <a href="/#principles" onClick={() => setOpen(false)}>Quality standard</a>
           <span>MESHVARA · Free downloads · No account · Source included</span>

@@ -92,6 +92,8 @@ Every catalog card renders the actual Three.js/R3F asset in a viewport-gated Web
 
 `bun run quality:check` runs both the scene-quality validator and the full 500-asset audit. The generated machine-readable report is written to `public/quality/asset-audit.json`. It verifies source depth, deterministic construction, rendering/material contracts, semantic density and packaging readiness. Automated checks complement visual art-direction review; they do not pretend to replace human visual judgement.
 
+For real pinned-Bun verification results, see [2026-11-19 evaluation readiness evidence](docs/REAL_VERIFICATION_2026-11-19.md). The study is not certified complete until ownership, archive licensing and browser QA are cleared.
+
 ## Evaluation study preparation and contributor guidance
 
 Before using this project in a recorded AI coding session, read the [pre-application audit](docs/PRE_APPLICATION_AUDIT.md), [ownership/provenance review](docs/OWNERSHIP_AND_PROVENANCE_REVIEW.md), and [safe session guide](docs/EVALUATION_SESSION_SAFETY.md). The [development backlog](docs/DEVELOPMENT_BACKLOG.md) lists real future tasks with acceptance criteria. See [contributing](CONTRIBUTING.md) and [security reporting](SECURITY.md) for maintenance guidance.

@@ -110,7 +110,7 @@ function LoadedGlb({ url, node, onInspection }: { url: string; node: StudioNode;
     return () => { action.stop() }
   }, [actions, activePose, mixer, node.animation.clip, node.animation.loop, node.animation.playing, node.animation.speed])
 
-  useEffect(() => () => mixer.stopAllAction(), [mixer])
+  useEffect(() => () => { mixer.stopAllAction() }, [mixer])
 
   useEffect(() => () => {
     disposeStudioModel(scene)

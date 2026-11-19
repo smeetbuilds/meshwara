@@ -33,7 +33,7 @@ test('desktop Animation Studio authors, plays and exports transform keys', async
   await page.locator('.studio-auto-key input').check()
   const position = page.locator('.studio-vector').filter({ hasText: 'POSITION' })
   await position.locator('input').first().fill('2')
-  await expect(page.getByRole('status')).toContainText('AUTO KEY · POSITION')
+  await expect(page.locator('span[role="status"][aria-live="polite"]')).toContainText('AUTO KEY · POSITION')
   await expect(page.locator('.studio-track-row').filter({ hasText: 'POSITION' }).locator('button')).toHaveCount(1)
 
   const timeBefore = Number(await playhead.inputValue())
