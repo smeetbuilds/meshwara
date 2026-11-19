@@ -96,4 +96,22 @@ Every catalog card renders the actual Three.js/R3F asset in a viewport-gated Web
 
 Before using this project in a recorded AI coding session, read the [pre-application audit](docs/PRE_APPLICATION_AUDIT.md), [ownership/provenance review](docs/OWNERSHIP_AND_PROVENANCE_REVIEW.md), and [safe session guide](docs/EVALUATION_SESSION_SAFETY.md). The [development backlog](docs/DEVELOPMENT_BACKLOG.md) lists real future tasks with acceptance criteria. See [contributing](CONTRIBUTING.md) and [security reporting](SECURITY.md) for maintenance guidance.
 
-The audit is a **partial evidence review, not a certification**. The checked-in Bun lockfile needs reconciliation with `package.json` before claiming clean frozen-install or browser-test readiness.
+The audit is a **partial evidence review, not a certification**. The Bun lockfile's direct dependencies have been reconciled with `package.json`, but a **clean Bun frozen install and browser test run are still required**.
+
+### Local evaluation readiness checks
+
+Run these **before** entering any recorded AI coding session, in a clean clone and outside the recording:
+
+```bash
+node scripts/check-study-lockfile.mjs
+node tests/security/study-lockfile.test.mjs
+node tests/security/study-history.test.mjs
+node scripts/audit-study-history.mjs
+bun install --frozen-lockfile
+bun run studio:check
+bun run qa
+bun run release:audit
+bun run e2e
+```
+
+The no-dependency Git-history scanner checks reachable text blobs for recognizable credential patterns, reports **paths and shortened blob IDs only**, and never prints suspected secret values. Return status 2 means a finding requires manual review; status 0 means **no pattern matched**, not that the entire history or any ZIP archive has been certified safe. It deliberately excludes binary/archive and oversized content. Review its output privately, not during a recorded session. `bun run study:check` runs the two small local security/lockfile test suites and a lockfile structural check. For the whole project, Bun's own frozen install and browser QA remain authoritative.

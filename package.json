@@ -18,7 +18,7 @@
     "models:test": "bun tests/model-pipeline/source-registry.test.mjs && bun tests/model-pipeline/inspector.test.mjs && bun tests/model-pipeline/validator.test.mjs && bun tests/model-pipeline/young-man-contract.test.mjs && bun tests/model-pipeline/model-runtime.test.mjs",
     "models:check": "bun scripts/validate-modeled-assets.mjs",
     "sources:check": "bun scripts/materialize-model-source.mjs --check-only staging/sources/kaykit-adventurers-1.0.json",
-    "versions:check": "bun scripts/validate-version-pins.mjs",
+    "versions:check": "bun scripts/validate-version-pins.mjs && node scripts/check-study-lockfile.mjs",
     "quality:check": "bun scripts/validate-scene-quality.mjs && bun scripts/audit-geometry-v2.mjs && bun scripts/validate-production-forms.mjs && bun scripts/audit-asset-quality.mjs",
     "quality:audit": "bun scripts/audit-asset-quality.mjs",
     "public:check": "node tests/public-contrast.test.mjs",
@@ -33,7 +33,9 @@
     "customization:check": "bun tests/developer-handoff/customization-state.test.ts && bun tests/studio/customization-project.test.ts && node tests/distribution/customization-pack.test.mjs && node scripts/validate-customization.mjs",
     "codecs:sync": "node scripts/sync-codecs.mjs",
     "codecs:check": "node tests/studio/codec-sync.test.mjs && node scripts/validate-codecs.mjs",
-    "animation:precision:check": "bun tests/studio/timeline-authoring.test.ts && node scripts/validate-animation-precision.mjs"
+    "animation:precision:check": "bun tests/studio/timeline-authoring.test.ts && node scripts/validate-animation-precision.mjs",
+    "study:check": "node scripts/check-study-lockfile.mjs && node tests/security/study-lockfile.test.mjs && node tests/security/study-history.test.mjs",
+    "study:history": "node scripts/audit-study-history.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.7",

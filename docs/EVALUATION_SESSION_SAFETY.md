@@ -27,6 +27,19 @@ Before the session, verify:
 
 Real customers' model files, private client websites or assets, personal documents, production API keys, secrets, private emails, login sessions, proprietary employer code, NDA material, non-permitted textures/fonts/models and copied evaluation-system materials.
 
+## Offline disclosure and lockfile preflight
+
+Run these checks locally **before recording begins**, never while sharing a terminal containing private file paths:
+
+```bash
+node scripts/check-study-lockfile.mjs
+node tests/security/study-lockfile.test.mjs
+node tests/security/study-history.test.mjs
+node scripts/audit-study-history.mjs --json
+```
+
+The history tool examines reachable Git blob contents for common secret patterns and suspicious file paths without echoing candidate secret values. It has explicit limitations: ZIPs, GLBs and other binary/archive data, content larger than 2 MiB per blob, unknown credential formats, and any unreachable history are not established safe. A clean result is **only a screening result**, not a license to record everything in the repository. Review flagged paths privately and revoke any real exposed credentials. The lockfile tool checks manifest/resolution structure and **does not** replace `bun install --frozen-lockfile`.
+
 ## Limits of this review
 
 This guidance cannot prove the current or historical repository contains no undisclosed secret. A full local history scan and human ownership review are still required before recording begins. If you find a genuine exposed credential, revoke/rotate it before any session and investigate the history without reproducing the value in reports. Never rely on deleting the latest version of a file to sanitize historic commits.
