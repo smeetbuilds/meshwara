@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/sync-codecs.mjs && bun --bun vite dev",
-    "build": "node scripts/sync-codecs.mjs && node scripts/build-registry.mjs && node scripts/generate-sitemap.mjs && bun --bun vite build && node scripts/generate-sitemap.mjs --clean",
+    "build": "node scripts/sync-codecs.mjs && node scripts/build-registry.mjs && node scripts/generate-sitemap.mjs && bun --bun vite build && node scripts/verify-static-output.mjs && node scripts/generate-sitemap.mjs --clean",
     "preview": "bun --bun vite preview",
     "check": "tsc --noEmit",
     "validate": "bun scripts/validate-library.mjs",
-    "qa": "bun run versions:check && bun run codecs:sync && bun run codecs:check && bun run customization:check && bun run sources:check && bun run models:test && bun run quality:check && bun run public:check && bun run packs && bun run pack:check && bun run registry:build && bun run distribution:check && bun run handoff:check && bun run studio:check && bun run validate && bun run check && bun run build",
+    "qa": "bun run versions:check && bun run codecs:sync && bun run codecs:check && bun run customization:check && bun run sources:check && bun run models:test && bun run quality:check && bun run public:check && bun run packs && bun run pack:check && bun run registry:build && bun run distribution:check && bun run handoff:check && bun run studio:check && bun run validate && bun run check && bun run build && bun run deployment:check",
     "packs": "bun scripts/validate-modeled-assets.mjs && bun scripts/build-download-packs.mjs && bun scripts/build-geometry-v2-packs.mjs && node scripts/enrich-customizable-packs.mjs && node scripts/standardize-download-packs.mjs",
     "handoff:check": "bun tests/developer-handoff/playground-state.test.ts && bun scripts/validate-developer-handoff.mjs",
     "studio:check": "bun tests/studio/project-state.test.ts && bun tests/studio/glb-validation.test.ts && bun tests/studio/codec-capabilities.test.ts && bun tests/studio/customization-project.test.ts && bun tests/studio/transform-preservation.test.ts && bun tests/studio/texture-validation.test.ts && bun tests/studio/local-storage.test.ts && bun tests/studio/portable-safety.test.mjs && bun tests/studio/component-pack.test.ts && bun tests/studio/theme.test.ts && node tests/studio/theme-contrast.test.mjs && bun run animation:check && bun run rig:check && bun scripts/validate-studio.mjs",
@@ -37,7 +37,8 @@
     "study:check": "node scripts/check-study-lockfile.mjs && node tests/security/study-lockfile.test.mjs && node tests/security/study-history.test.mjs && node tests/security/study-archive.test.mjs",
     "study:history": "node scripts/audit-study-history.mjs",
     "release:candidate:plan": "node scripts/prepare-pack-v1-release.mjs --plan",
-    "release:candidate:test": "node tests/release/prepare-pack-v1-release.test.mjs"
+    "release:candidate:test": "node tests/release/prepare-pack-v1-release.test.mjs",
+    "deployment:check": "node --experimental-strip-types tests/deployment/static-target.test.mjs && node tests/deployment/static-output.test.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.7",

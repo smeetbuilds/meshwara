@@ -127,3 +127,9 @@ The checked-in `public/downloads/manifest.json` lists 500 archives but **does no
 ### Portable Studio import data safety
 
 Portable project restoration has a 256 MiB cumulative decoded-media safety budget in addition to per-file GLB/texture limits. Importing a backup with media IDs already owned by another local project or a separate local file is rejected **before persistence** instead of silently replacing existing data. Same-project restore remains supported; a rejected import requires choosing a new, conflict-free source rather than automatically overwriting another project. This prevents one known cross-project data-loss path but does not replace full browser/IndexedDB regression testing.
+
+## Static Vercel deployment contract
+
+This project is an **entirely static** TanStack Start prerendered site. The Vercel configuration explicitly publishes `dist/client`, not generic Vite's `dist` root; no Nitro server is required for Meshvara's current no-backend architecture. `vite.config.ts` excludes binary downloads, other static files and query-state variants from the HTML prerender crawler. The build must pass `node scripts/verify-static-output.mjs`, which checks the generated homepage and all 500 ZIPs against the generated download manifest's byte sizes and SHA-256 hashes. Local regression commands are `bun run deployment:check`.
+
+Before this fix, a Vercel build marked `READY` returned actual HTTP 404 for the homepage and downloads. A successful build status **does not** establish live availability: verify `/`, `/assets`, `/studio`, `/downloads/manifest.json` and an actual `.zip` URL at the canonical production alias after each deployment.
