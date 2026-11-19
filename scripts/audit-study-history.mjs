@@ -3,11 +3,12 @@
 // This is not a substitute for Gitleaks, a full licensing review, or human inspection.
 import { spawnSync } from 'node:child_process'
 import { resolve } from 'node:path'
+import { inspectArchive } from './study-archive-scan.mjs'
 
 const MAX_TEXT_BLOB_BYTES = 2 * 1024 * 1024
 const BATCH_BYTES = 8 * 1024 * 1024
 const MAX_BUFFER_BYTES = 32 * 1024 * 1024
-const binaryExt = /\.(?:zip|glb|gltf|wasm|woff2?|ttf|otf|png|jpe?g|webp|gif|ico|pdf|mp4|mov|mp3|ogg|webm|avif)$/i
+const binaryExt = /\.(?:glb|gltf|wasm|woff2?|ttf|otf|png|jpe?g|webp|gif|ico|pdf|mp4|mov|mp3|ogg|webm|avif)$/i
 const sensitivePath = /(?:^|\/)(?:\.env(?:\.[^/]+)?|\.npmrc|\.netrc|\.pypirc|id_rsa|id_ed25519|credentials(?:\.[^/]+)?|[^/]+\.(?:pem|p12|pfx|key))$/i
 const samplePath = /(?:^|\/)\.env\.(?:example|sample|template)$/i
 const rules = [
@@ -51,9 +52,10 @@ function audit(repo) {
     if (!paths.has(sha)) paths.set(sha, path)
   }
   const allShas = [...paths.keys()]
-  const stats = { objects: allShas.length, reachableBlobs: 0, scannedTextBlobs: 0, scannedTextBytes: 0, skippedBinary: 0, skippedLarge: 0, skippedArchive: 0 }
+  const stats = { objects: allShas.length, reachableBlobs: 0, scannedTextBlobs: 0, scannedTextBytes: 0, scannedArchives: 0, scannedArchiveEntries: 0, skippedBinary: 0, skippedLarge: 0, skippedArchive: 0 }
   const findings = []
   const suspiciousFiles = []
+  const archiveIssues = []
   if (!allShas.length) return { status: 'review-required', findings, suspiciousFiles, stats }
   const meta = git(repo, ['cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], `${allShas.join('\n')}\n`).toString('utf8').trim().split('\n')
   const blobs = []
@@ -64,6 +66,7 @@ function audit(repo) {
     stats.reachableBlobs++
     if (sensitivePath.test(path) && !samplePath.test(path)) suspiciousFiles.push({ path: cleanPath(path), blob: sha.slice(0, 12) })
     if (binaryExt.test(path)) { stats.skippedArchive++; continue }
+    if (/\.zip$/i.test(path) && size > 4 * 1024 * 1024) { stats.skippedLarge++; archiveIssues.push({ path: cleanPath(path), blob: sha.slice(0, 12), types: ['archive-too-large'] }); continue }
     if (!Number.isFinite(size) || size > MAX_TEXT_BLOB_BYTES) { stats.skippedLarge++; continue }
     blobs.push({ sha, path, size })
   }
@@ -83,11 +86,22 @@ function audit(repo) {
       if (header[0] !== item.sha || header[1] !== 'blob' || Number(header[2]) !== item.size) throw new Error('Unexpected Git object in batch')
       const next = end + 1 + item.size
       if (next >= raw.length || raw[next] !== 10) throw new Error('Malformed Git object boundary')
-      scanBuffer(raw.subarray(end + 1, next), item, findings, stats)
+      const payload = raw.subarray(end + 1, next)
+      if (/\.zip$/i.test(item.path)) {
+        stats.scannedArchives++
+        const report = inspectArchive(payload, (name, bytes) => {
+          const virtualPath = `${item.path}!${name}`
+          if (sensitivePath.test(name) && !samplePath.test(name)) suspiciousFiles.push({ path: cleanPath(virtualPath), blob: item.sha.slice(0, 12) })
+          scanBuffer(bytes, { ...item, path: virtualPath }, findings, stats)
+        })
+        stats.scannedArchiveEntries += report.inspected
+        stats.skippedArchive += report.skipped
+        if (report.issues.length) archiveIssues.push({ path: cleanPath(item.path), blob: item.sha.slice(0, 12), types: report.issues })
+      } else scanBuffer(payload, item, findings, stats)
       offset = next + 1
     }
   }
-  return { status: findings.length || suspiciousFiles.length ? 'review-required' : 'no-pattern-match', findings, suspiciousFiles, stats, caveat: 'Heuristic scan; skipped archives/binaries and large blobs require manual/appropriate specialist review. No scan proves absence of secrets.' }
+  return { status: findings.length || suspiciousFiles.length || archiveIssues.length ? 'review-required' : 'no-pattern-match', findings, suspiciousFiles, archiveIssues, stats, caveat: 'Heuristic scan; archives up to 4 MiB are inspected with bounded decompression, but large/binary and nonstandard inputs need specialist review. No scan proves absence of secrets.' }
 }
 
 const args = process.argv.slice(2)
@@ -109,6 +123,7 @@ try {
     console.log(`Reachable Git blobs: ${result.stats.reachableBlobs}; text scanned: ${result.stats.scannedTextBlobs}; skipped opaque/large: ${result.stats.skippedArchive + result.stats.skippedBinary + result.stats.skippedLarge}`)
     for (const hit of result.findings) console.log(`REVIEW ${hit.path} blob=${hit.blob} patterns=${hit.types.join(',')}`)
     for (const file of result.suspiciousFiles) console.log(`REVIEW FILE ${file.path} blob=${file.blob}`)
+    for (const hit of result.archiveIssues) console.log(`REVIEW ARCHIVE ${hit.path} blob=${hit.blob} reasons=${hit.types.join(',')}`)
     console.log(`Result: ${result.status}. ${result.caveat}`)
   }
   if (result.status === 'review-required') process.exitCode = 2

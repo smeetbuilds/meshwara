@@ -126,3 +126,7 @@ Pack-v1 standardizes delivery metadata/integrity. The curated layer adds real ty
 Studio input decoding now has an offline/same-origin runtime contract for Draco, Meshopt and KTX2/BasisU. Draco and Basis worker assets are emitted from the exact pinned Three.js installation and retain Apache-2.0 licensing/notice files; Meshopt is bundled from Three.js. This is **input delivery/runtime support**, not a claim that Meshvara's GLB exporter or pack pipeline currently re-encodes geometry with Draco/Meshopt or textures with KTX2/BasisU.
 
 A future npm-published zero-dependency CLI can shorten the GitHub execution command, but npm publication is not required for the current no-login workflow.
+
+## Current checked-in snapshot versus generated Pack-v1 output
+
+As inspected on 2026-11-19, the committed `public/downloads/manifest.json` lists 500 ZIPs but does not contain `packSchemaVersion: 1`. The registry consequently reports `packSchemaVersion: 0` (legacy/unspecified). Do **not** describe the existing checkout as a verified 500-archive Pack-v1 release merely because the generation and validation scripts exist. A strict `node scripts/validate-pack-parity.mjs` run against that untouched manifest is expected to fail. Run `bun run packs` deliberately in a clean local environment, review the generated binary/manifest changes, verify licenses and provenance, then run `bun run pack:check`, `bun run release:audit` and browser tests before publishing a new artifact snapshot. Do not silently replace the old published ZIP corpus.

@@ -8,6 +8,7 @@
 
 | ID | Severity | Evidence | Status / action |
 |---|---|---|---|
+| R-13 | **P1 / release** | The checked-in `public/downloads/manifest.json` has **500 entries but no `packSchemaVersion`**, while `scripts/validate-pack-parity.mjs` strictly requires Pack-v1. `scripts/distribution/core.mjs` converts that manifest to registry `packSchemaVersion: 0`; default strict CLI `--require-pack-v1` is not ready from the checked-in snapshot. | **Open**. Controlled regeneration of 500 ZIPs with Bun, manifest SHA parity, curated pack evidence, license review and diff approval required; do not silently replace published assets. |
 | R-01 | **P1** | `package.json` declares `@playwright/test@1.62.1` and `name: meshwara`; `bun.lock` lacks Playwright and calls its workspace `meshvara`. | **Partially mitigated.** Playwright and optional dependency entries were reconciled in `bun.lock` with source integrity metadata. This is **not** Bun-regenerated or frozen-install verified. |
 | R-02 | **P1** | `src/lib/studioModelExport.ts` uses `new GLTFLoader()` without configuring codecs; `src/components/studio/StudioImportedObject.tsx` calls `configureStudioGltfLoader`, supplying Draco/Meshopt/KTX2. | **Open; code-level discrepancy**. Test compressed GLB export with real synthetic fixtures; implement one canonical decoder configuration shared by import/export. |
 | R-03 | **P1 / study gate** | Root license names Aahav Labs and contributors; Git commits alone do not prove exclusive copyright or match the job-post's company exclusion. | **Open**. Owner evidence and explicit client eligibility interpretation required. See ownership review. |
@@ -102,3 +103,13 @@ The selected future GLB round-trip task remains unimplemented. Ownership, per-ar
 - **Remaining study blockers:** owner copyright/solo-agency eligibility confirmation, archive-by-archive rights evidence, actual frozen Bun install, Studio QA/release/Playwright results, full local history-content review, and browser regression verification.
 
 The strict eight-point checklist remains **4/8**, since the new utilities improve verifiability but do not replace the outstanding gate evidence.
+
+## Extended scan and published archive review (2026-11-19)
+
+**Executed locally with Node 22:** `node tests/security/study-history.test.mjs`, `node tests/security/study-lockfile.test.mjs`, and new `node tests/security/study-archive.test.mjs` all passed on synthetic fixtures. `node --check` passed for the archive scanner and updated history scanner. The archive test includes a synthetic source-pack credential, a sensitive filename inside a ZIP, token-output redaction, corrupt input and a compressed member exceeding the expansion limit. **The actual Meshvara Git checkout was not scanned locally**: the sandbox cannot resolve `github.com` to clone, and Bun is absent. These tools are evidence-gathering aids, not certificates.
+
+The scanner now processes ZIP blobs up to 4 MiB compressed, with 2 MiB/member and 8 MiB cumulative uncompressed limits. Large/unsupported ZIP input produces an explicit manual-review finding; GLB, other binary data and some oversized content remain uninspected. **This narrows but does not eliminate the Git-history disclosure risk.**
+
+**New P1 release finding R-13:** The checked-in manifest has 500 SHA-256 records but no `packSchemaVersion` field. `scripts/validate-pack-parity.mjs` requires the field to equal 1; the generated registry therefore correctly identifies the current checkout as **legacy/unspecified**. This is an objective static blocker for `pack:check` on the unmodified checkout. `bun run qa` regenerates ZIPs first, so a future passing QA result would need separate diff review before it proves the committed downloads are correct. No ZIPs/assets were rewritten here. See `RELEASE_READINESS.md`.
+
+**Actual environment limitation:** `git ls-remote https://github.com/smeetbuilds/meshwara.git HEAD` failed with DNS resolution error; Bun is not installed. Vercel deployment status does not replace a local frozen install, Studio tests or browser E2E. **Strict completion remains 4/8** until owner evidence, full local scans, license clearance, release snapshot migration and full test evidence are available.

@@ -17,3 +17,7 @@ The audit requires:
 If the 13 customization packs or the wider 500-pack corpus have not been regenerated after a source-pipeline change, `release:audit` is expected to fail. That failure is intentional: regenerate with `bun run packs`, rebuild the registry, rerun distribution QA, then rerun the release audit.
 
 The audit does not claim output codec encoding. Draco/Meshopt/KTX2 support remains input decoding/transcoding unless an encoder pipeline is separately implemented and measured.
+
+## Snapshot status (2026-11-19)
+
+**Not yet Pack-v1 verified:** The committed 500-entry `public/downloads/manifest.json` has no `packSchemaVersion` field. The strict `pack:check` validator rejects it until a controlled ZIP regeneration, manifest update and release audit have completed. The source-level Pack-v1 pipeline is implemented; the checked-in binary corpus has **not** been proven to match it. The download interface and 500 current ZIP files are preserved pending owner-reviewed regeneration. This is a P1 pre-application readiness gate, not grounds to delete or replace the assets without verification.

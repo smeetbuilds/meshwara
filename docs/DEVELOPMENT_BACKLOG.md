@@ -188,6 +188,15 @@ The project is a 500-asset, React/TypeScript/Three.js/React Three Fiber library 
 - **Dependencies / prerequisites:** No paid service; loopback fixtures only.
 - **Acceptance criteria / verification:** Controlled local HTTP fixtures exercise redirects, max bytes, path traversal and atomic write behavior.
 
+### M-19. Publish a reproducible Pack-v1 snapshot — Medium / release-gated
+
+- **Actual current behavior / limitation:** The committed `public/downloads/manifest.json` lists 500 archives without `packSchemaVersion: 1`; strict `scripts/validate-pack-parity.mjs` rejects the untouched checkout, and the generated registry advertises legacy/unspecified packs.
+- **Relevant paths:** `public/downloads/manifest.json`, `public/downloads/*.zip`, `scripts/standardize-download-packs.mjs`, `scripts/build-download-packs.mjs`, `scripts/validate-pack-parity.mjs`, `scripts/audit-release-readiness.mjs`, `RELEASE_READINESS.md`.
+- **Desired outcome / product value:** Publish an owner-approved, reproducible archive set with correct Pack-v1 metadata and manifest integrity, preserving all legitimate download contents and licenses.
+- **Technical area / language:** JavaScript, TypeScript, ZIP/package manifests and build reproducibility. **Complexity:** Medium to large depending on actual binary diff.
+- **Dependencies:** Bun 1.3.14, clean frozen install, legal rights/attribution review for each redistributed payload, archive diff approval; avoid unnecessary deployments.
+- **Acceptance and verification:** Regenerate in an isolated working tree; `bun run packs` produces 500 deterministic archives; verify `bun run pack:check`, `bun run release:audit`, license notices, 13 curated payloads, CLI strict install and Git diff; independent second generation yields identical SHA-256 outputs. Commit to `main` only after verifying there are no accidental content losses. **Do not execute this as a silent cleanup.**
+
 ## Google Form — specific next task
 
 **Project:** Meshvara is my open-source 3D asset archive and local-first browser editing studio, maintained under Aahav Labs. It provides 500 downloadable procedural scenes and browser-based tools for inspecting, editing, organizing and exporting 3D work using TypeScript, React, Three.js, React Three Fiber, Bun and TanStack Start.
