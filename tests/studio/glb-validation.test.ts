@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { validateStudioGlbBytes } from '../../src/lib/studioStorage.ts'
+import { MAX_STUDIO_GLB_BYTES, MAX_STUDIO_TEXTURE_BYTES, storeStudioFile, storeStudioTexture, validateStudioGlbBytes } from '../../src/lib/studioStorage.ts'
 
 function validMinimalGlb() {
   const encoder = new TextEncoder()
@@ -41,5 +41,24 @@ new Uint8Array(badJson, 20, 4).set([0x6e, 0x6f, 0x70, 0x65])
 assert.throws(() => validateStudioGlbBytes(badJson), /JSON chunk is invalid/i)
 
 assert.throws(() => validateStudioGlbBytes(new ArrayBuffer(12)), /incomplete/i)
+
+
+let glbWasRead = false
+await assert.rejects(storeStudioFile({
+  name: 'oversized.glb',
+  type: 'model/gltf-binary',
+  size: MAX_STUDIO_GLB_BYTES + 1,
+  arrayBuffer: async () => { glbWasRead = true; throw new Error('GLB should not have been read') },
+} as unknown as File), /GLB exceeds the 100 MB local safety limit/i)
+assert.equal(glbWasRead, false, 'oversized GLB must be rejected before reading bytes')
+
+let textureWasRead = false
+await assert.rejects(storeStudioTexture({
+  name: 'oversized.png',
+  type: 'image/png',
+  size: MAX_STUDIO_TEXTURE_BYTES + 1,
+  arrayBuffer: async () => { textureWasRead = true; throw new Error('Texture should not have been read') },
+} as unknown as File), /Texture exceeds the 16 MB local safety limit/i)
+assert.equal(textureWasRead, false, 'oversized texture must be rejected before reading bytes')
 
 console.log('Meshvara Studio GLB structural validation contract passed')

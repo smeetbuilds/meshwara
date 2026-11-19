@@ -8,16 +8,16 @@
 
 | ID | Severity | Evidence | Status / action |
 |---|---|---|---|
-| R-01 | **P1** | `package.json` declares `@playwright/test@1.62.1` and `name: meshwara`; `bun.lock` lacks Playwright and calls its workspace `meshvara`. | **Open**. Regenerate with Bun 1.3.14, verify `bun install --frozen-lockfile`, run browser suite. Do not hand-edit a false lockfile. |
+| R-01 | **P1** | `package.json` declares `@playwright/test@1.62.1` and `name: meshwara`; `bun.lock` lacks Playwright and calls its workspace `meshvara`. | **Partially mitigated.** Playwright and optional dependency entries were reconciled in `bun.lock` with source integrity metadata. This is **not** Bun-regenerated or frozen-install verified. |
 | R-02 | **P1** | `src/lib/studioModelExport.ts` uses `new GLTFLoader()` without configuring codecs; `src/components/studio/StudioImportedObject.tsx` calls `configureStudioGltfLoader`, supplying Draco/Meshopt/KTX2. | **Open; code-level discrepancy**. Test compressed GLB export with real synthetic fixtures; implement one canonical decoder configuration shared by import/export. |
 | R-03 | **P1 / study gate** | Root license names Aahav Labs and contributors; Git commits alone do not prove exclusive copyright or match the job-post's company exclusion. | **Open**. Owner evidence and explicit client eligibility interpretation required. See ownership review. |
 | R-04 | **P1 / study gate** | Only current tree path enumeration and limited code search were possible; not a full reachable-history secret scanner. | **Open**. Run local secret/history scan before recorded sessions. No actual secret is claimed found. |
 | R-05 | **P2** | `restorePortableStudioProject` caps *each* embedded GLB at 100 MB and texture at 16 MB but has no apparent total project payload ceiling; it decodes base64 into memory. | **Open; resource-exhaustion risk to test**. Add cumulative limits/fixtures, not speculative security claims. |
 | R-06 | **P2** | Portable restore stores incoming media with supplied IDs via `persistPortableProject`; tests cover single-project restoration but not ID collisions with unrelated existing local projects. | **Open; data-integrity scenario to verify**. Add two-project collision tests before choosing a safe remapping strategy. |
 | R-07 | **P2** | `src/lib/studioStorage.ts` reports persistence errors; `tests/e2e/storage-failure.spec.ts` explicitly expects degraded autosave. Architecture prose suggests an in-memory fallback, which may mislead about whether new data is durable. | **Open documentation/UX clarity**. Keep explicit session-only warning, audit all failure paths. |
-| R-08 | **P2** | `src/lib/studioStorage.ts` reads whole uploaded files with `file.arrayBuffer()` before `validateStudioGlbBytes` enforces 100 MB. | **Open**. Check `File.size` before allocating and test oversized-file rejection. |
+| R-08 | **P2** | `src/lib/studioStorage.ts` reads whole uploaded files with `file.arrayBuffer()` before `validateStudioGlbBytes` enforces 100 MB. | **Source-level fix added:** Check `File.size` before allocation; two regression tests added, **not executed** in this environment. |
 | R-09 | **P2 / documentation** | Root has README/quality/architecture docs but no tracked `CONTRIBUTING.md` or `SECURITY.md` in inspected tree. | **Documentation-only remediation in this preparation**. |
-| R-10 | **P2 / reproducibility** | `.github/workflows/ci.yml` already exists, runs on pushes to `main`, and performs a full release suite. | **Existing workflow, not introduced by this task**. Do not rely on paid CI; decide separately whether to disable existing workflow. |
+| R-10 | **P2 / reproducibility** | `.github/workflows/ci.yml` already exists, runs on pushes to `main`, and performs a full release suite. | **Removed** existing workflow to honor local-only testing and no GitHub Actions spend. Testing scripts remain. |
 | R-11 | **P3** | 500 scene files and 500 archive paths are tracked; `public/downloads/manifest.json` lists 500. This does not verify ZIP bytes, CRC parity or visual quality. | **Verification needed** via the documented release audit and browser review. |
 | R-12 | **Resolved before this preparation** | TanStack Start CVE-2026-102989: `@tanstack/react-start@1.168.60`, router `1.170.41`, server-core `1.169.39`. Vercel production deployment for `c3afb72` reported `READY`. | **Build/security blocker closed** by earlier commit; no bypass environment variable used. |
 
@@ -69,7 +69,7 @@ bun run e2e
 - [ ] Real major defects fixed with targeted regression tests.
 - [x] At least 15 real future development opportunities documented.
 - [x] One appropriate next coding task and project description selected.
-- [x] No **new** branch, PR, paid service or CI workflow introduced by this document-only preparation. **Existing CI workflow still exists.**
+- [x] No **new** branch, PR, paid service or CI workflow introduced by this document-only preparation. **The existing CI workflow was removed; no new CI added.**
 
 **Current progress: 4/8 gates satisfied as scoped above; not ready to claim 8/8.**
 
@@ -84,3 +84,11 @@ bun run e2e
 ## Change and release record
 
 This preparation's planned code footprint is documentation only. Runtime fixes R-01/R-02/R-05/R-06/R-08 are **not** represented as completed because local regression verification was unavailable. Keep this report factual; do not claim that the current commit passes local `qa` or browser tests. See GitHub history for the prior TanStack fix at `c3afb72`. Any future changes should use a single focused direct-to-`main` commit only after a local verification gate.
+
+## Continuation update (2026-11-19)
+
+The `bun.lock` workspace name and Playwright 1.62.1 graph are reconciled against `package.json` using third-party lockfile metadata including integrity hashes. This is **not proof of a Bun-generated lockfile**. With Bun 1.3.14 on a clean local clone, run `bun install --frozen-lockfile`; if it fails, regenerate using Bun and reverify. Local `studio:check`, `qa`, `release:audit` and Playwright E2E remain **NOT RUN** here.
+
+`storeBrowserFile` now checks `File.size` before reading GLB and texture uploads. Two regression cases were added to `tests/studio/glb-validation.test.ts`, but were not executed. `.gitignore` now excludes additional `.env.*` files, retaining `.env.example`/sample/template. The earlier GitHub Actions workflow was removed to avoid automated CI usage. The current `main` history's 24 reachable Git tree filename listings were scanned for sensitive-looking filenames; none matched, but **blob contents and all reachable Git refs were not scanned**, so secrets/history clearance is still open.
+
+The selected future GLB round-trip task remains unimplemented. Ownership, per-archive license clearance, clean local install, browser tests and a full history-content secret scan are still required before an honest 8/8 completion claim.

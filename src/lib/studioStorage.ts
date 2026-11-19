@@ -253,6 +253,12 @@ function generatedFileId(kind: StudioFileKind) {
 }
 
 async function storeBrowserFile(file: File, kind: StudioFileKind): Promise<StudioFileRecord> {
+  const maxBytes = kind === 'texture' ? MAX_STUDIO_TEXTURE_BYTES : MAX_STUDIO_GLB_BYTES
+  if (file.size > maxBytes) {
+    throw new Error(kind === 'texture'
+      ? 'Texture exceeds the 16 MB local safety limit.'
+      : 'GLB exceeds the 100 MB local safety limit.')
+  }
   const bytes = await file.arrayBuffer()
   const detectedType = kind === 'texture' ? validateStudioTextureBytes(bytes, file.type) : (validateStudioGlbBytes(bytes), 'model/gltf-binary')
   const record: StudioFileRecord = {
