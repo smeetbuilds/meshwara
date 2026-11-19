@@ -7,6 +7,7 @@ import {
   garbageCollectStudioFiles,
   listStudioFiles,
   loadStudioFile,
+  loadStudioProject,
   restorePortableStudioProject,
   saveStudioProject,
   storeStudioFile,
@@ -85,5 +86,17 @@ assert.equal(restored.nodes.length, 1)
 assert.equal((await loadStudioFile(model.id))?.kind, 'glb')
 assert.equal((await loadStudioFile(texture.id))?.kind, 'texture')
 assert.equal((await listStudioFiles()).length, 2)
+
+// An imported backup must not replace media already owned by an unrelated local
+// project. The failure must occur before writing either the project or any file.
+const conflictingPortable = structuredClone(portable)
+conflictingPortable.project.id = createStudioProject('Unrelated import collision').id
+await assert.rejects(
+  restorePortableStudioProject(conflictingPortable),
+  /conflicts with another local Studio project/i,
+)
+assert.equal(await loadStudioProject(conflictingPortable.project.id), null)
+assert.equal((await loadStudioFile(model.id))?.size, portable.files.find((file) => file.kind === 'glb')?.size)
+assert.equal((await loadStudioFile(texture.id))?.kind, 'texture')
 
 console.log('Meshvara Studio local storage + offline-codec portable media contract passed')

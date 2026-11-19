@@ -123,3 +123,7 @@ Use [the Pack-v1 release candidate guide](docs/PACK_V1_RELEASE_CANDIDATE.md) to 
 ### Current published pack snapshot
 
 The checked-in `public/downloads/manifest.json` lists 500 archives but **does not declare `packSchemaVersion: 1`** (as inspected 2026-11-19). Therefore the current `main` checkout is **not yet a verified Pack-v1 release**, and `node scripts/validate-pack-parity.mjs` will reject its manifest until regeneration. `bun run qa` regenerates archives before checking them and may change the tracked ZIP corpus. Do not treat that generated success as proof the currently committed download snapshot was already Pack-v1. See `RELEASE_READINESS.md`; regenerate, diff-review, license-review and commit any archive migration deliberately, never silently.
+
+### Portable Studio import data safety
+
+Portable project restoration has a 256 MiB cumulative decoded-media safety budget in addition to per-file GLB/texture limits. Importing a backup with media IDs already owned by another local project or a separate local file is rejected **before persistence** instead of silently replacing existing data. Same-project restore remains supported; a rejected import requires choosing a new, conflict-free source rather than automatically overwriting another project. This prevents one known cross-project data-loss path but does not replace full browser/IndexedDB regression testing.

@@ -1,4 +1,5 @@
 import { assertStudioGlbCapabilities } from './studioGlbCapabilities'
+import { assertPortableStudioFileIsolation, assertPortableStudioMediaBudget } from './studioPortableSafety'
 import {
   STUDIO_NODE_LIMIT,
   STUDIO_PROJECT_FORMAT,
@@ -296,6 +297,13 @@ export async function loadStudioFile(id: string): Promise<StudioFileRecord | nul
   return record ? cloneFile(normalizeStoredFile(record)) : null
 }
 
+async function listStoredStudioFileIds(): Promise<string[]> {
+  const stored = await withStore<IDBValidKey[]>(FILE_STORE, 'readonly', (store) => store.getAllKeys())
+  const ids = new Set(memoryFiles.keys())
+  for (const key of stored ?? []) if (typeof key === 'string') ids.add(key)
+  return [...ids]
+}
+
 export async function listStudioFiles(): Promise<StudioFileRecord[]> {
   const stored = await withStore<StudioFileRecord[]>(FILE_STORE, 'readonly', (store) => store.getAll())
   const merged = new Map<string, StudioFileRecord>()
@@ -361,6 +369,7 @@ export async function restorePortableStudioProject(value: unknown): Promise<Stud
   const project = parseStudioProject(projectPayload)
   if (!project) throw new Error('Project scene data failed validation.')
   if (!Array.isArray(portable.files)) throw new Error('Project file payload is invalid.')
+  assertPortableStudioMediaBudget(portable.files)
 
   const expected = new Set(collectStudioFileIds(project))
   const glbReferences = new Set(project.nodes.flatMap((node) => node.kind === 'imported' && node.fileId ? [node.fileId] : []))
@@ -386,6 +395,14 @@ export async function restorePortableStudioProject(value: unknown): Promise<Stud
     restored.add(file.id)
   }
   if (restored.size !== expected.size) throw new Error('Project is missing one or more local GLB/texture payloads.')
+  const localProjects = await loadAllProjects()
+  const localFileIds = await listStoredStudioFileIds()
+  assertPortableStudioFileIsolation(
+    project.id,
+    restored,
+    localProjects.map((storedProject) => ({ id: storedProject.id, fileIds: collectStudioFileIds(storedProject) })),
+    localFileIds,
+  )
   await persistPortableProject(project, validatedFiles)
   return project
 }
