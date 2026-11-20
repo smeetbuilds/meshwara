@@ -1,0 +1,69 @@
+/* Meshvara Studio: editorial-system chrome around the functional 3D workbench.
+   Editing surfaces remain deliberately denser than marketing pages. */
+.studio-page {
+  --studio-border: #41454d;
+  --studio-panel: #1d1f25;
+  --studio-panel-2: #181d26;
+  --studio-text: #ffffff;
+  --studio-muted: #e0e2e6;
+  --studio-accent: #a8d8c4;
+  --studio-page-bg: #181d26;
+  --studio-chrome: #1d1f25;
+  --studio-surface: #181d26;
+  --studio-control: #333840;
+  --studio-hover: #41454d;
+  --studio-selected: #333840;
+  --studio-input: #181d26;
+  --studio-soft-border: #41454d;
+  --studio-border-strong: #9297a0;
+  --studio-subtle-text: #e0e2e6;
+  --studio-accent-soft: #0a2e0e;
+  font-family: var(--editorial-font);
+}
+.studio-page[data-studio-theme="light"] {
+  --studio-border: #dddddd;
+  --studio-panel: #f8fafc;
+  --studio-panel-2: #e0e2e6;
+  --studio-text: #181d26;
+  --studio-muted: #41454d;
+  --studio-accent: #0a2e0e;
+  --studio-page-bg: #ffffff;
+  --studio-chrome: #ffffff;
+  --studio-surface: #ffffff;
+  --studio-control: #f8fafc;
+  --studio-hover: #e0e2e6;
+  --studio-selected: #f5e9d4;
+  --studio-input: #ffffff;
+  --studio-soft-border: #dddddd;
+  --studio-border-strong: #9297a0;
+  --studio-subtle-text: #41454d;
+  --studio-accent-soft: #f5e9d4;
+}
+.studio-brand, .studio-brand b { font-weight: 500; letter-spacing: 0; }
+.studio-brand { font-size: 16px; }
+.studio-top-actions button, .studio-top-actions a, .studio-top-actions label,
+.studio-toolbar button {
+  min-height: 38px;
+  border-radius: 6px;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+.studio-project-name { height: 44px; border-radius: 6px; }
+.studio-project-name input { font-size: 14px; }
+.studio-search input, .studio-field input, .studio-page select {
+  min-height: 44px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.studio-theme-select select { min-height: 36px; font-size: 12px; }
+.studio-section-title { font-size: 12px; letter-spacing: 0; font-weight: 500; }
+.studio-tabs button { min-height: 44px; font-size: 12px; letter-spacing: 0; }
+.studio-object-main { min-height: 40px; }
+.studio-object-main strong, .studio-asset-list strong { font-size: 12px; font-weight: 500; }
+.studio-object-main small, .studio-asset-list small { font-size: 11px; }
+.studio-statusbar { font-size: 11px; letter-spacing: 0; }
+@media (max-width: 760px) {
+  .studio-top-actions button, .studio-top-actions a, .studio-top-actions label,
+  .studio-toolbar button, .studio-object-main { min-height: 44px; }
+}

@@ -60,6 +60,7 @@ import '../../styles/studio.css'
 import '../../styles/studio-model-editor.css'
 import '../../styles/studio-animation.css'
 import '../../styles/studio-theme.css'
+import '../../styles/studio-editorial.css'
 
 function downloadText(filename: string, content: string, type = 'text/plain') {
   downloadBlob(filename, new Blob([content], { type }))

@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { brand } from '../data/brand'
 import { ArrowUpRight, CloseIcon, MenuIcon } from './Icons'
@@ -17,22 +17,55 @@ function MeshvaraMark() {
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
   const menuButton = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLElement>(null)
+  const routePath = useRouterState({ select: (state) => state.location.pathname })
   const closeMenu = () => setOpen(false)
+
+  useEffect(() => { setOpen(false) }, [routePath])
 
   useEffect(() => {
     if (!open) return
+
     const previousOverflow = document.body.style.overflow
+    const background = Array.from(document.querySelectorAll<HTMLElement>('main, footer'))
+    const previousInert = background.map((element) => element.inert)
     document.body.style.overflow = 'hidden'
-    const onEscape = (event: KeyboardEvent) => {
+    background.forEach((element) => { element.inert = true })
+
+    const focusable = (): HTMLElement[] => [
+      ...(menuButton.current ? [menuButton.current] : []),
+      ...Array.from(menuRef.current?.querySelectorAll<HTMLAnchorElement>('a') ?? []),
+    ]
+    menuRef.current?.querySelector('a')?.focus()
+
+    const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setOpen(false)
         menuButton.current?.focus()
+        return
+      }
+      if (event.key !== 'Tab') return
+      const nodes = focusable()
+      const index = nodes.indexOf(document.activeElement as HTMLElement)
+      if (event.shiftKey && index <= 0) {
+        event.preventDefault()
+        nodes[nodes.length - 1]?.focus()
+      } else if (!event.shiftKey && (index === nodes.length - 1 || index === -1)) {
+        event.preventDefault()
+        nodes[0]?.focus()
       }
     }
-    window.addEventListener('keydown', onEscape)
+    const media = window.matchMedia('(min-width: 768px)')
+    const onBreakpoint = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    media.addEventListener('change', onBreakpoint)
     return () => {
       document.body.style.overflow = previousOverflow
-      window.removeEventListener('keydown', onEscape)
+      background.forEach((element, index) => { element.inert = previousInert[index] })
+      window.removeEventListener('keydown', onKeyDown)
+      media.removeEventListener('change', onBreakpoint)
     }
   }, [open])
 
@@ -66,7 +99,7 @@ export function SiteHeader() {
         </button>
       </div>
       {open && (
-        <nav className="mobile-menu" id="meshvara-mobile-menu" aria-label="Mobile navigation">
+        <nav ref={menuRef} className="mobile-menu" id="meshvara-mobile-menu" aria-label="Mobile navigation">
           <p className="mobile-menu-caption">Explore Meshvara</p>
           <Link to="/assets" onClick={closeMenu}>Archive <ArrowUpRight /></Link>
           <Link to="/studio" search={{ asset: undefined }} onClick={closeMenu}>Studio <ArrowUpRight /></Link>

@@ -3,6 +3,7 @@ import { HeadContent, Link, Outlet, Scripts, createRootRoute, useRouterState } f
 import appCss from '../styles/app.css?url'
 import publicA11yCss from '../styles/public-a11y.css?url'
 import editorialCss from '../styles/editorial.css?url'
+import interCss from '@fontsource-variable/inter/wght.css?url'
 import { SiteHeader } from '../components/SiteHeader'
 import { SiteFooter } from '../components/SiteFooter'
 import { brand } from '../data/brand'
@@ -22,6 +23,7 @@ export const Route = createRootRoute({
       { name: 'theme-color', content: '#ffffff' },
     ],
     links: [
+      { rel: 'stylesheet', href: interCss },
       { rel: 'stylesheet', href: appCss },
       { rel: 'stylesheet', href: publicA11yCss },
       { rel: 'stylesheet', href: editorialCss },
