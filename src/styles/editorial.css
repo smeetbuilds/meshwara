@@ -122,7 +122,7 @@ button, input, select, textarea { font-family: inherit; }
   gap: 36px; padding-top: 96px; padding-bottom: 96px;
 }
 .hero-kicker { display: flex; justify-content: space-between; gap: 20px; }
-.hero-copy { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .8fr); gap: 72px; align-items: end; }
+.hero-copy { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr); gap: 48px; align-items: end; }
 .hero-heading { display: grid; gap: 24px; }
 .hero h1, .library-hero h1, .detail-title h1, .not-found h1 {
   font-family: var(--editorial-font); font-size: 40px; font-weight: 400; line-height: 1.2;
@@ -153,7 +153,7 @@ button, input, select, textarea { font-family: inherit; }
 .hero-feature .hero-stage .asset-preview::after { display: none; }
 .hero-feature .hero-stage .asset-gridlines { opacity: .16; }
 .hero-feature .hero-stage .stage-note { bottom: 14px; left: 16px; right: 16px; color: var(--editorial-body); font-size: 12px; letter-spacing: 0; text-transform: none; }
-.hero-feature .hero-stage .preview-open { opacity: 1; transform: none; border-radius: 8px; top: 12px; right: 12px; min-height: 44px; padding: 10px 14px; font-size: 12px; font-weight: 500; letter-spacing: 0; }
+.hero-feature .hero-stage .preview-open { opacity: 1; transform: none; border-radius: 8px; top: 12px; right: 12px; bottom: auto; left: auto; min-height: 44px; padding: 10px 14px; font-size: 12px; font-weight: 500; letter-spacing: 0; }
 .hero-feature .hero-stage .asset-preview .preview-state-pill { border-radius: 6px; }
 .hero-feature .hero-stage .asset-card { content-visibility: visible; contain-intrinsic-size: auto; }
 
@@ -201,6 +201,8 @@ button, input, select, textarea { font-family: inherit; }
 .featured-section { padding-bottom: 96px; }
 .home-grid, .asset-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 24px; }
 .asset-card { min-width: 0; }
+/* The six home highlights must paint in full-page captures; keep large archive virtualization. */
+.home-grid .asset-card { content-visibility: visible; contain-intrinsic-size: auto; }
 .asset-preview {
   background: #f1f0ec; aspect-ratio: 4 / 3; border: 0; border-radius: 10px;
   overflow: hidden;
