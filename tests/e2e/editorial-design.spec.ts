@@ -18,7 +18,7 @@ test('desktop editorial tokens, CTA geometry and live showcase remain coherent',
 
   const previewHeight = await page.locator('.hero-feature .preview-open').evaluate((link) => link.getBoundingClientRect().height)
   expect(previewHeight).toBeLessThan(60)
-  expect(await page.locator('.world-grid').evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.trim().split(/\\s+/).length)).toBe(3)
+  expect(await page.locator('.world-grid').evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.trim().split(' ').filter(Boolean).length)).toBe(3)
   await expect(page.locator('.home-grid .asset-card')).toHaveCount(6)
 })
 
@@ -28,7 +28,7 @@ test('mobile editorial layout and full-screen menu remain usable', async ({ page
 
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
   await expect(page.locator('.site-header')).toHaveCSS('height', '64px')
-  expect(await page.locator('.world-grid').evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.trim().split(/\\s+/).length)).toBe(1)
+  expect(await page.locator('.world-grid').evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.trim().split(' ').filter(Boolean).length)).toBe(1)
   await expect(page.getByRole('button', { name: 'Open menu' })).toBeVisible()
 
   await page.getByRole('button', { name: 'Open menu' }).click()
