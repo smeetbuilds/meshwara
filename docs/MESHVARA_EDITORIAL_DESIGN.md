@@ -6,7 +6,7 @@ a visual *system*, not as Airtable branding, marketing copy, or a copied layout.
 ## Scope
 
 - Public home, archive, asset detail pages, navigation, footer and their shared controls.
-- Studio retains its independent dark/light editor themes, 3D viewport and functional workflows.
+- Studio retains its independent dark/light editor themes, 3D viewport and functional workflows. Its chrome now reuses the ink, forest and mint palette through `src/styles/studio-editorial.css` while preserving high-density editing layouts.
 - Code is implemented in `src/styles/editorial.css` after the legacy `app.css` so the
   complete existing component and 3D system remains compatible.
 - The source of truth for page structure is `src/routes/index.tsx` and the existing
@@ -34,9 +34,13 @@ a visual *system*, not as Airtable branding, marketing copy, or a copied layout.
 
 Typography follows the source's editorial scale: **40/1.2/400 hero**, **32/1.2/400
 section headings**, **24/1.35/400 collection names**, and **14px running type**.
-Haas Grotesk/Groot are proprietary and not bundled; the site uses a fast
-Inter → macOS/Windows system-font fallback with no remote font request. This is
-a faithful token implementation, **not an exact licensed-Haas glyph match**.
+Haas Grotesk/Groot are proprietary and are **not** bundled. A pinned
+`@fontsource-variable/inter@5.3.0` supplies the **self-hosted Inter Variable**
+typeface (weights 100–900, `font-display: swap`) from same-origin WOFF2 assets;
+the system font stack is used only while loading or as a fallback. No remote
+font service is required. Inter carries the SIL Open Font License 1.1;
+the redistributable license is in `public/licenses/inter-OFL.txt`. This is
+not a claim of identical licensed-Haas letterforms.
 
 ## Layout principles
 
@@ -59,14 +63,14 @@ a faithful token implementation, **not an exact licensed-Haas glyph match**.
 - **<768px**: single-column grids, full-height mobile navigation, stacked CTAs,
   24px outer gutters and reduced vertical spacing.
 - Existing screen-reader labels, keyboard focus, lazy previews and reduced-motion
-  handling stay intact. Mobile menu supports Escape and locks background scroll.
+  handling stay intact. Mobile menu supports Escape, focus trapping and restoration, background inerting, route-change dismissal and scroll locking.
 
 ## Verification
 
 Run `bun run check`, `bun run build`, `bun run studio:check` and
 `bun run distribution:check`; use the existing Playwright suite for browser
 regression. The focused `tests/e2e/editorial-design.spec.ts` verifies editorial
-tokens, active asset preview geometry, responsive structure, and mobile menu.
+tokens, the locally loaded font, uneven feature-card heights, active asset preview geometry, responsive structure, mobile-menu keyboard behavior, archive controls and Studio color themes.
 
 No pricing page or Airtable-style sales flow was added: Meshvara is a free 3D archive,
 not a SaaS subscription product. The design specification does not provide

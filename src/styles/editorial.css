@@ -163,7 +163,7 @@ button, input, select, textarea { font-family: inherit; }
 .category-index-intro { max-width: 350px; }
 .world-grid { border: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .world-card {
-  position: relative; min-height: 264px; padding: 24px; gap: 18px;
+  position: relative; align-self: start; min-height: 264px; padding: 24px; gap: 18px;
   border: 0; border-radius: 10px; grid-template-rows: auto 1fr auto auto;
   background: var(--editorial-cream); color: var(--editorial-primary);
   transition: none;
@@ -418,3 +418,10 @@ button, input, select, textarea { font-family: inherit; }
 }
 /* Keep Studio's independent dark/light workspace theme intact. */
 .studio-page { color-scheme: normal; }
+
+/* Preserve pressed/focus feedback while retiring inherited decorative hover movement. */
+@media (hover: hover) {
+  .asset-card:hover .asset-preview canvas { transform: none; }
+  .desktop-nav a:not(.is-active):hover::after { right: 100%; }
+  .related-links a:hover { padding-left: 0; }
+}
