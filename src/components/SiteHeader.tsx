@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { brand } from '../data/brand'
-import { CloseIcon, MenuIcon } from './Icons'
+import { ArrowUpRight, CloseIcon, MenuIcon } from './Icons'
 
 function MeshvaraMark() {
   return (
@@ -16,30 +16,64 @@ function MeshvaraMark() {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
+  const closeMenu = () => setOpen(false)
+
+  useEffect(() => {
+    if (!open) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+        menuButton.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', onEscape)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onEscape)
+    }
+  }, [open])
+
   return (
     <header className="site-header">
-      <Link to="/" className="brand" aria-label={`${brand.name} home`}>
-        <span className="brand-mark"><MeshvaraMark /></span>
-        <span className="brand-lockup"><strong>{brand.name}</strong><small>{brand.descriptor}</small></span>
-      </Link>
-      <nav className="desktop-nav" aria-label="Primary">
-        <Link to="/assets" activeProps={{ className: 'is-active' }}>Archive</Link>
-        <Link to="/studio" search={{ asset: undefined }} activeProps={{ className: 'is-active' }}>Studio</Link>
-        <a href="/#categories">Categories</a>
-        <a href="/#principles">Standard</a>
-        <span className="free-badge">OPEN / FREE</span>
-      </nav>
-      <button className="menu-button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-label={open ? 'Close menu' : 'Open menu'}>
-        {open ? <CloseIcon /> : <MenuIcon />}
-      </button>
-      {open && (
-        <div className="mobile-menu">
-          <Link to="/assets" onClick={() => setOpen(false)}>Archive</Link>
-          <Link to="/studio" search={{ asset: undefined }} onClick={() => setOpen(false)}>Meshvara Studio</Link>
-          <a href="/#categories" onClick={() => setOpen(false)}>Categories</a>
-          <a href="/#principles" onClick={() => setOpen(false)}>Quality standard</a>
-          <span>MESHVARA · Free downloads · No account · Source included</span>
+      <div className="site-header-inner">
+        <Link to="/" className="brand" aria-label={`${brand.name} home`} onClick={closeMenu}>
+          <span className="brand-mark"><MeshvaraMark /></span>
+          <span className="brand-lockup"><strong>{brand.name}</strong><small>{brand.descriptor}</small></span>
+        </Link>
+        <nav className="desktop-nav" aria-label="Primary navigation">
+          <Link to="/assets" activeProps={{ className: 'is-active' }}>Archive</Link>
+          <a href="/#categories">Collections</a>
+          <a href="/#principles">Our approach</a>
+          <Link to="/studio" search={{ asset: undefined }} activeProps={{ className: 'is-active' }}>Studio</Link>
+        </nav>
+        <div className="header-actions">
+          <span className="header-free-note">Free to explore</span>
+          <Link to="/assets" className="header-cta">Explore assets <ArrowUpRight /></Link>
         </div>
+        <button
+          ref={menuButton}
+          type="button"
+          className="menu-button"
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          aria-controls="meshvara-mobile-menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+        >
+          {open ? <CloseIcon /> : <MenuIcon />}
+        </button>
+      </div>
+      {open && (
+        <nav className="mobile-menu" id="meshvara-mobile-menu" aria-label="Mobile navigation">
+          <p className="mobile-menu-caption">Explore Meshvara</p>
+          <Link to="/assets" onClick={closeMenu}>Archive <ArrowUpRight /></Link>
+          <Link to="/studio" search={{ asset: undefined }} onClick={closeMenu}>Studio <ArrowUpRight /></Link>
+          <a href="/#categories" onClick={closeMenu}>Collections <ArrowUpRight /></a>
+          <a href="/#principles" onClick={closeMenu}>Our approach <ArrowUpRight /></a>
+          <p className="mobile-menu-foot">Open 3D source for the spatial web.<br />No account required.</p>
+        </nav>
       )}
     </header>
   )
