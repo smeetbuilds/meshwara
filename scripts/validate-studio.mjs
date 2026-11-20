@@ -107,6 +107,7 @@ assert(library.includes('IMPORT LOCAL GLB') && library.includes('PROJECTS') && l
 
 for (const token of ['inspectStudioModel', 'prepareStudioModel', 'StudioMaterialSlot', 'SkinnedMesh', 'missingNormals', 'studioEditableTextureChannels', 'studioTextureResourceKey']) assert(modelTools.includes(token), `model tooling missing ${token}`)
 for (const token of ['loadStudioFile', 'TextureLoader', 'flipY = false', 'studioTextureColorSpace', 'missing']) assert(textureResources.includes(token), `texture runtime missing ${token}`)
+assert(modelExport.includes('configureStudioGltfLoader(new GLTFLoader(), renderer)') && modelExport.includes('parseGlb(record.bytes, renderer)'), 'GLB export must use the same renderer-aware offline codecs as the preview')
 for (const token of ['GLTFExporter', 'GLTFLoader', 'loadStudioTextureResources', 'maxTextureSize', "source: { label: 'PRESERVE'", '2048', '1024', 'binary: true', 'animations', 'onlyVisible: true', 'trs: true']) assert(modelExport.includes(token), `local GLB export missing ${token}`)
 assert(!modelExport.includes('fetch('), 'local GLB export introduced a remote processing dependency')
 
