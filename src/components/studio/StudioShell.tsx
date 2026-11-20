@@ -42,6 +42,7 @@ import {
 import { generateStudioConfigModule, generateStudioR3FScaffold } from '../../lib/studioExport'
 import { exportStudioGlb, type StudioGlbExportProfile } from '../../lib/studioModelExport'
 import { createStudioComponentPack } from '../../lib/studioComponentPack'
+import { parsePortableStudioProjectFile } from '../../lib/studioPortableSafety'
 import type { StudioModelInspection } from '../../lib/studioModelTools'
 import {
   readStudioThemePreference,
@@ -353,7 +354,7 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
 
   const importProject = async (file: File) => {
     try {
-      const raw = JSON.parse(await file.text()) as unknown
+      const raw = await parsePortableStudioProjectFile(file)
       const restored = await restorePortableStudioProject(raw)
       setHistory(createStudioHistory(restored))
       setSelectedIds([])
