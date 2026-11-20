@@ -1,5 +1,14 @@
 /** Bounds restoration of embedded media before any base64 decoding starts. */
 export const MAX_PORTABLE_STUDIO_MEDIA_BYTES = 256 * 1024 * 1024
+// Allow base64 overhead plus 32 MiB for project metadata; reject oversized files before file.text().
+export const MAX_PORTABLE_STUDIO_PROJECT_FILE_BYTES = Math.ceil(MAX_PORTABLE_STUDIO_MEDIA_BYTES * 4 / 3) + 32 * 1024 * 1024
+
+export async function parsePortableStudioProjectFile(file: Pick<File, 'size' | 'text'>): Promise<unknown> {
+  if (!Number.isSafeInteger(file.size) || file.size < 0 || file.size > MAX_PORTABLE_STUDIO_PROJECT_FILE_BYTES) {
+    throw new Error('Portable Studio project exceeds the file-size import safety limit.')
+  }
+  return JSON.parse(await file.text()) as unknown
+}
 
 /**
  * Estimate decoded bytes conservatively. A malformed base64 payload is still
