@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import type { WebGLRenderer } from 'three'
 import { Link } from '@tanstack/react-router'
 import { assets } from '../../data/assets'
 import {
@@ -102,6 +103,7 @@ function isEditableTarget(target: EventTarget | null) {
 }
 
 export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string }) {
+  const rendererRef = useRef<WebGLRenderer | null>(null)
   const [history, setHistory] = useState(() => createStudioHistory(createStudioProject()))
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [mode, setMode] = useState<StudioTransformMode>('translate')
@@ -389,7 +391,7 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
       setStatus(`${componentPack ? 'R3F COMPONENT PACK' : 'WEB GLB EXPORT'} · PROCESSING LOCALLY`)
       const record = await loadStudioFile(selectedNode.fileId)
       if (!record || record.kind !== 'glb') throw new Error('Source GLB is missing from local storage.')
-      const result = await exportStudioGlb(record, selectedNode, profile)
+      const result = await exportStudioGlb(record, selectedNode, profile, rendererRef.current ?? undefined)
       const profileSuffix = profile === 'source' ? 'preserve' : profile === 'desktop' ? 'web-2k' : 'mobile-1k'
       if (componentPack) {
         const pack = createStudioComponentPack(selectedNode, result.inspection, result, profile)
@@ -548,6 +550,7 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
             onTransform={(id, transform: StudioTransform) => timeline.commitTransform(id, transform)}
             onMetrics={setMetrics}
             onInspection={reportInspection}
+            onRendererReady={(renderer) => { rendererRef.current = renderer }}
           />
 
           <StudioTimeline
