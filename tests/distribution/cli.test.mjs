@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { execFile } from 'node:child_process'
-import { mkdtemp, mkdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdtemp, mkdir, readFile, symlink, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { promisify } from 'node:util'
@@ -106,6 +106,27 @@ await assert.rejects(
   exec(process.execPath, [CLI, 'add', 'mercury-fold', '--registry', registryPath, '--archive', archivePath, '--dir', destination]),
   (error) => /Refusing to overwrite/.test(error.stderr),
 )
+if (process.platform !== 'win32') {
+  const outside = join(temp, 'outside-components')
+  await mkdir(outside)
+  const redirected = join(temp, 'symlink-components')
+  await mkdir(join(redirected, 'mercury-fold'), { recursive: true })
+  await symlink(outside, join(redirected, 'mercury-fold', 'src'), 'dir')
+  await assert.rejects(
+    exec(process.execPath, [CLI, 'add', 'mercury-fold', '--registry', registryPath, '--archive', archivePath, '--dir', redirected, '--force']),
+    (error) => /Refusing install through symbolic link/.test(error.stderr),
+  )
+  await assert.rejects(readFile(join(outside, 'index.ts')), /ENOENT/)
+  const linkedFile = join(temp, 'linked-file-components')
+  await mkdir(join(linkedFile, 'mercury-fold'), { recursive: true })
+  await symlink(join(temp, 'outside-readme.txt'), join(linkedFile, 'mercury-fold', 'README.md'))
+  await assert.rejects(
+    exec(process.execPath, [CLI, 'add', 'mercury-fold', '--registry', registryPath, '--archive', archivePath, '--dir', linkedFile, '--force']),
+    (error) => /Refusing install through symbolic link/.test(error.stderr),
+  )
+  await assert.rejects(readFile(join(temp, 'outside-readme.txt')), /ENOENT/)
+}
+
 const verify = await exec(process.execPath, [CLI, 'verify', 'mercury-fold', '--registry', registryPath, '--archive', archivePath, '--require-pack-v1'])
 assert.match(verify.stdout, /Verified Mercury Fold/)
 assert.match(verify.stdout, /Pack-v1/)
