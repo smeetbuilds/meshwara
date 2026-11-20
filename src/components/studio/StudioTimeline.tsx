@@ -31,6 +31,8 @@ export function StudioTimeline({
   time,
   playing,
   autoKey,
+  selectedKeyId,
+  onSelectKeyframe,
   onTime,
   onPlaying,
   onAutoKey,
@@ -44,6 +46,8 @@ export function StudioTimeline({
   time: number
   playing: boolean
   autoKey: boolean
+  selectedKeyId: string | null
+  onSelectKeyframe: (id: string | null) => void
   onTime: (time: number) => void
   onPlaying: (playing: boolean) => void
   onAutoKey: (enabled: boolean) => void
@@ -52,7 +56,7 @@ export function StudioTimeline({
   onUpdateKeyframe: (id: string, patch: Partial<Pick<StudioTransformKeyframe, 'time' | 'easing' | 'value' | 'channel'>>) => void
   onRemoveKeyframe: (id: string) => void
 }) {
-  const [selectedKeyId, setSelectedKeyId] = useState<string | null>(null)
+  const setSelectedKeyId = onSelectKeyframe
   const [clipboard, setClipboard] = useState<ReturnType<typeof copyStudioTransformKeyframe>>(null)
   const timeline = selectedNode ? resolveStudioTimeline(selectedNode.timeline) : null
   const duration = timeline?.duration ?? studioProjectTimelineDuration(nodes, 5)
@@ -65,11 +69,6 @@ export function StudioTimeline({
     '--studio-range-start': `${rangeStartPercent}%`,
     '--studio-range-end': `${rangeEndPercent}%`,
   } as CSSProperties
-
-  useEffect(() => setSelectedKeyId(null), [selectedNode?.id])
-  useEffect(() => {
-    if (selectedKeyId && timeline && !timeline.keyframes.some((keyframe) => keyframe.id === selectedKeyId)) setSelectedKeyId(null)
-  }, [selectedKeyId, timeline])
 
   const channelKeys = useMemo(() => Object.fromEntries(CHANNELS.map((channel) => [channel, timeline ? studioTimelineKeyframes(timeline, channel) : []])) as Record<StudioTimelineChannel, StudioTransformKeyframe[]>, [timeline])
 

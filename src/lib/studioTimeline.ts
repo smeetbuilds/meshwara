@@ -4,6 +4,7 @@ import type {
   StudioTimelineChannel,
   StudioTimelineEasing,
   StudioTransform,
+  StudioTransformMode,
   StudioTransformKeyframe,
   StudioVec3,
 } from './studioProject'
@@ -17,6 +18,27 @@ export const STUDIO_TIMELINE_KEYFRAME_LIMIT = 600
 
 const EASINGS = new Set<StudioTimelineEasing>(['linear', 'ease-in', 'ease-out', 'ease-in-out', 'step'])
 const CHANNELS = new Set<StudioTimelineChannel>(['position', 'rotation', 'scale'])
+
+// TransformControls names operations, while the timeline names stored transform fields.
+// Never cast 'translate' / 'rotate' directly to a keyframe channel.
+const TIMELINE_CHANNEL_BY_MODE: Record<StudioTransformMode, StudioTimelineChannel> = {
+  translate: 'position',
+  rotate: 'rotation',
+  scale: 'scale',
+}
+
+export function studioChannelForTransformEdit(
+  mode: StudioTransformMode,
+  patch?: Partial<StudioTransform>,
+): StudioTimelineChannel {
+  // Inspector edits send a single field; gizmo commits send the complete transform.
+  // Key the field the Inspector actually edited, regardless of the current gizmo mode.
+  if (patch) {
+    const fields = (['position', 'rotation', 'scale'] as const).filter((field) => patch[field] !== undefined)
+    if (fields.length === 1) return fields[0]
+  }
+  return TIMELINE_CHANNEL_BY_MODE[mode]
+}
 
 function keyId() {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') return `key-${crypto.randomUUID()}`

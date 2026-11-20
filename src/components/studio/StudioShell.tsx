@@ -560,6 +560,8 @@ export function StudioShell({ initialAssetSlug }: { initialAssetSlug?: string })
             time={timeline.time}
             playing={timeline.playing}
             autoKey={timeline.autoKey}
+            selectedKeyId={timeline.selectedKeyId}
+            onSelectKeyframe={timeline.setSelectedKeyId}
             onTime={timeline.seek}
             onPlaying={timeline.setPlaying}
             onAutoKey={timeline.setAutoKey}

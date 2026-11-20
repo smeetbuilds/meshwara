@@ -25,7 +25,7 @@ test('desktop Animation Studio authors, plays and exports transform keys', async
   const playhead = page.getByLabel('Timeline playhead')
   await playhead.evaluate((element) => {
     const input = element as HTMLInputElement
-    input.value = '1'
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(input, '1')
     input.dispatchEvent(new Event('input', { bubbles: true }))
     input.dispatchEvent(new Event('change', { bubbles: true }))
   })
@@ -37,7 +37,7 @@ test('desktop Animation Studio authors, plays and exports transform keys', async
   await expect(page.locator('.studio-track-row').filter({ hasText: 'POSITION' }).locator('button')).toHaveCount(1)
 
   const timeBefore = Number(await playhead.inputValue())
-  await page.getByRole('button', { name: 'PLAY' }).click()
+  await page.getByRole('button', { name: 'PLAY', exact: true }).click()
   await page.waitForTimeout(250)
   await page.getByRole('button', { name: 'PAUSE' }).click()
   expect(Number(await playhead.inputValue())).toBeGreaterThan(timeBefore)
@@ -54,4 +54,19 @@ test('desktop Animation Studio authors, plays and exports transform keys', async
   expect(node.timeline.keyframes).toHaveLength(1)
   expect(node.timeline.keyframes[0].channel).toBe('position')
   expect(node.timeline.keyframes[0].value[0]).toBe(2)
+})
+
+
+test('Inspector auto-key uses the edited channel even with a different gizmo mode', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-chromium', 'Run Studio keyframe regression once in desktop Chromium.')
+  await page.goto('/studio?asset=mercury-fold')
+  await expect(page.locator('.studio-object-main strong', { hasText: 'Mercury Fold' })).toBeVisible()
+
+  await page.getByRole('button', { name: '2 · ROTATE' }).click()
+  await page.locator('.studio-auto-key input').check()
+  await page.locator('.studio-vector').filter({ hasText: 'POSITION' }).locator('input').first().fill('3')
+
+  await expect(page.locator('span[role="status"][aria-live="polite"]')).toContainText('AUTO KEY · POSITION')
+  await expect(page.locator('.studio-track-row').filter({ hasText: 'POSITION' }).locator('button')).toHaveCount(1)
+  await expect(page.locator('.studio-track-row').filter({ hasText: 'ROTATION' }).locator('button')).toHaveCount(0)
 })

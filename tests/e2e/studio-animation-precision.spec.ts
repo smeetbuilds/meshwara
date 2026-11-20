@@ -25,7 +25,7 @@ async function seek(page: Page, seconds: number) {
   const playhead = page.getByLabel('Timeline playhead')
   await playhead.evaluate((element, value) => {
     const input = element as HTMLInputElement
-    input.value = String(value)
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(input, String(value))
     input.dispatchEvent(new Event('input', { bubbles: true }))
     input.dispatchEvent(new Event('change', { bubbles: true }))
   }, seconds)
@@ -89,7 +89,7 @@ test('desktop Animation Studio copies pastes duplicates and nudges a key', async
   await positionTrack.locator('.studio-track-rail button').last().click()
   await editor.getByRole('button', { name: '+1F' }).click()
   await expect(page.locator('span[role="status"][aria-live="polite"]')).toContainText('KEYFRAME UPDATED')
-  await expect(editor.locator('input[type=number]').first()).toHaveValue('2.0833')
+  await expect(editor.locator('input[type=number]').first()).toHaveValue((2 + 2 / 30).toFixed(4))
   await page.keyboard.press('[')
   await expect(page.locator('span[role="status"][aria-live="polite"]')).toContainText('KEY NAVIGATION')
 })

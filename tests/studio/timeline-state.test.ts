@@ -10,12 +10,26 @@ import {
   evaluateStudioTransform,
   interpolateStudioRotation,
   removeStudioTransformKeyframe,
+  studioChannelForTransformEdit,
   snapStudioTime,
   studioTimelinePlaybackRange,
   updateStudioTimelineTiming,
   updateStudioTransformKeyframe,
   upsertStudioTransformKeyframe,
 } from '../../src/lib/studioTimeline.ts'
+
+// Transform toolbar modes must map to real keyframe channels, never to undefined vectors.
+assert.equal(studioChannelForTransformEdit('translate'), 'position')
+assert.equal(studioChannelForTransformEdit('rotate'), 'rotation')
+assert.equal(studioChannelForTransformEdit('scale'), 'scale')
+// Inspector edits follow the changed property, even when a different gizmo is selected.
+assert.equal(studioChannelForTransformEdit('rotate', { position: [2, 0, 0] }), 'position')
+assert.equal(studioChannelForTransformEdit('translate', { rotation: [0, 1, 0] }), 'rotation')
+assert.equal(studioChannelForTransformEdit('translate', { scale: [2, 2, 2] }), 'scale')
+// A gizmo provides a full transform; its active mode determines the keyframe.
+assert.equal(studioChannelForTransformEdit('rotate', {
+  position: [0, 0, 0], rotation: [0, 0, 0], scale: [1, 1, 1],
+}), 'rotation')
 
 const base = { position: [0, 0, 0] as [number, number, number], rotation: [0, 0, 0] as [number, number, number], scale: [1, 1, 1] as [number, number, number] }
 let timeline = { ...defaultStudioTimeline(), duration: 2, fps: 30, loop: false, rangeStart: 0.25, rangeEnd: 1.75 }

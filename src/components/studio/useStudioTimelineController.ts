@@ -19,6 +19,7 @@ import {
   pasteStudioTransformKeyframe,
   removeStudioTransformKeyframe,
   snapStudioTime,
+  studioChannelForTransformEdit,
   studioAdjacentTransformKeyframe,
   studioProjectTimelineDuration,
   studioTimelinePlaybackRange,
@@ -229,7 +230,7 @@ export function useStudioTimelineController({
     const node = project.nodes.find((item) => item.id === id)
     if (!node) return
     const nextTransform: StudioTransform = { ...node.transform, ...patch }
-    const channel = mode as StudioTimelineChannel
+    const channel = studioChannelForTransformEdit(mode, patch)
 
     if (autoKey) {
       if (selectedIds.length !== 1 || selectedIds[0] !== id) {
@@ -269,7 +270,7 @@ export function useStudioTimelineController({
       }
       if (event.key.toLowerCase() === 'k' && !event.metaKey && !event.ctrlKey && !event.altKey) {
         event.preventDefault()
-        addKeyframe(mode as StudioTimelineChannel)
+        addKeyframe(studioChannelForTransformEdit(mode))
         return
       }
       if (event.key.toLowerCase() === 'i' && !event.metaKey && !event.ctrlKey && !event.altKey) {

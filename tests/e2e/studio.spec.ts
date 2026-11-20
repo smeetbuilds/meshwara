@@ -54,6 +54,7 @@ test('Studio appearance supports dark, light and live system preference', async 
 
 test('local project autosave survives a real browser reload', async ({ page }) => {
   await page.goto('/studio')
+  await expect(page.locator('span[role="status"][aria-live="polite"]')).toContainText('LOCAL PROJECT READY')
   const name = page.locator('.studio-project-name input')
   await name.fill('Browser Persistence Check')
   await page.waitForTimeout(700)
@@ -79,6 +80,9 @@ test('desktop asset detail hands off into Studio through the real UI link', asyn
 
 test('keyboard transform modes expose accessible pressed state', async ({ page }) => {
   await page.goto('/studio')
+  const status = page.locator('span[role="status"][aria-live="polite"]')
+  await expect(status).toContainText('LOCAL PROJECT READY')
+  await status.click()
   const translate = page.getByRole('button', { name: '1 · TRANSLATE' })
   const rotate = page.getByRole('button', { name: '2 · ROTATE' })
   const scale = page.getByRole('button', { name: '3 · SCALE' })
