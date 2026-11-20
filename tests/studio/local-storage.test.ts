@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { Buffer } from 'node:buffer'
+import { MAX_PORTABLE_STUDIO_PROJECT_FILE_BYTES, parsePortableStudioProjectFile } from '../../src/lib/studioPortableSafety.ts'
 import { appendStudioNode, createImportedStudioNode, createStudioProject, updateStudioNode } from '../../src/lib/studioProject.ts'
 import {
   createPortableStudioProject,
@@ -36,6 +37,14 @@ function pngBytes() {
   bytes.set([0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a])
   return bytes
 }
+
+let oversizedProjectRead = false
+await assert.rejects(
+  parsePortableStudioProjectFile({ size: MAX_PORTABLE_STUDIO_PROJECT_FILE_BYTES + 1, text: async () => { oversizedProjectRead = true; return '{}' } }),
+  /file-size import safety limit/,
+)
+assert.equal(oversizedProjectRead, false, 'oversized project must fail before reading file bytes')
+assert.deepEqual(await parsePortableStudioProjectFile({ size: 2, text: async () => '{}' }), {})
 
 const model = await storeStudioFile(new File([validMinimalGlb()], 'local.glb', { type: 'model/gltf-binary' }))
 const texture = await storeStudioTexture(new File([pngBytes()], 'albedo.png', { type: 'image/png' }))
