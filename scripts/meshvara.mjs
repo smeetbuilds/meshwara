@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
+import { access, lstat, mkdir, open, readFile } from 'node:fs/promises'
 import { constants } from 'node:fs'
-import { resolve } from 'node:path'
+import { join, parse, resolve, sep } from 'node:path'
 import process from 'node:process'
 import {
   normalizeRegistry,
@@ -46,6 +46,30 @@ function parseArgs(argv) {
 
 async function exists(path) {
   try { await access(path, constants.F_OK); return true } catch { return false }
+}
+
+// Lexical ZIP traversal checks cannot prevent writing through a pre-existing
+// symlinked component directory or final file. Check every existing ancestor.
+async function assertNoSymbolicLinks(target) {
+  const absolute = resolve(target)
+  let current = parse(absolute).root
+  for (const part of absolute.slice(current.length).split(sep).filter(Boolean)) {
+    current = join(current, part)
+    try {
+      if ((await lstat(current)).isSymbolicLink()) throw new Error(`Refusing install through symbolic link: ${current}`)
+    } catch (error) {
+      if (error?.code === 'ENOENT') return
+      throw error
+    }
+  }
+}
+
+async function writeSafeInstallFile(target, content, force) {
+  await mkdir(resolve(target, '..'), { recursive: true })
+  await assertNoSymbolicLinks(target)
+  const flags = constants.O_WRONLY | constants.O_CREAT | (force ? constants.O_TRUNC : constants.O_EXCL) | (constants.O_NOFOLLOW ?? 0)
+  const handle = await open(target, flags, 0o644)
+  try { await handle.writeFile(content) } finally { await handle.close() }
 }
 
 function fetchTimeoutMs() {
@@ -171,6 +195,8 @@ async function commandAdd(registry, registryLocation, slug, options) {
   const contract = validateArchiveContract(asset, entries, options['require-pack-v1'] || registry.packSchemaVersion === 1)
   const destination = resolve(options.dir ?? 'src/components/meshvara', slug)
   const planned = entries.map((entry) => ({ entry, target: outputPath(destination, entry.relative) }))
+  // Validate the complete install plan before making any writes.
+  for (const item of planned) await assertNoSymbolicLinks(item.target)
   const conflicts = []
   for (const item of planned) if (await exists(item.target)) conflicts.push(item.target)
   if (conflicts.length && !options.force) throw new Error(`Refusing to overwrite ${conflicts.length} existing file(s). Re-run with --force or choose --dir.`)
@@ -184,8 +210,7 @@ async function commandAdd(registry, registryLocation, slug, options) {
   if (options['dry-run']) return
 
   for (const item of planned) {
-    await mkdir(resolve(item.target, '..'), { recursive: true })
-    await writeFile(item.target, item.entry.bytes)
+    await writeSafeInstallFile(item.target, item.entry.bytes, Boolean(options.force))
   }
   const hint = dependencyHint(entries, contract)
   console.log(`\nInstalled ${planned.length} files. No account or runtime Meshvara API is required.`)
