@@ -6,6 +6,7 @@ import type { StudioFileRecord } from './studioStorage'
 import type { StudioNode } from './studioProject'
 import { disposeStudioModel, inspectStudioModel, prepareStudioModel, type StudioModelInspection } from './studioModelTools'
 import { loadStudioTextureResources } from './studioTextureResources'
+import { configureStudioGltfLoader } from './studioCodecRuntime'
 
 export type StudioGlbExportProfile = 'source' | 'desktop' | 'mobile'
 
@@ -25,9 +26,9 @@ export interface StudioGlbExportResult {
   inspection: StudioModelInspection
 }
 
-function parseGlb(bytes: ArrayBuffer) {
+function parseGlb(bytes: ArrayBuffer, renderer: THREE.WebGLRenderer) {
   return new Promise<GLTF>((resolve, reject) => {
-    const loader = new GLTFLoader()
+    const loader = configureStudioGltfLoader(new GLTFLoader(), renderer)
     loader.parse(bytes.slice(0), '', resolve, reject)
   })
 }
@@ -48,9 +49,11 @@ export async function exportStudioGlb(
   record: StudioFileRecord,
   node: StudioNode,
   profile: StudioGlbExportProfile = 'source',
+  renderer?: THREE.WebGLRenderer,
 ): Promise<StudioGlbExportResult> {
   if (node.kind !== 'imported' || record.kind !== 'glb') throw new Error('GLB export is available for imported models only.')
-  const gltf = await parseGlb(record.bytes)
+  if (!renderer) throw new Error('GLB export requires an initialized Studio WebGL renderer for offline codec support.')
+  const gltf = await parseGlb(record.bytes, renderer)
   const scene = clone(gltf.scene)
   const textureBundle = await loadStudioTextureResources(node.materialOverrides)
   try {
@@ -68,6 +71,6 @@ export async function exportStudioGlb(
 }
 
 /** Compatibility alias retained for existing callers and generated docs. */
-export function exportCleanStudioGlb(record: StudioFileRecord, node: StudioNode) {
-  return exportStudioGlb(record, node, 'source')
+export function exportCleanStudioGlb(record: StudioFileRecord, node: StudioNode, renderer?: THREE.WebGLRenderer) {
+  return exportStudioGlb(record, node, 'source', renderer)
 }
