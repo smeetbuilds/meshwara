@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { HeadContent, Link, Outlet, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
 import appCss from '../styles/app.css?url'
 import publicA11yCss from '../styles/public-a11y.css?url'
+import editorialCss from '../styles/editorial.css?url'
 import { SiteHeader } from '../components/SiteHeader'
 import { SiteFooter } from '../components/SiteFooter'
 import { brand } from '../data/brand'
@@ -18,11 +19,12 @@ export const Route = createRootRoute({
       { property: 'og:site_name', content: brand.name },
       { property: 'og:title', content: `${brand.name} — ${brand.descriptor}` },
       { property: 'og:description', content: brand.productLine },
-      { name: 'theme-color', content: '#0b0b0b' },
+      { name: 'theme-color', content: '#ffffff' },
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
       { rel: 'stylesheet', href: publicA11yCss },
+      { rel: 'stylesheet', href: editorialCss },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
       { rel: 'manifest', href: '/site.webmanifest' },
     ],
