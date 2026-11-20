@@ -187,6 +187,7 @@ export function StudioViewport({
   onTransform,
   onMetrics,
   onInspection,
+  onRendererReady,
 }: {
   project: StudioProject
   selectedIds: string[]
@@ -198,6 +199,7 @@ export function StudioViewport({
   onTransform: (id: string, transform: StudioTransform) => void
   onMetrics: (metrics: StudioViewportMetrics) => void
   onInspection: (id: string, report: StudioModelInspection) => void
+  onRendererReady: (renderer: THREE.WebGLRenderer) => void
 }) {
   return (
     <div className="studio-viewport" style={{ background: project.scene.background }}>
@@ -206,6 +208,7 @@ export function StudioViewport({
         dpr={[1, 1.75]}
         camera={{ position: [5, 4, 7], fov: 42, near: 0.05, far: 2000 }}
         gl={{ antialias: true, powerPreference: 'high-performance' }}
+        onCreated={({ gl }) => onRendererReady(gl)}
         onPointerMissed={() => onSelect(null)}
       >
         <RendererSettings exposure={project.scene.exposure} />
