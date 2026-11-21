@@ -23,11 +23,16 @@ for(const [slug,source] of Object.entries(records)){
  const glb=await readFile('public/models/cc0/'+slug+'.glb')
  if(sha(glb)!==source.sha256||glb.length!==source.bytes)throw Error('GLB hash mismatch '+slug)
  const zipPath=resolve('public',asset.file.slice(1))
- const files=readZip(await readFile(zipPath))
+ const originalZip=await readFile(zipPath)
+ const files=readZip(originalZip)
  const base=slug+'/'
  const existing=files.get(base+'src/models/'+slug+'.glb')
  const sourcePart=files.get(base+'src/Scene.tsx')?.toString('utf8')
- if(existing && sha(existing)===source.sha256 && sourcePart===portable && files.has(base+'LICENSE-ASSET.md')){
+ if(existing && sha(existing)===source.sha256 && sourcePart===portable && files.has(base+'LICENSE-ASSET.md') && files.get(base+'src/geometry/CC0Mesh.tsx')?.equals(helper) && files.get(base+'MODEL-PROVENANCE.json')?.toString('utf8')===JSON.stringify(source,null,2)+'\n' && (source.originalAuthors||[]).every(name=>files.get(base+'LICENSE-ASSET.md')?.toString('utf8').includes(name))){
+  // An earlier interrupted run can leave a correct ZIP with a stale manifest.
+  // Keep the contract idempotent and repair the digests even in this fast path.
+  asset.bytes=originalZip.length
+  asset.sha256=sha(originalZip)
   console.log('Already synchronized: '+slug)
   continue
  }
@@ -43,6 +48,7 @@ for(const [slug,source] of Object.entries(records)){
   '# CC0 source mesh and embedded PBR textures',
   'Original model: '+source.sourceUrl,
   'Published by Poly Haven; source ID: '+source.providerAssetId,
+  'Original creator(s): '+(source.originalAuthors||[]).join(', '),
   'License for the model: CC0 1.0. Source wrapper/runtime: MIT.',
   'Downloaded model GLB SHA-256: '+source.sha256,
   'No independent photorealism or artistic acceptance is implied by this license.',

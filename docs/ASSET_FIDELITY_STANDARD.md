@@ -58,3 +58,26 @@ original CC0 license notice and source provenance inside each corresponding ZIP.
 ZIP parity, license, and the download manifest without granting artistic approval.
 All six models still require independent human visual review before claims of
 production-ready hyperrealism.
+
+
+## Batch 3: identity-matched authored model sources (November 21, 2026)
+
+12 additional catalog objects were matched to their actual Poly Haven model
+identities (precision microscope, bench plane, cordless drill, architect's
+lamp, leather ottoman, ceramic tea service, nested wooden side tables, analog
+rangefinder, bar stool, optical spectacles, mechanical compass, brass wall
+sconce). **No animal substitutions or visually unrelated source models were
+used.** The catalog now has 18 CC0-authored PBR assets, plus three prior
+custom procedural rebuilds. These 21 scenes have improved technical and
+object-identity quality; neither the importer nor renderer certifies them as
+ultra-hyperrealistic. The rest of the archive still needs work.
+
+Original creator names, SHA-256 model digests, downloaded MD5 resource checks,
+full CC0 source provenance, and the exact portable scene/helper code are
+validated for all 18 authored model packages. Failed or mismatched upstream
+files block a clean build instead of falling back to placeholder geometry.
+The user-facing source links point to the original artists on Poly Haven.
+
+The visual-review gate still requires independent multi-angle approval and
+recorded reference evidence for each asset. This requirement must not be
+confused with success of source-integrity or CI checks.

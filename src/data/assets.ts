@@ -300,9 +300,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'optical-frames', index: '050', name: 'Optical Frames', category: 'Fashion', scene: 'opticalframes',
-    blurb: 'A thin metal eyewear study with optical lenses, sculpted bridge and long restrained temples.',
-    description: 'A fashion accessory built around precise front-plane geometry, lens transmission and lightweight metal proportions. Intended for editorial fashion and product-detail interfaces.',
-    tags: ['Eyewear', 'Optical', 'Fashion'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], accent: '#a98d70', download: '/downloads/optical-frames.zip', new: true,
+    blurb: 'Round optical glasses with thin metal rims, reflective lenses, bridge and curved temples.',
+    description: 'An authored pair of round spectacles from Poly Haven with detailed metal eyewear frames, lenses, bridge, nose pads, subtle signs of wear and embedded CC0 PBR texture maps.',
+    tags: ['Eyewear', 'Optical', 'Fashion'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], accent: '#a98d70', download: '/downloads/optical-frames.zip', new: true,
   },
   {
     slug: 'touring-wheel', index: '051', name: 'Touring Wheel', category: 'Vehicles', scene: 'touringwheel',
@@ -372,9 +372,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'precision-microscope', index: '062', name: 'Precision Microscope', category: 'Scientific', scene: 'microscope',
-    blurb: 'A laboratory microscope with weighted base, articulated stand, optical tube, turret and specimen stage.',
-    description: 'A scientific-instrument study where mechanical proportions, optical axis, controls and stage hierarchy are composed to read immediately as professional lab hardware rather than generic cylinders.',
-    tags: ['Microscope', 'Optics', 'Laboratory'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#c8d6d7', download: '/downloads/precision-microscope.zip', featured: true, new: true,
+    blurb: 'A real binocular laboratory microscope with turret, specimen stage and worn cast-metal body.',
+    description: 'An independently authored industrial microscope from Poly Haven, including its optical head, objective turret, detailed control knobs, original CC0 geometry, and embedded PBR surface maps.',
+    tags: ['Microscope', 'Optics', 'Laboratory'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#c8d6d7', download: '/downloads/precision-microscope.zip', featured: true, new: true,
   },
   {
     slug: 'lab-centrifuge', index: '063', name: 'Lab Centrifuge', category: 'Scientific', scene: 'centrifuge',
@@ -450,9 +450,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'tea-service', index: '075', name: 'Tea Service', category: 'Food', scene: 'teaservice',
-    blurb: 'A composed tray, teapot and paired cup service balancing ceramic, warm metal and wood.',
-    description: 'A hospitality vignette designed as a complete serving composition. Vessel curvature, spout, handle and cup spacing are intentionally coordinated rather than independently placed props.',
-    tags: ['Tea', 'Hospitality', 'Ceramic'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#c7b79f', download: '/downloads/tea-service.zip', new: true,
+    blurb: 'A complete ceramic tea set with teapot, cups, saucers, floral motifs and gold trim.',
+    description: 'A fully modeled Victorian-style tea service from Poly Haven containing an ornate teapot, cups and saucers with floral ceramic materials and metallic decoration, all distributed under CC0.',
+    tags: ['Tea', 'Hospitality', 'Ceramic'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#c7b79f', download: '/downloads/tea-service.zip', new: true,
   },
   {
     slug: 'induction-cooktop', index: '076', name: 'Induction Cooktop', category: 'Technology', scene: 'induction',
@@ -678,9 +678,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'lounge-ottoman', index: '113', name: 'Lounge Ottoman', category: 'Furniture', scene: 'loungeottoman',
-    blurb: 'A soft upholstered ottoman with rounded primary volume, floating top cushion and tapered support legs.',
-    description: 'A quiet furniture object tuned around believable upholstery softness and restrained textile sheen. The low profile makes it useful in living-room, hospitality and product-layout compositions.',
-    tags: ['Ottoman', 'Upholstery', 'Lounge'], complexity: 'Light', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#b9a68e', download: '/downloads/lounge-ottoman.zip', new: true,
+    blurb: 'A textured leather ottoman with cushion seams, stitched upholstery and short support feet.',
+    description: 'A detailed independently authored leather ottoman from Poly Haven with stacked padding, realistic creases, seam detail, and embedded PBR textures in the original CC0 model.',
+    tags: ['Ottoman', 'Upholstery', 'Lounge'], complexity: 'Light', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#b9a68e', download: '/downloads/lounge-ottoman.zip', new: true,
   },
   {
     slug: 'arc-floor-lamp', index: '114', name: 'Arc Floor Lamp', category: 'Furniture', scene: 'arcfloorlamp',
@@ -804,9 +804,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'mechanical-compass', index: '134', name: 'Mechanical Compass', category: 'Tools', scene: 'mechanicalcompass',
-    blurb: 'A field compass with calibrated dial, protective bezel and sighting detail.',
-    description: 'A compact navigation instrument composed for believable mechanical readability and outdoor-tool scenes.',
-    tags: ['Compass', 'Navigation', 'Instrument'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#c09b62', download: '/downloads/mechanical-compass.zip', new: true,
+    blurb: 'An aged brass field compass with directional dial, hinged cover and sighting hardware.',
+    description: 'An original brass nautical field compass from Poly Haven with engraved calibration marks, adjustable sighting lid, aged metal surfaces, and PBR textures in a standalone CC0 GLB.',
+    tags: ['Compass', 'Navigation', 'Instrument'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#c09b62', download: '/downloads/mechanical-compass.zip', new: true,
   },
   {
     slug: 'torque-wrench', index: '135', name: 'Torque Wrench', category: 'Tools', scene: 'torquewrench',
@@ -822,15 +822,15 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'cordless-drill', index: '137', name: 'Cordless Drill', category: 'Tools', scene: 'cordlessdrill',
-    blurb: 'A compact cordless drill with stepped chuck, trigger housing, grip and removable battery pack.',
-    description: 'A workshop power-tool asset with differentiated material zones and functional component hierarchy.',
-    tags: ['Drill', 'Power Tool', 'Workshop'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#c5a442', download: '/downloads/cordless-drill.zip', new: true,
+    blurb: 'A real cordless drill with molded rubber grip, chuck, trigger and removable 18V battery.',
+    description: 'A Poly Haven cordless power-drill model with realistic plastic enclosure, metal chuck, ergonomic trigger and battery details, and independently authored CC0 geometry and PBR textures.',
+    tags: ['Drill', 'Power Tool', 'Workshop'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#c5a442', download: '/downloads/cordless-drill.zip', new: true,
   },
   {
     slug: 'bench-plane', index: '138', name: 'Bench Plane', category: 'Tools', scene: 'benchplane',
-    blurb: 'A traditional bench plane with cast-metal body, timber handles and exposed cutting assembly.',
-    description: 'A woodworking tool balancing warm material cues with precise mechanical geometry.',
-    tags: ['Woodworking', 'Plane', 'Tool'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#9f7658', download: '/downloads/bench-plane.zip', new: true,
+    blurb: 'A textured woodworking bench plane with cast-metal shoe, timber grips and brass adjustment knobs.',
+    description: 'A vintage No. 4 woodworking plane authored for Poly Haven, preserving real worn-metal and wooden topology, brass adjustment hardware, original CC0 mesh and embedded PBR textures.',
+    tags: ['Woodworking', 'Plane', 'Tool'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#9f7658', download: '/downloads/bench-plane.zip', new: true,
   },
   {
     slug: 'spirit-level', index: '139', name: 'Spirit Level', category: 'Tools', scene: 'spiritlevel',
@@ -1355,9 +1355,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'bar-stool', index: '226', name: 'Bar Stool', category: 'Furniture', subcategory: 'Seating', scene: 'barstool',
-    blurb: 'A tall bar stool with curved seat, slender legs and a continuous foot-rest ring.',
-    description: 'A MESHVARA seating asset built as a self-contained Three.js composition with authored proportions, deterministic detail and responsive presentation.',
-    tags: ['Stool', 'Bar', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#8a745f', download: '/downloads/bar-stool.zip', new: true,
+    blurb: 'A realistic wooden bar stool with carved round seat, structural legs and ring footrest.',
+    description: 'A vintage round wooden bar stool by Poly Haven with an ornate carved seat, authentic structural joinery, circular footrest and detailed worn wood PBR surface textures.',
+    tags: ['Stool', 'Bar', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#8a745f', download: '/downloads/bar-stool.zip', new: true,
   },
   {
     slug: 'daybed', index: '227', name: 'Daybed', category: 'Furniture', subcategory: 'Seating', scene: 'daybed',
@@ -1884,9 +1884,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'rangefinder-camera', index: '314', name: 'Rangefinder Camera', category: 'Technology', subcategory: 'Imaging', scene: 'rangefindercamera',
-    blurb: 'A precision-authored rangefinder camera study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA imaging asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Rangefinder', 'Camera', 'Imaging', 'Mechanical'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a3a883', download: '/downloads/rangefinder-camera.zip', new: true,
+    blurb: 'A detailed vintage rangefinder camera with original lens, strap and aged leather panels.',
+    description: 'An independently authored analog rangefinder camera from Poly Haven, including realistic optical controls, leather strap, worn casework and original CC0 mesh with embedded PBR materials.',
+    tags: ['Rangefinder', 'Camera', 'Imaging', 'Mechanical'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#a3a883', download: '/downloads/rangefinder-camera.zip', new: true,
   },
   {
     slug: 'professional-camera-gimbal', index: '315', name: 'Professional Camera Gimbal', category: 'Technology', subcategory: 'Imaging', scene: 'professionalcameragimbal',
@@ -2058,9 +2058,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'nested-side-table-pair', index: '343', name: 'Nested Side Table Pair', category: 'Furniture', subcategory: 'Tables', scene: 'nestedsidetablepair',
-    blurb: 'A precision-authored nested side table pair study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA tables asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Side Table', 'Nested', 'Furniture', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a8a063', download: '/downloads/nested-side-table-pair.zip', new: true,
+    blurb: 'Two oak side tables of different heights with shelves and real PBR wood textures.',
+    description: 'A pair of independently positioned wooden side tables composed from an authored Poly Haven oak table model, retaining its structural shelving, original CC0 geometry and wood PBR maps.',
+    tags: ['Side Table', 'Nested', 'Furniture', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#a8a063', download: '/downloads/nested-side-table-pair.zip', new: true,
   },
   {
     slug: 'fluted-console-cabinet', index: '344', name: 'Fluted Console Cabinet', category: 'Furniture', subcategory: 'Tables', scene: 'flutedconsolecabinet',
@@ -2082,15 +2082,15 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'brass-wall-sconce', index: '347', name: 'Brass Wall Sconce', category: 'Furniture', subcategory: 'Tables', scene: 'brasswallsconce',
-    blurb: 'A precision-authored brass wall sconce study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA tables asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Sconce', 'Lighting', 'Brass', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a8c47b', download: '/downloads/brass-wall-sconce.zip', new: true,
+    blurb: 'A curved-arm brass wall light with dark shade, mounting plate and worn metal finishes.',
+    description: 'An independently modeled industrial brass wall sconce from Poly Haven with a curved lamp arm, aged brass and copper backplate, black conical shade and original CC0 PBR materials.',
+    tags: ['Sconce', 'Lighting', 'Brass', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#a8c47b', download: '/downloads/brass-wall-sconce.zip', new: true,
   },
   {
     slug: 'architect-desk-lamp', index: '348', name: 'Architect Desk Lamp', category: 'Furniture', subcategory: 'Tables', scene: 'architectdesklamp',
-    blurb: 'A precision-authored architect desk lamp study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA tables asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Desk Lamp', 'Lighting', 'Furniture', 'Task'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#6592a3', download: '/downloads/architect-desk-lamp.zip', new: true,
+    blurb: 'An articulated architect lamp featuring a mechanical arm, adjustable joints and metal shade.',
+    description: 'An authored clamp-mounted industrial desk lamp from Poly Haven, retaining articulated metal arms, external spring hardware, PBR finishes, and a complete CC0 GLB for reuse.',
+    tags: ['Desk Lamp', 'Lighting', 'Furniture', 'Task'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#6592a3', download: '/downloads/architect-desk-lamp.zip', new: true,
   },
   {
     slug: 'paper-floor-lantern', index: '349', name: 'Paper Floor Lantern', category: 'Furniture', subcategory: 'Tables', scene: 'paperfloorlantern',

@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { AssetDeveloperPanel, AssetPreviewControls, defaultPreviewSettings } from '../../components/AssetDeveloperWorkbench'
 import { AssetInstallPanel } from '../../components/AssetInstallPanel'
@@ -34,7 +34,8 @@ export const Route = createFileRoute('/assets/$slug')({
 function AssetDetail() {
   const asset = Route.useLoaderData()
   const cc0Model = cc0Models[asset.slug as keyof typeof cc0Models]
-  const [preview, setPreview] = useState(() => ({ ...defaultPreviewSettings, pointer: asset.interaction === 'Pointer' }))
+  const [preview, setPreview] = useState(() => ({ ...defaultPreviewSettings, stage: asset.slug === 'tea-service' ? 'dark' as const : 'light' as const, pointer: asset.interaction === 'Pointer' }))
+  useEffect(() => { if (asset.slug === 'tea-service') setPreview(current => ({ ...current, stage: 'dark' })) }, [asset.slug])
   const [playground, setPlayground] = useState(() => createDefaultAssetPlaygroundSettings(asset.scene))
   const assetSubcategory = getAssetSubcategory(asset)
   const sameType = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) === assetSubcategory)
@@ -83,7 +84,7 @@ function AssetDetail() {
           <div><span>PRICE</span><strong>FREE</strong></div><div><span>TYPE</span><strong>{assetSubcategory.toUpperCase()}</strong></div><div><span>SOURCE</span><strong>{sourceLabel}</strong></div><div><span>FORMAT</span><strong>{asset.formats.join(' / ').toUpperCase()}</strong></div><div><span>INTERACTION</span><strong>{interactionLabel}</strong></div><div><span>DETAIL</span><strong>{detailLabel}</strong></div><div><span>DOWNLOAD</span><strong>ZIP + SOURCE</strong></div><div><span>VISUAL QA</span><strong>REVIEW PENDING</strong></div>
           <a className="download-button" href={asset.download} download><span>Download from {brand.name}</span><ArrowDown /></a>
           <p>Direct download with source included. Object likeness and photorealism are not independently artist-certified; inspect the 3D preview and source before production use.</p>
-          {cc0Model && <p className="model-provenance">Original PBR model: <a href={cc0Model.sourceUrl} target="_blank" rel="noreferrer noopener">Poly Haven / {cc0Model.providerAssetId}</a> (CC0 1.0). The source ZIP includes the exact original model, material maps and provenance.</p>}
+          {cc0Model && <p className="model-provenance">Original PBR model: <a href={cc0Model.sourceUrl} target="_blank" rel="noreferrer noopener">Poly Haven / {cc0Model.providerAssetId}</a> by {cc0Model.originalAuthors.join(', ')} (CC0 1.0). The source ZIP includes the exact original model, material maps and provenance.</p>}
         </aside>
       </section>
 
