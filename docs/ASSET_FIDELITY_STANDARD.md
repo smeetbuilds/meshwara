@@ -38,3 +38,23 @@ Roadmap: individually rebuild and review named hard-surface objects, update
 both live preview and ZIP source, replace generic shared-form copies with unique
 geometry, then tackle anatomy-heavy and environment-heavy assets using licensed
 high-quality source meshes. All 500 remain UNREVIEWED until signed evidence.
+
+## Reproducible CC0 model assets (2026-11-21)
+
+Six exact-match PBR models are sourced from Poly Haven under CC0 1.0 and tracked
+in `src/data/cc0Models.json` with each original asset ID, MD5 source record,
+final reconstructed GLB SHA-256, mesh count and embedded textures. The committed
+repository contains the provenance manifest and import code, **not** the binary
+GLB files: `scripts/import-cc0.mjs` downloads and reconstructs missing GLBs
+from the original allowlisted host on a clean build, verifies upstream MD5 and
+refuses any GLB not matching the committed SHA-256 pin. This is an intentional
+build-time external dependency: a fresh build fails when Poly Haven is offline
+or changes the source bytes. Production browsers load only local same-origin
+static GLBs, without calling the external host.
+
+`scripts/cc0-overlay.mjs` embeds the byte-identical GLB, a portable TSX viewer,
+original CC0 license notice and source provenance inside each corresponding ZIP.
+`scripts/check-cc0-release.mjs` verifies source, embedded buffers and textures,
+ZIP parity, license, and the download manifest without granting artistic approval.
+All six models still require independent human visual review before claims of
+production-ready hyperrealism.

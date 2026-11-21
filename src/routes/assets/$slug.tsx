@@ -8,6 +8,7 @@ import { ArrowDown, ArrowUpRight } from '../../components/Icons'
 import { PreviewErrorBoundary } from '../../components/LazyAssetScene'
 import { assets, getAsset, getAssetSubcategory } from '../../data/assets'
 import { brand } from '../../data/brand'
+import cc0Models from '../../data/cc0Models.json'
 
 export const Route = createFileRoute('/assets/$slug')({
   loader: ({ params }) => {
@@ -32,6 +33,7 @@ export const Route = createFileRoute('/assets/$slug')({
 
 function AssetDetail() {
   const asset = Route.useLoaderData()
+  const cc0Model = cc0Models[asset.slug as keyof typeof cc0Models]
   const [preview, setPreview] = useState(() => ({ ...defaultPreviewSettings, pointer: asset.interaction === 'Pointer' }))
   const [playground, setPlayground] = useState(() => createDefaultAssetPlaygroundSettings(asset.scene))
   const assetSubcategory = getAssetSubcategory(asset)
@@ -40,7 +42,7 @@ function AssetDetail() {
   const related = [...sameType, ...sameCategory].slice(0, 3)
   const interactionLabel = asset.interaction === 'Pointer' ? 'INTERACTIVE' : 'ANIMATED'
   const detailLabel = asset.complexity === 'Light' ? 'LIGHTWEIGHT' : asset.complexity === 'Cinematic' ? 'CINEMATIC PRESET' : 'BALANCED'
-  const sourceLabel = asset.sourceType === 'Procedural' ? 'CODE' : asset.sourceType === 'Hybrid' ? 'CODE + MATERIALS' : asset.sourceType === 'Shader' ? 'SHADER' : 'MODEL'
+  const sourceLabel = asset.formats.includes('GLB') ? 'GLB + CODE' : asset.sourceType === 'Procedural' ? 'CODE' : asset.sourceType === 'Hybrid' ? 'CODE + MATERIALS' : asset.sourceType === 'Shader' ? 'SHADER' : 'MODEL'
   const previewStateLabel = preview.motion === 'paused' ? 'PAUSED' : asset.interaction !== 'Pointer' ? 'IDLE' : preview.pointer ? 'MOVE POINTER' : 'LOCKED'
   const stageStyle = playground.background ? ({ '--playground-stage': playground.background } as CSSProperties) : undefined
 
@@ -81,6 +83,7 @@ function AssetDetail() {
           <div><span>PRICE</span><strong>FREE</strong></div><div><span>TYPE</span><strong>{assetSubcategory.toUpperCase()}</strong></div><div><span>SOURCE</span><strong>{sourceLabel}</strong></div><div><span>FORMAT</span><strong>{asset.formats.join(' / ').toUpperCase()}</strong></div><div><span>INTERACTION</span><strong>{interactionLabel}</strong></div><div><span>DETAIL</span><strong>{detailLabel}</strong></div><div><span>DOWNLOAD</span><strong>ZIP + SOURCE</strong></div><div><span>VISUAL QA</span><strong>REVIEW PENDING</strong></div>
           <a className="download-button" href={asset.download} download><span>Download from {brand.name}</span><ArrowDown /></a>
           <p>Direct download with source included. Object likeness and photorealism are not independently artist-certified; inspect the 3D preview and source before production use.</p>
+          {cc0Model && <p className="model-provenance">Original PBR model: <a href={cc0Model.sourceUrl} target="_blank" rel="noreferrer noopener">Poly Haven / {cc0Model.providerAssetId}</a> (CC0 1.0). The source ZIP includes the exact original model, material maps and provenance.</p>}
         </aside>
       </section>
 

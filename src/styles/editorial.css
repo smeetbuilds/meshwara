@@ -425,3 +425,8 @@ button, input, select, textarea { font-family: inherit; }
   .desktop-nav a:not(.is-active):hover::after { right: 100%; }
   .related-links a:hover { padding-left: 0; }
 }
+
+/* Real model identifiers must never widen the detail layout on small screens. */
+.asset-info > *, .info-main, .spec-panel { min-width: 0; }
+.info-main h2, .info-main p, .spec-panel strong, .model-provenance { overflow-wrap: anywhere; }
+.model-provenance a { color: var(--editorial-link); text-decoration: underline; text-underline-offset: 3px; }
