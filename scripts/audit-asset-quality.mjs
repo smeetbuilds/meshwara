@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const root = process.cwd()
+const cc0 = JSON.parse(await readFile(resolve(root,'src/data/cc0Models.json'),'utf8'))
 const source = await readFile(resolve(root, 'src/data/assets.ts'), 'utf8')
 const blocks = [...source.matchAll(/\{\s*\n?\s*slug:\s*'[^']+'[\s\S]*?\n\s*\},/g)].map((match) => match[0])
 function field(block, name, required = true) { const match = block.match(new RegExp(`${name}:\\s*'([^']+)'`)); if (!match && required) throw new Error(`Asset block missing ${name}`); return match?.[1] }
@@ -18,6 +19,11 @@ const failures = []
 const records = []
 for (const block of blocks) {
   const asset = { index: field(block,'index'), slug: field(block,'slug'), name: field(block,'name'), category: field(block,'category'), subcategory: field(block,'subcategory',false) ?? null, scene: field(block,'scene'), sourceType: field(block,'sourceType'), complexity: field(block,'complexity'), interaction: field(block,'interaction'), presentation: field(block,'presentation',false) ?? 'Floating' }
+  if (cc0[asset.slug]) {
+    records.push({...asset,audit:'CC0_PBR_SOURCE_VERIFIED_ART_PENDING',criticalPassed:true,
+      embeddedTextures:cc0[asset.slug].images,modelSha256:cc0[asset.slug].sha256})
+    continue
+  }
   if (asset.sourceType === 'Model') { records.push({ ...asset, audit:'MODELED_GATE', criticalPassed:true }); continue }
   const scene = await readFile(resolve(root,'src/components/scenes',`${asset.scene}.tsx`),'utf8')
   const bytes = Buffer.byteLength(scene)

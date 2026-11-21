@@ -1,0 +1,236 @@
+{
+  "croissant-study": {
+    "provider": "Poly Haven",
+    "providerAssetId": "croissant",
+    "sourceUrl": "https://polyhaven.com/a/croissant",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/croissant-study.glb",
+    "sha256": "5c80475c9c03d503cee1c491487d7840c6fe98f05ed3628fd8ad7312a936d295",
+    "bytes": 2097812,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/croissant/croissant_1k.gltf",
+        "size": 2680,
+        "md5": "03127b1168ad97dd71f52032a286248f"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/croissant/croissant_nor_gl_1k.jpg",
+        "size": 844912,
+        "md5": "adc1a59a97372d92926e40b06e35f39e"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/croissant/croissant_diff_1k.jpg",
+        "size": 573933,
+        "md5": "4c60b005947f78e0b8049b017a5ce87d"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/croissant/croissant.bin",
+        "size": 44932,
+        "md5": "8d343f5c5ea635334c05bd74a7f13fab"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/croissant/croissant_arm_1k.jpg",
+        "size": 632316,
+        "md5": "816e24b4ef3357893348ec279720786d"
+      }
+    ]
+  },
+  "desert-boulder-study": {
+    "provider": "Poly Haven",
+    "providerAssetId": "boulder_01",
+    "sourceUrl": "https://polyhaven.com/a/boulder_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/desert-boulder-study.glb",
+    "sha256": "c616965bbb67e2bc2263f215ccb58966d250774757e55decd60e1191290d1601",
+    "bytes": 5770992,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/boulder_01/boulder_01_1k.gltf",
+        "size": 2773,
+        "md5": "26e2eef4a1f68c9557c65cd375b21d6c"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boulder_01/boulder_01_arm_1k.jpg",
+        "size": 659386,
+        "md5": "d632159982cc3121ed3d69b89a122146"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boulder_01/boulder_01_diff_1k.jpg",
+        "size": 987467,
+        "md5": "25f8a843f13369d56d37f49db05ea8c3"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/boulder_01/boulder_01.bin",
+        "size": 2938808,
+        "md5": "27a19fa031d8b4c3a09261f19c444dc5"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boulder_01/boulder_01_nor_gl_1k.jpg",
+        "size": 1183552,
+        "md5": "0c4da644d901144b53e4fe2446f3c389"
+      }
+    ]
+  },
+  "dining-table": {
+    "provider": "Poly Haven",
+    "providerAssetId": "dining_table",
+    "sourceUrl": "https://polyhaven.com/a/dining_table",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/dining-table.glb",
+    "sha256": "975afdd51c1b959989d24600c97de1b0b66a9cbbeea81a9758ddc2207cc48007",
+    "bytes": 2282336,
+    "meshes": 2,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/dining_table/dining_table_1k.gltf",
+        "size": 4165,
+        "md5": "556aed1f86536dba7cc5917c36ee7ab7"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/dining_table/dining_table_nor_gl_1k.jpg",
+        "size": 707020,
+        "md5": "f9e982c15242ff9e544d4968c377abb2"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/dining_table/dining_table_diff_1k.jpg",
+        "size": 852259,
+        "md5": "a309bb6839c628305059775d7480c8b7"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/dining_table/dining_table_arm_1k.jpg",
+        "size": 689497,
+        "md5": "0be0f4618ef26ce517ebf049e90bcc7c"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/dining_table/dining_table.bin",
+        "size": 30992,
+        "md5": "13227e80b4c213bd7fee570e0b23fe8c"
+      }
+    ]
+  },
+  "fern-study": {
+    "provider": "Poly Haven",
+    "providerAssetId": "fern_02",
+    "sourceUrl": "https://polyhaven.com/a/fern_02",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/fern-study.glb",
+    "sha256": "68b47695e77263eaf2294ed7431255793b54fe5165aece19ace01637b24e6808",
+    "bytes": 1143580,
+    "meshes": 4,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/fern_02/fern_02_1k.gltf",
+        "size": 6899,
+        "md5": "cf276874d37bfb73c299504a6b355b77"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_arm_1k.jpg",
+        "size": 280359,
+        "md5": "1bbb2b22951f450720d28e17d93a2987"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_diff_1k.jpg",
+        "size": 315705,
+        "md5": "82c18a6cfd5ae91c37c0e078f591181c"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_nor_gl_1k.jpg",
+        "size": 367222,
+        "md5": "43aed63dff79554f6064627515afd9d7"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/fern_02/fern_02.bin",
+        "size": 176176,
+        "md5": "c061e9255f7d36ae9ce0e92ef3e100b2"
+      }
+    ]
+  },
+  "lounge-chair": {
+    "provider": "Poly Haven",
+    "providerAssetId": "mid_century_lounge_chair",
+    "sourceUrl": "https://polyhaven.com/a/mid_century_lounge_chair",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/lounge-chair.glb",
+    "sha256": "32f5545bbb2c9ed32007a76c3e5052c80c89b1c5e7eb0fb1276b251541e2532d",
+    "bytes": 2085976,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/mid_century_lounge_chair/mid_century_lounge_chair_1k.gltf",
+        "size": 2884,
+        "md5": "474bed17d25e794f39e60d1748dafcc6"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/mid_century_lounge_chair/mid_century_lounge_chair_nor_gl_1k.jpg",
+        "size": 648960,
+        "md5": "2caa258ba4e50a6be6533ac9ff96587e"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/mid_century_lounge_chair/mid_century_lounge_chair_diff_1k.jpg",
+        "size": 627298,
+        "md5": "7ab2bc1b5ac85a7664a82eedf6c85dde"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/mid_century_lounge_chair/mid_century_lounge_chair_arm_1k.jpg",
+        "size": 636493,
+        "md5": "a0a839c4ae18eb06a5ececc72c0e066f"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/mid_century_lounge_chair/mid_century_lounge_chair.bin",
+        "size": 171384,
+        "md5": "bded2f717792aefe222dca07633b94ce"
+      }
+    ]
+  },
+  "rock-formation": {
+    "provider": "Poly Haven",
+    "providerAssetId": "namaqualand_boulders_01",
+    "sourceUrl": "https://polyhaven.com/a/namaqualand_boulders_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/rock-formation.glb",
+    "sha256": "c63178a0584a6a94d4777598ce46ba08d95ed072a2181417ebe183deab07ca03",
+    "bytes": 3638924,
+    "meshes": 2,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/namaqualand_boulders_01/namaqualand_boulders_01_1k.gltf",
+        "size": 4427,
+        "md5": "904c7349856f65f757b7f6fd36f57641"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulders_01/namaqualand_boulders_01_diff_1k.jpg",
+        "size": 830079,
+        "md5": "1ed791727bbb6f26f77246e5de17d901"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulders_01/namaqualand_boulders_01_nor_gl_1k.jpg",
+        "size": 1159170,
+        "md5": "0f3ad6c29c72b9fe28fc91dc3cf15c00"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/namaqualand_boulders_01/namaqualand_boulders_01.bin",
+        "size": 927724,
+        "md5": "58ed8a29120ad0807320ce49a9d14c2a"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulders_01/namaqualand_boulders_01_arm_1k.jpg",
+        "size": 719208,
+        "md5": "9827ad42f724de4fc327b063878939d6"
+      }
+    ]
+  }
+}

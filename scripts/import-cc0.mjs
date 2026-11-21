@@ -1,0 +1,98 @@
+import { createHash } from 'node:crypto'
+import { readFile, writeFile, mkdir } from 'node:fs/promises'
+import { resolve, dirname } from 'node:path'
+
+const curated={
+ 'fern-study':'fern_02',
+ 'croissant-study':'croissant',
+ 'dining-table':'dining_table',
+ 'lounge-chair':'mid_century_lounge_chair',
+ 'desert-boulder-study':'boulder_01',
+ 'rock-formation':'namaqualand_boulders_01',
+}
+const pinnedPath='src/data/cc0Models.json'
+const bootstrap=process.argv.includes('--bootstrap')
+const targetSlugs=process.argv.filter(x=>x in curated)
+const selections=targetSlugs.length?targetSlugs:Object.keys(curated)
+const registry=await (async()=>{try{return JSON.parse(await readFile(pinnedPath,'utf8'))}catch(err){if(err.code!=='ENOENT')throw err;return {}}})()
+const hash=(data,alg='sha256')=>createHash(alg).update(data).digest('hex')
+const safeUrl=u=>{const x=new URL(u);if(x.protocol!=='https:'||!['api.polyhaven.com','dl.polyhaven.org'].includes(x.hostname)||x.hostname==='dl.polyhaven.org'&&!x.pathname.startsWith('/file/ph-assets/Models/'))throw Error('Unapproved source URL');return u}
+async function load(url,max=11*1024*1024){
+ const response=await fetch(safeUrl(url),{headers:{'User-Agent':'Meshvara-curated-CC0/1.0'}})
+ if(!response.ok)throw Error('Upstream HTTP '+response.status+' '+url)
+ const bytes=Buffer.from(await response.arrayBuffer())
+ if(bytes.length>max)throw Error('Exceeds input budget '+url)
+ return bytes
+}
+function packGltf(input,source){
+ const gltf=structuredClone(input)
+ if(gltf.asset?.version!=='2.0'||!Array.isArray(gltf.buffers)||!Array.isArray(gltf.bufferViews))throw Error('Invalid glTF 2.0')
+ const blobs=[],offsets=[];let used=0
+ function append(bytes){
+  const pad=(4-used%4)%4;if(pad){blobs.push(Buffer.alloc(pad));used+=pad}
+  const start=used;blobs.push(bytes);used+=bytes.length;return start
+ }
+ for(const buffer of gltf.buffers){const bytes=source.get(buffer.uri);if(!bytes||bytes.length<buffer.byteLength)throw Error('Missing binary buffer '+buffer.uri);offsets.push(append(bytes))}
+ for(const view of gltf.bufferViews){if(!Number.isInteger(view.buffer)||offsets[view.buffer]==null)throw Error('Invalid buffer reference');view.byteOffset=(view.byteOffset||0)+offsets[view.buffer];view.buffer=0}
+ for(const image of gltf.images||[]){
+  const bytes=source.get(image.uri);if(!bytes||!/\.(jpg|jpeg|png)$/i.test(image.uri))throw Error('Invalid texture '+image.uri)
+  const start=append(bytes);image.bufferView=gltf.bufferViews.length;image.mimeType=/\.png$/i.test(image.uri)?'image/png':'image/jpeg';delete image.uri
+  gltf.bufferViews.push({buffer:0,byteOffset:start,byteLength:bytes.length})
+ }
+ gltf.buffers=[{byteLength:used}]
+ const json=Buffer.from(JSON.stringify(gltf))
+ const jpad=(4-json.length%4)%4
+ const bin=Buffer.concat(blobs)
+ const bpad=(4-bin.length%4)%4
+ const out=Buffer.alloc(12+8+json.length+jpad+8+bin.length+bpad)
+ let at=0
+ out.writeUInt32LE(0x46546c67,at);at+=4
+ out.writeUInt32LE(2,at);at+=4
+ out.writeUInt32LE(out.length,at);at+=4
+ out.writeUInt32LE(json.length+jpad,at);at+=4
+ out.writeUInt32LE(0x4e4f534a,at);at+=4
+ json.copy(out,at);at+=json.length
+ out.fill(0x20,at,at+jpad);at+=jpad
+ out.writeUInt32LE(bin.length+bpad,at);at+=4
+ out.writeUInt32LE(0x004e4942,at);at+=4
+ bin.copy(out,at)
+ if(!gltf.meshes?.length||!gltf.materials?.length||(gltf.images||[]).length<3)throw Error('PBR mesh/texture proof missing')
+ return {buffer:out,meshes:gltf.meshes.length,materials:gltf.materials.length,images:gltf.images.length}
+}
+for(const slug of selections){
+ const id=curated[slug]
+ const modelPath=resolve('public/models/cc0',slug+'.glb')
+ try{
+  const cached=await readFile(modelPath)
+  if(registry[slug]&&cached.length===registry[slug].bytes&&hash(cached)===registry[slug].sha256){console.log('Verified cached CC0 '+slug);continue}
+  throw Error('Corrupted cached model '+slug)
+ }catch(err){if(err.code!=='ENOENT')throw err}
+ if(!registry[slug]&&!bootstrap)throw Error('Unpinned model import blocked '+slug)
+ const data=JSON.parse((await load('https://api.polyhaven.com/files/'+id,1024*1024)).toString('utf8'))
+ const info=data.gltf?.['1k']?.gltf
+ if(!info?.url||!info?.md5||!info?.include)throw Error('Missing official source references '+id)
+ const text=await load(info.url,1024*1024)
+ if(hash(text,'md5')!==info.md5)throw Error('Original source MD5 mismatch')
+ const resources=new Map(),records=[{url:info.url,size:text.length,md5:info.md5}]
+ for(const [name,file] of Object.entries(info.include)){
+  if(name.includes('..')||name.startsWith('/')||!file.md5||!file.url||file.size>11*1024*1024)throw Error('Unsafe dependent resource')
+  const bytes=await load(file.url)
+  if(bytes.length!==file.size||hash(bytes,'md5')!==file.md5)throw Error('Original texture/binary mismatch '+name)
+  resources.set(name,bytes);records.push({url:file.url,size:bytes.length,md5:file.md5})
+ }
+ const built=packGltf(JSON.parse(text.toString('utf8')),resources)
+ if(built.buffer.length>18*1024*1024)throw Error('Model binary budget exceeded')
+ const value={provider:'Poly Haven',providerAssetId:id,sourceUrl:'https://polyhaven.com/a/'+id,license:'CC0-1.0',
+  path:'/models/cc0/'+slug+'.glb',sha256:hash(built.buffer),bytes:built.buffer.length,
+  meshes:built.meshes,materials:built.materials,images:built.images,sourceFiles:records}
+ if(registry[slug]&&registry[slug].sha256!==value.sha256)throw Error('Model SHA differs from repository pin for '+slug)
+ await mkdir(dirname(modelPath),{recursive:true})
+ await writeFile(modelPath,built.buffer)
+ registry[slug]=value
+ console.log('Verified '+slug+' / '+id+' / '+(built.buffer.length/1e6).toFixed(2)+' MB / '+built.images+' PBR maps')
+}
+if(bootstrap){
+ await mkdir(dirname(pinnedPath),{recursive:true})
+ await writeFile(pinnedPath,JSON.stringify(Object.fromEntries(Object.entries(registry).sort(([a],[b])=>a.localeCompare(b))),null,2)+'\n')
+ console.log('Immutable provenance registry generated; commit before live deployment')
+}

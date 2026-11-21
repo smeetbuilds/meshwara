@@ -726,9 +726,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'fern-study', index: '121', name: 'Fern Study', category: 'Nature', scene: 'fernstudy',
-    blurb: 'Seven curve-authored fronds radiate from a compact planter with layered paired leaflets.',
-    description: 'A foliage asset built from explicit frond curves and deterministic leaf placement rather than random instancing. It is designed to remain coherent when viewed close or compressed into a catalog card.',
-    tags: ['Fern', 'Foliage', 'Curves'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#547b60', download: '/downloads/fern-study.zip', featured: true, geometryV2: true, new: true,
+    blurb: 'A real textured fern assembly with recognizable layered fronds and natural leaf shapes.',
+    description: 'A CC0 authored fern model sourced from Poly Haven (fern_02), using original detailed mesh geometry and embedded PBR diffuse, normal and material maps. Meshvara bundles the identical GLB and an editable React Three Fiber scene wrapper.',
+    tags: ['Fern', 'Foliage', 'Curves'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#547b60', download: '/downloads/fern-study.zip', featured: true, geometryV2: true, new: true,
   },
   {
     slug: 'mushroom-cluster', index: '122', name: 'Mushroom Cluster', category: 'Nature', scene: 'mushroomcluster',
@@ -1032,9 +1032,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'lounge-chair', index: '172', name: 'Lounge Chair', category: 'Furniture', subcategory: 'Seating', scene: 'loungechair',
-    blurb: 'A low lounge chair with molded shell, independent cushion and splayed metal base.',
-    description: 'A product-quality seating object balancing upholstered volume and structural readability without reducing the form to generic boxes.',
-    tags: ['Chair', 'Seating', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#7c685e', download: '/downloads/lounge-chair.zip', new: true,
+    blurb: 'A convincingly modeled lounge chair with accurate upholstery and structural details.',
+    description: 'A CC0 mid_century_lounge_chair mesh from Poly Haven, preserving its independent modeled chair structure and upholstery textures. The portable download includes the identical original GLB, its materials and model source records.',
+    tags: ['Chair', 'Seating', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#7c685e', download: '/downloads/lounge-chair.zip', new: true,
   },
   {
     slug: 'bar-trolley', index: '173', name: 'Bar Trolley', category: 'Furniture', subcategory: 'Storage', scene: 'bartrolley',
@@ -1349,9 +1349,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'dining-table', index: '225', name: 'Dining Table', category: 'Furniture', subcategory: 'Tables', scene: 'diningtable',
-    blurb: 'A generous dining table with softened timber top and paired sculptural trestle supports.',
-    description: 'A MESHVARA tables asset built as a self-contained Three.js composition with authored proportions, deterministic detail and responsive presentation.',
-    tags: ['Dining', 'Table', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#8f6b52', download: '/downloads/dining-table.zip', new: true,
+    blurb: 'A realistically modeled dining table with wood texture and clear furniture joinery.',
+    description: 'A CC0 authored dining_table model from Poly Haven, with object-specific furniture proportions, detailed mesh structure and embedded PBR maps. Meshvara distributes the original GLB with editable React Three Fiber presentation code.',
+    tags: ['Dining', 'Table', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#8f6b52', download: '/downloads/dining-table.zip', new: true,
   },
   {
     slug: 'bar-stool', index: '226', name: 'Bar Stool', category: 'Furniture', subcategory: 'Seating', scene: 'barstool',
@@ -1775,15 +1775,15 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'rock-formation', index: '296', name: 'Rock Formation', category: 'Nature', subcategory: 'Terrain', scene: 'rockformation',
-    blurb: 'A layered rock formation with stepped strata, fractured faces and a grounded geological composition.',
-    description: 'A MESHVARA terrain asset built as a self-contained Three.js composition with authored proportions, deterministic detail and responsive presentation.',
-    tags: ['Rock', 'Geology', 'Terrain'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Static', accent: '#8d887f', download: '/downloads/rock-formation.zip', new: true,
+    blurb: 'A natural multi-rock assembly with multiple distinctive boulders and detailed surfaces.',
+    description: 'A CC0 namaqualand_boulders_01 geological mesh sourced from Poly Haven, preserving multiple separate rock geometries and embedded PBR maps. The source download contains the original GLB and documented CC0 rights.',
+    tags: ['Rock', 'Geology', 'Terrain'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Static', accent: '#8d887f', download: '/downloads/rock-formation.zip', new: true,
   },
   {
     slug: 'croissant-study', index: '297', name: 'Croissant Study', category: 'Food', subcategory: 'Food Objects', scene: 'croissantstudy',
-    blurb: 'A laminated pastry study with segmented crescent volume and deliberately browned outer ridges.',
-    description: 'A MESHVARA food objects asset built as a self-contained Three.js composition with authored proportions, deterministic detail and responsive presentation.',
-    tags: ['Croissant', 'Bakery', 'Food'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#b47b47', download: '/downloads/croissant-study.zip', new: true,
+    blurb: 'A fully modeled, textured croissant with a believable laminated crust and pastry shape.',
+    description: 'A CC0 authored croissant sourced from Poly Haven with independent mesh geometry and baked PBR color, surface and normal texture maps. The original GLB and its provenance are included in a reusable Meshvara source package.',
+    tags: ['Croissant', 'Bakery', 'Food'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#b47b47', download: '/downloads/croissant-study.zip', new: true,
   },
   {
     slug: 'sushi-service', index: '298', name: 'Sushi Service', category: 'Food', subcategory: 'Tableware', scene: 'sushiservice',
@@ -2748,9 +2748,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'desert-boulder-study', index: '458', name: 'Desert Boulder Study', category: 'Nature', subcategory: 'Botanical', scene: 'desertboulderstudy',
-    blurb: 'A precision-authored desert boulder study study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA botanical asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Boulder', 'Desert', 'Nature', 'Terrain'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Static', accent: '#c17678', download: '/downloads/desert-boulder-study.zip', new: true,
+    blurb: 'An irregular natural boulder featuring high-detail geometry and PBR surface texture.',
+    description: 'A CC0 boulder_01 natural-rock mesh from Poly Haven with detailed source geometry and embedded diffuse, normal and surface-response textures. Meshvara provides the original GLB and editable presentation wrapper with provenance.',
+    tags: ['Boulder', 'Desert', 'Nature', 'Terrain'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Static', accent: '#c17678', download: '/downloads/desert-boulder-study.zip', new: true,
   },
   {
     slug: 'alpine-pine-study', index: '459', name: 'Alpine Pine Study', category: 'Nature', subcategory: 'Botanical', scene: 'alpinepinestudy',

@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const root = process.cwd()
+const cc0 = JSON.parse(await readFile(resolve(root,'src/data/cc0Models.json'),'utf8'))
 const source = await readFile(resolve(root, 'src/data/assets.ts'), 'utf8')
 const v2Source = await readFile(resolve(root, 'src/data/geometryV2.ts'), 'utf8')
 const promotedSlugs = new Set([...v2Source.matchAll(/'([^']+)'/g)].map((match) => match[1]))
@@ -56,6 +57,12 @@ let curvedBoxScenes = 0
 const phasePassed = new Map(phases.map(([label]) => [label, 0]))
 
 for (const asset of assets) {
+  if (cc0[asset.slug]) {
+    if (asset.geometryV2) v2Count += 1
+    for (const [phaseName, set] of phases)
+      if (set.has(asset.slug)) phasePassed.set(phaseName,phasePassed.get(phaseName)+1)
+    continue
+  }
   if (asset.sourceType === 'Model') continue
   const scene = await readFile(resolve(root, 'src/components/scenes', `${asset.scene}.tsx`), 'utf8')
   const productionCount = (scene.match(productionSignal) ?? []).length

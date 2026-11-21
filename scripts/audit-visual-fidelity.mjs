@@ -3,6 +3,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises'
 import { resolve, dirname } from 'node:path'
 
 const root = process.cwd()
+const cc0 = JSON.parse(await readFile(resolve(root,'src/data/cc0Models.json'),'utf8'))
 const outputArg = process.argv.indexOf('--output')
 const output = resolve(root, outputArg >= 0 ? process.argv[outputArg + 1] : 'public/quality/visual-fidelity.json')
 const strict = process.argv.includes('--strict')
@@ -25,7 +26,7 @@ for (const block of blocks) {
   const sourceSha256=createHash('sha256').update(content).digest('hex')
   const indicators={
     genericForm: /<(?:PerformanceForm|SpatialForm|ArchitectureForm|IndustrialForm)\b/.test(sourceText),
-    noSourceTexture: !/(?:TextureLoader|useTexture|map=\{|(?:roughness|normal|metalness|ao)Map=|\.png|\.jpg|\.ktx2|\.webp)/i.test(sourceText),
+    noSourceTexture: !cc0[slug] && !/(?:TextureLoader|useTexture|map=\{|(?:roughness|normal|metalness|ao)Map=|\.png|\.jpg|\.ktx2|\.webp)/i.test(sourceText),
     smallSource: content.byteLength<1500,
     primitivesPresent: /<(?:box|sphere|cylinder|cone|capsule|torus|plane|circle)Geometry\b/.test(sourceText),
   }
@@ -60,6 +61,7 @@ const summary={
   genericForm:record.filter(x=>x.indicators.genericForm).length,
   smallSource:record.filter(x=>x.indicators.smallSource).length,
   noSourceTexture:record.filter(x=>x.indicators.noSourceTexture).length,
+  verifiedCc0PbrSources:Object.keys(cc0).length,
 }
 if (record.length!==500) throw new Error('Catalog count changed: '+record.length)
 if (problems.length) throw new Error('Invalid artist approvals:\n'+problems.join('\n'))

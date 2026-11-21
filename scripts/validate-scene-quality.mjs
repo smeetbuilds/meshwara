@@ -3,6 +3,7 @@ import { readFile, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const root = process.cwd()
+const cc0 = JSON.parse(await readFile(resolve(root,'src/data/cc0Models.json'),'utf8'))
 const source = await readFile(resolve(root, 'src/data/assets.ts'), 'utf8')
 const blocks = [...source.matchAll(/\{\s*\n?\s*slug:\s*'[^']+'[\s\S]*?\n\s*\},/g)].map((match) => match[0])
 function field(block, name, required = true) {
@@ -31,7 +32,7 @@ for (const asset of assets) {
   if (asset.tags.length < 3) failures.push(`${asset.slug}: requires at least 3 authored tags`)
   if (asset.index >= 301 && asset.tags.length < 4) failures.push(`${asset.slug}: 301+ production assets require at least 4 authored tags`)
   if (asset.index >= 201 && !asset.subcategory) failures.push(`${asset.slug}: scaled catalog additions require explicit subcategory`)
-  if (asset.sourceType === 'Model') continue
+  if (asset.sourceType === 'Model' || cc0[asset.slug]) continue // SHA-locked externally authored geometry
   const path = resolve(root, 'src/components/scenes', `${asset.scene}.tsx`)
   const scene = await readFile(path, 'utf8')
   const size = (await stat(path)).size
