@@ -16,6 +16,14 @@ const selections=[
   {slug:'pneumatic-cylinder',title:'Pneumatic Cylinder'},
   {slug:'conveyor-module',title:'Conveyor Module'},
   {slug:'air-compressor',title:'Workshop Air Compressor'},
+  {slug:'lathe-chuck',title:'Precision Lathe Chuck'},
+  {slug:'otoscope',title:'Clinical Otoscope'},
+  {slug:'thermal-printer',title:'Thermal Printer'},
+  {slug:'magnetic-stirrer',title:'Magnetic Stirrer'},
+  {slug:'sourdough-loaf',title:'Sourdough Loaf'},
+  {slug:'performance-surfboard',title:'Performance Surfboard'},
+  {slug:'network-router',title:'Network Router'},
+  {slug:'mushroom-cluster',title:'Mushroom Cluster'},
 ] as const
 
 test.describe('revised catalog WebGL evidence',()=>{
