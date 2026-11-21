@@ -1,7 +1,55 @@
-import { PerformanceForm } from '../geometry/ProductionForms'
-const primary=[{x:-.9,y:-.22,width:.19,height:.11,exponent:3.6},{x:-.58,y:-.14,width:.29,height:.16,exponent:3.8},{x:-.12,y:-.08,width:.36,height:.19,exponent:4},{x:.34,y:-.05,width:.33,height:.17,exponent:4},{x:.72,y:-.12,width:.23,height:.13,exponent:3.7},{x:.94,y:-.18,width:.11,height:.07,exponent:3.3}]
-const secondary=[{x:-.72,y:0,z:.01,width:.18,height:.16,exponent:3.4},{x:-.42,y:.16,z:.01,width:.28,height:.3,exponent:3.5},{x:-.06,y:.28,z:0,width:.33,height:.37,exponent:3.6},{x:.3,y:.22,z:0,width:.29,height:.3,exponent:3.5},{x:.62,y:.08,z:0,width:.19,height:.18,exponent:3.4}]
-const trim:Array<[number,number,number]>=[[-.52,.2,.28],[-.3,.34,.33],[-.06,.39,.35],[.18,.34,.32],[.4,.2,.28]]
-const accent:Array<[number,number,number]>=[[-.68,-.22,-.2],[-.42,-.3,-.25],[-.05,-.28,-.27],[.34,-.26,-.22],[.68,-.24,-.16]]
-const profile:Array<[number,number]>=[[0,-.13],[.1,-.12],[.15,-.04],[.14,.05],[.08,.1],[0,.11]]
-export default function ProFootballCleat(){return <PerformanceForm primary={primary} secondary={secondary} trim={trim} accent={accent} profile={profile} primaryMaterial={{color:'#191b1d',roughness:.44,clearcoat:.2}} secondaryMaterial={{color:'#f3f1e9',roughness:.36,clearcoat:.16}} accentMaterial={{color:'#df583f',metalness:.08,roughness:.3,clearcoat:.3}} rotation={[0,-.48,-.06]} scale={.95}/>}
+import { LoftSurface, ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
+
+/** Studded football boot: close-fitting upper, molded heel cup, distinct
+ * forefoot vamp, tongue and laces, rigid outsole and twelve grip studs.
+ * Stud locations are illustrative, not approved for match surfaces.
+ */
+const upper='#24282e', vamp='#b3b9b3', red='#cf614d', black='#171e23', sole='#d5d0c3', studs='#9eaeac'
+const soleStation=[
+ {x:-1.06,y:-.26,width:.12,height:.055,exponent:3.6},
+ {x:-.78,y:-.17,width:.27,height:.09,exponent:3.8},
+ {x:-.45,y:-.13,width:.35,height:.12,exponent:4},
+ {x:0,y:-.13,width:.37,height:.10,exponent:4},
+ {x:.44,y:-.15,width:.30,height:.08,exponent:4},
+ {x:.85,y:-.22,width:.16,height:.055,exponent:3.5},
+ {x:1.08,y:-.26,width:.045,height:.045,exponent:3},
+]
+const upperStation=soleStation.map((s,i)=>({...s,y:s.y+[.17,.29,.44,.45,.37,.21,.10][i],height:s.height+[.09,.22,.29,.30,.27,.14,.05][i],width:s.width*.92}))
+const heelCollar:Array<[number,number,number]>=[[-.93,.08,-.1],[-.79,.40,-.25],[-.52,.49,-.24],[-.33,.43,-.2]]
+const studsX=[-.78,-.46,-.13,.18,.5,.78]
+export default function ProFootballCleat(){
+ return <group rotation={[0,-.45,-.04]} scale={1.04} position={[0,-.17,0]}>
+  <LoftSurface stations={soleStation} radialSegments={40}>
+   <meshPhysicalMaterial color={sole} roughness={.45} clearcoat={.2}/>
+  </LoftSurface>
+  <LoftSurface stations={upperStation} radialSegments={42}>
+   <meshPhysicalMaterial color={upper} roughness={.40} clearcoat={.2}/>
+  </LoftSurface>
+  {[-1,1].map(side=><group key={side}>
+   <SplineTube points={heelCollar.map(([x,y,z])=>[x,y,z*side] as [number,number,number])} radius={.043}>
+    <meshStandardMaterial color={vamp} roughness={.70}/>
+   </SplineTube>
+   <SplineTube points={[[-.86,.08,side*.21],[-.50,.38,side*.32],[-.05,.48,side*.33],[.51,.30,side*.20],[.92,-.02,side*.11]]} radius={.023}>
+    <meshStandardMaterial color={red} roughness={.55}/>
+   </SplineTube>
+   <SplineTube points={[[-.58,.25,side*.34],[-.19,.35,side*.38],[.32,.28,side*.31]]} radius={.02}>
+    <meshStandardMaterial color={vamp} roughness={.62}/>
+   </SplineTube>
+  </group>)}
+  {/* Matching lateral and medial stud rows actually project beneath the sole. */}
+  {studsX.flatMap((x,i)=>[-1,1].map(side=><RevolvedSurface key={i+':'+side}
+   profile={[[0,-.12],[.045,-.12],[.095,.11],[0,.11]]}
+   position={[x,-.40+(i%3)*.018,side*(.17+(i>1&&i<5?.10:0))]} radialSegments={10}>
+    <meshPhysicalMaterial color={studs} metalness={.44} roughness={.35}/>
+   </RevolvedSurface>))}
+  <ExtrudedProfile points={[[-.24,-.19],[.24,-.19],[.19,.21],[-.19,.21]]} depth={.10} bevelSize={.022} bevelThickness={.02} rotation={[0,0,.12]} position={[-.15,.45,0]}>
+   <meshStandardMaterial color={upper} roughness={.55}/>
+  </ExtrudedProfile>
+  {Array.from({length:5},(_,i)=><SplineTube key={i} points={[[-.48+i*.14,.48,-.16],[-.42+i*.14,.52,0],[-.48+i*.14,.48,.16]]} radius={.012} tubularSegments={16}>
+   <meshStandardMaterial color={vamp} roughness={.74}/>
+  </SplineTube>)}
+  <RevolvedSurface profile={[[0,-.05],[.07,-.05],[.07,.05],[0,.05]]} position={[-.68,.16,0]}>
+   <meshStandardMaterial color={red} roughness={.48}/>
+  </RevolvedSurface>
+ </group>
+}

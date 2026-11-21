@@ -15,14 +15,19 @@ try {
   assert.equal(report.summary.needsVisualReview,500)
   // Six previously generic industrial assemblies must never regress to
   // ProductionForms. This assertion shrinks when more named objects are fixed.
-  assert.equal(report.summary.genericForm,15,'An object-specific architectural or industrial scene regressed to generic geometry')
+  assert.equal(report.summary.genericForm,0,'No catalog scene may regress to a generic production form')
   for (const slug of ['precision-milling-vice','hydraulic-tie-rod-cylinder',
       'scara-assembly-robot','delta-pick-robot','plc-control-rack','safety-light-curtain',
       'servo-drive-module','conveyor-diverter-junction','compact-palletizer','vacuum-gripper-array',
       'machine-vision-camera','cnc-rotary-table','twelve-station-tool-turret','six-axis-robot-cell',
       'courtyard-villa-study','glass-house-study','cliff-cabin-study','urban-row-house',
       'museum-wing-study','timber-library-hall','rail-platform-canopy','urban-bus-pavilion',
-      'footbridge-lookout-tower','coastal-observation-shelter']) {
+      'footbridge-lookout-tower','coastal-observation-shelter',
+      'patisserie-display-stand','sculptural-pendant-necklace','brushed-signet-ring',
+      'aero-cycling-helmet','alpine-ski-goggles','carbon-running-shoe','pro-football-cleat',
+      'audio-mastering-desk-scene','product-photography-studio','contemporary-surgical-suite',
+      'electric-vehicle-workshop','minimal-living-room-scene','luxury-boutique-display',
+      'sculpture-gallery-courtyard','observatory-roof-deck']) {
     assert.equal(report.assets.find(x=>x.slug===slug)?.indicators.genericForm,false,slug+' regressed to generic geometry')
   }
   assert.equal(report.summary.verifiedCc0PbrSources,31,'Curated source provenance count does not match expected releases')

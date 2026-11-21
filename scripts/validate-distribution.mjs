@@ -37,7 +37,7 @@ for (const script of ['registry:build', 'distribution:check', 'pack:check', 'cus
 assert(pkg.scripts['codecs:check'].includes('tests/studio/codec-sync.test.mjs') && pkg.scripts['codecs:check'].includes('scripts/validate-codecs.mjs'), 'codec release gate does not combine deterministic sync and emitted-runtime validation')
 assert(pkg.scripts.build.startsWith('node scripts/sync-codecs.mjs && node scripts/import-cc0.mjs && bun run packs &&'),
   'production build must sync codecs, verify pinned models, and rebuild all source ZIP packs before publishing')
-assert(pkg.scripts.build.includes('node scripts/verify-cc0-architecture-textures.mjs --packs && node scripts/check-cc0-release.mjs && node tests/quality/architecture-identity.test.mjs --packs && node tests/quality/industrial-identity.test.mjs --packs && node scripts/validate-pack-parity.mjs && node scripts/build-registry.mjs'),
+assert(pkg.scripts.build.includes('node tests/quality/final-fifteen-identity.test.mjs --packs && node scripts/verify-cc0-architecture-textures.mjs --packs && node scripts/check-cc0-release.mjs && node tests/quality/architecture-identity.test.mjs --packs && node tests/quality/industrial-identity.test.mjs --packs && node scripts/validate-pack-parity.mjs && node scripts/build-registry.mjs'),
   'production build must verify CC0 PBR map hashes, Pack-v1 and preview-to-download parity before emitting the public registry')
 assert(pkg.scripts.packs.endsWith('node scripts/standardize-download-packs.mjs'), 'pack generation does not standardize archives to Pack-v1')
 assert(pkg.scripts.packs.includes('scripts/enrich-customizable-packs.mjs'), 'pack generation does not enrich curated typed-customization archives')
