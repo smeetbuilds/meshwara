@@ -72,7 +72,7 @@ function SlashedCrust({x,index}:{x:number;index:number}) {
     const t=i/11
     return [x+.21*(t-.5),baseline+.06*Math.sin(t*Math.PI),-.51+t*.98]
   })
-  const edge=P[] = slash.map(([px,py,pz])=>[px-.045,py+.028,pz-.007])
+  const edge:P[] = slash.map(([px,py,pz])=>[px-.045,py+.028,pz-.007])
   return <group>
     <SplineTube points={slash} radius={.024} tubularSegments={40} radialSegments={8}>
       <meshStandardMaterial color="#5b2d1e" roughness={.97}/>
