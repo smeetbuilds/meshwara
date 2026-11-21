@@ -24,6 +24,10 @@ const selections=[
   {slug:'performance-surfboard',title:'Performance Surfboard'},
   {slug:'network-router',title:'Network Router'},
   {slug:'mushroom-cluster',title:'Mushroom Cluster'},
+  {slug:'glazed-bay',title:'Glazed Window Bay'},
+  {slug:'brutalist-stair',title:'Brutalist Stair'},
+  {slug:'aero-wheel',title:'Aero Wheel'},
+  {slug:'pendant-cluster',title:'Pendant Cluster'},
 ] as const
 
 test.describe('revised catalog WebGL evidence',()=>{
