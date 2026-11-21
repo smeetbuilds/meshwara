@@ -1,7 +1,59 @@
-import { IndustrialForm } from '../geometry/ProductionForms'
-const housing=[{x:-.58,y:-.2,width:.2,height:.17,exponent:4.2},{x:-.28,y:.02,width:.26,height:.22,exponent:4},{x:.02,y:.2,width:.26,height:.21,exponent:3.8},{x:.34,y:.32,width:.2,height:.16,exponent:3.8},{x:.62,y:.34,width:.13,height:.11,exponent:4}]
-const actuator=[{x:-.22,y:.02,width:.12,height:.1,exponent:3.6},{x:.02,y:.18,width:.16,height:.14,exponent:3.4},{x:.28,y:.28,width:.11,height:.09,exponent:3.6}]
-const cable:Array<[number,number,number]>=[[-.54,-.08,.18],[-.34,.14,.24],[-.08,.34,.25],[.2,.48,.2],[.52,.5,.1]]
-const driveProfile:Array<[number,number]>=[[0,-.18],[.18,-.16],[.24,-.06],[.24,.07],[.17,.17],[0,.19]]
-const baseProfile:Array<[number,number]>=[[-.68,-.44],[.68,-.44],[.78,.32],[.4,.5],[-.42,.5],[-.78,.32]]
-export default function ScaraAssemblyRobot(){return <IndustrialForm housing={housing} actuator={actuator} cable={cable} driveProfile={driveProfile} baseProfile={baseProfile} bodyMaterial={{color:'#d5d9d7',roughness:.4,clearcoat:.15}} machineMaterial={{color:'#4e5960',metalness:.4,roughness:.31,clearcoat:.18}} signalMaterial={{color:'#70c2d1',metalness:.18,roughness:.22,clearcoat:.38}} rotation={[0,-.36,0]} scale={.94}/>}
+import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
+
+/** SCARA assembly manipulator: heavy rotary base, two planar horizontal
+ * revolute joints, a vertical Z spindle, and a parallel mechanical gripper.
+ * Unlike a 6-axis arm, its arms rotate in the horizontal working plane.
+ */
+const shell='#e6e8e4', enamel='#edb42f', steel='#8a9da6', black='#323d42', signal='#5bb2b9'
+const baseSection:Array<[number,number]>=[[0,-.15],[.38,-.15],[.43,-.1],[.43,.13],[0,.13]]
+const shoulderSection:Array<[number,number]>=[[0,-.1],[.23,-.1],[.25,.1],[0,.1]]
+const spindleSection:Array<[number,number]>=[[0,-.52],[.09,-.52],[.09,.52],[0,.52]]
+const armOne:Array<[number,number]>=[[-.53,-.19],[.53,-.19],[.59,-.12],[.59,.12],[.53,.19],[-.53,.19],[-.59,.12],[-.59,-.12]]
+const armTwo:Array<[number,number]>=[[-.34,-.16],[.34,-.16],[.39,-.09],[.39,.09],[.34,.16],[-.34,.16],[-.39,.09],[-.39,-.09]]
+export default function ScaraAssemblyRobot(){
+ return <group rotation={[0,-.46,0]}>
+  <ExtrudedProfile points={[[-.55,-.12],[.55,-.12],[.63,.12],[-.63,.12]]} depth={.88} bevelSize={.018} bevelThickness={.018} position={[-.56,-1.30,-.28]}>
+   <meshStandardMaterial color={steel} metalness={.75} roughness={.32}/>
+  </ExtrudedProfile>
+  <RevolvedSurface profile={baseSection} position={[-.56,-1.04,-.28]} radialSegments={32}>
+   <meshPhysicalMaterial color={black} metalness={.65} roughness={.3} clearcoat={.22}/>
+  </RevolvedSurface>
+  <RevolvedSurface profile={[[0,-.56],[.22,-.56],[.25,.54],[.20,.56],[0,.56]]} position={[-.56,-.39,-.28]} radialSegments={30}>
+   <meshPhysicalMaterial color={shell} metalness={.21} roughness={.3} clearcoat={.43}/>
+  </RevolvedSurface>
+  <RevolvedSurface profile={shoulderSection} position={[-.56,.24,-.28]}>
+   <meshStandardMaterial color={black} metalness={.66} roughness={.25}/>
+  </RevolvedSurface>
+  <ExtrudedProfile points={armOne} depth={.35} bevelSize={.045} bevelThickness={.035} rotation={[Math.PI/2,0,0]} position={[.06,.26,-.28]}>
+   <meshPhysicalMaterial color={enamel} metalness={.15} roughness={.34} clearcoat={.38}/>
+  </ExtrudedProfile>
+  <RevolvedSurface profile={shoulderSection} position={[.69,.25,-.28]}>
+   <meshStandardMaterial color={black} metalness={.72} roughness={.26}/>
+  </RevolvedSurface>
+  <ExtrudedProfile points={armTwo} depth={.32} bevelSize={.032} bevelThickness={.031} rotation={[Math.PI/2,0,0]} position={[.92,.24,.10]}>
+   <meshPhysicalMaterial color={shell} metalness={.27} roughness={.31} clearcoat={.34}/>
+  </ExtrudedProfile>
+  <RevolvedSurface profile={shoulderSection} position={[1.16,.27,.49]}>
+   <meshStandardMaterial color={black} metalness={.7} roughness={.25}/>
+  </RevolvedSurface>
+  <RevolvedSurface profile={spindleSection} position={[1.16,-.25,.49]} radialSegments={28}>
+   <meshPhysicalMaterial color={steel} metalness={.92} roughness={.2} clearcoat={.4}/>
+  </RevolvedSurface>
+  <RevolvedSurface profile={[[0,-.15],[.15,-.15],[.17,.15],[0,.15]]} position={[1.16,-.86,.49]}>
+   <meshStandardMaterial color={black} metalness={.72} roughness={.29}/>
+  </RevolvedSurface>
+  <ExtrudedProfile points={[[-.08,-.2],[.08,-.2],[.08,.2],[-.08,.2]]} depth={.1} bevelSize={.01} bevelThickness={.009} position={[1.04,-1.05,.49]}>
+   <meshStandardMaterial color={steel} metalness={.81} roughness={.25}/>
+  </ExtrudedProfile>
+  <ExtrudedProfile points={[[-.08,-.2],[.08,-.2],[.08,.2],[-.08,.2]]} depth={.1} bevelSize={.01} bevelThickness={.009} position={[1.28,-1.05,.49]}>
+   <meshStandardMaterial color={steel} metalness={.81} roughness={.25}/>
+  </ExtrudedProfile>
+  <SplineTube points={[[-.57,-.82,-.44],[-.55,-.12,-.52],[.01,.47,-.50],[.69,.51,-.49],[1.13,.49,.20],[1.2,.04,.47]]} radius={.033} tubularSegments={80}>
+   <meshStandardMaterial color={black} roughness={.84}/>
+  </SplineTube>
+  <SplineTube points={[[-.52,-.83,-.45],[-.46,-.12,-.55],[.1,.45,-.53],[.78,.48,-.42],[1.25,.31,.24]]} radius={.014} tubularSegments={65}>
+   <meshStandardMaterial color={signal} metalness={.22} roughness={.35}/>
+  </SplineTube>
+  {[-1,1].map(z=><mesh key={z} position={[-.56,-1.4,-.28+z*.31]}><boxGeometry args={[.14,.06,.2]}/><meshStandardMaterial color={black} metalness={.56} roughness={.36}/></mesh>)}
+ </group>
+}

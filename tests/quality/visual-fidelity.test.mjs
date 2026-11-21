@@ -13,9 +13,16 @@ try {
   assert.equal(report.summary.catalogCount,500)
   assert.equal(report.summary.artistApproved,0,'Code metrics cannot certify visual fidelity')
   assert.equal(report.summary.needsVisualReview,500)
-  assert.ok(report.summary.genericForm>=35,'Structural risk signals unexpectedly missing')
+  // Six previously generic industrial assemblies must never regress to
+  // ProductionForms. This assertion shrinks when more named objects are fixed.
+  assert.equal(report.summary.genericForm,33,'A generic scene was added or a specialized machine regressed')
+  for (const slug of ['precision-milling-vice','hydraulic-tie-rod-cylinder',
+      'scara-assembly-robot','delta-pick-robot','plc-control-rack','safety-light-curtain']) {
+    assert.equal(report.assets.find(x=>x.slug===slug)?.indicators.genericForm,false,slug+' regressed to generic geometry')
+  }
+  assert.equal(report.summary.verifiedCc0PbrSources,31,'Curated source provenance count does not match expected releases')
   assert.equal(report.assets.find(x=>x.slug==='vr-headset').visualStatus,'unreviewed')
-  assert.equal(report.assets.find(x=>x.slug==='delta-pick-robot').indicators.genericForm,true)
+  assert.equal(report.assets.find(x=>x.slug==='delta-pick-robot').visualStatus,'unreviewed')
   const strict=spawnSync(process.execPath,['scripts/audit-visual-fidelity.mjs','--strict','--output',output],{encoding:'utf8'})
   assert.equal(strict.status,1,'Unapproved assets must block the visual release gate')
   assert.match(strict.stderr,/Visual release gate blocked/)

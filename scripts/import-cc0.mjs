@@ -33,6 +33,7 @@ const curated={
  'stone-coffee-table':'modern_coffee_table_01',
  'three-drawer-chest':'GothicCommode_01',
  'stone-pedestal-table':'modern_coffee_table_02',
+ 'horse-bust':'horse_head',
 }
 const pinnedPath='src/data/cc0Models.json'
 const bootstrap=process.argv.includes('--bootstrap')

@@ -1751,9 +1751,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'horse-bust', index: '292', name: 'Horse Bust', category: 'Animals', subcategory: 'Mammals', scene: 'horsebust',
-    blurb: 'A sculptural horse bust with long facial plane, alert ears, neck musculature and clean mane ridge.',
-    description: 'A MESHVARA mammals asset built as a self-contained Three.js composition with authored proportions, deterministic detail and responsive presentation.',
-    tags: ['Horse', 'Equine', 'Sculptural'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#8c735f', download: '/downloads/horse-bust.zip', new: true,
+    blurb: 'An independently sculpted bronze horse-head bust with flowing mane and real patinated PBR material details.',
+    description: 'A complete textured bronze horse-head bust authored and distributed under CC0 by Poly Haven, with realistic equine muzzle, ears, carved mane, square base and embedded roughness/normal/color maps. The locally hosted GLB and source ZIP are exact byte matches.',
+    tags: ['Horse', 'Equine', 'Sculptural'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#8c735f', download: '/downloads/horse-bust.zip', new: true,
   },
   {
     slug: 'monstera-study', index: '293', name: 'Monstera Study', category: 'Nature', subcategory: 'Botanical', scene: 'monsterastudy',
@@ -2292,14 +2292,14 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'scara-assembly-robot', index: '382', name: 'SCARA Assembly Robot', category: 'Industrial', subcategory: 'Automation', scene: 'scaraassemblyrobot',
-    blurb: 'A precision-authored scara assembly robot study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A true four-axis SCARA robot with paired horizontal rotary links, vertical spindle and parallel picking jaws.',
+    description: 'An object-specific SCARA assembly manipulator with pedestal, proximal and distal horizontal-arm joints, Z spindle, replaceable end-effector gripping jaws and industrial cable harness. The form distinguishes SCARA architecture from six-axis and delta robots.',
     tags: ['SCARA', 'Robot', 'Automation', 'Industrial'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#94cc9e', download: '/downloads/scara-assembly-robot.zip', new: true,
   },
   {
     slug: 'delta-pick-robot', index: '383', name: 'Delta Pick Robot', category: 'Industrial', subcategory: 'Automation', scene: 'deltapickrobot',
-    blurb: 'A precision-authored delta pick robot study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A triangular delta robot with three motor pods, parallel carbon link pairs and a vacuum picking tool over a conveyor.',
+    description: 'A bespoke high-speed parallel delta pick-and-place robot study with fixed triangular motor gantry, three synchronized joint chains, paired carbon rods, moving tool plate, vacuum end effector and low conveyor. Engineering geometry is illustrative rather than ready-to-manufacture CAD.',
     tags: ['Delta Robot', 'Automation', 'Industrial', 'Picker'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#679caf', download: '/downloads/delta-pick-robot.zip', new: true,
   },
   {
@@ -2310,8 +2310,8 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'plc-control-rack', index: '385', name: 'PLC Control Rack', category: 'Industrial', subcategory: 'Automation', scene: 'plccontrolrack',
-    blurb: 'A precision-authored plc control rack study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'Industrial PLC cabinet with real DIN rails, controller CPU, I/O modules, terminal blocks, LEDs and cable harnesses.',
+    description: 'A detailed programmable-logic-controller rack showing steel backplane, power supply, CPU, modular analog and digital I/O cards, terminal barriers, DIN rail brackets, status lights and signal/power cabling. The assembly is a visual study and not wiring certified for production machinery.',
     tags: ['PLC', 'Control', 'Automation', 'Industrial'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#b5677e', download: '/downloads/plc-control-rack.zip', new: true,
   },
   {
@@ -2340,8 +2340,8 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'safety-light-curtain', index: '390', name: 'Safety Light Curtain', category: 'Industrial', subcategory: 'Automation', scene: 'safetylightcurtain',
-    blurb: 'A precision-authored safety light curtain study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'Paired industrial safety light-curtain posts with infrared windows, emitter and receiver arrays, mounting brackets and cables.',
+    description: 'A bespoke machine-guarding safety light curtain with emitter and receiver aluminum profiles, protective lens strips, regular optical sensor arrays, field-adjustable brackets and routed signal wiring. Real safeguarding uses invisible infrared; this asset is a visualization, not certified protection hardware.',
     tags: ['Safety', 'Sensor', 'Automation', 'Industrial'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#b082bc', download: '/downloads/safety-light-curtain.zip', new: true,
   },
   {
@@ -2352,8 +2352,8 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'precision-milling-vice', index: '392', name: 'Precision Milling Vice', category: 'Industrial', subcategory: 'Machining', scene: 'precisionmillingvice',
-    blurb: 'A precision-authored precision milling vice study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA machining asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A recognizable precision milling vise with fixed and sliding steel jaws, dovetail ways, leadscrew and adjustable handle.',
+    description: 'A custom engineering study of a workshop precision milling vise with replaceable serrated jaw plates, fixed and moving jaw castings, two linear guides, central leadscrew, handwheel and clamping mounting slots. Technical proportions and mechanisms are illustrative, not certified manufacturing CAD.',
     tags: ['Vice', 'Milling', 'Machining', 'Industrial'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#ce8aa3', download: '/downloads/precision-milling-vice.zip', new: true,
   },
   {
@@ -2364,8 +2364,8 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'hydraulic-tie-rod-cylinder', index: '394', name: 'Hydraulic Tie Rod Cylinder', category: 'Industrial', subcategory: 'Machining', scene: 'hydraulictierodcylinder',
-    blurb: 'A precision-authored hydraulic tie rod cylinder study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA machining asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A double-acting hydraulic cylinder with chrome piston rod, four external tie rods, glands, fluid ports and mounting feet.',
+    description: 'An object-specific industrial hydraulic actuator showing the honed barrel, polished piston rod, front rod gland, four threaded tie rods with locknuts, dual hydraulic ports, supporting feet and end clevis. Mechanism intended as accurate visual study, not pressure-rated engineering CAD.',
     tags: ['Hydraulic', 'Cylinder', 'Industrial', 'Fluid'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a9aa77', download: '/downloads/hydraulic-tie-rod-cylinder.zip', new: true,
   },
   {

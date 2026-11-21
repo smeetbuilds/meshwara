@@ -523,6 +523,49 @@
     ],
     "sourcePolycount": 6232
   },
+  "horse-bust": {
+    "provider": "Poly Haven",
+    "providerAssetId": "horse_head",
+    "sourceUrl": "https://polyhaven.com/a/horse_head",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/horse-bust.glb",
+    "sha256": "b900c19d25057f67ba3bccdffbe9041b9a137d56393ee725993520c09091b517",
+    "bytes": 1764328,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/horse_head/horse_head_1k.gltf",
+        "size": 2755,
+        "md5": "a7449aef8ccad7c8e270250985f73b72"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/horse_head/horse_head_nor_gl_1k.jpg",
+        "size": 437446,
+        "md5": "6ae8e9adab4865c46047a44a8287d902"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/horse_head/horse_head_diff_1k.jpg",
+        "size": 511649,
+        "md5": "0dc78f41f6272eecc6cbddb937e1a3c2"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/horse_head/horse_head_arm_1k.jpg",
+        "size": 520190,
+        "md5": "ef29c3831aa2640ba941d31c5e44f711"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/horse_head/horse_head.bin",
+        "size": 293272,
+        "md5": "77d4dfede2ae9275084d5161dabb2cd9"
+      }
+    ],
+    "originalAuthors": [
+      "Tina"
+    ],
+    "sourcePolycount": 12068
+  },
   "lounge-chair": {
     "provider": "Poly Haven",
     "providerAssetId": "mid_century_lounge_chair",
