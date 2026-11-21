@@ -81,3 +81,26 @@ The user-facing source links point to the original artists on Poly Haven.
 The visual-review gate still requires independent multi-angle approval and
 recorded reference evidence for each asset. This requirement must not be
 confused with success of source-integrity or CI checks.
+
+
+## Batch 4: realistic object identity and mobile budgets (2026-11-21)
+
+Twelve further identity-matched object models added: a monobloc molded chair,
+painted wooden bedside table, open worn timber shelving, industrial counter
+stool, cafe side chair, oak-and-leather armchair, timber bench, moss-covered
+forest rocks, metal writing desk, stone-topped coffee table, genuine
+three-drawer wooden chest, and stone-base low table. Each listing explicitly
+states the authentic source style rather than pretending a different finish,
+period or structural form is present. Source authors, licenses, external file
+MD5 checksums and local GLB SHA-256 hashes are kept in the provenance ledger.
+
+All 30 sourced models now have an external catalog polygon-count datum and
+must remain at or below 250,000 source polygons in the curated importer.
+The 17-million-polygon pine model was specifically rejected rather than
+shipped unoptimized. This imported-web budget is not equivalent to measured
+mobile FPS; real device review remains an outstanding requirement.
+
+The previous three bespoke procedural rebuilds plus 30 PBR model imports
+constitute 33 materially reworked assets. **The rest of the 500-asset
+archive is not certified, and the mandatory human visual-review gate still
+blocks all 500 until external evidence has been examined.**

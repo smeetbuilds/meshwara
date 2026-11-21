@@ -165,9 +165,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'monocoque-chair', index: '028', name: 'Monocoque Chair', category: 'Furniture', scene: 'monocoque',
-    blurb: 'A soft monocoque lounge chair with a quiet shell, dark metal stance and warm structural detail.',
-    description: 'A furniture study focused on silhouette, bevel quality and proportion rather than ornamental complexity. Its material hierarchy is designed for product-showcase and interior-editorial compositions.',
-    tags: ['Furniture', 'Monocoque', 'Product'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], accent: '#d6b58c', download: '/downloads/monocoque-chair.zip', featured: true, geometryV2: true,
+    blurb: 'A recognizable one-piece molded chair with a weathered white finish and molded seat and back.',
+    description: 'An original CC0 plastic monobloc chair model from Poly Haven, retaining the complete single-shell seat and back, realistic molded edges, scuffs, dirt, and embedded PBR texture maps. The source download includes the identical GLB and a reusable Three.js wrapper.',
+    tags: ['Furniture', 'Monocoque', 'Product'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], accent: '#d6b58c', download: '/downloads/monocoque-chair.zip', featured: true, geometryV2: true,
   },
   {
     slug: 'performance-rotor', index: '029', name: 'Performance Rotor', category: 'Vehicles', scene: 'rotor',
@@ -888,9 +888,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'bedside-table', index: '148', name: 'Bedside Table', category: 'Furniture', scene: 'bedsidetable',
-    blurb: 'A compact bedside table with inset drawer, stone top and slender frame.',
-    description: 'A residential furniture object using controlled material contrast and small-scale architectural detail.',
-    tags: ['Bedside', 'Table', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a98a74', download: '/downloads/bedside-table.zip', new: true,
+    blurb: 'A worn painted wooden nightstand with a working-scale drawer, tapered legs and authentic surface wear.',
+    description: 'An original CC0 painted bedside table model from Poly Haven with an inset single drawer, tapered legs, faded blue paint and aged wood materials. Its detailed geometry, embedded PBR textures and source licensing accompany the GLB download.',
+    tags: ['Bedside', 'Table', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#a98a74', download: '/downloads/bedside-table.zip', new: true,
   },
   {
     slug: 'pendant-cluster', index: '149', name: 'Pendant Cluster', category: 'Furniture', scene: 'pendantcluster',
@@ -1020,9 +1020,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'writing-desk', index: '170', name: 'Writing Desk', category: 'Furniture', subcategory: 'Tables', scene: 'writingdesk',
-    blurb: 'A slim writing desk with inset leather surface, shallow drawer and tapered frame.',
-    description: 'A workspace furniture asset with disciplined proportions, modest hardware and enough detail to hold up in medium-close product scenes.',
-    tags: ['Desk', 'Workspace', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#8e6c4c', download: '/downloads/writing-desk.zip', new: true,
+    blurb: 'A mid-century metal writing desk with pedestal drawers, metal legs and real drawer hardware.',
+    description: 'A CC0 industrial writing desk from Poly Haven with an aged grey finish, inset storage pedestals, chrome handles, tapered metal supports and detailed PBR surface maps. The complete model geometry and reusable React viewer source are included.',
+    tags: ['Desk', 'Workspace', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#8e6c4c', download: '/downloads/writing-desk.zip', new: true,
   },
   {
     slug: 'floor-mirror', index: '171', name: 'Floor Mirror', category: 'Furniture', subcategory: 'Decor', scene: 'floormirror',
@@ -1313,21 +1313,21 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'sculpted-armchair', index: '219', name: 'Sculpted Armchair', category: 'Furniture', subcategory: 'Seating', scene: 'sculptedarmchair',
-    blurb: 'A lounge armchair with continuous shell, tailored cushion volumes and a grounded metal base.',
-    description: 'A MESHVARA seating asset built as a self-contained Three.js composition with authored proportions, deterministic detail and responsive presentation.',
-    tags: ['Armchair', 'Seating', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a77f69', download: '/downloads/sculpted-armchair.zip', new: true,
+    blurb: 'A sculptural oak-framed armchair with black leather cushions and visibly tailored construction.',
+    description: 'An independently modeled modern wooden armchair from Poly Haven with a warm oak structural frame, curved arms, thick leather back and seat cushions, and original CC0 PBR surface maps. Includes the same locally hosted GLB used for the viewer.',
+    tags: ['Armchair', 'Seating', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#a77f69', download: '/downloads/sculpted-armchair.zip', new: true,
   },
   {
     slug: 'timber-bench', index: '220', name: 'Timber Bench', category: 'Furniture', subcategory: 'Seating', scene: 'timberbench',
-    blurb: 'A long timber bench with softened slab, expressed joinery and restrained stretcher frame.',
-    description: 'A MESHVARA seating asset built as a self-contained Three.js composition with authored proportions, deterministic detail and responsive presentation.',
-    tags: ['Bench', 'Timber', 'Furniture'], complexity: 'Light', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#9c775a', download: '/downloads/timber-bench.zip', new: true,
+    blurb: 'A sturdy timber bench with a lower shelf, rustic painted finish and visible furniture joints.',
+    description: 'An original painted wooden bench model from Poly Haven with a compact timber seat, visible lower storage shelf, aging and red painted-wear surfaces. Its authentic geometry and embedded PBR materials remain available in a portable CC0 GLB.',
+    tags: ['Bench', 'Timber', 'Furniture'], complexity: 'Light', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#9c775a', download: '/downloads/timber-bench.zip', new: true,
   },
   {
     slug: 'stone-coffee-table', index: '221', name: 'Stone Coffee Table', category: 'Furniture', subcategory: 'Tables', scene: 'stonecoffeetable',
-    blurb: 'A monolithic coffee table with rounded stone top and paired architectural pedestal supports.',
-    description: 'A MESHVARA tables asset built as a self-contained Three.js composition with authored proportions, deterministic detail and responsive presentation.',
-    tags: ['Coffee Table', 'Stone', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a69c8f', download: '/downloads/stone-coffee-table.zip', new: true,
+    blurb: 'A contemporary low coffee table combining a detailed stone tabletop with warm angular wooden joinery.',
+    description: 'An independently authored rectangular stone-topped coffee table from Poly Haven with a textured mineral slab, carefully joined warm wood frame and angled wood inlays. All original CC0 geometry and embedded PBR maps are included in the download.',
+    tags: ['Coffee Table', 'Stone', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#a69c8f', download: '/downloads/stone-coffee-table.zip', new: true,
   },
   {
     slug: 'low-credenza', index: '222', name: 'Low Credenza', category: 'Furniture', subcategory: 'Storage', scene: 'lowcredenza',
@@ -2016,9 +2016,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'counter-height-stool', index: '336', name: 'Counter Height Stool', category: 'Furniture', subcategory: 'Seating', scene: 'counterheightstool',
-    blurb: 'A precision-authored counter height stool study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA seating asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Stool', 'Counter', 'Seating', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#97c4b9', download: '/downloads/counter-height-stool.zip', new: true,
+    blurb: 'A tall metal counter stool with a cushioned leather seat and circular footrest supports.',
+    description: 'A CC0 industrial counter stool from Poly Haven, including its tall aged-metal body, circular footrests, riveted padded leather seat and detailed surface materials. Meshvara distributes the original GLB and PBR textures with portable scene source.',
+    tags: ['Stool', 'Counter', 'Seating', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#97c4b9', download: '/downloads/counter-height-stool.zip', new: true,
   },
   {
     slug: 'bentwood-rocking-chair', index: '337', name: 'Bentwood Rocking Chair', category: 'Furniture', subcategory: 'Seating', scene: 'bentwoodrockingchair',
@@ -2034,9 +2034,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'cafe-side-chair', index: '339', name: 'Cafe Side Chair', category: 'Furniture', subcategory: 'Seating', scene: 'cafesidechair',
-    blurb: 'A precision-authored cafe side chair study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA seating asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Cafe', 'Chair', 'Seating', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#9077d1', download: '/downloads/cafe-side-chair.zip', new: true,
+    blurb: 'A classic painted cafe chair with a slatted seat, decorative back and straightforward wooden joinery.',
+    description: 'A CC0 painted wooden dining chair from Poly Haven with a decorative backrest, slatted seating, square legs, visible frame bracing and realistically worn paint textures. The complete source mesh and PBR maps are bundled in the archive.',
+    tags: ['Cafe', 'Chair', 'Seating', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#9077d1', download: '/downloads/cafe-side-chair.zip', new: true,
   },
   {
     slug: 'low-lounge-bench', index: '340', name: 'Low Lounge Bench', category: 'Furniture', subcategory: 'Seating', scene: 'lowloungebench',
@@ -2046,9 +2046,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'stone-pedestal-table', index: '341', name: 'Stone Pedestal Table', category: 'Furniture', subcategory: 'Tables', scene: 'stonepedestaltable',
-    blurb: 'A precision-authored stone pedestal table study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA tables asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Pedestal', 'Table', 'Stone', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#acb77e', download: '/downloads/stone-pedestal-table.zip', new: true,
+    blurb: 'A sculptural low table with a dark stone base and precision-patterned wooden tabletop inlay.',
+    description: 'A CC0 contemporary low pedestal coffee table from Poly Haven featuring a carved dark stone foundation and concentric decorative wooden inlays. The fully modeled structure and its embedded PBR materials are delivered in a reusable GLB archive.',
+    tags: ['Pedestal', 'Table', 'Stone', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#acb77e', download: '/downloads/stone-pedestal-table.zip', new: true,
   },
   {
     slug: 'oak-trestle-table', index: '342', name: 'Oak Trestle Table', category: 'Furniture', subcategory: 'Tables', scene: 'oaktrestletable',
@@ -2070,15 +2070,15 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'three-drawer-chest', index: '345', name: 'Three Drawer Chest', category: 'Furniture', subcategory: 'Tables', scene: 'threedrawerchest',
-    blurb: 'A precision-authored three drawer chest study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA tables asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Drawers', 'Chest', 'Storage', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#6376a8', download: '/downloads/three-drawer-chest.zip', new: true,
+    blurb: 'An ornate solid-wood chest with three identifiable drawers and Gothic arched detailing.',
+    description: 'A CC0 three-drawer wooden Gothic commode from Poly Haven, featuring a full furniture carcass, carved arch motifs, three functioning-design drawers and aged timber PBR textures. The exact authored GLB and portable source code are included.',
+    tags: ['Drawers', 'Chest', 'Storage', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#6376a8', download: '/downloads/three-drawer-chest.zip', new: true,
   },
   {
     slug: 'open-frame-shelving', index: '346', name: 'Open Frame Shelving', category: 'Furniture', subcategory: 'Tables', scene: 'openframeshelving',
-    blurb: 'A precision-authored open frame shelving study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA tables asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Shelving', 'Storage', 'Furniture', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a585ad', download: '/downloads/open-frame-shelving.zip', new: true,
+    blurb: 'A tall open wooden bookcase with real shelf thickness, visibly joined panels and worn timber grain.',
+    description: 'A fully authored CC0 wooden bookshelf model from Poly Haven with multiple open shelves, aged grain, layered plywood edges and visible nail details. The identical model geometry and baked PBR maps are included in its portable source package.',
+    tags: ['Shelving', 'Storage', 'Furniture', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#a585ad', download: '/downloads/open-frame-shelving.zip', new: true,
   },
   {
     slug: 'brass-wall-sconce', index: '347', name: 'Brass Wall Sconce', category: 'Furniture', subcategory: 'Tables', scene: 'brasswallsconce',
@@ -2742,9 +2742,9 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'moss-stone-study', index: '457', name: 'Moss Stone Study', category: 'Nature', subcategory: 'Botanical', scene: 'mossstonestudy',
-    blurb: 'A precision-authored moss stone study study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA botanical asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Moss', 'Stone', 'Nature', 'Terrain'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Static', accent: '#64adaa', download: '/downloads/moss-stone-study.zip', new: true,
+    blurb: 'Six distinct moss-covered forest rocks with realistic silhouettes, weathered mineral surfaces and green growth.',
+    description: 'A CC0 set of six independently modeled moss-covered rocks from Poly Haven with varied geological forms, erosion, dirt, and authentic green moss PBR detail. The source archive contains the identical model and its embedded texture maps.',
+    tags: ['Moss', 'Stone', 'Nature', 'Terrain'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Static', accent: '#64adaa', download: '/downloads/moss-stone-study.zip', new: true,
   },
   {
     slug: 'desert-boulder-study', index: '458', name: 'Desert Boulder Study', category: 'Nature', subcategory: 'Botanical', scene: 'desertboulderstudy',

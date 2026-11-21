@@ -34,8 +34,8 @@ export const Route = createFileRoute('/assets/$slug')({
 function AssetDetail() {
   const asset = Route.useLoaderData()
   const cc0Model = cc0Models[asset.slug as keyof typeof cc0Models]
-  const [preview, setPreview] = useState(() => ({ ...defaultPreviewSettings, stage: asset.slug === 'tea-service' ? 'dark' as const : 'light' as const, pointer: asset.interaction === 'Pointer' }))
-  useEffect(() => { if (asset.slug === 'tea-service') setPreview(current => ({ ...current, stage: 'dark' })) }, [asset.slug])
+  const [preview, setPreview] = useState(() => ({ ...defaultPreviewSettings, stage: ['tea-service', 'monocoque-chair', 'cafe-side-chair'].includes(asset.slug) ? 'dark' as const : 'light' as const, pointer: asset.interaction === 'Pointer' }))
+  useEffect(() => { if (['tea-service', 'monocoque-chair', 'cafe-side-chair'].includes(asset.slug)) setPreview(current => ({ ...current, stage: 'dark' })) }, [asset.slug])
   const [playground, setPlayground] = useState(() => createDefaultAssetPlaygroundSettings(asset.scene))
   const assetSubcategory = getAssetSubcategory(asset)
   const sameType = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) === assetSubcategory)

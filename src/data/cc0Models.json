@@ -40,7 +40,8 @@
     "originalAuthors": [
       "Kuutti Siitonen",
       "Yann Kervran"
-    ]
+    ],
+    "sourcePolycount": 25710
   },
   "bar-stool": {
     "provider": "Poly Haven",
@@ -82,7 +83,51 @@
     ],
     "originalAuthors": [
       "Dairon Sanchez"
-    ]
+    ],
+    "sourcePolycount": 14373
+  },
+  "bedside-table": {
+    "provider": "Poly Haven",
+    "providerAssetId": "painted_wooden_nightstand",
+    "sourceUrl": "https://polyhaven.com/a/painted_wooden_nightstand",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/bedside-table.glb",
+    "sha256": "46d6ab020b90477f12e1002d24876e39cecabba34dbe81df979979fb93612844",
+    "bytes": 2149816,
+    "meshes": 2,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/painted_wooden_nightstand/painted_wooden_nightstand_1k.gltf",
+        "size": 4427,
+        "md5": "eff35aa15d8408d030156df43c8c9bb3"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_nightstand/painted_wooden_nightstand_nor_gl_1k.jpg",
+        "size": 751707,
+        "md5": "4598a8c32374362f3a3e18fac2b0decc"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/painted_wooden_nightstand/painted_wooden_nightstand.bin",
+        "size": 18916,
+        "md5": "7643d3fb660b2416d38c2e7964ba816d"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_nightstand/painted_wooden_nightstand_arm_1k.jpg",
+        "size": 773123,
+        "md5": "d4ef49fba68617442d8366c635167aaf"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_nightstand/painted_wooden_nightstand_diff_1k.jpg",
+        "size": 603334,
+        "md5": "7ca7bf109ce5eea128b8c2b478795858"
+      }
+    ],
+    "originalAuthors": [
+      "Kirill Sannikov"
+    ],
+    "sourcePolycount": 470
   },
   "bench-plane": {
     "provider": "Poly Haven",
@@ -124,7 +169,8 @@
     ],
     "originalAuthors": [
       "Satyaki Mandal"
-    ]
+    ],
+    "sourcePolycount": 8220
   },
   "brass-wall-sconce": {
     "provider": "Poly Haven",
@@ -171,7 +217,51 @@
     ],
     "originalAuthors": [
       "Ulan Cabanilla"
-    ]
+    ],
+    "sourcePolycount": 9826
+  },
+  "cafe-side-chair": {
+    "provider": "Poly Haven",
+    "providerAssetId": "painted_wooden_chair_01",
+    "sourceUrl": "https://polyhaven.com/a/painted_wooden_chair_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/cafe-side-chair.glb",
+    "sha256": "ef6ef09e82961ce1bc25bb7c8b8bcfd2d01b8b17a8802ec2ca094f3f1ebe559d",
+    "bytes": 491540,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/painted_wooden_chair_01/painted_wooden_chair_01_1k.gltf",
+        "size": 2785,
+        "md5": "28e739db9799cdadf820ead2b486d463"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_chair_01/painted_wooden_chair_01_diff_1k.jpg",
+        "size": 168040,
+        "md5": "94c34f4a211eec5bd30017564e09be4c"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_chair_01/painted_wooden_chair_01_nor_gl_1k.jpg",
+        "size": 140110,
+        "md5": "5150e3034d2f69b0d7f0576955e51e3e"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/painted_wooden_chair_01/painted_wooden_chair_01.bin",
+        "size": 37112,
+        "md5": "7fd011acaef4730770108a7932191768"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_chair_01/painted_wooden_chair_01_arm_1k.jpg",
+        "size": 144503,
+        "md5": "2ee02ed8f2dda4303428eaf6443f928a"
+      }
+    ],
+    "originalAuthors": [
+      "Kuutti Siitonen"
+    ],
+    "sourcePolycount": 724
   },
   "cordless-drill": {
     "provider": "Poly Haven",
@@ -213,7 +303,51 @@
     ],
     "originalAuthors": [
       "Fernando Quinn"
-    ]
+    ],
+    "sourcePolycount": 2926
+  },
+  "counter-height-stool": {
+    "provider": "Poly Haven",
+    "providerAssetId": "metal_stool_01",
+    "sourceUrl": "https://polyhaven.com/a/metal_stool_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/counter-height-stool.glb",
+    "sha256": "f97b29a8895932cdd7f873b674bb65a81123e822d0aa26bdcc0ebd43aaa32844",
+    "bytes": 2285960,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/metal_stool_01/metal_stool_01_1k.gltf",
+        "size": 2790,
+        "md5": "b52fb99e40b3dc12f515e2591f281a0e"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/metal_stool_01/metal_stool_01_nor_gl_1k.jpg",
+        "size": 667394,
+        "md5": "dc2e7a5284195b3ea4d2a793b03142c5"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/metal_stool_01/metal_stool_01_diff_1k.jpg",
+        "size": 617390,
+        "md5": "aac1762c55431dc1352bd6f5cb0f0bee"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/metal_stool_01/metal_stool_01_arm_1k.jpg",
+        "size": 783046,
+        "md5": "4b990b2caddcd4bb958fd3e91b2fc786"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/metal_stool_01/metal_stool_01.bin",
+        "size": 216340,
+        "md5": "5e6178cf61b8f10a733a28d8f57bbb99"
+      }
+    ],
+    "originalAuthors": [
+      "Ulan Cabanilla"
+    ],
+    "sourcePolycount": 8334
   },
   "croissant-study": {
     "provider": "Poly Haven",
@@ -256,7 +390,8 @@
     "originalAuthors": [
       "Dario Barresi",
       "Greg Zaal"
-    ]
+    ],
+    "sourcePolycount": 1990
   },
   "desert-boulder-study": {
     "provider": "Poly Haven",
@@ -298,7 +433,8 @@
     ],
     "originalAuthors": [
       "Rico Cilliers"
-    ]
+    ],
+    "sourcePolycount": 123976
   },
   "dining-table": {
     "provider": "Poly Haven",
@@ -339,8 +475,9 @@
       }
     ],
     "originalAuthors": [
-      "Aron \u0141yczek"
-    ]
+      "Aron Łyczek"
+    ],
+    "sourcePolycount": 1048
   },
   "fern-study": {
     "provider": "Poly Haven",
@@ -383,7 +520,8 @@
     "originalAuthors": [
       "Rico Cilliers",
       "Rob Tuytel"
-    ]
+    ],
+    "sourcePolycount": 6232
   },
   "lounge-chair": {
     "provider": "Poly Haven",
@@ -425,7 +563,8 @@
     ],
     "originalAuthors": [
       "Kuutti Siitonen"
-    ]
+    ],
+    "sourcePolycount": 6148
   },
   "lounge-ottoman": {
     "provider": "Poly Haven",
@@ -467,7 +606,8 @@
     ],
     "originalAuthors": [
       "Caspian Fortune"
-    ]
+    ],
+    "sourcePolycount": 4240
   },
   "mechanical-compass": {
     "provider": "Poly Haven",
@@ -509,7 +649,94 @@
     ],
     "originalAuthors": [
       "Benny Weimer"
-    ]
+    ],
+    "sourcePolycount": 11645
+  },
+  "monocoque-chair": {
+    "provider": "Poly Haven",
+    "providerAssetId": "plastic_monobloc_chair_01",
+    "sourceUrl": "https://polyhaven.com/a/plastic_monobloc_chair_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/monocoque-chair.glb",
+    "sha256": "35e5fa9ecd4937c9691800e24c521bee9ba5470268872f0faf2d1256751bd457",
+    "bytes": 1951816,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/plastic_monobloc_chair_01/plastic_monobloc_chair_01_1k.gltf",
+        "size": 2892,
+        "md5": "b0ac94e52b406e1815af47d9d84eadb4"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/plastic_monobloc_chair_01/plastic_monobloc_chair_01.bin",
+        "size": 124808,
+        "md5": "cff97136a9c4bb57c62937cbb7d33a79"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/plastic_monobloc_chair_01/plastic_monobloc_chair_01_arm_1k.jpg",
+        "size": 634320,
+        "md5": "ce9271797fd8893a6c84f639f952d0b9"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/plastic_monobloc_chair_01/plastic_monobloc_chair_01_diff_1k.jpg",
+        "size": 560823,
+        "md5": "c36dfe0f38d6ca1632ba426c598e6764"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/plastic_monobloc_chair_01/plastic_monobloc_chair_01_nor_gl_1k.jpg",
+        "size": 630024,
+        "md5": "387f81f09c0754416298398277fb2a6d"
+      }
+    ],
+    "originalAuthors": [
+      "Kuutti Siitonen"
+    ],
+    "sourcePolycount": 3356
+  },
+  "moss-stone-study": {
+    "provider": "Poly Haven",
+    "providerAssetId": "rock_moss_set_01",
+    "sourceUrl": "https://polyhaven.com/a/rock_moss_set_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/moss-stone-study.glb",
+    "sha256": "451599a92e375059fda4c11fc9265e35dde547df6dbc65a6f0572b4d72ae9e88",
+    "bytes": 1933008,
+    "meshes": 6,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/rock_moss_set_01/rock_moss_set_01_1k.gltf",
+        "size": 9987,
+        "md5": "75113cc1c21806cca5d8badad4737af7"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_moss_set_01/rock_moss_set_01_nor_gl_1k.jpg",
+        "size": 209975,
+        "md5": "eb7ebd31ad08e78d0497900652ff1568"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/rock_moss_set_01/rock_moss_set_01.bin",
+        "size": 1466380,
+        "md5": "207a51c9f56d34732e9814bbf9cc07b1"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_moss_set_01/rock_moss_set_01_rough_1k.jpg",
+        "size": 82624,
+        "md5": "ed9d8a2c863262f76f881346e8047c6a"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_moss_set_01/rock_moss_set_01_diff_1k.jpg",
+        "size": 168099,
+        "md5": "b8742301e6b4bc5683d2de712e83f772"
+      }
+    ],
+    "originalAuthors": [
+      "Kless Gyzen"
+    ],
+    "sourcePolycount": 63127
   },
   "nested-side-table-pair": {
     "provider": "Poly Haven",
@@ -551,7 +778,51 @@
     ],
     "originalAuthors": [
       "James Ray Cock"
-    ]
+    ],
+    "sourcePolycount": 2756
+  },
+  "open-frame-shelving": {
+    "provider": "Poly Haven",
+    "providerAssetId": "wooden_bookshelf_worn",
+    "sourceUrl": "https://polyhaven.com/a/wooden_bookshelf_worn",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/open-frame-shelving.glb",
+    "sha256": "1776a3790a745ec6b51815f6a846eea825538efa1420f7ef75d3234c423537bc",
+    "bytes": 2776164,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/wooden_bookshelf_worn/wooden_bookshelf_worn_1k.gltf",
+        "size": 2849,
+        "md5": "f8bb25dfb3c646e5c4f420d800276928"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_bookshelf_worn/wooden_bookshelf_worn_nor_gl_1k.jpg",
+        "size": 993276,
+        "md5": "0e6f33c00eec432dd17178a4e5feb4f2"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/wooden_bookshelf_worn/wooden_bookshelf_worn.bin",
+        "size": 267964,
+        "md5": "3842de1943f58cdafb3a25d384b2400f"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_bookshelf_worn/wooden_bookshelf_worn_arm_1k.jpg",
+        "size": 713979,
+        "md5": "7252efe4bd18f6dfdc014a9f4ccdf065"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_bookshelf_worn/wooden_bookshelf_worn_diff_1k.jpg",
+        "size": 799126,
+        "md5": "8f92c92e6473010e7df9b11f32d1234a"
+      }
+    ],
+    "originalAuthors": [
+      "Ulan Cabanilla"
+    ],
+    "sourcePolycount": 10106
   },
   "optical-frames": {
     "provider": "Poly Haven",
@@ -593,7 +864,8 @@
     ],
     "originalAuthors": [
       "Sean Buckley"
-    ]
+    ],
+    "sourcePolycount": 11810
   },
   "precision-microscope": {
     "provider": "Poly Haven",
@@ -635,7 +907,8 @@
     ],
     "originalAuthors": [
       "Lukas Walzer"
-    ]
+    ],
+    "sourcePolycount": 16598
   },
   "rangefinder-camera": {
     "provider": "Poly Haven",
@@ -707,7 +980,8 @@
     ],
     "originalAuthors": [
       "Rajil Jose Macatangay"
-    ]
+    ],
+    "sourcePolycount": 26987
   },
   "rock-formation": {
     "provider": "Poly Haven",
@@ -750,7 +1024,167 @@
     "originalAuthors": [
       "Greg Zaal",
       "Jenelle van Heerden"
-    ]
+    ],
+    "sourcePolycount": 76590
+  },
+  "sculpted-armchair": {
+    "provider": "Poly Haven",
+    "providerAssetId": "modern_arm_chair_01",
+    "sourceUrl": "https://polyhaven.com/a/modern_arm_chair_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/sculpted-armchair.glb",
+    "sha256": "e63d43aa97f499c95f7b02cff070c78fb68017a1f423b261bbd62d8eb4452049",
+    "bytes": 2696208,
+    "meshes": 1,
+    "materials": 2,
+    "images": 6,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/modern_arm_chair_01/modern_arm_chair_01_1k.gltf",
+        "size": 5121,
+        "md5": "a5ce303bc2962fe98b733fcdfa5a842b"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_arm_chair_01/modern_arm_chair_01_pillow_nor_gl_1k.jpg",
+        "size": 302377,
+        "md5": "6804f34108fcc755f0c84dd3c638270c"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_arm_chair_01/modern_arm_chair_01_legs_nor_gl_1k.jpg",
+        "size": 560864,
+        "md5": "7cece7eccf75588af5b5df9b095d2c97"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_arm_chair_01/modern_arm_chair_01_pillow_arm_1k.jpg",
+        "size": 321223,
+        "md5": "772495ddbf26ca3de4b31298f10113b9"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_arm_chair_01/modern_arm_chair_01_legs_diff_1k.jpg",
+        "size": 460937,
+        "md5": "778f1897e07ff81b2bc338f3d463ad1f"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_arm_chair_01/modern_arm_chair_01_legs_arm_1k.jpg",
+        "size": 577931,
+        "md5": "9c69cb001df175bddf6d1c2436567fb7"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modern_arm_chair_01/modern_arm_chair_01.bin",
+        "size": 240728,
+        "md5": "5a8f2ea1c79ea484140e484b2a621670"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_arm_chair_01/modern_arm_chair_01_pillow_diff_1k.jpg",
+        "size": 228851,
+        "md5": "2e4f64c633c3cb1656ad3eabdb3f0607"
+      }
+    ],
+    "originalAuthors": [
+      "Vibrant Nordic"
+    ],
+    "sourcePolycount": 8916
+  },
+  "stone-coffee-table": {
+    "provider": "Poly Haven",
+    "providerAssetId": "modern_coffee_table_01",
+    "sourceUrl": "https://polyhaven.com/a/modern_coffee_table_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/stone-coffee-table.glb",
+    "sha256": "c8b19a533dceda5b3b17c0c86e36b244d7f135fb7521b9c5e4db743a1ca420af",
+    "bytes": 1330284,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/modern_coffee_table_01/modern_coffee_table_01_1k.gltf",
+        "size": 2771,
+        "md5": "f1c079ab5bc307630258cf3b40910511"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modern_coffee_table_01/modern_coffee_table_01.bin",
+        "size": 154864,
+        "md5": "6e8f65bff935af308eab9eff062f6daa"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_01/modern_coffee_table_01_rough_1k.jpg",
+        "size": 403959,
+        "md5": "6ccbc448fa0e2bed32eac52511e84e2c"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_01/modern_coffee_table_01_diff_1k.jpg",
+        "size": 410569,
+        "md5": "356014e027b59c21b3c99ac112e645f9"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_01/modern_coffee_table_01_nor_gl_1k.jpg",
+        "size": 359134,
+        "md5": "d263e6131abc518760d6771390bc5066"
+      }
+    ],
+    "originalAuthors": [
+      "Amin"
+    ],
+    "sourcePolycount": 4504
+  },
+  "stone-pedestal-table": {
+    "provider": "Poly Haven",
+    "providerAssetId": "modern_coffee_table_02",
+    "sourceUrl": "https://polyhaven.com/a/modern_coffee_table_02",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/stone-pedestal-table.glb",
+    "sha256": "cfe4886c2d02e790a58909c70a93f210962eb74619ff5239526c73ea58dce7b2",
+    "bytes": 2953924,
+    "meshes": 1,
+    "materials": 2,
+    "images": 6,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/modern_coffee_table_02/modern_coffee_table_02_1k.gltf",
+        "size": 4979,
+        "md5": "6840f431aa9f2b9096b32416a5b198f3"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_02/modern_coffee_table_02_base_nor_gl_1k.jpg",
+        "size": 119341,
+        "md5": "02cffd400d675f77bb326fd9752b87c9"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_02/modern_coffee_table_02_wood_nor_gl_1k.jpg",
+        "size": 340139,
+        "md5": "b11514f206d8821dbcd0f2456aa58599"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_02/modern_coffee_table_02_base_rough_1k.jpg",
+        "size": 220354,
+        "md5": "f75772d1830611aee991d33eaaa1205d"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modern_coffee_table_02/modern_coffee_table_02.bin",
+        "size": 882992,
+        "md5": "f75c0faa37dfa96b99cee9639a36e0a5"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_02/modern_coffee_table_02_wood_diff_1k.jpg",
+        "size": 710960,
+        "md5": "7cce41236a1d4240d9ce3498dcad9776"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_02/modern_coffee_table_02_base_diff_1k.jpg",
+        "size": 153120,
+        "md5": "338b60530424c187a35be09d9022cc39"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modern_coffee_table_02/modern_coffee_table_02_wood_rough_1k.jpg",
+        "size": 523840,
+        "md5": "3c2a2064d34cc7aa1e6629fef9879364"
+      }
+    ],
+    "originalAuthors": [
+      "Amin"
+    ],
+    "sourcePolycount": 13645
   },
   "tea-service": {
     "provider": "Poly Haven",
@@ -794,6 +1228,136 @@
       "James Ray Cock",
       "Jurita Burger",
       "Rico Cilliers"
-    ]
+    ],
+    "sourcePolycount": 40296
+  },
+  "three-drawer-chest": {
+    "provider": "Poly Haven",
+    "providerAssetId": "GothicCommode_01",
+    "sourceUrl": "https://polyhaven.com/a/GothicCommode_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/three-drawer-chest.glb",
+    "sha256": "dd3b6914c8657dcc6fbd43cebbd5a230101bc4e08c6dd66d0fab17df5c58171c",
+    "bytes": 601368,
+    "meshes": 4,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/GothicCommode_01/GothicCommode_01_1k.gltf",
+        "size": 7054,
+        "md5": "491a4bb1c267ecd9f6592c55308a5286"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/GothicCommode_01/GothicCommode_01_arm_1k.jpg",
+        "size": 173750,
+        "md5": "b4eacccbd3add26eb3c714ea8585a90d"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/GothicCommode_01/GothicCommode_01_nor_gl_1k.jpg",
+        "size": 148711,
+        "md5": "98f49cd397fc5ee4e95e7c33eef140f9"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/GothicCommode_01/GothicCommode_01.bin",
+        "size": 135224,
+        "md5": "4f691c34556ea46dd5bc59833e2d5ae9"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/GothicCommode_01/GothicCommode_01_diff_1k.jpg",
+        "size": 139422,
+        "md5": "f4a5fb099986a9627f675efe1b77ae10"
+      }
+    ],
+    "originalAuthors": [
+      "Kirill Sannikov"
+    ],
+    "sourcePolycount": 3897
+  },
+  "timber-bench": {
+    "provider": "Poly Haven",
+    "providerAssetId": "painted_wooden_bench",
+    "sourceUrl": "https://polyhaven.com/a/painted_wooden_bench",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/timber-bench.glb",
+    "sha256": "01366dba8fbdea38c2945ba6eaf91486f268785d6e849913d1df579651df05ef",
+    "bytes": 1988600,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/painted_wooden_bench/painted_wooden_bench_1k.gltf",
+        "size": 2835,
+        "md5": "784a49250144aa5299a93c1f3b6968d7"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_bench/painted_wooden_bench_diff_1k.jpg",
+        "size": 545216,
+        "md5": "60c7d0f34f52b1003345d318e35f468d"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_bench/painted_wooden_bench_nor_gl_1k.jpg",
+        "size": 830104,
+        "md5": "08b74bebcff262c14beae35a4f7b3405"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/painted_wooden_bench/painted_wooden_bench_arm_1k.jpg",
+        "size": 586040,
+        "md5": "754ecc7f47b1e5d032e45e22334954f1"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/painted_wooden_bench/painted_wooden_bench.bin",
+        "size": 25444,
+        "md5": "ed331b50f955852f007313c1a75c2e2d"
+      }
+    ],
+    "originalAuthors": [
+      "Kirill Sannikov"
+    ],
+    "sourcePolycount": 630
+  },
+  "writing-desk": {
+    "provider": "Poly Haven",
+    "providerAssetId": "metal_office_desk",
+    "sourceUrl": "https://polyhaven.com/a/metal_office_desk",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/writing-desk.glb",
+    "sha256": "75559afa2a66f018ff2aba92e47ce169783bb54d8f9799b8ce6671954111496a",
+    "bytes": 1601008,
+    "meshes": 9,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/metal_office_desk/metal_office_desk_1k.gltf",
+        "size": 13510,
+        "md5": "723956efef6da35ad41494efa5c3b820"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/metal_office_desk/metal_office_desk_nor_gl_1k.jpg",
+        "size": 170875,
+        "md5": "bcf6793df61d9b5f097f2b9518866c45"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/metal_office_desk/metal_office_desk_diff_1k.jpg",
+        "size": 470831,
+        "md5": "6a27263c95811fa902ddea6476d610e9"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/metal_office_desk/metal_office_desk_arm_1k.jpg",
+        "size": 721614,
+        "md5": "fb76b1e17f07592608d3f144fce4bfce"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/metal_office_desk/metal_office_desk.bin",
+        "size": 229700,
+        "md5": "96f258b9a64d36ca011f44de23da7c65"
+      }
+    ],
+    "originalAuthors": [
+      "Ulan Cabanilla"
+    ],
+    "sourcePolycount": 6898
   }
 }

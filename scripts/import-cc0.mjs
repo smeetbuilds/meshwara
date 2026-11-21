@@ -21,6 +21,18 @@ const curated={
  'optical-frames':'round_spectacles',
  'mechanical-compass':'seadogs_compass',
  'brass-wall-sconce':'industrial_wall_sconce',
+ 'monocoque-chair':'plastic_monobloc_chair_01',
+ 'bedside-table':'painted_wooden_nightstand',
+ 'open-frame-shelving':'wooden_bookshelf_worn',
+ 'counter-height-stool':'metal_stool_01',
+ 'cafe-side-chair':'painted_wooden_chair_01',
+ 'sculpted-armchair':'modern_arm_chair_01',
+ 'timber-bench':'painted_wooden_bench',
+ 'moss-stone-study':'rock_moss_set_01',
+ 'writing-desk':'metal_office_desk',
+ 'stone-coffee-table':'modern_coffee_table_01',
+ 'three-drawer-chest':'GothicCommode_01',
+ 'stone-pedestal-table':'modern_coffee_table_02',
 }
 const pinnedPath='src/data/cc0Models.json'
 const bootstrap=process.argv.includes('--bootstrap')
@@ -96,7 +108,7 @@ for(const slug of selections){
  if(built.buffer.length>18*1024*1024)throw Error('Model binary budget exceeded')
  const value={provider:'Poly Haven',providerAssetId:id,sourceUrl:'https://polyhaven.com/a/'+id,license:'CC0-1.0',
   path:'/models/cc0/'+slug+'.glb',sha256:hash(built.buffer),bytes:built.buffer.length,
-  meshes:built.meshes,materials:built.materials,images:built.images,sourceFiles:records,originalAuthors:registry[slug]?.originalAuthors??[]}
+  meshes:built.meshes,materials:built.materials,images:built.images,sourceFiles:records,originalAuthors:registry[slug]?.originalAuthors??[],sourcePolycount:registry[slug]?.sourcePolycount??0}
  if(registry[slug]&&registry[slug].sha256!==value.sha256)throw Error('Model SHA differs from repository pin for '+slug)
  await mkdir(dirname(modelPath),{recursive:true})
  await writeFile(modelPath,built.buffer)

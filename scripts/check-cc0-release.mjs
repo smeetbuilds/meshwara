@@ -8,8 +8,8 @@ const downloads = JSON.parse(await readFile('public/downloads/manifest.json', 'u
 const catalog = await readFile('src/data/assets.ts','utf8')
 const portableHelper=await readFile('src/components/geometry/CC0Mesh.tsx')
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
-const curated = new Set(['fern-study','croissant-study','dining-table','lounge-chair','desert-boulder-study','rock-formation','precision-microscope','bench-plane','cordless-drill','architect-desk-lamp','lounge-ottoman','tea-service','nested-side-table-pair','rangefinder-camera','bar-stool','optical-frames','mechanical-compass','brass-wall-sconce'])
-assert.equal(Object.keys(source).length, 18, 'All curated PBR sources should be pinned')
+const curated = new Set(['fern-study','croissant-study','dining-table','lounge-chair','desert-boulder-study','rock-formation','precision-microscope','bench-plane','cordless-drill','architect-desk-lamp','lounge-ottoman','tea-service','nested-side-table-pair','rangefinder-camera','bar-stool','optical-frames','mechanical-compass','brass-wall-sconce','monocoque-chair','bedside-table','open-frame-shelving','counter-height-stool','cafe-side-chair','sculpted-armchair','timber-bench','moss-stone-study','writing-desk','stone-coffee-table','three-drawer-chest','stone-pedestal-table'])
+assert.equal(Object.keys(source).length, 30, 'All curated PBR sources should be pinned')
 for (const [slug, record] of Object.entries(source)) {
   assert.ok(curated.has(slug), 'Unexpected third-party asset source: '+slug)
   assert.equal(record.license, 'CC0-1.0')
@@ -17,6 +17,8 @@ for (const [slug, record] of Object.entries(source)) {
   assert.equal(record.sourceUrl, 'https://polyhaven.com/a/'+record.providerAssetId)
   assert.match(record.sha256, /^[a-f0-9]{64}$/)
   assert.ok(record.images>=3 && record.meshes>=1 && record.materials>=1)
+  assert.ok(Number.isInteger(record.sourcePolycount) && record.sourcePolycount>0 && record.sourcePolycount<=250000,
+    'Sourced geometry exceeds the mobile budget: '+slug)
   assert.ok(record.sourceFiles?.length>=4, 'Missing upstream source provenance')
   assert.ok(record.originalAuthors?.length>=1 && record.originalAuthors.every(name=>typeof name==='string' && name.trim().length>=3), 'Original artist attribution missing: '+slug)
   for (const file of record.sourceFiles) {
