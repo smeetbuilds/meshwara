@@ -37,3 +37,34 @@ unmet until multi-angle review evidence is signed off.
 A matching CC0 bronze horse-head bust is independently sourced from Poly Haven
 with its original artists, embedded PBR maps and source license in the download.
 This model is also **artist-unreviewed in Meshvara** despite its realistic mesh.
+
+## Phase 6: eight additional object-specific machine studies
+
+Eight more former generic industrial templates have been replaced with
+independent source files and recognizable mechanisms:
+
+- Servo drive: cooling fins, power/fieldbus terminals, operating display,
+  DIN-rail mounting, and signal/power cable paths
+- Conveyor diverter junction: two intersecting belt sections, idler rollers,
+  side rails, pneumatic switching gate and machine stand
+- Compact palletizer: Cartesian portal, vertical lifting slide, suction
+  tool, traversing carriage and slatted carton pallet
+- Vacuum gripper array: twelve individually sprung cups, service manifolds,
+  connectors, robot flange and vacuum-hose routing
+- Machine vision camera: C-mount focus barrel, optical front element,
+  industrial camera enclosure, mount, triggering lights and I/O cables
+- CNC rotary table: indexing disc, radial work-holding slots, worm gear,
+  clamping blocks and angular markers
+- Twelve-station tool turret: indexed radial holders and tooling,
+  spindle locking hub, drive housing, mounting and coolant line
+- Six-axis robot cell: jointed waist/shoulder/elbow/wrist chain,
+  end effector, fixture and guarded perimeter
+
+These are **illustrative technical reconstructions, not manufacturer CAD**.
+The requirement is structural recognizability and correctly named mechanisms;
+photorealistic material calibration and independently signed multi-angle art
+review are not verified by the code checks or Playwright screenshot smoke tests.
+
+The original human-review gate remains strict for all 500 assets. New sources
+must retain the GeometryV2 parity test in portable ZIPs and the quality
+regression contract \`tests/quality/industrial-identity.test.mjs\`.

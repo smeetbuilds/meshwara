@@ -5,7 +5,7 @@ import { readZip } from '../../scripts/zip-utils.mjs'
 
 /**
  * Named-mechanism regression contract, not a visual realism certificate.
- * Rejects six former generic templates, checks distinct constructed parts,
+ * Rejects fourteen former generic templates, checks distinct constructed parts,
  * and (optionally) verifies the packaged source/geometry dependency.
  */
 const scenes = {
@@ -15,6 +15,15 @@ const scenes = {
  'delta-pick-robot': {file:'deltapickrobot',part:['motorPoints','toolPoints','toolPlate','vacuum','conveyor'],fix:['motorPoints','toolPoints']},
  'plc-control-rack': {file:'plccontrolrack',part:['controller','terminal','DIN','rail','SPS'],fix:['card','rail']},
  'safety-light-curtain': {file:'safetylightcurtain',part:['infrared','emitter','receiver','sensor','window'],fix:['window','bar']},
+ 'servo-drive-module': {file:'servodrivemodule',fix:['connectorProfile','display','rail']},
+ 'conveyor-diverter-junction': {file:'conveyordiverterjunction',fix:['roller','shortRail','foot']},
+ 'compact-palletizer': {file:'compactpalletizer',fix:['lifter','cup','beam']},
+ 'vacuum-gripper-array': {file:'vacuumgripperarray',fix:['manifold','bell','fittings']},
+ 'machine-vision-camera': {file:'machinevisioncamera',fix:['optic','focus','aperture']},
+ 'cnc-rotary-table': {file:'cncrotarytable',fix:['index','bearing','gear']},
+ 'twelve-station-tool-turret': {file:'twelvestationtoolturret',fix:['stations','tool','turret']},
+ 'six-axis-robot-cell': {file:'sixaxisrobotcell',fix:['Limb','path','pad']},
+
 }
 const checkPacks=process.argv.includes('--packs')
 const manifest=checkPacks ? JSON.parse(await readFile('public/downloads/manifest.json','utf8')) : null
@@ -40,4 +49,4 @@ for(const [slug,config] of Object.entries(scenes)){
   assert.ok(files.has(slug+'/src/geometry/GeometryV2.tsx'),slug+' missing portable curved geometry')
  }
 }
-console.log('Six distinct named industrial mechanisms verified '+(checkPacks?'with ZIP source parity.':'in source.'))
+console.log(Object.keys(scenes).length+' distinct named industrial mechanisms verified '+(checkPacks?'with ZIP source parity.':'in source.'))

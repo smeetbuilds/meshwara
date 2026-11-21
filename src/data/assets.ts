@@ -2286,8 +2286,8 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'six-axis-robot-cell', index: '381', name: 'Six Axis Robot Cell', category: 'Industrial', subcategory: 'Automation', scene: 'sixaxisrobotcell',
-    blurb: 'A precision-authored six axis robot cell study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A six-axis articulated robot in a guarded industrial workcell with jointed arm, wrist tool and cable harness.',
+    description: 'A dedicated six-axis industrial manipulator inside a safety perimeter: waist turntable, shoulder and elbow joints, three wrist degrees of freedom, parallel picking jaws, routed cable harness, raised work fixture and guarded structural frame. This is static concept geometry, not motion-validated or safety-certified robotics CAD.',
     tags: ['Robot', 'Automation', 'Industrial', 'Cell'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#ba738f', download: '/downloads/six-axis-robot-cell.zip', new: true,
   },
   {
@@ -2304,8 +2304,8 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'servo-drive-module', index: '384', name: 'Servo Drive Module', category: 'Industrial', subcategory: 'Automation', scene: 'servodrivemodule',
-    blurb: 'A precision-authored servo drive module study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A real industrial servo inverter with a finned aluminium chassis, status display, power terminals and encoder connections.',
+    description: 'A bespoke technical 3D study of an enclosed servo-drive controller: finned heat sink, machined enclosure, dark front operator display, status indicators, plug-in motor and signal terminals, a fieldbus connector, strain-relieved cables and a DIN mounting rail. It is visual reference geometry, not an electrical design or manufacturer-approved CAD model.',
     tags: ['Servo', 'Drive', 'Automation', 'Industrial'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#8cbfcc', download: '/downloads/servo-drive-module.zip', new: true,
   },
   {
@@ -2316,26 +2316,26 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'conveyor-diverter-junction', index: '386', name: 'Conveyor Diverter Junction', category: 'Industrial', subcategory: 'Automation', scene: 'conveyordiverterjunction',
-    blurb: 'A precision-authored conveyor diverter junction study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A true perpendicular two-conveyor transfer with moving-belt geometry, support rollers and a pneumatic diverting gate.',
+    description: 'A bespoke conveyor-diverter mechanism showing a long motor-belt transfer, 90-degree branch conveyor, idler rollers, raised side rails, supporting legs and a pneumatic actuated gate. The physical layout follows recognizable packaging equipment rather than a generic machine body; safety and dimensions remain illustrative.',
     tags: ['Conveyor', 'Automation', 'Industrial', 'Logistics'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#ba7c8d', download: '/downloads/conveyor-diverter-junction.zip', new: true,
   },
   {
     slug: 'compact-palletizer', index: '387', name: 'Compact Palletizer', category: 'Industrial', subcategory: 'Automation', scene: 'compactpalletizer',
-    blurb: 'A precision-authored compact palletizer study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A compact two-column palletizer with overhead Cartesian slide, Z-axis lift, gripper and stacked pallet cartons.',
+    description: 'A detailed Cartesian palletizing cell with two structural extrusion columns, cross-beam, servo traveling carriage, vertical lift slide, vacuum picking cups, connected service hoses and a real slatted pallet of cartons. This is an illustrative machine study, not load-rated automation CAD.',
     tags: ['Palletizer', 'Automation', 'Industrial', 'Robot'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#969e71', download: '/downloads/compact-palletizer.zip', new: true,
   },
   {
     slug: 'vacuum-gripper-array', index: '388', name: 'Vacuum Gripper Array', category: 'Industrial', subcategory: 'Automation', scene: 'vacuumgripperarray',
-    blurb: 'A precision-authored vacuum gripper array study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A modular vacuum gripper tool with 12 sprung suction cups, manifold rails, hose routing and robot mounting flange.',
+    description: 'An object-specific robot end-effector array with industrial vacuum distribution beams, plug-in fittings, twelve spring-loaded suction cups in two rows, compressed-air hoses, aluminum flanges and a central robot mounting plate. Rated lifting capacity and pneumatic safety are not certified.',
     tags: ['Vacuum', 'Gripper', 'Automation', 'Industrial'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#b77175', download: '/downloads/vacuum-gripper-array.zip', new: true,
   },
   {
     slug: 'machine-vision-camera', index: '389', name: 'Machine Vision Camera', category: 'Industrial', subcategory: 'Automation', scene: 'machinevisioncamera',
-    blurb: 'A precision-authored machine vision camera study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA automation asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A recognizable industrial vision camera with C-mount optics, machined chassis, bracket, trigger lights and cables.',
+    description: 'A custom machine-vision inspection camera: rectangular anodized enclosure, flanged lens mount, focusing rings, front optical glass, backplane connectors, status LEDs and rigid adjustable bracket with strain-relieved cables. Optical performance is illustrative, not a certified instrument design.',
     tags: ['Vision', 'Camera', 'Automation', 'Industrial'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#82a2b2', download: '/downloads/machine-vision-camera.zip', new: true,
   },
   {
@@ -2346,8 +2346,8 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'cnc-rotary-table', index: '391', name: 'CNC Rotary Table', category: 'Industrial', subcategory: 'Machining', scene: 'cncrotarytable',
-    blurb: 'A precision-authored cnc rotary table study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA machining asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A substantial indexed CNC rotary table with machined chuck disk, radial slots, indexed markings and geared hand drive.',
+    description: 'A recognizable CNC indexing fixture with a cast iron support base, large machined circular table, radial T-slot patterns, engraved degree markers, center locating boss, locking blocks, worm gearbox and exposed hand-control knob. Scale and precision are illustrative, not metrology-grade CAD.',
     tags: ['CNC', 'Rotary', 'Machining', 'Industrial'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#9fba87', download: '/downloads/cnc-rotary-table.zip', new: true,
   },
   {
@@ -2358,8 +2358,8 @@ export const assets: AssetRecord[] = [
   },
   {
     slug: 'twelve-station-tool-turret', index: '393', name: 'Twelve Station Tool Turret', category: 'Industrial', subcategory: 'Machining', scene: 'twelvestationtoolturret',
-    blurb: 'A precision-authored twelve station tool turret study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA machining asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
+    blurb: 'A polygonal lathe tool turret with twelve individually clocked holders, indexing hub and coolant routing.',
+    description: 'A bespoke 12-station CNC lathe turret illustration featuring a machined radial carrier, indexed tool blocks and cutters, central locking spindle, rear drive gearbox, bolted mounting plate and directed coolant hose. Cutter geometry is a presentation study, not manufacturing-ready tooling.',
     tags: ['Turret', 'CNC', 'Machining', 'Industrial'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#d3c289', download: '/downloads/twelve-station-tool-turret.zip', new: true,
   },
   {

@@ -15,9 +15,11 @@ try {
   assert.equal(report.summary.needsVisualReview,500)
   // Six previously generic industrial assemblies must never regress to
   // ProductionForms. This assertion shrinks when more named objects are fixed.
-  assert.equal(report.summary.genericForm,33,'A generic scene was added or a specialized machine regressed')
+  assert.equal(report.summary.genericForm,25,'A generic scene was added or a specialized machine regressed')
   for (const slug of ['precision-milling-vice','hydraulic-tie-rod-cylinder',
-      'scara-assembly-robot','delta-pick-robot','plc-control-rack','safety-light-curtain']) {
+      'scara-assembly-robot','delta-pick-robot','plc-control-rack','safety-light-curtain',
+      'servo-drive-module','conveyor-diverter-junction','compact-palletizer','vacuum-gripper-array',
+      'machine-vision-camera','cnc-rotary-table','twelve-station-tool-turret','six-axis-robot-cell']) {
     assert.equal(report.assets.find(x=>x.slug===slug)?.indicators.genericForm,false,slug+' regressed to generic geometry')
   }
   assert.equal(report.summary.verifiedCc0PbrSources,31,'Curated source provenance count does not match expected releases')
