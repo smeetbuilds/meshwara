@@ -39,7 +39,7 @@ function AssetDetail() {
   const sameCategory = assets.filter((item) => item.slug !== asset.slug && item.category === asset.category && getAssetSubcategory(item) !== assetSubcategory)
   const related = [...sameType, ...sameCategory].slice(0, 3)
   const interactionLabel = asset.interaction === 'Pointer' ? 'INTERACTIVE' : 'ANIMATED'
-  const detailLabel = asset.complexity === 'Light' ? 'LIGHTWEIGHT' : asset.complexity === 'Cinematic' ? 'HIGH DETAIL' : 'BALANCED'
+  const detailLabel = asset.complexity === 'Light' ? 'LIGHTWEIGHT' : asset.complexity === 'Cinematic' ? 'CINEMATIC PRESET' : 'BALANCED'
   const sourceLabel = asset.sourceType === 'Procedural' ? 'CODE' : asset.sourceType === 'Hybrid' ? 'CODE + MATERIALS' : asset.sourceType === 'Shader' ? 'SHADER' : 'MODEL'
   const previewStateLabel = preview.motion === 'paused' ? 'PAUSED' : asset.interaction !== 'Pointer' ? 'IDLE' : preview.pointer ? 'MOVE POINTER' : 'LOCKED'
   const stageStyle = playground.background ? ({ '--playground-stage': playground.background } as CSSProperties) : undefined
@@ -78,9 +78,9 @@ function AssetDetail() {
       <section className="asset-info page-pad" id="asset-info">
         <div className="info-main"><p className="section-label">OBJECT / {asset.index}</p><h2>{asset.description}</h2><div className="tag-row">{asset.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
         <aside className="spec-panel">
-          <div><span>PRICE</span><strong>FREE</strong></div><div><span>TYPE</span><strong>{assetSubcategory.toUpperCase()}</strong></div><div><span>SOURCE</span><strong>{sourceLabel}</strong></div><div><span>FORMAT</span><strong>{asset.formats.join(' / ').toUpperCase()}</strong></div><div><span>INTERACTION</span><strong>{interactionLabel}</strong></div><div><span>DETAIL</span><strong>{detailLabel}</strong></div><div><span>DOWNLOAD</span><strong>ZIP + SOURCE</strong></div>
+          <div><span>PRICE</span><strong>FREE</strong></div><div><span>TYPE</span><strong>{assetSubcategory.toUpperCase()}</strong></div><div><span>SOURCE</span><strong>{sourceLabel}</strong></div><div><span>FORMAT</span><strong>{asset.formats.join(' / ').toUpperCase()}</strong></div><div><span>INTERACTION</span><strong>{interactionLabel}</strong></div><div><span>DETAIL</span><strong>{detailLabel}</strong></div><div><span>DOWNLOAD</span><strong>ZIP + SOURCE</strong></div><div><span>VISUAL QA</span><strong>REVIEW PENDING</strong></div>
           <a className="download-button" href={asset.download} download><span>Download from {brand.name}</span><ArrowDown /></a>
-          <p>Direct download with source included. No account required.</p>
+          <p>Direct download with source included. Object likeness and photorealism are not independently artist-certified; inspect the 3D preview and source before production use.</p>
         </aside>
       </section>
 

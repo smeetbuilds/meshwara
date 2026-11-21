@@ -28,7 +28,7 @@ function HomePage() {
             <h1 id="home-title">A better starting point for everything 3D.</h1>
           </div>
           <div className="hero-sidecopy">
-            <p>Explore {assets.length} free Three.js assets, materials and scenes. Preview real objects, download editable source, and bring your ideas to life—without signing up.</p>
+            <p>Explore {assets.length} free Three.js assets, materials and scenes. Preview interactive studies, download editable source, and bring your ideas to life—without signing up.</p>
             <div className="hero-actions">
               <Link to="/assets" className="primary-link">Explore the archive <ArrowUpRight /></Link>
               <Link to="/studio" search={{ asset: undefined }} className="secondary-link">Open Studio <ArrowUpRight /></Link>
@@ -84,7 +84,7 @@ function HomePage() {
           <div className="manifesto-grid">
             <h2 id="principles-heading">The details make the difference.</h2>
             <div className="manifesto-copy">
-              <p>Created to feel considered, not generic. From materials and lighting to motion and source code, each asset is designed to be explored and adapted.</p>
+              <p>We are rebuilding this catalog around recognizable forms, useful source and honest visual QA. Every scene is editable, and visual approval is tracked separately from technical checks.</p>
               <div className="principle-list">
                 <span><b>01</b> Art-directed</span>
                 <span><b>02</b> Responsive</span>

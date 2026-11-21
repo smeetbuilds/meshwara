@@ -29,7 +29,7 @@ export const Route = createFileRoute('/assets/')({
   head: () => ({
     meta: [
       { title: `Archive — ${brand.name}` },
-      { name: 'description', content: `Browse ${assets.length} free production-grade Three.js assets from ${brand.name}, with live previews, source downloads and Studio handoff.` },
+      { name: 'description', content: `Browse ${assets.length} free editable Three.js source studies from ${brand.name}, with live previews, source downloads and Studio handoff.` },
       { property: 'og:title', content: `Archive — ${brand.name}` },
       { property: 'og:description', content: brand.productLine },
     ],

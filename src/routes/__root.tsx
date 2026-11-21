@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
       { title: `${brand.name} — ${brand.descriptor}` },
-      { name: 'description', content: `${brand.name} is an open archive of production-grade Three.js objects, characters, shaders, generative systems and scenes, developed by ${brand.studio}.` },
+      { name: 'description', content: `${brand.name} is an open archive of free procedural Three.js objects, characters, shaders, generative systems and scenes, developed by ${brand.studio}.` },
       { name: 'application-name', content: brand.name },
       { name: 'apple-mobile-web-app-title', content: brand.name },
       { property: 'og:site_name', content: brand.name },

@@ -48,16 +48,21 @@ for (const slug of [...phase4, ...phase5]) {
   if (bytes < 900) failures.push(`${slug}: production wrapper/source too thin (${bytes} bytes)`)
   if (colors < 3) failures.push(`${slug}: requires at least 3 controlled material colors (${colors})`)
   if (/Math\.random\s*\(|\b(?:TODO|FIXME|placeholder|lorem ipsum)\b/i.test(scene)) failures.push(`${slug}: non-production marker or randomness found`)
+  // An object-specific assembly may replace a historical generic form.
+  // Preserve the high authored-profile floor; don't force a generic silhouette back in.
+  const usesGeneric = /<(?:PerformanceForm|SpatialForm|ArchitectureForm|IndustrialForm)\b/.test(scene)
+  const objectSpecific = !usesGeneric && scene.includes('../geometry/GeometryV2') &&
+    directAdvanced >= 8 && bytes >= 3200
   if (direct.has(slug)) {
     if (directAdvanced < 4) failures.push(`${slug}: direct V2 scene requires >=4 authored curved/profile operations (${directAdvanced})`)
     if (configArrays < 2) failures.push(`${slug}: direct V2 scene requires >=2 authored configuration arrays (${configArrays})`)
-  } else {
+  } else if (!objectSpecific) {
     if (configArrays < 4) failures.push(`${slug}: production-form asset requires >=4 authored configuration arrays (${configArrays})`)
   }
-  if (spatial.has(slug) && !scene.includes('<SpatialForm')) failures.push(`${slug}: expected SpatialForm composition`)
-  if (performance.has(slug) && !scene.includes('<PerformanceForm')) failures.push(`${slug}: expected PerformanceForm composition`)
-  if (architecture.has(slug) && !scene.includes('<ArchitectureForm')) failures.push(`${slug}: expected ArchitectureForm composition`)
-  if (industrial.has(slug) && !scene.includes('<IndustrialForm')) failures.push(`${slug}: expected IndustrialForm composition`)
+  if (!objectSpecific && spatial.has(slug) && !scene.includes('<SpatialForm')) failures.push(`${slug}: expected SpatialForm composition`)
+  if (!objectSpecific && performance.has(slug) && !scene.includes('<PerformanceForm')) failures.push(`${slug}: expected PerformanceForm composition`)
+  if (!objectSpecific && architecture.has(slug) && !scene.includes('<ArchitectureForm')) failures.push(`${slug}: expected ArchitectureForm composition`)
+  if (!objectSpecific && industrial.has(slug) && !scene.includes('<IndustrialForm')) failures.push(`${slug}: expected IndustrialForm composition`)
 
   const fingerprint = scene
     .replace(/^import[^\n]+$/gm, '')

@@ -1,6 +1,6 @@
 # MESHVARA
 
-MESHVARA is the open Three.js asset archive by Aahav Labs — a frontend-only collection of production-grade spatial assets, built with TanStack Start, React Three Fiber and Bun.
+MESHVARA is the open Three.js asset archive by Aahav Labs — a frontend-only collection of editable procedural spatial studies, built with TanStack Start, React Three Fiber and Bun.
 
 **Developed by Aahav Labs with love ♥**  
 [aahavlabs.in](https://aahavlabs.in) · [hi@aahavlabs.in](mailto:hi@aahavlabs.in)

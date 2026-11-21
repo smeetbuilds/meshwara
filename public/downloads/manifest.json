@@ -1484,8 +1484,8 @@
       "category": "Technology",
       "subcategory": "XR",
       "file": "/downloads/vr-headset.zip",
-      "bytes": 5329,
-      "sha256": "bcaf28a94daa17a27562238a991d35203ce243eae72315e0aec72deb38e0a2dc"
+      "bytes": 6932,
+      "sha256": "bd1428c74723624b880cbcffea8069162fa10736b8d88a981a5f66ff5ed33a3d"
     },
     {
       "slug": "thermal-printer",
@@ -4445,8 +4445,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/advanced-research-laboratory.zip",
-      "bytes": 8590,
-      "sha256": "f3f48e7c9ddecc9792d2cf02b91bf2980be0db1c98b93cf357af36cfb604ce28"
+      "bytes": 10893,
+      "sha256": "bf8a02aed4c6cd68a1fa29b45d9dee49751cd06b95f6f5c62c02d58ba8406f58"
     },
     {
       "slug": "electric-vehicle-workshop",
@@ -4499,8 +4499,8 @@
       "category": "Scenes",
       "subcategory": "Interior Scenes",
       "file": "/downloads/robotics-assembly-cell.zip",
-      "bytes": 8417,
-      "sha256": "7255920b8d263cc6eddb3dd25ee4feaa6c454e469975cb65cf2dd78448a0486d"
+      "bytes": 10391,
+      "sha256": "457e966cb4e85c3630be60e9776358459828c639c3f34ab6ada9960a6ac41542"
     }
   ]
 }
