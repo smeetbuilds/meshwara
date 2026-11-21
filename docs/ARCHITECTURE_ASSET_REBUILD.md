@@ -19,8 +19,10 @@ palettes, not an architectural scan or a photo-derived textured 3D master.
 | Coastal observation shelter | Headland plinth, protective roof wing, wind screens, deck, bench and guardrail |
 
 All remain **architecture concept visualizations, not construction-ready BIM**.
-Material finishes are authored colors and physically-based shader settings, not
-photogrammetry or full physically scanned PBR texture sets. Do not use them to
+The structural geometry remains illustrative, but selected visible architectural
+surfaces now use independently authored CC0 scanned PBR maps for color, normal
+and roughness. The scanned maps improve material detail, not the accuracy of
+the modeling, lighting or scale. These are not photogrammetric buildings. Do not use them to
 claim verified ultra-hyperrealism, structural safety, accessibility compliance,
 fire code compliance, or measured real-world fidelity.
 
@@ -52,3 +54,28 @@ and industrial preview-to-archive source parity. It aborts on a mismatch
 before Vite prerenders the catalog. This costs additional build time but avoids
 publishing inconsistent scene source packs. All generated ZIP bytes and
 manifest SHA-256 records are validated before static deployment.
+
+## Phase 8: locally packaged real PBR surface maps
+
+Four 1024-pixel sets (weathered plaster, aged brick, oak planks and concrete)
+were obtained from Poly Haven and converted to web-optimized WebP. Original
+source MD5s, output SHA-256s, original creators, bytes, and license are pinned
+in src/data/cc0ArchitectureTextures.json. The checked-in textures are never
+fetched from third-party websites at runtime. They are under 1.6 MiB combined
+and are loaded per preview only when required.
+
+All ten architecture studies now assign color, tangent-space normal, and
+roughness maps to material-appropriate surfaces. The same mapping helper and
+only the referenced material map sets are included in the downloadable ZIP,
+under public/textures/architecture/. Extracted apps must copy the included
+public/ textures into their own public folder.
+
+The build gate node scripts/verify-cc0-architecture-textures.mjs --packs
+verifies the exact original-derived texture hash, geometry helper and
+scene source byte-for-byte across all ten ZIPs. The conversion helper
+scripts/refresh-cc0-architecture-textures.py uses Pillow when intentional
+asset regeneration is requested; production builds use checked-in files only.
+
+**This remains an artist-unapproved architectural material fidelity upgrade,
+not proof of ultra-photorealism.** UV scaling, lighting, camera settings and
+mobile GPU performance require multi-angle human review and real-device tests.

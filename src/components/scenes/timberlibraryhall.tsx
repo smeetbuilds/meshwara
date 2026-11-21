@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Timber library hall: repetitive laminated timber portal bents,
@@ -13,10 +14,10 @@ const shelfLevels=[-.76,-.45,-.13,.18]
 export default function TimberLibraryHall(){
  return <group rotation={[0,-.43,0]} scale={.90} position={[0,-.16,0]}>
   <ExtrudedProfile points={rect(3.2,2.50)} depth={.15} rotation={[Math.PI/2,0,0]} position={[0,-1.36,0]}>
-   <meshStandardMaterial color={paleOak} roughness={.72}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(2.93,1.15)} depth={2.20} position={[0,-.50,-.04]}>
-   <meshStandardMaterial color={plaster} roughness={.81}/>
+   <CC0Surface texture="plaster" />
   </ExtrudedProfile>
   <ExtrudedProfile points={gable} depth={2.35} position={[0,.39,-.04]}>
    <meshStandardMaterial color={roof} roughness={.62}/>
@@ -29,10 +30,10 @@ export default function TimberLibraryHall(){
   </ExtrudedProfile>
   {beamBays.map(z=><group key={z}>
    <ExtrudedProfile points={rect(.11,1.33)} depth={.11} position={[-1.25,-.39,z]}>
-    <meshStandardMaterial color={oak} roughness={.55}/>
+    <CC0Surface texture="oak" />
    </ExtrudedProfile>
    <ExtrudedProfile points={rect(.11,1.33)} depth={.11} position={[1.25,-.39,z]}>
-    <meshStandardMaterial color={oak} roughness={.55}/>
+    <CC0Surface texture="oak" />
    </ExtrudedProfile>
    <ExtrudedProfile points={rect(2.51,.14)} depth={.12} position={[0,.26,z]}>
     <meshStandardMaterial color={oak} roughness={.52}/>

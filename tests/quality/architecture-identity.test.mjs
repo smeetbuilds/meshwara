@@ -40,7 +40,7 @@ for(const [slug,config] of Object.entries(scenes)){
   assert.equal(zip.length,row.bytes)
   assert.equal(createHash('sha256').update(zip).digest('hex'),row.sha256)
   const files=readZip(zip)
-  assert.equal(files.get(slug+'/src/Scene.tsx')?.toString('utf8'),source.replaceAll('../geometry/GeometryV2','./geometry/GeometryV2'),slug+' ZIP does not match live source')
+  assert.equal(files.get(slug+'/src/Scene.tsx')?.toString('utf8'),source.replaceAll('../geometry/GeometryV2','./geometry/GeometryV2').replaceAll('../geometry/CC0Surface','./geometry/CC0Surface'),slug+' ZIP does not match live source')
   assert.ok(files.has(slug+'/src/geometry/GeometryV2.tsx'),slug+' ZIP missing geometry helper')
  }
 }

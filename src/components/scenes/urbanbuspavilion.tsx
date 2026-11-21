@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Street-level bus stop: curved cantilever shade, independently framed glass
@@ -11,7 +12,7 @@ const roofSection:Array<[number,number]>=[[-1.50,.42],[-1.43,.59],[-.65,.69],[.6
 export default function UrbanBusPavilion(){
  return <group rotation={[0,-.35,0]} scale={.92} position={[0,-.16,0]}>
   <ExtrudedProfile points={rect(3.36,2.16)} depth={.14} rotation={[Math.PI/2,0,0]} position={[0,-1.34,.05]}>
-   <meshStandardMaterial color={concrete} roughness={.88}/>
+   <CC0Surface texture="concrete" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(3.25,.15)} depth={.035} rotation={[Math.PI/2,0,0]} position={[0,-1.22,1.04]}>
    <meshStandardMaterial color={signal} roughness={.80}/>
@@ -44,10 +45,10 @@ export default function UrbanBusPavilion(){
    <meshStandardMaterial color={aluminium} metalness={.79} roughness={.28}/>
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(1.58,.095)} depth={.46} position={[-.28,-.77,-.15]}>
-   <meshStandardMaterial color={seat} roughness={.59}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(1.56,.40)} depth={.10} position={[-.28,-.53,-.39]}>
-   <meshStandardMaterial color={seat} roughness={.58}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   {[-.90,.34].map(x=><group key={x}>
    <ExtrudedProfile points={rect(.066,.56)} depth={.43} position={[x,-1.04,-.11]}>

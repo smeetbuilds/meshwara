@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Modern pavilion with structurally exposed steel, honest glass envelopes,
@@ -11,7 +12,7 @@ const rafters=[-.75,-.42,-.08,.25,.59]
 export default function GlassHouseStudy(){
  return <group rotation={[0,-.43,0]} scale={.92} position={[0,-.12,0]}>
   <ExtrudedProfile points={rect(3.15,2.45)} depth={.13} rotation={[Math.PI/2,0,0]} position={[0,-1.32,0]}>
-   <meshPhysicalMaterial color={terrazzo} roughness={.68} metalness={.08}/>
+   <CC0Surface texture="concrete" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(3.08,2.36)} depth={.065} rotation={[Math.PI/2,0,0]} position={[0,-1.17,0]}>
    <meshStandardMaterial color={pale} roughness={.66}/>
@@ -20,7 +21,7 @@ export default function GlassHouseStudy(){
    <meshStandardMaterial color={steel} metalness={.69} roughness={.31}/>
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(3.50,.085)} depth={2.75} position={[.12,.63,.14]}>
-   <meshStandardMaterial color={oak} roughness={.48}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   {mullions.map(x=><group key={x}>
    <ExtrudedProfile points={rect(.048,1.65)} depth={.06} position={[x,-.34,1.10]}>

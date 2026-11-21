@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "provider": "Poly Haven",
+  "providerLicenseUrl": "https://polyhaven.com/license",
+  "encoding": "WEBP",
+  "resolution": 1024,
+  "sources": {
+    "plaster": {
+      "providerAssetId": "plastered_wall",
+      "name": "Plastered Wall",
+      "authors": [
+        "Amal Kumar"
+      ],
+      "sourceUrl": "https://polyhaven.com/a/plastered_wall",
+      "maps": {
+        "color": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_wall/plastered_wall_diff_1k.jpg",
+          "originalMd5": "9f64cd14ded4938e64ab6c6bb3de3c19",
+          "outputPath": "public/textures/architecture/plaster/color.webp",
+          "sha256": "a769745b9f6fd8ec0ea3bf4a806a0a54aaa0e9ad065c7af3767fe98882afa053",
+          "bytes": 73054,
+          "width": 1024,
+          "height": 1024
+        },
+        "normal": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_wall/plastered_wall_nor_gl_1k.jpg",
+          "originalMd5": "e3e00c5d9a589621bf3cc541d9fb7d81",
+          "outputPath": "public/textures/architecture/plaster/normal.webp",
+          "sha256": "4fe66783d3c23945f46d89ee8332ca9958748d572832084baed77d88c13872e9",
+          "bytes": 281192,
+          "width": 1024,
+          "height": 1024
+        },
+        "roughness": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_wall/plastered_wall_rough_1k.jpg",
+          "originalMd5": "5c5f8e9c43bf183b45274575a7eac318",
+          "outputPath": "public/textures/architecture/plaster/roughness.webp",
+          "sha256": "1df4e6b41c0dd20efd2ed923cb888c4dde34afe3036e40ed8e7db0a7d57fe819",
+          "bytes": 7270,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    "brick": {
+      "providerAssetId": "brick_wall_07",
+      "name": "Brick Wall 07",
+      "authors": [
+        "Dimitrios Savva"
+      ],
+      "sourceUrl": "https://polyhaven.com/a/brick_wall_07",
+      "maps": {
+        "color": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brick_wall_07/brick_wall_07_diff_1k.jpg",
+          "originalMd5": "7715ed235e20cd8ebe412b925797f408",
+          "outputPath": "public/textures/architecture/brick/color.webp",
+          "sha256": "7e9682a425a06404ed23eb0b3eaee98face8f8e15be9bcb587524c77e1872b1c",
+          "bytes": 239140,
+          "width": 1024,
+          "height": 1024
+        },
+        "normal": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brick_wall_07/brick_wall_07_nor_gl_1k.jpg",
+          "originalMd5": "9f1c1d88c22d211f0b5ac9427578994b",
+          "outputPath": "public/textures/architecture/brick/normal.webp",
+          "sha256": "aba7f658fd7a56811962b0e96c40bff418bc1b22026861307741fa498656b4f7",
+          "bytes": 231210,
+          "width": 1024,
+          "height": 1024
+        },
+        "roughness": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brick_wall_07/brick_wall_07_rough_1k.jpg",
+          "originalMd5": "1e920a4605da74318bea481f615af6ac",
+          "outputPath": "public/textures/architecture/brick/roughness.webp",
+          "sha256": "477db8fb7817c5e2c4f84481296da658a02bde84b2f26ffeeac334d57580b559",
+          "bytes": 37470,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    "oak": {
+      "providerAssetId": "oak_wood_planks",
+      "name": "Oak Wood Planks",
+      "authors": [
+        "Dimitrios Savva"
+      ],
+      "sourceUrl": "https://polyhaven.com/a/oak_wood_planks",
+      "maps": {
+        "color": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/oak_wood_planks/oak_wood_planks_diff_1k.jpg",
+          "originalMd5": "e9e25ac7abcc482f73214fda23e2de25",
+          "outputPath": "public/textures/architecture/oak/color.webp",
+          "sha256": "1491b72dd8e4246d6bd8e6689c7af3ca51993d24131c48d04004c911f5b8a256",
+          "bytes": 99940,
+          "width": 1024,
+          "height": 1024
+        },
+        "normal": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/oak_wood_planks/oak_wood_planks_nor_gl_1k.jpg",
+          "originalMd5": "6a71c23551887b77b29623bb871aefbf",
+          "outputPath": "public/textures/architecture/oak/normal.webp",
+          "sha256": "d36775a568c6505cd76d6302e4092b8cee271405fcdb35d79db7e8684fd409ce",
+          "bytes": 4936,
+          "width": 1024,
+          "height": 1024
+        },
+        "roughness": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/oak_wood_planks/oak_wood_planks_rough_1k.jpg",
+          "originalMd5": "3609ef0a3155ae90b69395431bf8cec1",
+          "outputPath": "public/textures/architecture/oak/roughness.webp",
+          "sha256": "ba3bc09d021ae07dadc0af14c9e0b0bbc3480c7c10d98919b3fa85e19c3c4d2c",
+          "bytes": 231466,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    "concrete": {
+      "providerAssetId": "concrete_floor",
+      "name": "Concrete Floor",
+      "authors": [
+        "eye-candy.xyz"
+      ],
+      "sourceUrl": "https://polyhaven.com/a/concrete_floor",
+      "maps": {
+        "color": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor/concrete_floor_diff_1k.jpg",
+          "originalMd5": "99b94da291a4f038fa6af93c3993cbec",
+          "outputPath": "public/textures/architecture/concrete/color.webp",
+          "sha256": "e43ce518ece2139874ff14f3f939cd6567e29a235f67963d3d7df0a6143861e0",
+          "bytes": 235826,
+          "width": 1024,
+          "height": 1024
+        },
+        "normal": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor/concrete_floor_nor_gl_1k.jpg",
+          "originalMd5": "d77c5c5de3f58adcb00f93caeb4c5a73",
+          "outputPath": "public/textures/architecture/concrete/normal.webp",
+          "sha256": "db922b30f17a84309a788350055be1a3f639c789b8a3d769c75f376dab3335b5",
+          "bytes": 161024,
+          "width": 1024,
+          "height": 1024
+        },
+        "roughness": {
+          "originalUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor/concrete_floor_rough_1k.jpg",
+          "originalMd5": "5d9bd1bfd18e5d32a3217e8275dd8271",
+          "outputPath": "public/textures/architecture/concrete/roughness.webp",
+          "sha256": "642a267588ec04cae392033ce118d0cc873100106d24671845fce473a0ef96c2",
+          "bytes": 15490,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Timber-and-steel pedestrian footbridge to a raised viewing platform.
@@ -13,11 +14,11 @@ const poles=[-1.45,-1.04,-.62,-.20,.22,.64,1.07]
 export default function FootbridgeLookoutTower(){
  return <group rotation={[0,-.47,0]} scale={.89} position={[0,-.01,0]}>
   <ExtrudedProfile points={rect(3.65,2.14)} depth={.17} rotation={[Math.PI/2,0,0]} position={[0,-1.40,-.10]}>
-   <meshStandardMaterial color={foundations} roughness={.88}/>
+   <CC0Surface texture="concrete" />
   </ExtrudedProfile>
   {/* Bridge deck rises toward a separate lookout tower. */}
   <ExtrudedProfile points={rect(2.74,.13)} depth={.74} position={[-.35,-.47,-.20]}>
-   <meshStandardMaterial color={timber} roughness={.62}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   {deckStations.map(i=><ExtrudedProfile key={i} points={rect(.08,.07)} depth={.75} position={[-1.65+i*.215,-.36,-.20]}>
    <meshStandardMaterial color={landing} roughness={.71}/>

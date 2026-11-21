@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Narrow three-level brick row house with authentic punched windows, lintels,
@@ -12,7 +13,7 @@ const courses=Array.from({length:15},(_,i)=>i)
 export default function UrbanRowHouse(){
  return <group rotation={[0,-.38,0]} scale={.90} position={[0,-.15,0]}>
   <ExtrudedProfile points={rect(1.90,2.73)} depth={1.20} bevelSize={.018} bevelThickness={.014} position={[0,-.02,-.26]}>
-   <meshStandardMaterial color={brick} roughness={.93}/>
+   <CC0Surface texture="brick" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(2.13,.22)} depth={1.46} position={[0,1.37,-.27]}>
    <meshStandardMaterial color={trim} roughness={.70}/>
@@ -51,7 +52,7 @@ export default function UrbanRowHouse(){
    <meshStandardMaterial color={stone} metalness={.7} roughness={.26}/>
   </RevolvedSurface>
   <ExtrudedProfile points={rect(1.84,.15)} depth={.75} rotation={[Math.PI/2,0,0]} position={[0,-1.46,.68]}>
-   <meshStandardMaterial color={stone} roughness={.85}/>
+   <CC0Surface texture="concrete" />
   </ExtrudedProfile>
   {[-1.31,-1.20,-1.09].map((y,i)=><ExtrudedProfile key={i} points={rect(.94,.11)} depth={.16+i*.15} rotation={[Math.PI/2,0,0]} position={[0,y,.90+i*.14]}>
    <meshStandardMaterial color={stone} roughness={.84}/>

@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Salt-weathered coastal viewing shelter: raised headland foundation, timber
@@ -17,10 +18,10 @@ export default function CoastalObservationShelter(){
    <meshStandardMaterial color={slate} roughness={.97} flatShading/>
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(3.1,1.79)} depth={.12} rotation={[Math.PI/2,0,0]} position={[0,-1.14,.05]}>
-   <meshStandardMaterial color={sand} roughness={.87}/>
+   <CC0Surface texture="concrete" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(2.90,1.08)} depth={.07} rotation={[Math.PI/2,0,0]} position={[0,-1.08,.45]}>
-   <meshStandardMaterial color={timber} roughness={.72}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   {boardSlats.map(i=><ExtrudedProfile key={i} points={rect(.072,.04)} depth={1.04} rotation={[Math.PI/2,0,0]} position={[-1.40+i*.133,-1.02,.44]}>
    <meshStandardMaterial color={i%3===0?'#ad9274':timber} roughness={.70}/>

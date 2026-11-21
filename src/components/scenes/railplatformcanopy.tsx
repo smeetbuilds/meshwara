@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Railway platform: two rails on sleepers, distinct tactile platform edge,
@@ -11,10 +12,10 @@ const sleepers=Array.from({length:19},(_,i)=>-1.33+i*.147)
 export default function RailPlatformCanopy(){
  return <group rotation={[0,-.35,0]} scale={.92} position={[0,-.16,0]}>
   <ExtrudedProfile points={rect(3.14,2.13)} depth={.17} rotation={[Math.PI/2,0,0]} position={[0,-1.35,0]}>
-   <meshStandardMaterial color={stone} roughness={.86}/>
+   <CC0Surface texture="concrete" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(3.0,.97)} depth={.18} rotation={[Math.PI/2,0,0]} position={[0,-1.16,-.44]}>
-   <meshStandardMaterial color={stone} roughness={.72}/>
+   <CC0Surface texture="concrete" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(3.0,.13)} depth={.04} rotation={[Math.PI/2,0,0]} position={[0,-1.04,.01]}>
    <meshStandardMaterial color={yellow} roughness={.78}/>

@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Courtyard villa: three inhabited wings frame a reflecting pool and shaded
@@ -16,10 +17,10 @@ export default function CourtyardVillaStudy(){
   </ExtrudedProfile>
   {/* U-shaped habitable wings — the central courtyard is genuinely open. */}
   <ExtrudedProfile points={rect(3.20,1.28)} depth={.60} position={[0,-.37,-.91]}>
-   <meshStandardMaterial color={chalk} roughness={.72}/>
+   <CC0Surface texture="plaster" />
   </ExtrudedProfile>
   {[-1,1].map(side=><ExtrudedProfile key={side} points={rect(.62,1.12)} depth={1.60} position={[side*1.30,-.47,.09]}>
-   <meshStandardMaterial color={chalk} roughness={.74}/>
+   <CC0Surface texture="plaster" />
   </ExtrudedProfile>)}
   <ExtrudedProfile points={rect(3.32,.14)} depth={.79} position={[0,.40,-.89]}>
    <meshStandardMaterial color={terracotta} roughness={.63}/>
@@ -54,7 +55,7 @@ export default function CourtyardVillaStudy(){
   </ExtrudedProfile>
   {columns.map(x=><group key={x}>
    <ExtrudedProfile points={rect(.062,.90)} depth={.06} position={[x,-.64,1.12]}>
-    <meshStandardMaterial color={wood} roughness={.49}/>
+    <CC0Surface texture="oak" />
    </ExtrudedProfile>
    <ExtrudedProfile points={rect(.08,.065)} depth={.43} position={[x,-.14,.94]}>
     <meshStandardMaterial color={wood} roughness={.52}/>

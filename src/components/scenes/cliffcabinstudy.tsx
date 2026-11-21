@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Elevated steep-roof timber cabin: cliff ledge, A-frame roof, glazed gable,
@@ -16,10 +17,10 @@ export default function CliffCabinStudy(){
    <meshStandardMaterial color={shale} roughness={.99} flatShading/>
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(2.22,1.78)} depth={.15} rotation={[Math.PI/2,0,0]} position={[0,-.95,.08]}>
-   <meshStandardMaterial color={pine} roughness={.73}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(2.02,1.26)} depth={1.65} position={[0,-.39,-.33]}>
-   <meshStandardMaterial color={pine} roughness={.76}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   {/* Genuine triangular gable, rather than a bevelled generic shell. */}
   <ExtrudedProfile points={roofFrame} depth={1.82} position={[0,.34,-.35]}>
@@ -35,7 +36,7 @@ export default function CliffCabinStudy(){
    <meshStandardMaterial color={trim} metalness={.33} roughness={.51}/>
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(2.56,1.1)} depth={.12} rotation={[Math.PI/2,0,0]} position={[0,-.98,1.01]}>
-   <meshStandardMaterial color={deck} roughness={.74}/>
+   <CC0Surface texture="oak" />
   </ExtrudedProfile>
   {braces.map(x=><group key={x}>
    <ExtrudedProfile points={rect(.09,1.25)} depth={.09} position={[x,-.22,.55]}>

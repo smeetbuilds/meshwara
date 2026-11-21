@@ -1,3 +1,4 @@
+import { CC0Surface } from '../geometry/CC0Surface'
 import { ExtrudedProfile, RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
 /** Low museum wing with a colonnaded covered walk, clearstory ribbon,
@@ -12,10 +13,10 @@ const art=[[-.89,-.44],[-.20,-.44],[.61,-.44]] as Array<[number,number]>
 export default function MuseumWingStudy(){
  return <group rotation={[0,-.47,0]} scale={.91} position={[0,-.24,0]}>
   <ExtrudedProfile points={rect(3.46,2.12)} depth={.17} rotation={[Math.PI/2,0,0]} position={[0,-1.28,0]}>
-   <meshStandardMaterial color={flooring} roughness={.82}/>
+   <CC0Surface texture="concrete" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(3.22,1.35)} depth={1.18} position={[0,-.42,-.47]}>
-   <meshStandardMaterial color={gallery} roughness={.75}/>
+   <CC0Surface texture="plaster" />
   </ExtrudedProfile>
   <ExtrudedProfile points={rect(3.34,.15)} depth={1.64} position={[0,.41,-.20]}>
    <meshStandardMaterial color={travertine} roughness={.58}/>
