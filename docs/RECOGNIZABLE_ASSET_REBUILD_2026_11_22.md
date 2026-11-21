@@ -36,3 +36,9 @@ These remain procedural WebGL models. Physical realism, texture fidelity, actual
 6. Obtain independent signed, multi-angle art direction approvals for each of the 500 objects. The archive is not a collection of 500 approved photorealistic meshes yet.
 
 See `docs/ASSET_FIDELITY_STANDARD.md`, `QUALITY_STANDARD.md`, and `quality/visual-approvals.json` for release policy.
+
+## Independent WebGL image evidence generator
+
+Run `bun run visual:evidence` with Playwright Chromium installed. The new `tests/e2e/asset-rebuild-visual.spec.ts` mounts the actual asset detail-page WebGL viewer for all ten most recently rebuilt scenes (the wolf and zebra from the previous pass, plus these eight). It captures and attaches three reproducible scene-orientation screenshots per asset, records browser runtime errors and checks the WebGL canvas is alive.
+
+This is an opt-in **browser QA tool** and is not part of the production build, because screenshot capture requires a graphical test environment and independent art review. Generated images are not an automatic likeness pass; signed evidence must still be reviewed and registered separately per the fidelity standard.

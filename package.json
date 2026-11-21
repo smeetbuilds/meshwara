@@ -9,6 +9,7 @@
     "check": "tsc --noEmit",
     "creatures:check": "node tests/quality/creature-source-integrity.test.mjs",
     "products:check": "node tests/quality/recognizable-products.test.mjs",
+    "visual:evidence": "playwright test tests/e2e/asset-rebuild-visual.spec.ts --project=desktop-chromium",
     "rebuild:workqueue": "node scripts/audit-visual-fidelity.mjs && node scripts/generate-rebuild-workqueue.mjs",
     "validate": "bun scripts/validate-library.mjs",
     "qa": "node scripts/import-cc0.mjs && bun run versions:check && bun run codecs:sync && bun run codecs:check && bun run customization:check && bun run sources:check && bun run models:test && bun run quality:check && bun run public:check && bun run packs && bun run pack:check && bun run registry:build && bun run distribution:check && bun run handoff:check && bun run studio:check && bun run validate && bun run check && bun run build && bun run deployment:check",
