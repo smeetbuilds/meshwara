@@ -38,7 +38,7 @@ function Fin({x,z,tilt}:{x:number;z:number;tilt:number}) {
   </group>
 }
 export default function PerformanceSurfboard(){
-  return <group rotation={[.07,-.45,-.16]} scale={.93}>
+  return <group rotation={[1.08,-.38,-.08]} scale={.93}>
     <LoftSurface stations={stations} radialSegments={64} castShadow receiveShadow>
       <meshPhysicalMaterial color={deck} metalness={.03} roughness={.30}
         clearcoat={.92} clearcoatRoughness={.14}/>

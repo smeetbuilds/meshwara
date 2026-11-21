@@ -24,15 +24,15 @@ export default function ChefKnife() {
   return <group rotation={[.17,-.35,-.16]} scale={.94}>
     <ExtrudedProfile points={blade} depth={.052} bevelSize={.008} bevelThickness={.009}
       bevelSegments={3} castShadow receiveShadow>
-      <meshPhysicalMaterial color="#c7cdd0" metalness={1} roughness={.27} clearcoat={.19} clearcoatRoughness={.28}/>
+      <meshPhysicalMaterial color="#d8e0e4" metalness={.62} roughness={.22} clearcoat={.19} clearcoatRoughness={.28}/>
     </ExtrudedProfile>
     <ExtrudedProfile points={bevel} position={[0,0,.039]} depth={.009} bevelSize={.002} bevelThickness={.002}
       bevelSegments={2}>
-      <meshPhysicalMaterial color="#e6e8e8" metalness={.98} roughness={.13}/>
+      <meshPhysicalMaterial color="#f0f3f3" metalness={.65} roughness={.18}/>
     </ExtrudedProfile>
     <ExtrudedProfile points={bevel} position={[0,0,-.039]} depth={.009} bevelSize={.002} bevelThickness={.002}
       bevelSegments={2}>
-      <meshPhysicalMaterial color="#e6e8e8" metalness={.98} roughness={.13}/>
+      <meshPhysicalMaterial color="#f0f3f3" metalness={.65} roughness={.18}/>
     </ExtrudedProfile>
     <SplineTube points={spine} radius={.012} tubularSegments={72} radialSegments={6}>
       <meshStandardMaterial color="#808a90" metalness={.95} roughness={.31}/>
