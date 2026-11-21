@@ -30,7 +30,21 @@ try {
       'sculpture-gallery-courtyard','observatory-roof-deck']) {
     assert.equal(report.assets.find(x=>x.slug===slug)?.indicators.genericForm,false,slug+' regressed to generic geometry')
   }
-  assert.equal(report.summary.verifiedCc0PbrSources,31,'Curated source provenance count does not match expected releases')
+  assert.equal(report.summary.verifiedCc0PbrSources,39,'Curated source provenance count does not match expected releases')
+  for (const slug of [
+      'courtyard-villa-study','glass-house-study','cliff-cabin-study','urban-row-house',
+      'museum-wing-study','timber-library-hall','rail-platform-canopy','urban-bus-pavilion',
+      'footbridge-lookout-tower','coastal-observation-shelter']) {
+    assert.equal(report.assets.find(x => x.slug === slug)?.indicators.noSourceTexture, false,
+      slug+' uses audited locally bundled CC0 textures and must not be marked untextured')
+  }
+  for (const slug of ['studio-laptop','floor-mirror','research-microscope-pro',
+      'professional-saute-pan','fluted-console-cabinet','lion-form-study',
+      'succulent-arrangement','torque-wrench']) {
+    assert.equal(report.assets.find(x => x.slug === slug)?.indicators.noSourceTexture, false,
+      slug+' has embedded original scanned PBR textures')
+  }
+
   assert.equal(report.assets.find(x=>x.slug==='vr-headset').visualStatus,'unreviewed')
   assert.equal(report.assets.find(x=>x.slug==='delta-pick-robot').visualStatus,'unreviewed')
   const strict=spawnSync(process.execPath,['scripts/audit-visual-fidelity.mjs','--strict','--output',output],{encoding:'utf8'})

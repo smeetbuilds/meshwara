@@ -8,8 +8,8 @@ const downloads = JSON.parse(await readFile('public/downloads/manifest.json', 'u
 const catalog = await readFile('src/data/assets.ts','utf8')
 const portableHelper=await readFile('src/components/geometry/CC0Mesh.tsx')
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
-const curated = new Set(['fern-study','croissant-study','dining-table','lounge-chair','desert-boulder-study','rock-formation','precision-microscope','bench-plane','cordless-drill','architect-desk-lamp','lounge-ottoman','tea-service','nested-side-table-pair','rangefinder-camera','bar-stool','optical-frames','mechanical-compass','brass-wall-sconce','monocoque-chair','bedside-table','open-frame-shelving','counter-height-stool','cafe-side-chair','sculpted-armchair','timber-bench','moss-stone-study','writing-desk','stone-coffee-table','three-drawer-chest','stone-pedestal-table','horse-bust'])
-assert.equal(Object.keys(source).length, 31, 'All curated PBR sources should be pinned')
+const curated = new Set(['fern-study','croissant-study','dining-table','lounge-chair','desert-boulder-study','rock-formation','precision-microscope','bench-plane','cordless-drill','architect-desk-lamp','lounge-ottoman','tea-service','nested-side-table-pair','rangefinder-camera','bar-stool','optical-frames','mechanical-compass','brass-wall-sconce','monocoque-chair','bedside-table','open-frame-shelving','counter-height-stool','cafe-side-chair','sculpted-armchair','timber-bench','moss-stone-study','writing-desk','stone-coffee-table','three-drawer-chest','stone-pedestal-table','horse-bust','studio-laptop','floor-mirror','research-microscope-pro','professional-saute-pan','fluted-console-cabinet','lion-form-study','succulent-arrangement','torque-wrench'])
+assert.equal(Object.keys(source).length, 39, 'All curated PBR sources should be pinned')
 for (const [slug, record] of Object.entries(source)) {
   assert.ok(curated.has(slug), 'Unexpected third-party asset source: '+slug)
   assert.equal(record.license, 'CC0-1.0')

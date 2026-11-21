@@ -26,7 +26,12 @@ for (const block of blocks) {
   const sourceSha256=createHash('sha256').update(content).digest('hex')
   const indicators={
     genericForm: /<(?:PerformanceForm|SpatialForm|ArchitectureForm|IndustrialForm)\b/.test(sourceText),
-    noSourceTexture: !cc0[slug] && !/(?:TextureLoader|useTexture|map=\{|(?:roughness|normal|metalness|ao)Map=|\.png|\.jpg|\.ktx2|\.webp)/i.test(sourceText),
+    // A scene using the audited local CC0Surface helper has real color,
+    // normal and roughness maps even though their actual useTexture() call
+    // lives inside the reusable helper, not in this particular TSX scene.
+    noSourceTexture: !cc0[slug] &&
+      !(sourceText.includes("from '../geometry/CC0Surface'") && /<CC0Surface\b/.test(sourceText)) &&
+      !/(?:TextureLoader|useTexture|map=\{|(?:roughness|normal|metalness|ao)Map=|\.png|\.jpg|\.ktx2|\.webp)/i.test(sourceText),
     smallSource: content.byteLength<1500,
     primitivesPresent: /<(?:box|sphere|cylinder|cone|capsule|torus|plane|circle)Geometry\b/.test(sourceText),
   }

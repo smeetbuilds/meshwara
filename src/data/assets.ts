@@ -809,10 +809,10 @@ export const assets: AssetRecord[] = [
     tags: ['Compass', 'Navigation', 'Instrument'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#c09b62', download: '/downloads/mechanical-compass.zip', new: true,
   },
   {
-    slug: 'torque-wrench', index: '135', name: 'Torque Wrench', category: 'Tools', scene: 'torquewrench',
-    blurb: 'A long-form torque wrench with ratchet head, knurled adjustment grip and calibrated shaft.',
-    description: 'A workshop tool modeled around real mechanical proportions and strong silhouette for automotive and industrial interfaces.',
-    tags: ['Torque', 'Workshop', 'Mechanical'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#9ba3aa', download: '/downloads/torque-wrench.zip', new: true,
+    slug: 'torque-wrench', index: '135', name: 'Chrome Ratchet Wrench', category: 'Tools', scene: 'torquewrench',
+    blurb: 'Scanned mechanical ratchet wrench with worn chrome, real socket-head geometry, oil, grime and surface scuffs.',
+    description: 'A source-authored chrome ratchet/socket wrench with separate drive head geometry, worn and scratched metal surfaces and realistic oil marks. It is not a calibrated torque-setting wrench; the original category label is corrected so the item name accurately describes the provided model.',
+    tags: ['Torque', 'Workshop', 'Mechanical'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js', 'GLB'], presentation: 'Grounded', accent: '#9ba3aa', download: '/downloads/torque-wrench.zip', new: true,
   },
   {
     slug: 'digital-caliper', index: '136', name: 'Digital Caliper', category: 'Tools', scene: 'digitalcaliper',
@@ -971,10 +971,10 @@ export const assets: AssetRecord[] = [
     tags: ['Camera', 'Imaging', 'Optics'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#7d858b', download: '/downloads/mirrorless-camera.zip', new: true,
   },
   {
-    slug: 'studio-laptop', index: '162', name: 'Studio Laptop', category: 'Technology', subcategory: 'Computing', scene: 'studiolaptop',
-    blurb: 'A thin workstation laptop with machined chassis, keyboard deck and precisely hinged display.',
-    description: 'A premium computing asset designed for desks, product showcases and interface compositions, with device-scale proportions and understated material separation.',
-    tags: ['Laptop', 'Computing', 'Workstation'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#9aa0a5', download: '/downloads/studio-laptop.zip', new: true,
+    slug: 'studio-laptop', index: '162', name: 'Retro Laptop Computer', category: 'Technology', subcategory: 'Computing', scene: 'studiolaptop',
+    blurb: 'Scanned retro laptop with actual keycaps, trackball, disk drive, LCD screen and lived-in original materials.',
+    description: 'An independently authored CC0 model of a beige vintage laptop with thick hinges, physical keyboard, integrated trackball, floppy-drive opening and original scanned PBR materials. This retro computer is not a modern thin studio notebook; original model by Poly Haven contributors.',
+    tags: ['Laptop', 'Computing', 'Workstation'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js', 'GLB'], presentation: 'Grounded', accent: '#9aa0a5', download: '/downloads/studio-laptop.zip', new: true,
   },
   {
     slug: 'reference-turntable', index: '163', name: 'Reference Turntable', category: 'Technology', subcategory: 'Audio', scene: 'referenceturntable',
@@ -1025,10 +1025,10 @@ export const assets: AssetRecord[] = [
     tags: ['Desk', 'Workspace', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#8e6c4c', download: '/downloads/writing-desk.zip', new: true,
   },
   {
-    slug: 'floor-mirror', index: '171', name: 'Floor Mirror', category: 'Furniture', subcategory: 'Decor', scene: 'floormirror',
-    blurb: 'A full-height leaning mirror with slender metal frame, back support and physically reflective face.',
-    description: 'A minimal interior decor asset built for bedrooms, retail and hospitality scenes, with intentional lean angle and stable floor contact.',
-    tags: ['Mirror', 'Decor', 'Interior'], complexity: 'Cinematic', interaction: 'Idle', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a9afb1', download: '/downloads/floor-mirror.zip', new: true,
+    slug: 'floor-mirror', index: '171', name: 'Ornate Gilded Mirror', category: 'Furniture', subcategory: 'Decor', scene: 'floormirror',
+    blurb: 'Vintage gilded wall mirror with a carved floral crest, rope edge, patinated reflection and authentic scanned textures.',
+    description: 'A source-authored Victorian wall mirror featuring an arched frame, raised gilded botanical carving, rope edging and weathered mirror glass. This object is wall-mounted rather than a freestanding floor mirror; the stable original asset link is retained. Embedded materials and source model CC0 licensed.',
+    tags: ['Mirror', 'Decor', 'Interior'], complexity: 'Cinematic', interaction: 'Idle', sourceType: 'Hybrid', formats: ['TSX', 'Three.js', 'GLB'], presentation: 'Grounded', accent: '#a9afb1', download: '/downloads/floor-mirror.zip', new: true,
   },
   {
     slug: 'lounge-chair', index: '172', name: 'Lounge Chair', category: 'Furniture', subcategory: 'Seating', scene: 'loungechair',
@@ -2063,10 +2063,10 @@ export const assets: AssetRecord[] = [
     tags: ['Side Table', 'Nested', 'Furniture', 'Interior'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['GLB', 'TSX'], presentation: 'Grounded', accent: '#a8a063', download: '/downloads/nested-side-table-pair.zip', new: true,
   },
   {
-    slug: 'fluted-console-cabinet', index: '344', name: 'Fluted Console Cabinet', category: 'Furniture', subcategory: 'Tables', scene: 'flutedconsolecabinet',
-    blurb: 'A precision-authored fluted console cabinet study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA tables asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Console', 'Cabinet', 'Storage', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a37c9b', download: '/downloads/fluted-console-cabinet.zip', new: true,
+    slug: 'fluted-console-cabinet', index: '344', name: 'Vintage Glass-Front Cabinet', category: 'Furniture', subcategory: 'Tables', scene: 'flutedconsolecabinet',
+    blurb: 'Textured vintage wooden cabinet with real carved casework, paneled cupboards, glass doors and brass hardware.',
+    description: 'A detailed source-authored dark wood vintage storage cabinet with carved frame members, glazed upper doors, paneled lower cupboard doors and original metallic knobs. This design is not a contemporary fluted console, and the catalog label is updated accordingly. Model and embedded PBR maps are CC0.',
+    tags: ['Console', 'Cabinet', 'Storage', 'Furniture'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js', 'GLB'], presentation: 'Grounded', accent: '#a37c9b', download: '/downloads/fluted-console-cabinet.zip', new: true,
   },
   {
     slug: 'three-drawer-chest', index: '345', name: 'Three Drawer Chest', category: 'Furniture', subcategory: 'Tables', scene: 'threedrawerchest',
@@ -2405,10 +2405,10 @@ export const assets: AssetRecord[] = [
     tags: ['Regulator', 'Pressure', 'Industrial', 'Fluid'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#b78bb5', download: '/downloads/precision-pressure-regulator.zip', new: true,
   },
   {
-    slug: 'research-microscope-pro', index: '401', name: 'Research Microscope Pro', category: 'Scientific', subcategory: 'Optics', scene: 'researchmicroscopepro',
-    blurb: 'A precision-authored research microscope pro study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA optics asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Microscope', 'Optics', 'Scientific', 'Research'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#7cb579', download: '/downloads/research-microscope-pro.zip', new: true,
+    slug: 'research-microscope-pro', index: '401', name: 'Vintage Brass Microscope', category: 'Scientific', subcategory: 'Optics', scene: 'researchmicroscopepro',
+    blurb: 'Original vintage brass optical microscope model with engraved mechanical stage, black enamel and knurled focus wheels.',
+    description: 'Photogrammetric-style CC0 vintage laboratory microscope with brass mechanical hardware, enamel body, separately modeled focus wheels, objective turret and a detailed stand. This depicts a historical optical instrument rather than a modern professional clinical microscope. Original PBR maps are embedded in the GLB.',
+    tags: ['Microscope', 'Optics', 'Scientific', 'Research'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js', 'GLB'], presentation: 'Grounded', accent: '#7cb579', download: '/downloads/research-microscope-pro.zip', new: true,
   },
   {
     slug: 'raman-spectrometer-bench', index: '402', name: 'Raman Spectrometer Bench', category: 'Scientific', subcategory: 'Optics', scene: 'ramanspectrometerbench',
@@ -2651,10 +2651,10 @@ export const assets: AssetRecord[] = [
     tags: ['Wolf', 'Mammal', 'Animal', 'Stylized'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#a7bf74', download: '/downloads/wolf-form-study.zip', new: true,
   },
   {
-    slug: 'lion-form-study', index: '442', name: 'Lion Form Study', category: 'Animals', subcategory: 'Mammals', scene: 'lionformstudy',
-    blurb: 'A precision-authored lion form study study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA mammals asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Lion', 'Mammal', 'Animal', 'Stylized'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#7ac9d3', download: '/downloads/lion-form-study.zip', new: true,
+    slug: 'lion-form-study', index: '442', name: 'Carved Lion Head Sculpture', category: 'Animals', subcategory: 'Mammals', scene: 'lionformstudy',
+    blurb: 'A richly modeled lion-head sculpture with realistic mane detail, weathered carved material and squared plinth.',
+    description: 'A CC0 sculptural study featuring a lion head with long layered mane, textured carving marks, patinated surface and a separate square pedestal. The scanned source has realistic artist-authored surface texture and forms; this is an artwork rather than a living lion reconstruction.',
+    tags: ['Lion', 'Mammal', 'Animal', 'Stylized'], complexity: 'Cinematic', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js', 'GLB'], presentation: 'Grounded', accent: '#7ac9d3', download: '/downloads/lion-form-study.zip', new: true,
   },
   {
     slug: 'tiger-form-study', index: '443', name: 'Tiger Form Study', category: 'Animals', subcategory: 'Mammals', scene: 'tigerformstudy',
@@ -2729,10 +2729,10 @@ export const assets: AssetRecord[] = [
     tags: ['Agave', 'Plant', 'Nature', 'Botanical'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Static', accent: '#a7a879', download: '/downloads/agave-rosette.zip', new: true,
   },
   {
-    slug: 'succulent-arrangement', index: '455', name: 'Succulent Arrangement', category: 'Nature', subcategory: 'Botanical', scene: 'succulentarrangement',
-    blurb: 'A precision-authored succulent arrangement study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA botanical asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Succulent', 'Plant', 'Nature', 'Botanical'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Static', accent: '#af72a3', download: '/downloads/succulent-arrangement.zip', new: true,
+    slug: 'succulent-arrangement', index: '455', name: 'Cheiridopsis Succulent Study', category: 'Nature', subcategory: 'Botanical', scene: 'succulentarrangement',
+    blurb: 'Detailed CC0 Karoo succulent model with fleshy blue-green leaves, quartz gravel and delicate pale flowers.',
+    description: 'A botanically recognizable Cheiridopsis succulent with blue-green fleshy lobes, pale flowers, rough groundcover, tiny stones and detailed original PBR textures. It presents one naturalistic groundcover specimen rather than an artificial bouquet or mixed planter.',
+    tags: ['Succulent', 'Plant', 'Nature', 'Botanical'], complexity: 'Balanced', interaction: 'Idle', sourceType: 'Hybrid', formats: ['TSX', 'Three.js', 'GLB'], presentation: 'Static', accent: '#af72a3', download: '/downloads/succulent-arrangement.zip', new: true,
   },
   {
     slug: 'wildflower-meadow-study', index: '456', name: 'Wildflower Meadow Study', category: 'Nature', subcategory: 'Botanical', scene: 'wildflowermeadowstudy',
@@ -2795,10 +2795,10 @@ export const assets: AssetRecord[] = [
     tags: ['Wine', 'Decanter', 'Food', 'Glass'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#c689ab', download: '/downloads/crystal-wine-decanter.zip', new: true,
   },
   {
-    slug: 'professional-saute-pan', index: '466', name: 'Professional Saute Pan', category: 'Food', subcategory: 'Hospitality', scene: 'professionalsautepan',
-    blurb: 'A precision-authored professional saute pan study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA hospitality asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Pan', 'Cookware', 'Food', 'Kitchen'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#92ccc3', download: '/downloads/professional-saute-pan.zip', new: true,
+    slug: 'professional-saute-pan', index: '466', name: 'Aged Brass Cooking Pan', category: 'Food', subcategory: 'Hospitality', scene: 'professionalsautepan',
+    blurb: 'Hand-worn brass cooking pan with real geometric hammering, wood handle, tarnish and surface material detail.',
+    description: 'An independently sourced aged brass pan with a worn golden-metal vessel, polished interior, subtle dents and attached carved wooden handle. This decorative vintage cookware differs from a modern nonstick saute pan, so its catalog name has been corrected to represent the actual modeled form.',
+    tags: ['Pan', 'Cookware', 'Food', 'Kitchen'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js', 'GLB'], presentation: 'Grounded', accent: '#92ccc3', download: '/downloads/professional-saute-pan.zip', new: true,
   },
   {
     slug: 'enamel-dutch-oven', index: '467', name: 'Enamel Dutch Oven', category: 'Food', subcategory: 'Hospitality', scene: 'enameldutchoven',

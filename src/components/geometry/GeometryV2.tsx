@@ -24,54 +24,100 @@ function useDisposableGeometry(factory: () => THREE.BufferGeometry, deps: readon
   return geometry
 }
 
+/**
+ * Generate one continuous rounded/superelliptic loft with watertight caps.
+ *
+ * Side surface UV seams have separate vertices, so U/V=0 and U/V=1 never
+ * share triangles. The seam's normals are averaged to remove a lighting
+ * crease. End-cap vertices are independent so their normals stay flat and
+ * point *outward* instead of being smoothed together with the side shell.
+ *
+ * The original implementation wrapped the final side triangle directly
+ * from v~1 to v=0, which stretched image textures across the entire seam;
+ * both cap winding directions were also reversed.
+ */
 export function buildLoftGeometry(stations: LoftStation[], radialSegments = 36) {
   if (stations.length < 2) throw new Error('LoftSurface requires at least two stations')
-  const vertices: number[] = []
+  if (!Number.isInteger(radialSegments) || radialSegments < 8 || radialSegments > 256) {
+    throw new Error('LoftSurface radialSegments must be an integer in [8, 256]')
+  }
+  for (const [index, station] of stations.entries()) {
+    if (![station.x, station.y ?? 0, station.z ?? 0, station.width, station.height, station.exponent ?? 3.4, station.twist ?? 0]
+      .every(Number.isFinite)) throw new Error('LoftSurface station ' + index + ' has non-finite coordinates')
+    if (station.width < 0 || station.height < 0 || (station.exponent ?? 3.4) <= 0)
+      throw new Error('LoftSurface station ' + index + ' has invalid dimensions')
+  }
+
+  const positions: number[] = []
   const uvs: number[] = []
   const indices: number[] = []
+  const stride = radialSegments + 1
 
-  stations.forEach((station, s) => {
-    const exponent = station.exponent ?? 3.4
-    const power = 2 / exponent
-    const twist = station.twist ?? 0
-    for (let i = 0; i < radialSegments; i += 1) {
-      const theta = (i / radialSegments) * Math.PI * 2 + twist
-      const c = signedPow(Math.cos(theta), power)
-      const si = signedPow(Math.sin(theta), power)
-      const y = (station.y ?? 0) + station.height * si
-      const z = (station.z ?? 0) + station.width * c
-      vertices.push(station.x, y, z)
-      uvs.push(s / Math.max(1, stations.length - 1), i / radialSegments)
+  const ringPosition = (station: LoftStation, sample: number): [number, number, number] => {
+    const power = 2 / (station.exponent ?? 3.4)
+    const theta = (sample / radialSegments) * Math.PI * 2 + (station.twist ?? 0)
+    const y = (station.y ?? 0) + station.height * signedPow(Math.sin(theta), power)
+    const z = (station.z ?? 0) + station.width * signedPow(Math.cos(theta), power)
+    return [station.x, y, z]
+  }
+
+  // Side rows use radialSegments+1, duplicating the longitudinal UV seam.
+  stations.forEach((station, row) => {
+    for (let i = 0; i <= radialSegments; i += 1) {
+      const [x, y, z] = ringPosition(station, i)
+      positions.push(x, y, z)
+      uvs.push(row / (stations.length - 1), i / radialSegments)
     }
   })
-
-  for (let s = 0; s < stations.length - 1; s += 1) {
-    const row = s * radialSegments
-    const next = (s + 1) * radialSegments
+  for (let row = 0; row < stations.length - 1; row += 1) {
+    const a = row * stride
+    const b = (row + 1) * stride
     for (let i = 0; i < radialSegments; i += 1) {
-      const j = (i + 1) % radialSegments
-      indices.push(row + i, next + i, row + j, row + j, next + i, next + j)
+      indices.push(a + i, b + i, a + i + 1)
+      indices.push(a + i + 1, b + i, b + i + 1)
     }
   }
 
-  for (const [stationIndex, flip] of [[0, true], [stations.length - 1, false]] as const) {
-    const station = stations[stationIndex]
-    const centerIndex = vertices.length / 3
-    vertices.push(station.x, station.y ?? 0, station.z ?? 0)
-    uvs.push(stationIndex === 0 ? 0 : 1, 0.5)
-    const row = stationIndex * radialSegments
+  // Independent cap perimeter rings preserve sharp manufactured edges.
+  // From +z toward +y, the perimeter winds toward -X; reverse the last cap.
+  for (const [row, isFirst] of [[0, true], [stations.length - 1, false]] as const) {
+    const station = stations[row]
+    const centerIndex = positions.length / 3
+    positions.push(station.x, station.y ?? 0, station.z ?? 0)
+    uvs.push(0.5, 0.5)
+    const capStart = positions.length / 3
+    for (let i = 0; i <= radialSegments; i += 1) {
+      const [x, y, z] = ringPosition(station, i)
+      positions.push(x, y, z)
+      uvs.push(
+        0.5 + (station.width ? (z - (station.z ?? 0)) / (2 * station.width) : 0),
+        0.5 + (station.height ? (y - (station.y ?? 0)) / (2 * station.height) : 0),
+      )
+    }
     for (let i = 0; i < radialSegments; i += 1) {
-      const j = (i + 1) % radialSegments
-      if (flip) indices.push(centerIndex, row + j, row + i)
-      else indices.push(centerIndex, row + i, row + j)
+      if (isFirst) indices.push(centerIndex, capStart + i, capStart + i + 1)
+      else indices.push(centerIndex, capStart + i + 1, capStart + i)
     }
   }
 
   const geometry = new THREE.BufferGeometry()
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
   geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2))
   geometry.setIndex(indices)
   geometry.computeVertexNormals()
+
+  const normal = geometry.getAttribute('normal')
+  for (let row = 0; row < stations.length; row += 1) {
+    const first = row * stride
+    const last = first + radialSegments
+    const nx = normal.getX(first) + normal.getX(last)
+    const ny = normal.getY(first) + normal.getY(last)
+    const nz = normal.getZ(first) + normal.getZ(last)
+    const length = Math.hypot(nx, ny, nz) || 1
+    normal.setXYZ(first, nx / length, ny / length, nz / length)
+    normal.setXYZ(last, nx / length, ny / length, nz / length)
+  }
+  normal.needsUpdate = true
   geometry.computeBoundingBox()
   geometry.computeBoundingSphere()
   return geometry

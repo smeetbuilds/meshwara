@@ -523,6 +523,112 @@
     ],
     "sourcePolycount": 6232
   },
+  "floor-mirror": {
+    "provider": "Poly Haven",
+    "providerAssetId": "ornate_mirror_01",
+    "sourceUrl": "https://polyhaven.com/a/ornate_mirror_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/floor-mirror.glb",
+    "sha256": "d0d7b260bd5fd50d2cac085f1afe908ce12721347415937623fb8236aeb4964a",
+    "bytes": 676260,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/ornate_mirror_01/ornate_mirror_01_1k.gltf",
+        "size": 2697,
+        "md5": "834501c79f6045083367606fd8f30c9f"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/ornate_mirror_01/ornate_mirror_01_arm_1k.jpg",
+        "size": 126947,
+        "md5": "0e7d993bec7cc5913bf73f51821b09ad"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/ornate_mirror_01/ornate_mirror_01.bin",
+        "size": 372772,
+        "md5": "0be4cf0dda17d51c4a279ce4912b1b3f"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/ornate_mirror_01/ornate_mirror_01_diff_1k.jpg",
+        "size": 115752,
+        "md5": "d2103c8f1e72c86d7911a06da6161cd1"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/ornate_mirror_01/ornate_mirror_01_nor_gl_1k.jpg",
+        "size": 59073,
+        "md5": "bea34985dd1cc0d3dd20478df6b1e7b3"
+      }
+    ],
+    "originalAuthors": [
+      "James Ray Cock"
+    ],
+    "sourcePolycount": 14246
+  },
+  "fluted-console-cabinet": {
+    "provider": "Poly Haven",
+    "providerAssetId": "vintage_cabinet_01",
+    "sourceUrl": "https://polyhaven.com/a/vintage_cabinet_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/fluted-console-cabinet.glb",
+    "sha256": "095809ca2b46de7651cbc416dedd1e234dd4fe1b946476c66e931fc711d0b8d3",
+    "bytes": 2862024,
+    "meshes": 8,
+    "materials": 3,
+    "images": 7,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/vintage_cabinet_01/vintage_cabinet_01_1k.gltf",
+        "size": 22562,
+        "md5": "754cfb6f79559dbd0eb3c1ccbf364e3b"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_cabinet_01/vintage_cabinet_01_a_rough_1k.jpg",
+        "size": 133697,
+        "md5": "183215e644cd0f74b426121b49e9a411"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_cabinet_01/vintage_cabinet_01_a_arm_1k.jpg",
+        "size": 157915,
+        "md5": "9b4581b935f69907fc1bc93d5bc07ed6"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_cabinet_01/vintage_cabinet_01_a_nor_gl_1k.jpg",
+        "size": 109236,
+        "md5": "5f0f1319da94f89c1111f6484839d266"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_cabinet_01/vintage_cabinet_01_b_rough_1k.jpg",
+        "size": 155539,
+        "md5": "e858bf92185d817f993dafcf21b9be18"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/vintage_cabinet_01/vintage_cabinet_01.bin",
+        "size": 1995776,
+        "md5": "9048b5c9e35ab9d2e2732cf738b7fcb8"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_cabinet_01/vintage_cabinet_01_b_nor_gl_1k.jpg",
+        "size": 52162,
+        "md5": "492c300d382219c0cd696cf11c6dbc26"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_cabinet_01/vintage_cabinet_01_a_diff_1k.jpg",
+        "size": 119782,
+        "md5": "fdb450df01c024a7f86f0719c23b63de"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_cabinet_01/vintage_cabinet_01_b_diff_1k.jpg",
+        "size": 124307,
+        "md5": "7bd4316d7c8997626de05fe9e149e4d5"
+      }
+    ],
+    "originalAuthors": [
+      "Rico Cilliers"
+    ],
+    "sourcePolycount": 61096
+  },
   "horse-bust": {
     "provider": "Poly Haven",
     "providerAssetId": "horse_head",
@@ -565,6 +671,49 @@
       "Tina"
     ],
     "sourcePolycount": 12068
+  },
+  "lion-form-study": {
+    "provider": "Poly Haven",
+    "providerAssetId": "lion_head",
+    "sourceUrl": "https://polyhaven.com/a/lion_head",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/lion-form-study.glb",
+    "sha256": "8390e6b52cca8fd759ef8eb52aa20fe0dd59ebb310c460aa21bb10f576df8a28",
+    "bytes": 3199440,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/lion_head/lion_head_1k.gltf",
+        "size": 2746,
+        "md5": "28b0ea6cfa4e154b4559ce2eb01acff7"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/lion_head/lion_head_nor_gl_1k.jpg",
+        "size": 807928,
+        "md5": "6eb95ab97478e3a2e255fe467776467c"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/lion_head/lion_head_diff_1k.jpg",
+        "size": 619974,
+        "md5": "0bda22feecb680bfbd20c5beae60cba1"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/lion_head/lion_head_arm_1k.jpg",
+        "size": 674331,
+        "md5": "6da26ff6ba20dac9abccf4f56701f48d"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/lion_head/lion_head.bin",
+        "size": 1095444,
+        "md5": "b6e09d69c51220b0b0305ac5f29ca030"
+      }
+    ],
+    "originalAuthors": [
+      "Tina"
+    ],
+    "sourcePolycount": 47214
   },
   "lounge-chair": {
     "provider": "Poly Haven",
@@ -953,6 +1102,49 @@
     ],
     "sourcePolycount": 16598
   },
+  "professional-saute-pan": {
+    "provider": "Poly Haven",
+    "providerAssetId": "brass_pan_01",
+    "sourceUrl": "https://polyhaven.com/a/brass_pan_01",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/professional-saute-pan.glb",
+    "sha256": "8a295a8db1f509fb3c25be3383f4a917aff3fe163b2ef28c2c0ca19bd05b6802",
+    "bytes": 1614972,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/brass_pan_01/brass_pan_01_1k.gltf",
+        "size": 2676,
+        "md5": "4baf504c0b665858296de702f93beda5"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_pan_01/brass_pan_01_diff_1k.jpg",
+        "size": 595029,
+        "md5": "50d7fe9790c6ad162674e7b536ff3e49"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_pan_01/brass_pan_01_nor_gl_1k.jpg",
+        "size": 359170,
+        "md5": "a17f5ad48de5a433b793de3868580dc1"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_pan_01/brass_pan_01_arm_1k.jpg",
+        "size": 549721,
+        "md5": "3a01028fb8d35b065a02ed4f0e3a2414"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/brass_pan_01/brass_pan_01.bin",
+        "size": 109336,
+        "md5": "3099c59ef46a50380487ad9b92d4dfbd"
+      }
+    ],
+    "originalAuthors": [
+      "Rico Cilliers"
+    ],
+    "sourcePolycount": 4340
+  },
   "rangefinder-camera": {
     "provider": "Poly Haven",
     "providerAssetId": "Camera_01",
@@ -1025,6 +1217,49 @@
       "Rajil Jose Macatangay"
     ],
     "sourcePolycount": 26987
+  },
+  "research-microscope-pro": {
+    "provider": "Poly Haven",
+    "providerAssetId": "vintage_microscope",
+    "sourceUrl": "https://polyhaven.com/a/vintage_microscope",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/research-microscope-pro.glb",
+    "sha256": "6f9dedcbd14207c9b67c5df07c92a26b8ebf8493e154fc7b10adcbeb910d5728",
+    "bytes": 2867924,
+    "meshes": 8,
+    "materials": 2,
+    "images": 4,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/vintage_microscope/vintage_microscope_1k.gltf",
+        "size": 15000,
+        "md5": "8caf57500671c4d5fb1df878df5c3498"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_microscope/vintage_microscope_nor_gl_1k.jpg",
+        "size": 320605,
+        "md5": "d584938da3350e1c46a11efe1fb4c844"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_microscope/vintage_microscope_diff_1k.jpg",
+        "size": 561049,
+        "md5": "a3a431383641b3e3b295f4cfc521f9a6"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/vintage_microscope/vintage_microscope_arm_1k.jpg",
+        "size": 714056,
+        "md5": "cf75e4595fcdac9a263777956afd57fd"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/vintage_microscope/vintage_microscope.bin",
+        "size": 702092,
+        "md5": "f391522a073472a4ff4f3ba5f8d9b8dc"
+      }
+    ],
+    "originalAuthors": [
+      "Luis José Fernández Rodríguez"
+    ],
+    "sourcePolycount": 20631
   },
   "rock-formation": {
     "provider": "Poly Haven",
@@ -1229,6 +1464,93 @@
     ],
     "sourcePolycount": 13645
   },
+  "studio-laptop": {
+    "provider": "Poly Haven",
+    "providerAssetId": "classic_laptop",
+    "sourceUrl": "https://polyhaven.com/a/classic_laptop",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/studio-laptop.glb",
+    "sha256": "40cf012604e388ae6512d1d97673ae9868e94343a05a46d2457dd66bea51d030",
+    "bytes": 2181136,
+    "meshes": 3,
+    "materials": 2,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/classic_laptop/classic_laptop_1k.gltf",
+        "size": 7496,
+        "md5": "7eeb1538a6b917c5e08a55a6c77695cf"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/classic_laptop/classic_laptop_nor_gl_1k.jpg",
+        "size": 445971,
+        "md5": "5039de6a8edd18f89dafbf77ab55b1cb"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/classic_laptop/classic_laptop_diff_1k.jpg",
+        "size": 524918,
+        "md5": "b16478b0bfdaf836180867d26054435a"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/classic_laptop/classic_laptop_arm_1k.jpg",
+        "size": 697150,
+        "md5": "bfdc7350cc006b818bb4163093fb1e28"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/classic_laptop/classic_laptop.bin",
+        "size": 508524,
+        "md5": "61282875872d1d523a02ecbf09627a8c"
+      }
+    ],
+    "originalAuthors": [
+      "Arrangemonk"
+    ],
+    "sourcePolycount": 14450
+  },
+  "succulent-arrangement": {
+    "provider": "Poly Haven",
+    "providerAssetId": "cheiridopsis_succulent",
+    "sourceUrl": "https://polyhaven.com/a/cheiridopsis_succulent",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/succulent-arrangement.glb",
+    "sha256": "e38cd13cd2b5b7460aa2cbec99e998432a3caab1320e5ac36c3d556e15525925",
+    "bytes": 4778880,
+    "meshes": 9,
+    "materials": 2,
+    "images": 4,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/cheiridopsis_succulent/cheiridopsis_succulent_1k.gltf",
+        "size": 21966,
+        "md5": "57d2405eaab419e2f786153776cd6d8a"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/cheiridopsis_succulent/cheiridopsis_succulent_nor_gl_1k.jpg",
+        "size": 724619,
+        "md5": "a731447a99c54f4c844ec77c57e2594b"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/cheiridopsis_succulent/cheiridopsis_succulent_diff_1k.jpg",
+        "size": 526293,
+        "md5": "d752f6ee06c3c5f1b8eabed21498e086"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/cheiridopsis_succulent/cheiridopsis_succulent_arm_1k.jpg",
+        "size": 484264,
+        "md5": "95bb867b029422654d248554f3d6f5a1"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/cheiridopsis_succulent/cheiridopsis_succulent.bin",
+        "size": 2504328,
+        "md5": "2cebafe46a5d6a949c11e75471d56328"
+      }
+    ],
+    "originalAuthors": [
+      "James Ray Cock",
+      "Jenelle van Heerden"
+    ],
+    "sourcePolycount": 198888
+  },
   "tea-service": {
     "provider": "Poly Haven",
     "providerAssetId": "tea_set_01",
@@ -1359,6 +1681,49 @@
       "Kirill Sannikov"
     ],
     "sourcePolycount": 630
+  },
+  "torque-wrench": {
+    "provider": "Poly Haven",
+    "providerAssetId": "ratchet_wrench",
+    "sourceUrl": "https://polyhaven.com/a/ratchet_wrench",
+    "license": "CC0-1.0",
+    "path": "/models/cc0/torque-wrench.glb",
+    "sha256": "b5a50aebba112d297274c1309908b9ce5b92d6b43999ce73e26b3dceeeb4dfed",
+    "bytes": 1518776,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "sourceFiles": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/ratchet_wrench/ratchet_wrench_1k.gltf",
+        "size": 2788,
+        "md5": "a402821ab94f6dcfdbf240a06da47ac8"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/ratchet_wrench/ratchet_wrench_nor_gl_1k.jpg",
+        "size": 388724,
+        "md5": "9e5b7767e4f286b76b9ba0d6c8f8e692"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/ratchet_wrench/ratchet_wrench.bin",
+        "size": 219816,
+        "md5": "021dc261c222c50e5e07963d0cb7fa7a"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/ratchet_wrench/ratchet_wrench_arm_1k.jpg",
+        "size": 622307,
+        "md5": "647ec2fe71b5f0d2749cf22b83e9e09b"
+      },
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/ratchet_wrench/ratchet_wrench_diff_1k.jpg",
+        "size": 286148,
+        "md5": "92bda4c684ff4ceb5a15f8a5200d17dd"
+      }
+    ],
+    "originalAuthors": [
+      "John Hutcheson"
+    ],
+    "sourcePolycount": 8796
   },
   "writing-desk": {
     "provider": "Poly Haven",

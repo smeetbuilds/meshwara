@@ -34,6 +34,14 @@ const curated={
  'three-drawer-chest':'GothicCommode_01',
  'stone-pedestal-table':'modern_coffee_table_02',
  'horse-bust':'horse_head',
+ 'studio-laptop':'classic_laptop',
+ 'floor-mirror':'ornate_mirror_01',
+ 'research-microscope-pro':'vintage_microscope',
+ 'professional-saute-pan':'brass_pan_01',
+ 'fluted-console-cabinet':'vintage_cabinet_01',
+ 'lion-form-study':'lion_head',
+ 'succulent-arrangement':'cheiridopsis_succulent',
+ 'torque-wrench':'ratchet_wrench',
 }
 const pinnedPath='src/data/cc0Models.json'
 const bootstrap=process.argv.includes('--bootstrap')
