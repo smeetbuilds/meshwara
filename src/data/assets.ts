@@ -895,7 +895,7 @@ export const assets: AssetRecord[] = [
   {
     slug: 'pendant-cluster', index: '149', name: 'Pendant Cluster', category: 'Furniture', scene: 'pendantcluster',
     blurb: 'A three-light pendant composition with varied drop heights and translucent sculptural shades.',
-    description: 'A lighting asset intended for interior scenes where hierarchy and suspended rhythm matter more than decorative noise.',
+    description: 'Three hanging glass and brushed-metal fixtures use a SHA-verified Poly Haven CC0 model with embedded PBR textures, suspended cables and independent lighting. Complete portable source and artist provenance are included.',
     tags: ['Lighting', 'Pendant', 'Interior'], complexity: 'Cinematic', interaction: 'Idle', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Static', accent: '#d9c188', download: '/downloads/pendant-cluster.zip', new: true,
   },
   {
@@ -2809,8 +2809,8 @@ export const assets: AssetRecord[] = [
   {
     slug: 'artisan-bread-basket', index: '468', name: 'Artisan Bread Basket', category: 'Food', subcategory: 'Hospitality', scene: 'artisanbreadbasket',
     blurb: 'A precision-authored artisan bread basket study with controlled proportions, layered functional detail and a clean editorial silhouette for responsive WebGL use.',
-    description: 'MESHVARA hospitality asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. The scene is authored to remain legible from compact library cards through full asset previews without relying on random placement, placeholder geometry or external model dependencies.',
-    tags: ['Bread', 'Basket', 'Food', 'Hospitality'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Procedural', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#ce92a2', download: '/downloads/artisan-bread-basket.zip', new: true,
+    description: 'MESHVARA hospitality asset developed as a self-contained React Three Fiber composition with deterministic geometry, physically tuned materials, deliberate hardware/detail hierarchy and device-aware presentation. A SHA-verified CC0 woven basket with embedded PBR textures is composed with original deterministic artisan bread meshes. Its artist, license and download hash are documented inside the standalone ZIP.',
+    tags: ['Bread', 'Basket', 'Food', 'Hospitality'], complexity: 'Balanced', interaction: 'Pointer', sourceType: 'Hybrid', formats: ['TSX', 'Three.js'], presentation: 'Grounded', accent: '#ce92a2', download: '/downloads/artisan-bread-basket.zip', new: true,
   },
   {
     slug: 'omakase-sushi-platter', index: '469', name: 'Omakase Sushi Platter', category: 'Food', subcategory: 'Hospitality', scene: 'omakasesushiplatter',

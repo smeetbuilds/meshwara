@@ -17,8 +17,8 @@ const studied = [
    features:['function Handrail','const levels','<CC0Surface texture="concrete"','rise = .182','<SplineTube']},
   {slug:'aero-wheel',scene:'aerowheel',min:5400,materials:[],
    features:['tyreMap','bumpMap={tyreMap}','function Spoke','ventCircle','const lugs','SplineTube']},
-  {slug:'pendant-cluster',scene:'pendantcluster',min:3400,materials:[],
-   features:['const fixtures','function Pendant','RevolvedSurface','transmission={.55}','pointLight']},
+  {slug:'pendant-cluster',scene:'pendantcluster',min:1900,materials:[],
+   features:['const fixtures','CC0Mesh','const modelUrl','pointLight']},
 ]
 const manifest=JSON.parse(await readFile('public/downloads/manifest.json','utf8'))
 const pbrLedger=JSON.parse(await readFile('src/data/cc0ArchitectureTextures.json','utf8'))
@@ -40,7 +40,7 @@ for(const study of studied){
     assert.ok(!source.includes('boxGeometry args={[3.3,3.2,.38]}'),
       'Glazed bay must not place a solid wall behind its glazing')
   if(study.slug==='pendant-cluster')
-    assert.equal([...source.matchAll(/\{x:[^}\n]+metal:/g)].length,3,
+    assert.equal([...source.matchAll(/\{\s*x:\s*[-.\d]+,\s*y:/g)].length,3,
       'Pendant composition must match the advertised three-light catalog asset')
   const entry=manifest.assets.find(a=>a.slug===study.slug)
   assert.ok(entry,study.slug+': missing catalog download')
@@ -53,6 +53,9 @@ for(const study of studied){
     .replaceAll('../geometry/CurvedBox','./geometry/CurvedBox')
     .replaceAll('../geometry/GeometryV2','./geometry/GeometryV2')
     .replaceAll('../geometry/CC0Surface','./geometry/CC0Surface')
+    .replaceAll('../geometry/CC0Mesh','./geometry/CC0Mesh')
+    .replace("const modelUrl = '/models/cc0/pendant-cluster.glb'",
+      "const modelUrl = new URL('./models/pendant-cluster.glb', import.meta.url).href")
   assert.equal(zip.get(prefix+'src/Scene.tsx')?.toString('utf8'),portable,
     study.slug+': shipped scene source differs from preview')
   if(source.includes('../geometry/GeometryV2'))

@@ -42,6 +42,8 @@ const curated={
  'lion-form-study':'lion_head',
  'succulent-arrangement':'cheiridopsis_succulent',
  'torque-wrench':'ratchet_wrench',
+ 'artisan-bread-basket':'wicker_basket_01',
+ 'pendant-cluster':'modern_ceiling_lamp_01',
 }
 const pinnedPath='src/data/cc0Models.json'
 const bootstrap=process.argv.includes('--bootstrap')
@@ -115,9 +117,17 @@ for(const slug of selections){
  }
  const built=packGltf(JSON.parse(text.toString('utf8')),resources)
  if(built.buffer.length>18*1024*1024)throw Error('Model binary budget exceeded')
+ // Read author and polygon metadata from the same official CC0 provider when pinning.
+ const infoMeta=!registry[slug]
+  ? JSON.parse((await load('https://api.polyhaven.com/info/'+id,1024*1024)).toString('utf8'))
+  : null
+ const authors=registry[slug]?.originalAuthors??Object.keys(infoMeta?.authors??{})
+ const polycount=registry[slug]?.sourcePolycount??infoMeta?.polycount
+ if(!authors.length||!Number.isInteger(polycount)||polycount<1||polycount>250000)
+  throw Error('Model provenance or mobile polygon budget failed '+slug)
  const value={provider:'Poly Haven',providerAssetId:id,sourceUrl:'https://polyhaven.com/a/'+id,license:'CC0-1.0',
   path:'/models/cc0/'+slug+'.glb',sha256:hash(built.buffer),bytes:built.buffer.length,
-  meshes:built.meshes,materials:built.materials,images:built.images,sourceFiles:records,originalAuthors:registry[slug]?.originalAuthors??[],sourcePolycount:registry[slug]?.sourcePolycount??0}
+  meshes:built.meshes,materials:built.materials,images:built.images,sourceFiles:records,originalAuthors:authors,sourcePolycount:polycount}
  if(registry[slug]&&registry[slug].sha256!==value.sha256)throw Error('Model SHA differs from repository pin for '+slug)
  await mkdir(dirname(modelPath),{recursive:true})
  await writeFile(modelPath,built.buffer)

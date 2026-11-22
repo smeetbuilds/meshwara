@@ -28,6 +28,7 @@ const selections=[
   {slug:'brutalist-stair',title:'Brutalist Stair'},
   {slug:'aero-wheel',title:'Aero Wheel'},
   {slug:'pendant-cluster',title:'Pendant Cluster'},
+  {slug:'artisan-bread-basket',title:'Artisan Bread Basket'},
 ] as const
 
 /**
