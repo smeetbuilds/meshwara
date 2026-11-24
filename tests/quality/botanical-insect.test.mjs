@@ -4,6 +4,8 @@ import { createHash } from 'node:crypto'
 import { readZip } from '../../scripts/zip-utils.mjs'
 
 const entries=[
+ {slug:'falcon-study',scene:'falconstudy',features:['function plumage','function featherGeometry','function tapered','data.flight','data.coverts','data.toes','data.claws','vertexColors']},
+ {slug:'hummingbird-study',scene:'hummingbird',features:['function plumage','function featherGeometry','function wingGeometry','function billGeometry','function throatGeometry','iridescence','vertexColors']},
  {slug:'manta-ray',scene:'mantaray',features:['function rayGeometry','function taperedTube','const stations','vertexColors','data.body.computeVertexNormals','data.lobes']},
  {slug:'koi-pair',scene:'koipair',features:['function bodyGeometry','function koiMaps','function finGeometry','DataTexture','function Fish','Fish variant={0}','Fish variant={1}']},
  {slug:'sea-turtle',scene:'seaturtle',features:['function shellMaps','function shellGeometry','function skinMap','function flipperGeometry','DataTexture','data.front','data.rear']},
