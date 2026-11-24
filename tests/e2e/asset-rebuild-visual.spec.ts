@@ -34,6 +34,8 @@ const selections=[
   {slug:'water-lily',title:'Water Lily'},
   {slug:'sea-turtle',title:'Sea Turtle'},
   {slug:'stone-pine',title:'Stone Pine'},
+  {slug:'manta-ray',title:'Manta Ray'},
+  {slug:'koi-pair',title:'Koi Pair'},
 ] as const
 
 /**
