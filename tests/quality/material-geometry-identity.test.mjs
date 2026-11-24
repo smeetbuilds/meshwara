@@ -14,7 +14,7 @@ const studied = [
    features:['function Mullion','glassWidths.map','<CC0Surface texture="plaster"','<CC0Surface texture="oak"','SplineTube']},
   {slug:'brutalist-stair',scene:'brutaliststair',min:4300,
    materials:['concrete'],
-   features:['function Handrail','const levels','<CC0Surface texture="concrete"','rise = .182','<SplineTube']},
+   features:['function Handrail','const levels','<CC0Surface texture="concrete"','rise = .182','function flightGeometry','function Bar','new THREE.ExtrudeGeometry']},
   {slug:'aero-wheel',scene:'aerowheel',min:5400,materials:[],
    features:['tyreMap','bumpMap={tyreMap}','function Spoke','ventCircle','const lugs','SplineTube']},
   {slug:'pendant-cluster',scene:'pendantcluster',min:1900,materials:[],

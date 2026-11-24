@@ -1,118 +1,85 @@
+import { useEffect, useMemo } from 'react'
+import * as THREE from 'three'
 import { CC0Surface } from '../geometry/CC0Surface'
-import { SplineTube } from '../geometry/GeometryV2'
 
-/**
- * Cast-in-place concrete staircase: structural flight, independently readable
- * nosings and risers, upper/lower landings, paired guard rails, anchored
- * vertical balusters and discreet bolted steel handrail connections.
- * The concrete is an existing SHA-256-verified Poly Haven CC0 scanned surface.
- */
-type Point = [number,number,number]
-const count = 10
-const run = .29
+/** Single closed, stepped reinforced-concrete flight, seated landings,
+ * guardrails anchored into each tread. All elevations share one datum. */
+type Point=[number,number,number]
+const count=10
+const run=.29
 const rise = .182
-const originX = -1.40
-const originY = -.91
-const steel = '#414b50'
-const bright = '#9ca7a8'
-const levels = Array.from({length:count},(_,i)=>({
-  x:originX+i*run,
-  y:originY+i*rise,
-}))
-const railPts = (z:number):Point[] => levels
- .filter((_,i)=>i===0||i===3||i===6||i===9)
- .map(({x,y}):Point=>[x,y+1.16,z])
-const buildRail=(z:number)=>railPts(z)
-function Handrail({z}:{z:number}) {
+const originX=-1.45
+const originY=-.91
+const width=1.60
+const slab=.21
+const levels=Array.from({length:count},(_,i)=>({x:originX+(i+.5)*run,y:originY+(i+1)*rise}))
+const start=originX,end=originX+count*run,top=originY+count*rise
+const steel='#4b5153'
+const rail='#6d7476'
+function flightGeometry(){
+  const shape=new THREE.Shape()
+  shape.moveTo(start,originY)
+  for(let i=0;i<count;i++){
+    const x=start+i*run,y=originY+(i+1)*rise
+    shape.lineTo(x,y);shape.lineTo(x+run,y)
+  }
+  shape.lineTo(end,top-slab-rise);shape.lineTo(start,originY-slab);shape.closePath()
+  const g=new THREE.ExtrudeGeometry(shape,{depth:width,bevelEnabled:false,steps:1})
+  g.translate(0,0,-width/2)
+  // Planar texture projection with a consistent physical texel scale.
+  const p=g.getAttribute('position'),n=g.getAttribute('normal'),uv=g.getAttribute('uv')
+  for(let i=0;i<p.count;i++){
+    const ax=Math.abs(n.getX(i)),ay=Math.abs(n.getY(i)),az=Math.abs(n.getZ(i))
+    if(ay>=ax&&ay>=az)uv.setXY(i,p.getX(i)*.72,p.getZ(i)*.72)
+    else if(ax>=az)uv.setXY(i,p.getZ(i)*.72,p.getY(i)*.72)
+    else uv.setXY(i,p.getX(i)*.72,p.getY(i)*.72)
+  }
+  return g
+}
+function Bar({a,b,radius,color=steel}:{a:Point;b:Point;radius:number;color?:string}){
+  const from=new THREE.Vector3(...a),to=new THREE.Vector3(...b),delta=to.clone().sub(from)
+  return <mesh position={from.clone().lerp(to,.5)} quaternion={new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),delta.clone().normalize())} castShadow>
+    <cylinderGeometry args={[radius,radius,delta.length(),18]}/>
+    <meshPhysicalMaterial color={color} metalness={.78} roughness={.38}/>
+  </mesh>
+}
+function Handrail({z}:{z:number}){
+  const h=1.00
+  const first=levels[0],last=levels[count-1]
+  const lower:Point=[start-.43,originY+h,z],a:Point=[first.x,first.y+h,z],b:Point=[last.x,last.y+h,z],upper:Point=[end+.43,last.y+h,z]
   return <group>
-    <SplineTube points={buildRail(z)} radius={.038}
-      tubularSegments={74} radialSegments={10}>
-      <meshPhysicalMaterial color={steel} metalness={.79}
-        roughness={.31} clearcoat={.17}/>
-    </SplineTube>
-    {levels.map(({x,y},i)=>i%3===0||i===9?
-      <group key={i}>
-        <mesh position={[x,y+.595,z]} castShadow>
-          <cylinderGeometry args={[.019,.019,1.10,12]}/>
-          <meshPhysicalMaterial color={bright} metalness={.83} roughness={.31}/>
-        </mesh>
-        <mesh position={[x,y+.035,z]}>
-          <cylinderGeometry args={[.073,.073,.025,24]}/>
-          <meshPhysicalMaterial color={steel} metalness={.84} roughness={.29}/>
-        </mesh>
-        <mesh position={[x,y+.06,z]}>
-          <cylinderGeometry args={[.025,.025,.036,6]}/>
-          <meshStandardMaterial color={bright} metalness={.68} roughness={.4}/>
-        </mesh>
-      </group>
-      : <mesh key={i} position={[x,y+.58,z]} castShadow>
-        <cylinderGeometry args={[.011,.011,1.05,10]}/>
-        <meshPhysicalMaterial color={steel} metalness={.80} roughness={.32}/>
-      </mesh>
-    )}
-    <SplineTube points={levels.map(({x,y}):Point=>[x,y+.16,z])}
-      radius={.019} radialSegments={8} tubularSegments={80}>
-      <meshPhysicalMaterial color="#56636a" metalness={.78} roughness={.36}/>
-    </SplineTube>
+    <Bar a={lower} b={a} radius={.033} color={rail}/>
+    <Bar a={a} b={b} radius={.033} color={rail}/>
+    <Bar a={b} b={upper} radius={.033} color={rail}/>
+    {levels.map(({x,y},i)=><group key={i}>
+      <Bar a={[x,y,z]} b={[x,y+h,z]} radius={i%3===0||i===count-1?.018:.012}/>
+      <mesh position={[x,y+.012,z]} castShadow><cylinderGeometry args={[.063,.063,.024,24]}/><meshStandardMaterial color={steel} metalness={.76} roughness={.43}/></mesh>
+      {[-1,1].map(s=><mesh key={s} position={[x+s*.038,y+.03,z]}><cylinderGeometry args={[.008,.008,.012,6]}/><meshStandardMaterial color="#929a9b" metalness={.75} roughness={.42}/></mesh>)}
+    </group>)}
+    <Bar a={[start-.43,originY,z]} b={lower} radius={.019}/>
+    <mesh position={[start-.43,originY+.012,z]}><cylinderGeometry args={[.063,.063,.024,24]}/><meshStandardMaterial color={steel} metalness={.76} roughness={.43}/></mesh>
+    <Bar a={[end+.43,top,z]} b={upper} radius={.019}/>
+    <mesh position={[end+.43,top+.012,z]}><cylinderGeometry args={[.063,.063,.024,24]}/><meshStandardMaterial color={steel} metalness={.76} roughness={.43}/></mesh>
+    <Bar a={[first.x,first.y+.15,z]} b={[last.x,last.y+.15,z]} radius={.013}/>
   </group>
 }
 export default function BrutalistStair(){
-  return <group position={[0,-.09,0]} rotation={[0,-.37,0]} scale={.96}>
-    {/* Visible stair flight is a continuous concrete slab behind the steps. */}
-    <mesh position={[0,-.17,0]} rotation={[0,0,-.55]} castShadow receiveShadow>
-      <boxGeometry args={[3.49,.19,1.53]}/>
-      <CC0Surface texture="concrete"/>
+  const flight=useMemo(flightGeometry,[])
+  useEffect(()=>()=>flight.dispose(),[flight])
+  return <group position={[0,-.10,0]} rotation={[0,-.36,0]} scale={.94}>
+    <mesh geometry={flight} castShadow receiveShadow><CC0Surface texture="concrete" bumpStrength={.23}/></mesh>
+    <mesh position={[start-.32,originY-slab/2,0]} castShadow receiveShadow>
+      <boxGeometry args={[.64,slab,1.78]}/><CC0Surface texture="concrete"/>
+    </mesh>
+    <mesh position={[end+.32,top-slab/2,0]} castShadow receiveShadow>
+      <boxGeometry args={[.64,slab,1.78]}/><CC0Surface texture="concrete"/>
     </mesh>
     {levels.map(({x,y},i)=><group key={i}>
-      <mesh position={[x,y,0]} castShadow receiveShadow>
-        <boxGeometry args={[.345,.078,1.60]}/>
-        <CC0Surface texture="concrete"/>
-      </mesh>
-      <mesh position={[x-.132,y-.104,0]} castShadow receiveShadow>
-        <boxGeometry args={[.060,.155,1.53]}/>
-        <CC0Surface texture="concrete"/>
-      </mesh>
-      <mesh position={[x+.138,y+.040,0]}>
-        <boxGeometry args={[.018,.007,1.55]}/>
-        <meshStandardMaterial color="#9c9385" roughness={.83}/>
-      </mesh>
-      <mesh position={[x-.01,y+.043,.70]}>
-        <boxGeometry args={[.17,.006,.022]}/>
-        <meshStandardMaterial color="#d4cbbb" roughness={.85}/>
-      </mesh>
-    </group>)}
-    {/* Landings are load-bearing, not a decorative box beneath a stair sculpture. */}
-    <mesh position={[-1.67,-1.05,0]} castShadow receiveShadow>
-      <boxGeometry args={[.93,.20,2.04]}/>
-      <CC0Surface texture="concrete"/>
-    </mesh>
-    <mesh position={[1.53,.82,0]} castShadow receiveShadow>
-      <boxGeometry args={[.88,.20,2.05]}/>
-      <CC0Surface texture="concrete"/>
-    </mesh>
-    {/* Steel side stringers and guard rails are actual continuous members. */}
-    {[-.88,.88].map(z=><group key={z}>
-      <SplineTube points={[[originX-.21,originY-.18,z],
-        [originX+.4,originY+.18,z],
-        [originX+1.41,originY+.85,z],
-        [originX+count*run+.23,originY+count*rise-.10,z]]}
-        radius={.064} radialSegments={12} tubularSegments={80}>
-        <meshPhysicalMaterial color="#666d6a" metalness={.62} roughness={.38}/>
-      </SplineTube>
-      <Handrail z={z}/>
-      {[-1.66,1.50].map(x=><mesh key={x} position={[x,-1.09,z]}>
-        <boxGeometry args={[.18,.12,.20]}/>
-        <meshPhysicalMaterial color={steel} metalness={.76} roughness={.40}/>
+      {/* Integral non-slip grooves near the leading edge of each tread. */}
+      {[0,1].map(j=><mesh key={j} position={[x-run*.37+j*.031,y+.001,0]} receiveShadow>
+        <boxGeometry args={[.009,.004,width-.15]}/><meshStandardMaterial color="#86837b" roughness={.93}/>
       </mesh>)}
     </group>)}
-    <mesh position={[.18,-1.14,0]} castShadow>
-      <boxGeometry args={[.17,.16,1.46]}/>
-      <CC0Surface texture="concrete"/>
-    </mesh>
-    {[-.69,.69].map(z=>[-1.72,1.58].map(x=><mesh key={x+':'+z}
-      position={[x,-1.15,z]}>
-      <cylinderGeometry args={[.035,.035,.018,6]}/>
-      <meshPhysicalMaterial color={bright} metalness={.87} roughness={.29}/>
-    </mesh>))}
+    {[-.67,.67].map(z=><Handrail key={z} z={z}/>)}
   </group>
 }

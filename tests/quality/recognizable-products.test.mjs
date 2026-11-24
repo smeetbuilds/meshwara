@@ -14,7 +14,7 @@ const fixtures = [
   {slug:'tennis-racket',scene:'tennisracket',minimum:3200,
     markers:['const ellipse','mains.map','crosses.map','gripHelix','throatLeft']},
   {slug:'chef-knife',scene:'chefknife',minimum:3200,
-    markers:['const blade','const bevel','const rivets','<ExtrudedProfile','<CurvedBox']},
+    markers:['const blade','function bladeGeometry','function gripGeometry','const rivets','roughnessMap={data.brush}','anisotropy={.66}']},
   {slug:'oscilloscope',scene:'oscilloscope',minimum:4100,
     markers:['const traces','function Encoder','const ports','<SplineTube','<CurvedBox']},
   {slug:'action-camera',scene:'actioncamera',minimum:4100,
