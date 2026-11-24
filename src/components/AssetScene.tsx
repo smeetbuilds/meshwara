@@ -51,6 +51,15 @@ function Studio({ compact, quality }: { compact: boolean; quality: AssetPreviewQ
         <hemisphereLight color="#fffdf8" groundColor="#aaa69e" intensity={1.18} />
         <directionalLight position={[4.5, 5.5, 4]} intensity={2.15} />
         <directionalLight position={[-3.5, 2, -2.5]} intensity={0.8} />
+        {/* Compact previews previously had no environment, so metallic and
+            transmissive materials could not reflect their studio surroundings.
+            Generate a small, static local environment once per active canvas. */}
+        <Environment resolution={64} frames={1}>
+          <Lightformer intensity={3.2} position={[0, 5, -2]} scale={[8, 1.6, 1]} />
+          <Lightformer intensity={2.4} position={[-5, 0.5, 2]} rotation-y={Math.PI / 2} scale={[6, 1.5, 1]} />
+          <Lightformer intensity={1.6} position={[5, -0.6, 1]} rotation-y={-Math.PI / 2} scale={[5, 1.1, 1]} />
+          <Lightformer intensity={1.0} position={[0, -3, 2]} rotation-x={Math.PI / 2} scale={[4, 1, 1]} />
+        </Environment>
       </>
     )
   }
