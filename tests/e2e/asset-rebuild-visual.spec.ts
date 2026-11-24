@@ -31,6 +31,7 @@ const selections=[
   {slug:'artisan-bread-basket',title:'Artisan Bread Basket'},
   {slug:'desert-cactus',title:'Desert Cactus'},
   {slug:'monarch-butterfly',title:'Monarch Butterfly'},
+  {slug:'water-lily',title:'Water Lily'},
 ] as const
 
 /**
