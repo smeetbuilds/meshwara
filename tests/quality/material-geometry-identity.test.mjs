@@ -11,7 +11,7 @@ import { readZip } from '../../scripts/zip-utils.mjs'
 const studied = [
   {slug:'glazed-bay',scene:'glazedbay',min:4900,
    materials:['plaster','concrete','oak'],
-   features:['function Mullion','glassWidths.map','<CC0Surface texture="plaster"','<CC0Surface texture="oak"','SplineTube']},
+   features:['function Mullion','glassWidths.map','function GlassUnit','const opening','function Seal','<CC0Surface texture="plaster"','<CC0Surface texture="oak"','SplineTube']},
   {slug:'brutalist-stair',scene:'brutaliststair',min:4300,
    materials:['concrete'],
    features:['function Handrail','const levels','<CC0Surface texture="concrete"','rise = .182','function flightGeometry','function Bar','new THREE.ExtrudeGeometry']},

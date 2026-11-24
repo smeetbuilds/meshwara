@@ -1,124 +1,106 @@
 import { useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 import { CurvedBox } from '../geometry/CurvedBox'
-import { SplineTube } from '../geometry/GeometryV2'
 
-/**
- * Hand-scored artisan sourdough boule with asymmetrical oven spring, blistered
- * color, flour bloom, shallow belly, lifted ears and a porous-looking crumb
- * opening. The surfaces are deterministic artwork, not a food scan.
- */
-type P=[number,number,number]
+/** Original baked sourdough artwork. Scores are recessed into the actual
+ * upper surface, including a raised crust shoulder and uneven exposed crumb.
+ * No tubes or floating decorative slashes. */
+const fract=(v:number)=>v-Math.floor(v)
+const hash=(x:number,y:number)=>fract(Math.sin(x*127.1+y*311.7)*43758.5453)
+function noise(x:number,y:number){
+ const i=Math.floor(x),j=Math.floor(y),a=x-i,b=y-j,u=a*a*(3-2*a),v=b*b*(3-2*b)
+ return THREE.MathUtils.lerp(THREE.MathUtils.lerp(hash(i,j),hash(i+1,j),u),THREE.MathUtils.lerp(hash(i,j+1),hash(i+1,j+1),u),v)
+}
 function crustMaps(){
-  const w=512,h=256
-  const albedo=new Uint8Array(w*h*4),height=new Uint8Array(w*h*4)
-  const fract=(v:number)=>v-Math.floor(v)
-  const hash=(x:number,y:number)=>fract(Math.sin(x*127.1+y*311.7)*43758.5453)
-  const valueNoise=(x:number,y:number)=>{
-    const xi=Math.floor(x),yi=Math.floor(y)
-    const a=x-xi,b=y-yi,u=a*a*(3-2*a),v=b*b*(3-2*b)
-    const left=hash(xi,yi)*(1-u)+hash(xi+1,yi)*u
-    const right=hash(xi,yi+1)*(1-u)+hash(xi+1,yi+1)*u
-    return left*(1-v)+right*v
-  }
-  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
-    const u=x/w,v=y/h
-    const rand=fract(Math.sin(x*12.9898+y*78.233)*43758.5453)
-    // Broad irregular toasted regions and sparse dusty flour. Avoid repeating
-    // white oval speckles that made this read like a sesame-covered hamburger.
-    const mottled=valueNoise(u*15.0,v*9.2)
-    const patches=valueNoise(u*37.4+12,v*21.3)
-    const blister=valueNoise(u*89.2,v*53.7)
-    const scorched=Math.min(1,Math.max(0,(mottled-.25)*1.35 + (patches-.58)*.36))
-    const flourFactor=Math.min(.37,Math.max(0,(valueNoise(u*18.3+7,v*14.1)-.67))*1.05)
-    const base=[198-scorched*81,115-scorched*56,56-scorched*34]
-    const i=(y*w+x)*4
-    for(let k=0;k<3;k++){
-      albedo[i+k]=Math.max(0,Math.min(255,Math.round(base[k]*(1-flourFactor)+[224,210,177][k]*flourFactor+(rand-.5)*8)))
-    }
-    albedo[i+3]=255
-    const r=Math.round(108+blister*71+(rand-.5)*11)
-    height[i]=r;height[i+1]=r;height[i+2]=r;height[i+3]=255
-  }
-  function create(pixels:Uint8Array){
-    const tex=new THREE.DataTexture(pixels,w,h,THREE.RGBAFormat)
-    tex.wrapS=THREE.RepeatWrapping
-    tex.wrapT=THREE.RepeatWrapping
-    tex.magFilter=THREE.LinearFilter
-    tex.minFilter=THREE.LinearMipmapLinearFilter
-    tex.generateMipmaps=true
-    tex.needsUpdate=true
-    return tex
-  }
-  const color=create(albedo),bump=create(height)
-  color.colorSpace=THREE.SRGBColorSpace
-  return {color,bump}
+ const w=768,h=384,color=new Uint8Array(w*h*4),height=new Uint8Array(w*h*4),rough=new Uint8Array(w*h*4)
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const u=x/w,v=y/h
+  const m=noise(u*19,v*14),toast=noise(u*39+9,v*28),pore=noise(u*164,v*82),fine=hash(x,y)
+  const scorch=THREE.MathUtils.clamp(.26+(m-.5)*.60+(toast-.5)*.42,0,1)
+  const flour=THREE.MathUtils.clamp((noise(u*38+8,v*29)-.70)*1.15,0,.30)
+  const blister=Math.max(0,(pore-.68)*3.3)
+  const base=[205-scorch*86,126-scorch*69,61-scorch*36],i=(y*w+x)*4
+  for(let k=0;k<3;k++)color[i+k]=Math.round(THREE.MathUtils.clamp(base[k]*(1-flour)+[231,216,184][k]*flour +blister*7+(fine-.5)*15,0,255))
+  color[i+3]=255
+  height[i]=height[i+1]=height[i+2]=Math.round(94+pore*78+blister*31+fine*9);height[i+3]=255
+  rough[i]=rough[i+1]=rough[i+2]=Math.round(168+flour*80+fine*15);rough[i+3]=255
+ }
+ const tex=(bytes:Uint8Array)=>{const t=new THREE.DataTexture(bytes,w,h,THREE.RGBAFormat);t.wrapS=THREE.RepeatWrapping;t.minFilter=THREE.LinearMipmapLinearFilter;t.magFilter=THREE.LinearFilter;t.generateMipmaps=true;t.needsUpdate=true;return t}
+ const map=tex(color);map.colorSpace=THREE.SRGBColorSpace;return {color:map,bump:tex(height),rough:tex(rough)}
 }
-const maps=crustMaps()
+const cuts=[
+ {x:-.68,z:-.02,half:.62,slope:.39,width:.068,depth:.088},
+ {x:.02,z:.015,half:.72,slope:.30,width:.084,depth:.112},
+ {x:.65,z:.02,half:.53,slope:.38,width:.060,depth:.073}
+]
+function scoring(x:number,z:number){
+ let depth=0,ear=0,crumb=0
+ for(const cut of cuts){
+  const t=(z-cut.z)/cut.half
+  if(Math.abs(t)>=1)continue
+  const end=Math.pow(Math.max(0,1-t*t),.65)
+  const center=cut.x+cut.slope*(z-cut.z)+.035*Math.sin(t*3.5)
+  const delta=x-center
+  const w=cut.width*end+.004
+  const d=Math.exp(-Math.pow(delta/w,2))
+  depth+=cut.depth*end*d
+  const lip=Math.exp(-Math.pow((delta+w*.98)/(w*.53+.004),2))
+  ear+=cut.depth*.56*end*lip*(.75+.25*noise(x*36,z*23))
+  crumb=Math.max(crumb,d*end)
+ }
+ return {depth,ear,crumb}
+}
+function loafGeometry(){
+ const g=new THREE.SphereGeometry(1,176,112)
+ const p=g.getAttribute('position'),colors:number[]=[]
+ const white=new THREE.Color('#ffffff'),crumbColor=new THREE.Color('#c8af83'),brown=new THREE.Color('#a77750')
+ for(let i=0;i<p.count;i++){
+  const x=p.getX(i),y=p.getY(i),z=p.getZ(i)
+  const variation=1+.035*Math.sin(x*5.4+z*3.1)+.013*Math.sin(x*21+z*17)*Math.sin(z*15-y*19)
+  const px=x*1.35*variation,pz=z*.86*variation
+  const base=y<-.45?-.45+(y+.45)*.15:y
+  const dome=base*.66+.209+Math.sin(x*2.1)*.018
+  const score=y>.18?scoring(px,pz):{depth:0,ear:0,crumb:0}
+  const weight=THREE.MathUtils.smoothstep(y,.18,.42)
+  const surface=dome+(score.ear-score.depth)*weight
+  p.setXYZ(i,px,surface,pz)
+  const shade=white.clone().lerp(brown,score.crumb*weight*.24).lerp(crumbColor,score.crumb*weight*.30)
+  shade.multiplyScalar(1+.035*Math.sin(x*37+z*31))
+  colors.push(shade.r,shade.g,shade.b)
+ }
+ g.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));g.computeVertexNormals();return g
+}
+function boardMap(){
+ const w=512,h=256,a=new Uint8Array(w*h*4)
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const u=x/w,v=y/h
+  const fibers=Math.sin(v*260+2.2*Math.sin(u*4)+noise(u*9,v*4)*3)
+  const n=.83+.13*noise(u*8,v*34)+.06*fibers
+  const i=(y*w+x)*4;a[i]=Math.round(122*n);a[i+1]=Math.round(83*n);a[i+2]=Math.round(51*n);a[i+3]=255
+ }
+ const t=new THREE.DataTexture(a,w,h,THREE.RGBAFormat);t.colorSpace=THREE.SRGBColorSpace;t.minFilter=THREE.LinearMipmapLinearFilter;t.magFilter=THREE.LinearFilter;t.generateMipmaps=true;t.needsUpdate=true;return t
+}
 function LoafBody(){
-  const geometry=useMemo(()=>{
-    const geo=new THREE.SphereGeometry(1,128,96)
-    const position=geo.getAttribute('position') as THREE.BufferAttribute
-    for(let i=0;i<position.count;i++){
-      const x=position.getX(i),y=position.getY(i),z=position.getZ(i)
-      const noise=Math.sin(x*21+z*17)*Math.sin(z*15-y*19)*.014
-      const shape=1+.037*Math.sin(x*5.4+z*3.1)+noise
-      const belly=y<-.45 ? -.45+(y+.45)*.16:y
-      position.setXYZ(i,x*1.44*shape,belly*.63+.08+Math.sin(x*2.1)*.020,z*.89*shape)
-    }
-    position.needsUpdate=true
-    geo.computeVertexNormals()
-    return geo
-  },[])
-  useEffect(()=>()=>geometry.dispose(),[geometry])
-  return <mesh geometry={geometry} castShadow receiveShadow position={[0,.13,0]}>
-    <meshPhysicalMaterial map={maps.color} bumpMap={maps.bump} bumpScale={.019}
-      metalness={0} roughness={.88} clearcoat={.018} clearcoatRoughness={.93}/>
-  </mesh>
+ const data=useMemo(()=>({geometry:loafGeometry(),maps:crustMaps()}),[])
+ useEffect(()=>()=>{data.geometry.dispose();Object.values(data.maps).forEach(t=>t.dispose())},[data])
+ return <mesh geometry={data.geometry} castShadow receiveShadow>
+  <meshPhysicalMaterial vertexColors map={data.maps.color} bumpMap={data.maps.bump} bumpScale={.026} roughnessMap={data.maps.rough} roughness={1} metalness={0} clearcoat={.025} clearcoatRoughness={.87}/>
+ </mesh>
 }
-function SlashedCrust({x,index}:{x:number;index:number}) {
-  const surfaceY=(px:number,pz:number)=>{
-    const nx=px/1.44,nz=pz/.89
-    const dome=Math.sqrt(Math.max(.03,1-nx*nx-nz*nz))
-    return dome*.63+.21+.022
-  }
-  const slash:P[] = Array.from({length:25},(_,i)=>{
-    const t=i/24
-    const pz=-.57+t*1.14
-    const px=x+.18*(t-.5)+.036*Math.sin(t*Math.PI*2)
-    return [px,surfaceY(px,pz),pz]
-  })
-  const edge:P[] = slash.map(([px,py,pz])=>[px-.060,py+.040,pz-.013])
-  return <group>
-    <SplineTube points={slash} radius={.035} tubularSegments={68} radialSegments={8}>
-      <meshStandardMaterial color="#5b2d1e" roughness={.97}/>
-    </SplineTube>
-    <SplineTube points={edge} radius={.028} tubularSegments={68} radialSegments={8}>
-      <meshPhysicalMaterial color={index%2===0?'#e8be88':'#dfb283'} roughness={.92}/>
-    </SplineTube>
-  </group>
-}
-const slitPositions=[-.89,-.36,.20,.73]
 export default function SourdoughLoaf(){
-  return <group position={[0,-.36,0]} rotation={[.06,-.43,0]}>
-    <CurvedBox args={[3.30,.12,2.15]} radius={.07} smoothness={6} position={[0,-.20,0]}>
-      <meshPhysicalMaterial color="#8b8072" metalness={.02} roughness={.93}/>
-    </CurvedBox>
-    <LoafBody/>
-    {slitPositions.map((x,i)=><SlashedCrust key={i} x={x} index={i}/>)}
-    <mesh position={[0,-.132,0]} rotation={[-Math.PI/2,0,0]}>
-      <circleGeometry args={[.90,64]}/>
-      <meshStandardMaterial color="#72523c" roughness={.98} transparent opacity={.23}
-        depthWrite={false}/>
-    </mesh>
-    {Array.from({length:24},(_,i)=>{
-      const a=(i*.6180339887%1)*Math.PI*2
-      const radius=.62+(.31*((i*7)%11)/10)
-      const x=Math.cos(a)*radius*1.1,z=Math.sin(a)*radius*.71
-      return <mesh key={i} position={[x,-.305,z]} rotation={[0,a,0]}>
-        <boxGeometry args={[.03+.01*(i%3),.002,.065]}/>
-        <meshStandardMaterial color={i%3===0?'#d8c5a3':'#8e7658'} roughness={.96}/>
-      </mesh>
-    })}
-  </group>
+ const wood=useMemo(boardMap,[])
+ useEffect(()=>()=>wood.dispose(),[wood])
+ return <group position={[0,-.36,0]} rotation={[.30,-.36,-.025]}>
+  <CurvedBox args={[3.22,.12,2.10]} radius={.065} smoothness={6} position={[0,-.21,0]} castShadow receiveShadow>
+   <meshPhysicalMaterial map={wood} roughness={.88} metalness={0}/>
+  </CurvedBox>
+  <LoafBody/>
+  {Array.from({length:31},(_,i)=>{
+   const a=i*2.3999632,r=.98+.15*hash(i,5),x=Math.cos(a)*r*1.37,z=Math.sin(a)*r*.88
+   const s=.012+.016*hash(i,19)
+   return <mesh key={i} position={[x,-.142,z]} rotation={[a*.11,a,.23]} scale={[s*1.4,s*.55,s]}>
+    <dodecahedronGeometry args={[1,0]}/><meshStandardMaterial color={i%3?'#b88d58':'#d6b98a'} roughness={.97}/>
+   </mesh>
+  })}
+ </group>
 }

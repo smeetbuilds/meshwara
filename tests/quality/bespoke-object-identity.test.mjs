@@ -14,7 +14,7 @@ const targets=[
   {slug:'otoscope',scene:'otoscope',min:4600,markers:['function Selector','speculum','gripRings','function ring','function knurlMap']},
   {slug:'thermal-printer',scene:'thermalprinter',min:4300,markers:['receiptTexture','function Receipt','getAttribute(\'position\')','Array.from({length:6']},
   {slug:'magnetic-stirrer',scene:'magneticstirrer',min:5500,markers:['beakerProfile','function ControlKnob','transmission','function beakerGeometry','function liquidGeometry']},
-  {slug:'sourdough-loaf',scene:'sourdough',min:4200,markers:['crustMaps','function LoafBody','SlashedCrust','computeVertexNormals']},
+  {slug:'sourdough-loaf',scene:'sourdough',min:4200,markers:['crustMaps','function LoafBody','function scoring','function loafGeometry','computeVertexNormals']},
   {slug:'performance-surfboard',scene:'surfboard',min:3750,markers:['const stations','<LoftSurface','function Fin','padRibs']},
   {slug:'network-router',scene:'networkrouter',min:4600,markers:['function Antenna','function Port','antennaX','RF venting']},
   {slug:'mushroom-cluster',scene:'mushroomcluster',min:4400,markers:['capMap','capShape','gills.map','mycelium']},
