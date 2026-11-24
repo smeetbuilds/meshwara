@@ -1,116 +1,91 @@
+import { useMemo, useEffect } from 'react'
 import * as THREE from 'three'
 import { CurvedBox } from '../geometry/CurvedBox'
-import { RevolvedSurface, SplineTube } from '../geometry/GeometryV2'
 
-/**
- * Handheld diagnostic otoscope: removable conical speculum, angled optics,
- * viewing window, fiber-optic illumination ring, knurled handle, dimmer,
- * battery connector and tabletop charging dock.
- */
-const satin='#65727b', handle='#343f47', metal='#adb8bd', lens='#102d36'
-const profile: Array<[number,number]> = [
-  [0,0],[.088,0],[.092,.05],[.11,.11],[.13,.18],[.18,.26],
-  [.23,.38],[.26,.48],[.245,.52],[.202,.55],[0,.55]
+/** Original clinical instrument visualization. The viewing lens, illuminated
+ * channel and hollow speculum share one optical axis. Not a medical device. */
+const tau=Math.PI*2
+const metal='#aeb9bf',polymer='#30383d'
+const gripRings=Array.from({length:24},(_,i)=>-.88+i*.047)
+const speculum: [number,number][]=[
+ [.228,0],[.242,.035],[.231,.071],[.205,.13],[.17,.24],[.115,.39],
+ [.073,.52],[.061,.58],[.052,.584],[.043,.575],[.053,.515],[.095,.385],
+ [.15,.235],[.188,.12],[.201,.045],[.205,0],[.228,0]
 ]
-const gripRings=Array.from({length:18},(_,i)=>-.41+i*.065)
-function Selector() {
-  return <group position={[-.20,.82,.29]}>
-    <mesh rotation={[Math.PI/2,0,0]}>
-      <cylinderGeometry args={[.12,.12,.08,40]}/>
-      <meshPhysicalMaterial color={metal} metalness={.91} roughness={.24}/>
-    </mesh>
-    <mesh position={[0,0,.055]}>
-      <cylinderGeometry args={[.057,.057,.02,26]}/>
-      <meshPhysicalMaterial color="#222c30" metalness={.57} roughness={.38}/>
-    </mesh>
-  </group>
+function ring(profile:[number,number][]){
+ const g=new THREE.LatheGeometry(profile.map(([r,y])=>new THREE.Vector2(r,y)),80)
+ g.rotateX(-Math.PI/2);return g
+}
+function knurlMap(){
+ const w=256,h=128,data=new Uint8Array(w*h*4)
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const u=x/w,v=y/h
+  const diamond=Math.pow(Math.abs(Math.sin(tau*(u*44+v*16))*Math.sin(tau*(u*44-v*16))),.6)
+  const grain=Math.sin(x*12.9898+y*78.233)*43758.5453
+  const value=Math.round(90+120*diamond+13*(grain-Math.floor(grain)))
+  const i=(y*w+x)*4;data[i]=data[i+1]=data[i+2]=value;data[i+3]=255
+ }
+ const t=new THREE.DataTexture(data,w,h,THREE.RGBAFormat);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.minFilter=THREE.LinearMipmapLinearFilter;t.magFilter=THREE.LinearFilter;t.generateMipmaps=true;t.needsUpdate=true;return t
+}
+function Selector(){
+ return <group position={[.192,.22,.025]} rotation={[0,0,-Math.PI/2]}>
+  <mesh><cylinderGeometry args={[.086,.086,.044,36]}/><meshPhysicalMaterial color="#5d696f" roughness={.43} metalness={.6}/></mesh>
+  {Array.from({length:16},(_,i)=>{
+   const a=i*tau/16
+   return <mesh key={i} position={[Math.cos(a)*.084,0,Math.sin(a)*.084]} rotation={[0,-a,0]}>
+    <boxGeometry args={[.006,.035,.011]}/><meshStandardMaterial color="#343c40" roughness={.68}/>
+   </mesh>
+  })}
+ </group>
 }
 export default function ClinicalOtoscope(){
-  return <group position={[0,-.25,0]} rotation={[0,-.42,-.03]} scale={.97}>
-    <mesh position={[0,-.39,0]} castShadow receiveShadow>
-      <cylinderGeometry args={[.205,.24,1.52,40,1]}/>
-      <meshPhysicalMaterial color={handle} metalness={.52} roughness={.42} clearcoat={.14}/>
+ const data=useMemo(()=>({
+  tip:ring(speculum),collar:ring([[.174,0],[.252,0],[.26,.025],[.26,.095],[.235,.12],[.174,.12],[.174,0]]),
+  housing:ring([[.153,0],[.256,0],[.277,.025],[.284,.19],[.266,.31],[.245,.36],[.155,.36],[.153,0]]),
+  eyepiece:ring([[.153,0],[.228,0],[.238,.026],[.238,.079],[.213,.102],[.153,.102],[.153,0]]),
+  socket:ring([[.211,0],[.34,0],[.34,.115],[.235,.15],[.211,.15],[.211,0]]),
+  knurl:knurlMap()
+ }),[])
+ useEffect(()=>()=>Object.values(data).forEach(x=>x.dispose()),[data])
+ return <group rotation={[.05,-.72,-.07]} position={[0,-.18,0]} scale={1.02}>
+  <mesh position={[0,-.37,0]} castShadow receiveShadow>
+   <cylinderGeometry args={[.195,.216,1.27,64]}/><meshPhysicalMaterial color={polymer} bumpMap={data.knurl} bumpScale={.018} roughness={.73} metalness={.08}/>
+  </mesh>
+  {gripRings.map(y=><mesh key={y} position={[0,y,0]} rotation={[Math.PI/2,0,0]}>
+   <torusGeometry args={[.207-(y+.88)*.014,.003,5,64]}/><meshStandardMaterial color="#252e33" roughness={.78}/>
+  </mesh>)}
+  {[-1.03,.287].map(y=><mesh key={y} position={[0,y,0]}>
+   <cylinderGeometry args={[.216,.216,.055,64]}/><meshPhysicalMaterial color={metal} roughness={.33} metalness={.78}/>
+  </mesh>)}
+  <mesh position={[0,.405,0]}><cylinderGeometry args={[.15,.182,.22,48]}/><meshPhysicalMaterial color="#747f85" roughness={.36} metalness={.68}/></mesh>
+  <Selector/>
+  {/* Head axis local -Z: viewer lens behind, patient tip in front. */}
+  <group position={[0,.742,0]} rotation={[.075,0,0]}>
+   <mesh geometry={data.housing} position={[0,0,.18]} castShadow><meshPhysicalMaterial color="#56636a" metalness={.42} roughness={.37} side={THREE.DoubleSide}/></mesh>
+   <mesh geometry={data.eyepiece} position={[0,0,.197]} rotation={[0,Math.PI,0]}><meshPhysicalMaterial color={polymer} roughness={.57} side={THREE.DoubleSide}/></mesh>
+   <mesh position={[0,0,.295]} scale={[.152,.152,.024]}>
+    <sphereGeometry args={[1,56,32]}/><meshPhysicalMaterial color="#81acb2" roughness={.095} metalness={.05} transmission={.77} thickness={.045} ior={1.49} clearcoat={.6}/>
+   </mesh>
+   <mesh position={[0,0,.19]}><circleGeometry args={[.15,56]}/><meshStandardMaterial color="#24383e" roughness={.54}/></mesh>
+   <mesh geometry={data.collar} position={[0,0,-.13]}><meshPhysicalMaterial color={metal} roughness={.31} metalness={.78} side={THREE.DoubleSide}/></mesh>
+   <mesh geometry={data.tip} position={[0,0,-.243]} castShadow>
+    <meshPhysicalMaterial color="#20262a" roughness={.71} metalness={.06} side={THREE.DoubleSide}/>
+   </mesh>
+   {[0,1,2,3,4,5].map(i=>{
+    const a=i*tau/6
+    return <mesh key={i} position={[Math.cos(a)*.165,Math.sin(a)*.165,-.227]}>
+     <sphereGeometry args={[.012,12,8]}/><meshPhysicalMaterial color="#d8e4de" emissive="#b5d0ca" emissiveIntensity={.15} roughness={.27}/>
     </mesh>
-    {gripRings.map(y=><mesh key={y} position={[0,y,0]} rotation={[Math.PI/2,0,0]}>
-      <torusGeometry args={[.213,.008,7,44]}/>
-      <meshStandardMaterial color="#4c565d" metalness={.49} roughness={.61}/>
-    </mesh>)}
-    {[-1.20,.37].map(y=><mesh key={y} position={[0,y,0]}>
-      <cylinderGeometry args={[.246,.246,.075,40]}/>
-      <meshPhysicalMaterial color={metal} metalness={.87} roughness={.29}/>
-    </mesh>)}
-    <mesh position={[0,.48,0]}>
-      <cylinderGeometry args={[.185,.20,.23,40]}/>
-      <meshPhysicalMaterial color="#77868e" metalness={.75} roughness={.38}/>
-    </mesh>
-    <CurvedBox args={[.70,.54,.65]} radius={.18} smoothness={8}
-      position={[.21,.79,0]} rotation={[0,0,-.22]} castShadow>
-      <meshPhysicalMaterial color={satin} metalness={.69} roughness={.34} clearcoat={.18}/>
-    </CurvedBox>
-    <mesh position={[-.05,.79,.34]}>
-      <cylinderGeometry args={[.205,.205,.10,48]}/>
-      <meshPhysicalMaterial color="#20292e" metalness={.7} roughness={.36}/>
-    </mesh>
-    <mesh position={[-.05,.79,.40]} rotation={[Math.PI/2,0,0]}>
-      <circleGeometry args={[.185,56]}/>
-      <meshPhysicalMaterial color={lens} metalness={.30} roughness={.08}
-        clearcoat={1} clearcoatRoughness={.025}/>
-    </mesh>
-    <mesh position={[-.091,.82,.411]} rotation={[Math.PI/2,0,0]}>
-      <circleGeometry args={[.067,32]}/>
-      <meshBasicMaterial color="#84c7cf" transparent opacity={.3}/>
-    </mesh>
-    <Selector/>
-    <group position={[.56,.91,0]} rotation={[0,0,Math.PI/2]}>
-      <mesh>
-        <cylinderGeometry args={[.235,.25,.35,48]}/>
-        <meshPhysicalMaterial color={metal} metalness={.89} roughness={.26}/>
-      </mesh>
-      <mesh position={[0,.22,0]}>
-        <cylinderGeometry args={[.26,.26,.085,48]}/>
-        <meshPhysicalMaterial color="#242d31" metalness={.47} roughness={.45}/>
-      </mesh>
-      <RevolvedSurface profile={profile} position={[0,.43,0]} radialSegments={48}
-        rotation={[0,0,0]} castShadow>
-        <meshPhysicalMaterial color="#21292d" metalness={.12} roughness={.82}/>
-      </RevolvedSurface>
-      <mesh position={[0,.99,0]}>
-        <cylinderGeometry args={[.060,.085,.03,32]}/>
-        <meshStandardMaterial color="#222c31" roughness={.86}/>
-      </mesh>
-    </group>
-    {[0,1,2,3,4,5].map(i=>{
-      const a=i/6*Math.PI*2
-      return <mesh key={i} position={[.77,.91+Math.sin(a)*.19,Math.cos(a)*.19]}>
-        <sphereGeometry args={[.014,10,10]}/>
-        <meshBasicMaterial color="#d1dedb"/>
-      </mesh>
-    })}
-    <mesh position={[.03,-1.26,0]}>
-      <cylinderGeometry args={[.24,.24,.15,40]}/>
-      <meshPhysicalMaterial color="#3e4a4f" metalness={.64} roughness={.4}/>
-    </mesh>
-    <SplineTube points={[[.04,-1.23,-.19],[.07,-1.39,-.25],[.27,-1.51,-.30]]}
-      radius={.025} radialSegments={9} tubularSegments={28}>
-      <meshStandardMaterial color="#242b2e" roughness={.84}/>
-    </SplineTube>
-    <group position={[1.15,-1.18,-.19]}>
-      <mesh position={[0,.04,0]}>
-        <cylinderGeometry args={[.52,.60,.16,56]}/>
-        <meshPhysicalMaterial color="#b3b8b7" metalness={.56} roughness={.38}/>
-      </mesh>
-      <mesh position={[0,.155,0]}>
-        <cylinderGeometry args={[.30,.38,.11,40]}/>
-        <meshStandardMaterial color="#363e43" metalness={.36} roughness={.61}/>
-      </mesh>
-      <mesh position={[0,.22,0]}>
-        <cylinderGeometry args={[.19,.19,.02,40]}/>
-        <meshPhysicalMaterial color="#b6bfbc" metalness={.83} roughness={.28}/>
-      </mesh>
-      <mesh position={[0,.236,0]}>
-        <cylinderGeometry args={[.10,.10,.012,24]}/>
-        <meshStandardMaterial color="#2c373a" roughness={.79}/>
-      </mesh>
-    </group>
+   })}
+   <mesh position={[0,0,-.825]}><torusGeometry args={[.048,.005,8,48]}/><meshStandardMaterial color="#333a3e" roughness={.75}/></mesh>
   </group>
+  {/* Dock cup sits immediately below the handle; no disconnected cable. */}
+  <CurvedBox args={[.88,.16,.84]} radius={.075} smoothness={6} position={[0,-1.19,0]} castShadow>
+   <meshPhysicalMaterial color="#c6cbca" roughness={.48} metalness={.13}/>
+  </CurvedBox>
+  <mesh geometry={data.socket} rotation={[Math.PI/2,0,0]} position={[0,-1.112,0]}>
+   <meshPhysicalMaterial color="#424d53" roughness={.63} side={THREE.DoubleSide}/>
+  </mesh>
+  <mesh position={[.285,-1.10,.25]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[.026,20]}/><meshStandardMaterial color="#92b7a6" emissive="#59a883" emissiveIntensity={.35}/></mesh>
+ </group>
 }
