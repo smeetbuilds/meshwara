@@ -38,6 +38,7 @@ const selections=[
   {slug:'koi-pair',title:'Koi Pair'},
   {slug:'falcon-study',title:'Falcon Study'},
   {slug:'hummingbird-study',title:'Hummingbird Study'},
+  {slug:'greyhound-study',title:'Greyhound Study'},
 ] as const
 
 /**

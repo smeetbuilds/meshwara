@@ -1,6 +1,6 @@
 import { Bounds, ContactShadows, Environment, Float, Lightformer } from '@react-three/drei'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Suspense, useEffect, useMemo, useRef, type ReactNode } from 'react'
+import { Suspense, useEffect, useLayoutEffect, useMemo, useRef, type ReactNode, type RefObject } from 'react'
 import * as THREE from 'three'
 import type { AssetInteraction, AssetPresentation, AssetSceneKind } from '../lib/types'
 import { resolveAssetCustomization, type AssetCustomization } from '../lib/assetCustomization'
@@ -77,6 +77,26 @@ function FramedScene({ children, compact }: { children: ReactNode; compact: bool
   return <Bounds fit clip observe margin={compact ? 1.32 : 1.16}>{children}</Bounds>
 }
 
+/** Calibrate contact shadows to authored world-space mesh bounds, not a
+ * catalog-wide floor height. Measure only on scene/layout changes, never
+ * every animation frame. Keep shadows outside Bounds and the measured group. */
+function GroundContact({ target, revision }: { target: RefObject<THREE.Group | null>; revision: string }) {
+  const shadow = useRef<THREE.Group>(null)
+  const { invalidate } = useThree()
+  useLayoutEffect(() => {
+    if (!target.current || !shadow.current) return
+    target.current.updateWorldMatrix(true, true)
+    const bounds = new THREE.Box3().setFromObject(target.current, true)
+    if (bounds.isEmpty() || !Number.isFinite(bounds.min.y)) return
+    const center = bounds.getCenter(new THREE.Vector3())
+    shadow.current.position.set(center.x, bounds.min.y - 0.015, center.z)
+    invalidate()
+  }, [target, revision, invalidate])
+  return <group ref={shadow} position={[0, -1.48, 0]}>
+    <ContactShadows position={[0, 0, 0]} opacity={0.22} scale={8} blur={2.8} far={3.2} resolution={512} />
+  </group>
+}
+
 function CameraTuner({ fov, zoom }: { fov: number; zoom: number }) {
   const { camera, invalidate } = useThree()
 
@@ -136,6 +156,8 @@ export function AssetScene({
         ? [1, 1.5]
         : [1, 2]
 
+  const groundTarget = useRef<THREE.Group>(null)
+  const groundRevision = JSON.stringify([kind, tuning.rotationY, resolvedCustomization])
   const sceneObject = (
     <AssetCustomizationLayer scene={kind} customization={resolvedCustomization}>
       <Scene />
@@ -174,9 +196,10 @@ export function AssetScene({
         {!compact && <RendererTuner exposure={tuning.exposure} />}
         <Studio compact={compact} quality={quality} />
         <FramedScene compact={compact}>
-          <group rotation-y={THREE.MathUtils.degToRad(tuning.rotationY)}>{content}</group>
+          <group ref={groundTarget} rotation-y={THREE.MathUtils.degToRad(tuning.rotationY)}>{content}</group>
         </FramedScene>
-        {!compact && presentation !== 'Floating' && (
+        {!compact && presentation === 'Grounded' && <GroundContact target={groundTarget} revision={groundRevision} />}
+        {!compact && presentation !== 'Floating' && presentation !== 'Grounded' && (
           <ContactShadows position={[0, -1.48, 0]} opacity={0.22} scale={8} blur={2.8} far={3.2} resolution={512} />
         )}
       </Suspense>

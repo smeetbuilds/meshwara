@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto'
 import { readZip } from '../../scripts/zip-utils.mjs'
 
 const entries=[
+ {slug:'greyhound-study',scene:'greyhound',features:['function anatomy','function field','function skinGeometry','const tets','function coatMap','function tailGeometry','vertexColors']},
  {slug:'falcon-study',scene:'falconstudy',features:['function plumage','function featherGeometry','function tapered','data.flight','data.coverts','data.toes','data.claws','vertexColors']},
  {slug:'hummingbird-study',scene:'hummingbird',features:['function plumage','function featherGeometry','function wingGeometry','function billGeometry','function throatGeometry','iridescence','vertexColors']},
  {slug:'manta-ray',scene:'mantaray',features:['function rayGeometry','function taperedTube','const stations','vertexColors','data.body.computeVertexNormals','data.lobes']},
