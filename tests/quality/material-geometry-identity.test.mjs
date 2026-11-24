@@ -16,7 +16,7 @@ const studied = [
    materials:['concrete'],
    features:['function Handrail','const levels','<CC0Surface texture="concrete"','rise = .182','function flightGeometry','function Bar','new THREE.ExtrudeGeometry']},
   {slug:'aero-wheel',scene:'aerowheel',min:5400,materials:[],
-   features:['tyreMap','bumpMap={tyreMap}','function Spoke','ventCircle','const lugs','SplineTube']},
+   features:['tyreMap','bumpMap={tyreMap}','function Spoke','ventCircle','const lugs','function disk','function revolve']},
   {slug:'pendant-cluster',scene:'pendantcluster',min:1900,materials:[],
    features:['const fixtures','CC0Mesh','const modelUrl','pointLight']},
 ]

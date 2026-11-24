@@ -10,7 +10,7 @@ import { readZip } from '../../scripts/zip-utils.mjs'
  * parity. Human recognition and artistic realism require image-based review.
  */
 const targets=[
-  {slug:'lathe-chuck',scene:'lathechuck',min:3800,markers:['plateRings','FaceBolt','const steps','rear spindle register']},
+  {slug:'lathe-chuck',scene:'lathechuck',min:3800,markers:['plateRings','FaceBolt','const steps','rear spindle register','function faceSector','function ringGeometry']},
   {slug:'otoscope',scene:'otoscope',min:4600,markers:['function Selector','speculum','gripRings']},
   {slug:'thermal-printer',scene:'thermalprinter',min:4300,markers:['receiptTexture','function Receipt','getAttribute(\'position\')','Array.from({length:6']},
   {slug:'magnetic-stirrer',scene:'magneticstirrer',min:5500,markers:['beakerProfile','function ControlKnob','transmission','RevolvedSurface']},

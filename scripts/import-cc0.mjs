@@ -53,11 +53,29 @@ const registry=await (async()=>{try{return JSON.parse(await readFile(pinnedPath,
 const hash=(data,alg='sha256')=>createHash(alg).update(data).digest('hex')
 const safeUrl=u=>{const x=new URL(u);if(x.protocol!=='https:'||!['api.polyhaven.com','dl.polyhaven.org'].includes(x.hostname)||x.hostname==='dl.polyhaven.org'&&!x.pathname.startsWith('/file/ph-assets/Models/'))throw Error('Unapproved source URL');return u}
 async function load(url,max=11*1024*1024){
- const response=await fetch(safeUrl(url),{headers:{'User-Agent':'Meshvara-curated-CC0/1.0'}})
- if(!response.ok)throw Error('Upstream HTTP '+response.status+' '+url)
- const bytes=Buffer.from(await response.arrayBuffer())
- if(bytes.length>max)throw Error('Exceeds input budget '+url)
- return bytes
+ const approved=safeUrl(url)
+ // Retry only transient transport/HTTP failures. Validation and digest
+ // failures remain fatal; never relax a pinned model or size requirement.
+ for(let attempt=0;attempt<3;attempt++){
+  let response,bytes
+  try{
+   response=await fetch(approved,{headers:{'User-Agent':'Meshvara-curated-CC0/1.0'},signal:AbortSignal.timeout(30000)})
+   if(!response.ok){
+    if(![408,429,500,502,503,504].includes(response.status)||attempt===2)
+     throw Object.assign(Error('Upstream HTTP '+response.status+' '+url),{permanent:true})
+    await response.body?.cancel()
+    throw Error('Transient upstream HTTP '+response.status)
+   }
+   bytes=Buffer.from(await response.arrayBuffer())
+  }catch(error){
+   if(error.permanent||attempt===2)throw error
+   console.warn('Retrying CC0 download ('+(attempt+2)+'/3): '+approved+' — '+error.message)
+   await new Promise(resolve=>setTimeout(resolve,500*2**attempt))
+   continue
+  }
+  if(bytes.length>max)throw Error('Exceeds input budget '+url)
+  return bytes
+ }
 }
 function packGltf(input,source){
  const gltf=structuredClone(input)
